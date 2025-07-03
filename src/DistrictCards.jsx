@@ -19,20 +19,38 @@ const districtTitles = [
   "Diplomatic Quarter",
 ];
 
+// Helper function to get the image file name from the title
+const getDistrictImg = (title) => {
+  // Remove spaces and make first character lowercase
+  const noSpace = title.replace(/\s+/g, "");
+  return noSpace.charAt(0).toLowerCase() + noSpace.slice(1);
+};
+
 // Functional component for a single card
 const DistrictCard = ({ title }) => {
+  const imgFile = getDistrictImg(title);
   return (
     <article className="district-card" aria-label={`${title} card`}>
       <header className="district-card-header">
         <h2>{title}</h2>
       </header>
-      {/* Placeholder for image */}
+      {/* District image */}
       <div
         className="district-card-image"
-        aria-label={`${title} image placeholder`}
+        aria-label={`${title} image`}
         tabIndex="0"
       >
-        {/* Add an <img> tag here when you have an image */}
+        {/* The image path should be relative to the public folder for Vite/React */}
+        <img
+          src={`/districtImg/${imgFile}.webp`}
+          alt={`${title} district`}
+          className="district-img"
+          onError={(e) => {
+            // Show a simple fallback if image is missing
+            e.target.style.display = "none";
+            e.target.parentNode.textContent = "No image available";
+          }}
+        />
       </div>
       <footer className="district-card-footer">
         <label htmlFor={`${title}-input`} className="visually-hidden">
