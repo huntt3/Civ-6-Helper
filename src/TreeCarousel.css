@@ -1,0 +1,30 @@
+/*
+  Styles for TreeCarousel component.
+  The container is wide and scrollable horizontally.
+*/
+
+.tree-carousel {
+  width: 100%;
+  overflow-x: auto;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+}
+
+.tree-carousel-inner {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  min-width: 1200px; /* Makes the inner container wider than most screens */
+}
+
+.tree-carousel-item {
+  background: #e0e0e0;
+  border-radius: 0.5rem;
+  min-width: 200px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
