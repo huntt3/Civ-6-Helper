@@ -32,26 +32,25 @@ const DistrictCard = ({ title }) => {
   return (
     <article className="district-card" aria-label={`${title} card`}>
       <header className="district-card-header">
-        <h2>{title}</h2>
+        {/* District image */}
+        <div
+          className="district-card-image"
+          aria-label={`${title} image`}
+          tabIndex="0"
+        >
+          {/* The image path should be relative to the public folder for Vite/React */}
+          <img
+            src={`/districtImg/${imgFile}.webp`}
+            alt={`${title} district`}
+            className="district-img"
+            onError={(e) => {
+              // Show a simple fallback if image is missing
+              e.target.style.display = "none";
+              e.target.parentNode.textContent = "No image available";
+            }}
+          />
+        </div>
       </header>
-      {/* District image */}
-      <div
-        className="district-card-image"
-        aria-label={`${title} image`}
-        tabIndex="0"
-      >
-        {/* The image path should be relative to the public folder for Vite/React */}
-        <img
-          src={`/districtImg/${imgFile}.webp`}
-          alt={`${title} district`}
-          className="district-img"
-          onError={(e) => {
-            // Show a simple fallback if image is missing
-            e.target.style.display = "none";
-            e.target.parentNode.textContent = "No image available";
-          }}
-        />
-      </div>
       <footer className="district-card-footer">
         <label htmlFor={`${title}-input`} className="visually-hidden">
           {`Input for ${title}`}
@@ -59,8 +58,8 @@ const DistrictCard = ({ title }) => {
         <input
           id={`${title}-input`}
           type="text"
-          placeholder={`Enter info for ${title}`}
-          aria-label={`Input for ${title}`}
+          placeholder={`Number Built`}
+          aria-label={`Input for number of ${title} built`}
         />
       </footer>
     </article>
