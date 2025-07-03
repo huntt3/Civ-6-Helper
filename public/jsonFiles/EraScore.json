@@ -1,6 +1,151 @@
-{ "title"   : "Threatening Camp Destroyed",
-  "eraScore"    : 3,
-  "description"  : "A hostile barbarian camp within 6 tiles of one of your cities was destroyed by a unit.",
-  "minEra" : "Ancient",
-  "maxEra" : "Medieval"
+{
+  "EraScore": [
+    {
+      "title": "Threatening Camp Destroyed",
+      "eraScore": 3,
+      "description": "A hostile barbarian camp within 6 tiles of one of your cities was destroyed by a unit.",
+      "minEra": "Ancient",
+      "maxEra": "Medieval"
+    },
+    {
+      "title": "Barbarian Camp Destroyed",
+      "eraScore": 2,
+      "description": "A hostile barbarian camp was leveled to the ground by a unit, spreading peace through the area.",
+      "minEra": "Ancient",
+      "maxEra": "Medieval"
+    },
+    {
+      "title": "First Civic Completed",
+      "eraScore": 1,
+      "description": "You completed your first civic.",
+      "minEra": "Ancient",
+      "maxEra": "Information"
+    },
+    {
+      "title": "First Technology Completed",
+      "eraScore": 1,
+      "description": "You completed your first technology.",
+      "minEra": "Ancient",
+      "maxEra": "Information"
+    },
+    {
+      "title": "First Government Established",
+      "eraScore": 3,
+      "description": "You established your first government.",
+      "minEra": "Ancient",
+      "maxEra": "Information"
+    },
+    {
+      "title": "First Great Person Earned",
+      "eraScore": 2,
+      "description": "You earned your first Great Person.",
+      "minEra": "Ancient",
+      "maxEra": "Information"
+    },
+    {
+      "title": "First City Founded on a New Continent",
+      "eraScore": 3,
+      "description": "You founded a city on a continent other than your home continent.",
+      "minEra": "Ancient",
+      "maxEra": "Information"
+    },
+    {
+      "title": "First City-State Met",
+      "eraScore": 1,
+      "description": "You met your first city-state.",
+      "minEra": "Ancient",
+      "maxEra": "Information"
+    },
+    {
+      "title": "First Major Civilization Met",
+      "eraScore": 1,
+      "description": "You met another major civilization for the first time.",
+      "minEra": "Ancient",
+      "maxEra": "Information"
+    },
+    {
+      "title": "Natural Wonder Discovered",
+      "eraScore": 2,
+      "description": "You discovered a natural wonder.",
+      "minEra": "Ancient",
+      "maxEra": "Information"
+    },
+    {
+      "title": "First Religion Founded",
+      "eraScore": 4,
+      "description": "You founded a religion.",
+      "minEra": "Ancient",
+      "maxEra": "Information"
+    },
+    {
+      "title": "First City Converted to Religion",
+      "eraScore": 2,
+      "description": "You converted a city to your religion for the first time.",
+      "minEra": "Ancient",
+      "maxEra": "Information"
+    },
+    {
+      "title": "First Wonder Built",
+      "eraScore": 4,
+      "description": "You built your first world wonder.",
+      "minEra": "Ancient",
+      "maxEra": "Information"
+    },
+    {
+      "title": "First District Built",
+      "eraScore": 1,
+      "description": "You built your first district.",
+      "minEra": "Ancient",
+      "maxEra": "Information"
+    },
+    {
+      "title": "First Unique Unit Trained",
+      "eraScore": 2,
+      "description": "You trained your first unique unit.",
+      "minEra": "Ancient",
+      "maxEra": "Information"
+    },
+    {
+      "title": "First Unique Building Constructed",
+      "eraScore": 2,
+      "description": "You constructed your first unique building.",
+      "minEra": "Ancient",
+      "maxEra": "Information"
+    },
+    {
+      "title": "First Unique Improvement Built",
+      "eraScore": 2,
+      "description": "You built your first unique improvement.",
+      "minEra": "Ancient",
+      "maxEra": "Information"
+    },
+    {
+      "title": "First City Population 10",
+      "eraScore": 1,
+      "description": "A city you own reached a population of 10 for the first time.",
+      "minEra": "Ancient",
+      "maxEra": "Information"
+    },
+    {
+      "title": "First City Population 20",
+      "eraScore": 2,
+      "description": "A city you own reached a population of 20 for the first time.",
+      "minEra": "Ancient",
+      "maxEra": "Information"
+    },
+    {
+      "title": "First Tier 3 Government Established",
+      "eraScore": 4,
+      "description": "You established a Tier 3 government for the first time.",
+      "minEra": "Medieval",
+      "maxEra": "Information"
+    },
+    {
+      "title": "First Spaceport Built",
+      "eraScore": 4,
+      "description": "You built your first Spaceport district.",
+      "minEra": "Modern",
+      "maxEra": "Information"
+    }
+  ]
 }

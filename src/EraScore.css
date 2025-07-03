@@ -6,15 +6,83 @@
   border-radius: 0.5rem;
   padding: 1rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  position: relative;
 }
 
 .era-score-checkbox {
-  margin-right: 1rem;
+  margin-right: 0.5rem;
   width: 1.2rem;
   height: 1.2rem;
 }
 
-.era-score-label {
+.era-score-title {
   font-size: 1.1rem;
+  font-weight: 500;
+  margin-right: 0.5rem;
+}
+
+.era-score-value {
+  background: #e0e0e0;
+  border-radius: 0.25rem;
+  padding: 0.2rem 0.5rem;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+.era-score-era {
+  font-size: 0.95rem;
+  color: #666;
+  margin-right: 0.5rem;
+}
+
+.era-score-desc-btn {
+  margin-left: auto;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.4rem 0.8rem;
   cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+.era-score-desc-btn:hover {
+  background: #125ea2;
+}
+
+/* Modal styles */
+.era-score-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.era-score-modal-content {
+  background: #fff;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  max-width: 400px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+.era-score-modal-close {
+  margin-top: 1rem;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+.era-score-modal-close:hover {
+  background: #125ea2;
 }

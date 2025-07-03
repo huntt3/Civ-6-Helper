@@ -1,28 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./EraTrackerContainer.css";
 import EraScore from "./EraScore";
 
-// Example list of era score items
-const eraScoreItems = [
-  "Threatening Camp Destroyed",
-  "Barbarian Camp Destroyed",
-  "Tribal Village Contacted",
-  "Final Foreign City Taken",
-  "World's First to Meet All Civilizations",
-  // Add more items as needed
-];
-
-// EraTrackerContainer component
 // EraTrackerContainer component
 const EraTrackerContainer = () => {
+  const [eraScoreItems, setEraScoreItems] = useState([]);
+  const [collapsed, setCollapsed] = useState(false);
+
+  // Load EraScore data from JSON file
+  useEffect(() => {
+    fetch("/jsonFiles/EraScore.json")
+      .then((res) => res.json())
+      .then((data) => setEraScoreItems(data.EraScore || []));
+  }, []);
+
+  // Toggle collapse state
+  const handleCollapse = () => setCollapsed((prev) => !prev);
+
   return (
     <section className="era-tracker-container" aria-label="Era Tracker">
-      <h2 className="era-tracker-title">Era Score Tracker</h2>
-      <div className="era-score-list">
-        {eraScoreItems.map((item) => (
-          <EraScore key={item} label={item} />
-        ))}
+      <div className="era-tracker-header">
+        <h2 className="era-tracker-title">Era Score Tracker</h2>
+        <button
+          className="era-tracker-collapse-btn"
+          onClick={handleCollapse}
+          aria-label={collapsed ? "Expand Era Score Tracker" : "Collapse Era Score Tracker"}
+        >
+          {collapsed ? "Expand" : "Collapse"}
+        </button>
       </div>
+      {!collapsed && (
+        <div className="era-score-list">
+          {eraScoreItems.map((item) => (
+            <EraScore key={item.title} {...item} />
+          ))}
+        </div>
+      )}
     </section>
   );
 };
