@@ -24,7 +24,11 @@ const EraTrackerContainer = () => {
         <button
           className="era-tracker-collapse-btn"
           onClick={handleCollapse}
-          aria-label={collapsed ? "Expand Era Score Tracker" : "Collapse Era Score Tracker"}
+          aria-label={
+            collapsed
+              ? "Expand Era Score Tracker"
+              : "Collapse Era Score Tracker"
+          }
         >
           {collapsed ? "Expand" : "Collapse"}
         </button>

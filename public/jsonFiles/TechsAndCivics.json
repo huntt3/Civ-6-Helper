@@ -1,0 +1,556 @@
+{
+  "TechsAndCivics": [
+    {
+      "name": "Pottery",
+      "techCivic": "Tech",
+      "baseCost": 25,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": []
+    },
+    {
+      "name": "Animal Husbandry",
+      "techCivic": "Tech",
+      "baseCost": 25,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": []
+    },
+    {
+      "name": "Mining",
+      "techCivic": "Tech",
+      "baseCost": 25,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": []
+    },
+    {
+      "name": "Sailing",
+      "techCivic": "Tech",
+      "baseCost": 50,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Pottery"]
+    },
+    {
+      "name": "Astrology",
+      "techCivic": "Tech",
+      "baseCost": 50,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Pottery"]
+    },
+    {
+      "name": "Irrigation",
+      "techCivic": "Tech",
+      "baseCost": 50,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Pottery"]
+    },
+    {
+      "name": "Archery",
+      "techCivic": "Tech",
+      "baseCost": 50,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Animal Husbandry"]
+    },
+    {
+      "name": "The Wheel",
+      "techCivic": "Tech",
+      "baseCost": 60,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Animal Husbandry"]
+    },
+    {
+      "name": "Masonry",
+      "techCivic": "Tech",
+      "baseCost": 60,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Mining"]
+    },
+    {
+      "name": "Bronze Working",
+      "techCivic": "Tech",
+      "baseCost": 60,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Mining"]
+    },
+    {
+      "name": "Writing",
+      "techCivic": "Tech",
+      "baseCost": 60,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Pottery"]
+    },
+    {
+      "name": "Code of Laws",
+      "techCivic": "Civic",
+      "baseCost": 20,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": []
+    },
+    {
+      "name": "Foreign Trade",
+      "techCivic": "Civic",
+      "baseCost": 40,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Code of Laws"]
+    },
+    {
+      "name": "Craftsmanship",
+      "techCivic": "Civic",
+      "baseCost": 40,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Code of Laws"]
+    },
+    {
+      "name": "Horseback Riding",
+      "techCivic": "Tech",
+      "baseCost": 80,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["The Wheel"]
+    },
+    {
+      "name": "Iron Working",
+      "techCivic": "Tech",
+      "baseCost": 80,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Bronze Working"]
+    },
+    {
+      "name": "Construction",
+      "techCivic": "Tech",
+      "baseCost": 120,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Masonry"]
+    },
+    {
+      "name": "Mathematics",
+      "techCivic": "Tech",
+      "baseCost": 120,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Currency", "Astrology"]
+    },
+    {
+      "name": "Currency",
+      "techCivic": "Tech",
+      "baseCost": 120,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Writing"]
+    },
+    {
+      "name": "Philosophy",
+      "techCivic": "Tech",
+      "baseCost": 120,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Writing"]
+    },
+    {
+      "name": "Drama and Poetry",
+      "techCivic": "Civic",
+      "baseCost": 70,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Foreign Trade"]
+    },
+    {
+      "name": "Early Empire",
+      "techCivic": "Civic",
+      "baseCost": 70,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Craftsmanship"]
+    },
+    {
+      "name": "Military Tradition",
+      "techCivic": "Civic",
+      "baseCost": 70,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Foreign Trade"]
+    },
+    {
+      "name": "Political Philosophy",
+      "techCivic": "Civic",
+      "baseCost": 90,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Early Empire", "State Workforce"]
+    },
+    {
+      "name": "State Workforce",
+      "techCivic": "Civic",
+      "baseCost": 70,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Craftsmanship"]
+    },
+    {
+      "name": "Apprenticeship",
+      "techCivic": "Tech",
+      "baseCost": 165,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Construction"]
+    },
+    {
+      "name": "Chivalry",
+      "techCivic": "Tech",
+      "baseCost": 180,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Horseback Riding"]
+    },
+    {
+      "name": "Machinery",
+      "techCivic": "Tech",
+      "baseCost": 180,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Mathematics"]
+    },
+    {
+      "name": "Steel",
+      "techCivic": "Tech",
+      "baseCost": 240,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Iron Working"]
+    },
+    {
+      "name": "Education",
+      "techCivic": "Tech",
+      "baseCost": 440,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Printing"]
+    },
+    {
+      "name": "Banking",
+      "techCivic": "Tech",
+      "baseCost": 330,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Currency"]
+    },
+    {
+      "name": "Chivalry",
+      "techCivic": "Civic",
+      "baseCost": 140,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Military Tradition"]
+    },
+    {
+      "name": "Divine Right",
+      "techCivic": "Civic",
+      "baseCost": 265,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Theology"]
+    },
+    {
+      "name": "Feudalism",
+      "techCivic": "Civic",
+      "baseCost": 200,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Defensive Tactics"]
+    },
+    {
+      "name": "Guilds",
+      "techCivic": "Civic",
+      "baseCost": 200,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["State Workforce"]
+    },
+    {
+      "name": "Medieval Faires",
+      "techCivic": "Civic",
+      "baseCost": 265,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Feudalism"]
+    },
+    {
+      "name": "Theology",
+      "techCivic": "Civic",
+      "baseCost": 200,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Political Philosophy"]
+    },
+    {
+      "name": "Astronomy",
+      "techCivic": "Tech",
+      "baseCost": 500,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Mathematics"]
+    },
+    {
+      "name": "Banking",
+      "techCivic": "Tech",
+      "baseCost": 330,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Currency"]
+    },
+    {
+      "name": "Printing",
+      "techCivic": "Tech",
+      "baseCost": 330,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Education"]
+    },
+    {
+      "name": "Chemistry",
+      "techCivic": "Tech",
+      "baseCost": 660,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Machinery"]
+    },
+    {
+      "name": "Diplomacy",
+      "techCivic": "Civic",
+      "baseCost": 320,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Mercenaries"]
+    },
+    {
+      "name": "Humanism",
+      "techCivic": "Civic",
+      "baseCost": 400,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Reformed Church"]
+    },
+    {
+      "name": "Mercenaries",
+      "techCivic": "Civic",
+      "baseCost": 265,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Feudalism"]
+    },
+    {
+      "name": "Reformed Church",
+      "techCivic": "Civic",
+      "baseCost": 320,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Theology"]
+    },
+    {
+      "name": "Urbanization",
+      "techCivic": "Civic",
+      "baseCost": 640,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Diplomatic Service"]
+    },
+    {
+      "name": "Industrialization",
+      "techCivic": "Tech",
+      "baseCost": 1160,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Machinery"]
+    },
+    {
+      "name": "Steam Power",
+      "techCivic": "Tech",
+      "baseCost": 1160,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Industrialization"]
+    },
+    {
+      "name": "Electricity",
+      "techCivic": "Tech",
+      "baseCost": 1245,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Steam Power"]
+    },
+    {
+      "name": "Flight",
+      "techCivic": "Tech",
+      "baseCost": 1480,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Steel"]
+    },
+    {
+      "name": "Corporations",
+      "techCivic": "Civic",
+      "baseCost": 895,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Humanism"]
+    },
+    {
+      "name": "Nationalism",
+      "techCivic": "Civic",
+      "baseCost": 895,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Civil Engineering"]
+    },
+    {
+      "name": "Mobilization",
+      "techCivic": "Civic",
+      "baseCost": 1245,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Nationalism"]
+    },
+    {
+      "name": "Mass Media",
+      "techCivic": "Civic",
+      "baseCost": 1245,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Social Media"]
+    },
+    {
+      "name": "Radar",
+      "techCivic": "Tech",
+      "baseCost": 1480,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Flight"]
+    },
+    {
+      "name": "Computers",
+      "techCivic": "Tech",
+      "baseCost": 1750,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Rocketry"]
+    },
+    {
+      "name": "Nuclear Fission",
+      "techCivic": "Tech",
+      "baseCost": 1750,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Chemistry"]
+    },
+    {
+      "name": "Cold War",
+      "techCivic": "Civic",
+      "baseCost": 1750,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Mobilization"]
+    },
+    {
+      "name": "Space Race",
+      "techCivic": "Civic",
+      "baseCost": 3000,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Globalization"]
+    },
+    {
+      "name": "Nuclear Fusion",
+      "techCivic": "Tech",
+      "baseCost": 2650,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Nuclear Fission"]
+    },
+    {
+      "name": "Advanced Ballistics",
+      "techCivic": "Tech",
+      "baseCost": 2650,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Rocketry"]
+    },
+    {
+      "name": "Rapid Deployment",
+      "techCivic": "Civic",
+      "baseCost": 2650,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Cold War"]
+    },
+    {
+      "name": "Environmentalism",
+      "techCivic": "Civic",
+      "baseCost": 2650,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Globalization"]
+    },
+    {
+      "name": "Nanotechnology",
+      "techCivic": "Tech",
+      "baseCost": 3000,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Computers"]
+    },
+    {
+      "name": "Robotics",
+      "techCivic": "Tech",
+      "baseCost": 3000,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Nanotechnology"]
+    },
+    {
+      "name": "Social Media",
+      "techCivic": "Civic",
+      "baseCost": 1750,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Cold War"]
+    },
+    {
+      "name": "Globalization",
+      "techCivic": "Civic",
+      "baseCost": 1750,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Cold War"]
+    },
+    {
+      "name": "Future Tech",
+      "techCivic": "Tech",
+      "baseCost": 3000,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Nanotechnology"]
+    },
+    {
+      "name": "Future Civic",
+      "techCivic": "Civic",
+      "baseCost": 3000,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Globalization", "Social Media"]
+    }
+  ]
+}

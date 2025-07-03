@@ -2,6 +2,7 @@ import "./App.css";
 import DistrictCards from "./DistrictCards";
 import TreeCarousel from "./TreeCarousel";
 import EraTrackerContainer from "./EraTrackerContainer";
+import WondersContainer from "./WondersContainer";
 
 // Main App component
 function App() {
@@ -17,6 +18,8 @@ function App() {
       <TreeCarousel />
       {/* Render EraTrackerContainer below the District Cards */}
       <EraTrackerContainer />
+      {/* Render WondersContainer at the bottom */}
+      <WondersContainer />
     </>
   );
 }

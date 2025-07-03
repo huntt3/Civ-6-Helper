@@ -1,0 +1,119 @@
+/* Styles for WondersContainer and WonderCard */
+.wonders-container {
+  background: #f9f9f9;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 900px;
+}
+
+.wonders-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.wonders-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.wonders-collapse-btn {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+.wonders-collapse-btn:hover {
+  background: #125ea2;
+}
+
+.wonders-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.wonder-card {
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  padding: 1rem 2rem;
+  min-width: 180px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.wonder-card:hover,
+.wonder-card:focus {
+  background: #e3f2fd;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.15);
+}
+
+/* Darker background for built wonders */
+.wonder-card.built {
+  background: #bdbdbd;
+  color: #222;
+}
+
+.wonder-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.wonder-modal-content {
+  background: #fff;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  max-width: 400px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+.wonder-modal-close {
+  margin-top: 1rem;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+.wonder-modal-close:hover {
+  background: #125ea2;
+}
+.wonder-built-btn {
+  margin-top: 1rem;
+  background: #43a047;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-right: 1rem;
+  transition: background 0.2s;
+}
+.wonder-built-btn[aria-pressed="true"] {
+  background: #1976d2;
+}
+.wonder-built-btn:hover {
+  background: #2e7031;
+}
