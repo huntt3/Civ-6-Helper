@@ -1,0 +1,6 @@
+{ "title"   : "Threatening Camp Destroyed",
+  "eraScore"    : 3,
+  "description"  : "A hostile barbarian camp within 6 tiles of one of your cities was destroyed by a unit.",
+  "minEra" : "Ancient",
+  "maxEra" : "Medieval"
+}
