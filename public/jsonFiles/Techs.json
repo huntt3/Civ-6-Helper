@@ -1,0 +1,628 @@
+{
+  "Techs": [
+    {
+      "name": "Pottery",
+      "techCivic": "Tech",
+      "baseCost": 25,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": []
+    },
+    {
+      "name": "Animal Husbandry",
+      "techCivic": "Tech",
+      "baseCost": 25,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": []
+    },
+    {
+      "name": "Mining",
+      "techCivic": "Tech",
+      "baseCost": 25,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": []
+    },
+    {
+      "name": "Sailing",
+      "techCivic": "Tech",
+      "baseCost": 50,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Pottery"]
+    },
+    {
+      "name": "Astrology",
+      "techCivic": "Tech",
+      "baseCost": 50,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": []
+    },
+    {
+      "name": "Irrigation",
+      "techCivic": "Tech",
+      "baseCost": 50,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Pottery"]
+    },
+    {
+      "name": "Writing",
+      "techCivic": "Tech",
+      "baseCost": 50,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Pottery"]
+    },
+    {
+      "name": "Archery",
+      "techCivic": "Tech",
+      "baseCost": 50,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Animal Husbandry"]
+    },
+    {
+      "name": "Masonry",
+      "techCivic": "Tech",
+      "baseCost": 80,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Mining"]
+    },
+    {
+      "name": "Bronze Working",
+      "techCivic": "Tech",
+      "baseCost": 80,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Mining"]
+    },
+    {
+      "name": "The Wheel",
+      "techCivic": "Tech",
+      "baseCost": 80,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Mining"]
+    },
+    {
+      "name": "Celestial Navigation",
+      "techCivic": "Tech",
+      "baseCost": 120,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Sailing"]
+    },
+    {
+      "name": "Currency",
+      "techCivic": "Tech",
+      "baseCost": 120,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Writing"]
+    },
+    {
+      "name": "Horseback Riding",
+      "techCivic": "Tech",
+      "baseCost": 120,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["The Wheel"]
+    },
+    {
+      "name": "Iron Working",
+      "techCivic": "Tech",
+      "baseCost": 120,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Bronze Working"]
+    },
+    {
+      "name": "Shipbuilding",
+      "techCivic": "Tech",
+      "baseCost": 200,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Sailing", "Irrigation"]
+    },
+    {
+      "name": "Mathematics",
+      "techCivic": "Tech",
+      "baseCost": 200,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Currency", "Astrology"]
+    },
+    {
+      "name": "Construction",
+      "techCivic": "Tech",
+      "baseCost": 200,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Masonry"]
+    },
+    {
+      "name": "Engineering",
+      "techCivic": "Tech",
+      "baseCost": 200,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Construction"]
+    },
+    {
+      "name": "Military Tactics",
+      "techCivic": "Tech",
+      "baseCost": 300,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Bronze Working"]
+    },
+    {
+      "name": "Buttress",
+      "techCivic": "Tech",
+      "baseCost": 300,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Shipbuilding"]
+    },
+    {
+      "name": "Apprenticeship",
+      "techCivic": "Tech",
+      "baseCost": 300,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Currency", "Horseback Riding"]
+    },
+    {
+      "name": "Machinery",
+      "techCivic": "Tech",
+      "baseCost": 300,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Engineering"]
+    },
+    {
+      "name": "Stirrups",
+      "techCivic": "Tech",
+      "baseCost": 390,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Horseback Riding"]
+    },
+    {
+      "name": "Education",
+      "techCivic": "Tech",
+      "baseCost": 390,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Apprenticeship"]
+    },
+    {
+      "name": "Military Engineering",
+      "techCivic": "Tech",
+      "baseCost": 390,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Construction"]
+    },
+    {
+      "name": "Castles",
+      "techCivic": "Tech",
+      "baseCost": 390,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Engineering"]
+    },
+    {
+      "name": "Cartography",
+      "techCivic": "Tech",
+      "baseCost": 600,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Engineering"]
+    },
+    {
+      "name": "Mass Production",
+      "techCivic": "Tech",
+      "baseCost": 600,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Construction"]
+    },
+    {
+      "name": "Banking",
+      "techCivic": "Tech",
+      "baseCost": 600,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Currency"]
+    },
+    {
+      "name": "Gunpowder",
+      "techCivic": "Tech",
+      "baseCost": 600,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Stirrups"]
+    },
+    {
+      "name": "Printing",
+      "techCivic": "Tech",
+      "baseCost": 600,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Education"]
+    },
+    {
+      "name": "Square Rigging",
+      "techCivic": "Tech",
+      "baseCost": 730,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Celestial Navigation"]
+    },
+    {
+      "name": "Astronomy",
+      "techCivic": "Tech",
+      "baseCost": 730,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Mathematics"]
+    },
+    {
+      "name": "Metal Casting",
+      "techCivic": "Tech",
+      "baseCost": 730,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Mathematics"]
+    },
+    {
+      "name": "Siege Tactics",
+      "techCivic": "Tech",
+      "baseCost": 730,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Military Engineering"]
+    },
+    {
+      "name": "Industrialization",
+      "techCivic": "Tech",
+      "baseCost": 930,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Apprenticeship"]
+    },
+    {
+      "name": "Scientific Theory",
+      "techCivic": "Tech",
+      "baseCost": 930,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Astronomy"]
+    },
+    {
+      "name": "Ballistics",
+      "techCivic": "Tech",
+      "baseCost": 930,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Apprenticeship"]
+    },
+    {
+      "name": "Military Science",
+      "techCivic": "Tech",
+      "baseCost": 930,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Apprenticeship"]
+    },
+    {
+      "name": "Steam Power",
+      "techCivic": "Tech",
+      "baseCost": 1070,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Industrialization"]
+    },
+    {
+      "name": "Sanitation",
+      "techCivic": "Tech",
+      "baseCost": 1070,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Engineering"]
+    },
+    {
+      "name": "Economics",
+      "techCivic": "Tech",
+      "baseCost": 1070,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Engineering"]
+    },
+    {
+      "name": "Rifling",
+      "techCivic": "Tech",
+      "baseCost": 1070,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Engineering"]
+    },
+    {
+      "name": "Refining",
+      "techCivic": "Tech",
+      "baseCost": 1250,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Scientific Theory"]
+    },
+    {
+      "name": "Flight",
+      "techCivic": "Tech",
+      "baseCost": 1250,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Refining"]
+    },
+    {
+      "name": "Replaceable Parts",
+      "techCivic": "Tech",
+      "baseCost": 1250,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Sanitation"]
+    },
+    {
+      "name": "Steel",
+      "techCivic": "Tech",
+      "baseCost": 1250,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Iron Working"]
+    },
+    {
+      "name": "Refining",
+      "techCivic": "Tech",
+      "baseCost": 1250,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Iron Working"]
+    },
+    {
+      "name": "Electricity",
+      "techCivic": "Tech",
+      "baseCost": 1370,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Steam Power"]
+    },
+    {
+      "name": "Radio",
+      "techCivic": "Tech",
+      "baseCost": 1370,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Electricity"]
+    },
+    {
+      "name": "Chemistry",
+      "techCivic": "Tech",
+      "baseCost": 1370,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Machinery"]
+    },
+    {
+      "name": "Combustion",
+      "techCivic": "Tech",
+      "baseCost": 1370,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Replaceable Parts"]
+    },
+    {
+      "name": "Advanced Flight",
+      "techCivic": "Tech",
+      "baseCost": 1480,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Flight"]
+    },
+    {
+      "name": "Rocketry",
+      "techCivic": "Tech",
+      "baseCost": 1480,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Radio"]
+    },
+    {
+      "name": "Advanced Ballistics",
+      "techCivic": "Tech",
+      "baseCost": 1480,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Rocketry"]
+    },
+    {
+      "name": "Combined Arms",
+      "techCivic": "Tech",
+      "baseCost": 1480,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Rocketry"]
+    },
+    {
+      "name": "Plastics",
+      "techCivic": "Tech",
+      "baseCost": 1480,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Rocketry"]
+    },
+    {
+      "name": "Computers",
+      "techCivic": "Tech",
+      "baseCost": 1660,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Rocketry"]
+    },
+    {
+      "name": "Nuclear Fission",
+      "techCivic": "Tech",
+      "baseCost": 1660,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Chemistry"]
+    },
+    {
+      "name": "Synthetic Materials",
+      "techCivic": "Tech",
+      "baseCost": 1660,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Chemistry"]
+    },
+    {
+      "name": "Telecommunications",
+      "techCivic": "Tech",
+      "baseCost": 1850,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Rocketry"]
+    },
+    {
+      "name": "Satellites",
+      "techCivic": "Tech",
+      "baseCost": 1850,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Rocketry"]
+    },
+    {
+      "name": "Guidance Systems",
+      "techCivic": "Tech",
+      "baseCost": 1850,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Rocketry"]
+    },
+    {
+      "name": "Lasers",
+      "techCivic": "Tech",
+      "baseCost": 1850,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Computers"]
+    },
+    {
+      "name": "Composites",
+      "techCivic": "Tech",
+      "baseCost": 1850,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Computers"]
+    },
+    {
+      "name": "Stealth Technology",
+      "techCivic": "Tech",
+      "baseCost": 1850,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Computers"]
+    },
+    {
+      "name": "Robotics",
+      "techCivic": "Tech",
+      "baseCost": 2155,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Nanotechnology"]
+    },
+    {
+      "name": "Nuclear Fusion",
+      "techCivic": "Tech",
+      "baseCost": 2155,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Nuclear Fission"]
+    },
+    {
+      "name": "Nanotechnology",
+      "techCivic": "Tech",
+      "baseCost": 2155,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Computers"]
+    },
+    {
+      "name": "Future Tech",
+      "techCivic": "Tech",
+      "baseCost": 2500,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Robotics"]
+    },
+    {
+      "name": "Advanced AI",
+      "techCivic": "Tech",
+      "baseCost": 2300,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Lasers"]
+    },
+    {
+      "name": "Advanced Power Cells",
+      "techCivic": "Tech",
+      "baseCost": 2300,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Synthetics"]
+    },
+    {
+      "name": "Cybernetics",
+      "techCivic": "Tech",
+      "baseCost": 2300,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Robotics"]
+    },
+    {
+      "name": "Predictive Systems",
+      "techCivic": "Tech",
+      "baseCost": 2300,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Advanced Power Cells"]
+    },
+    {
+      "name": "Seasteads",
+      "techCivic": "Tech",
+      "baseCost": 2300,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Nanotechnology"]
+    },
+    {
+      "name": "Smart Materials",
+      "techCivic": "Tech",
+      "baseCost": 2300,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Nanotechnology"]
+    },
+    {
+      "name": "Offworld Mission",
+      "techCivic": "Tech",
+      "baseCost": 2500,
+      "researched": false,
+      "boosted": false,
+      "prerequisites": ["Nanotechnology"]
+    }
+  ]
+}
