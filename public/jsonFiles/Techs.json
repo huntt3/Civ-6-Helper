@@ -6,6 +6,8 @@
       "baseCost": 25,
       "researched": false,
       "boosted": false,
+      "column": 0,
+      "row": 3,
       "prerequisites": []
     },
     {
@@ -14,6 +16,8 @@
       "baseCost": 25,
       "researched": false,
       "boosted": false,
+      "column": 0,
+      "row": 4,
       "prerequisites": []
     },
     {
@@ -22,6 +26,8 @@
       "baseCost": 25,
       "researched": false,
       "boosted": false,
+      "column": 0,
+      "row": 6,
       "prerequisites": []
     },
     {
@@ -30,6 +36,8 @@
       "baseCost": 50,
       "researched": false,
       "boosted": false,
+      "column": 1,
+      "row": 0,
       "prerequisites": ["Pottery"]
     },
     {
@@ -38,6 +46,8 @@
       "baseCost": 50,
       "researched": false,
       "boosted": false,
+      "column": 1,
+      "row": 1,
       "prerequisites": []
     },
     {
@@ -46,6 +56,8 @@
       "baseCost": 50,
       "researched": false,
       "boosted": false,
+      "column": 1,
+      "row": 2,
       "prerequisites": ["Pottery"]
     },
     {
@@ -54,6 +66,8 @@
       "baseCost": 50,
       "researched": false,
       "boosted": false,
+      "column": 1,
+      "row": 3,
       "prerequisites": ["Pottery"]
     },
     {
@@ -62,6 +76,8 @@
       "baseCost": 50,
       "researched": false,
       "boosted": false,
+      "column": 1,
+      "row": 4,
       "prerequisites": ["Animal Husbandry"]
     },
     {
@@ -70,6 +86,8 @@
       "baseCost": 80,
       "researched": false,
       "boosted": false,
+      "column": 2,
+      "row": 5,
       "prerequisites": ["Mining"]
     },
     {
@@ -78,6 +96,8 @@
       "baseCost": 80,
       "researched": false,
       "boosted": false,
+      "column": 2,
+      "row": 6,
       "prerequisites": ["Mining"]
     },
     {
@@ -86,6 +106,8 @@
       "baseCost": 80,
       "researched": false,
       "boosted": false,
+      "column": 2,
+      "row": 7,
       "prerequisites": ["Mining"]
     },
     {
@@ -94,6 +116,8 @@
       "baseCost": 120,
       "researched": false,
       "boosted": false,
+      "column": 3,
+      "row": 1,
       "prerequisites": ["Sailing"]
     },
     {
@@ -102,6 +126,8 @@
       "baseCost": 120,
       "researched": false,
       "boosted": false,
+      "column": 3,
+      "row": 3,
       "prerequisites": ["Writing"]
     },
     {
@@ -110,6 +136,8 @@
       "baseCost": 120,
       "researched": false,
       "boosted": false,
+      "column": 3,
+      "row": 4,
       "prerequisites": ["The Wheel"]
     },
     {
@@ -118,6 +146,8 @@
       "baseCost": 120,
       "researched": false,
       "boosted": false,
+      "column": 3,
+      "row": 6,
       "prerequisites": ["Bronze Working"]
     },
     {
@@ -126,7 +156,9 @@
       "baseCost": 200,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Sailing", "Irrigation"]
+      "column": 4,
+      "row": 0,
+      "prerequisites": ["Sailing"]
     },
     {
       "name": "Mathematics",
@@ -134,6 +166,8 @@
       "baseCost": 200,
       "researched": false,
       "boosted": false,
+      "column": 4,
+      "row": 2,
       "prerequisites": ["Currency", "Astrology"]
     },
     {
@@ -142,6 +176,8 @@
       "baseCost": 200,
       "researched": false,
       "boosted": false,
+      "column": 4,
+      "row": 5,
       "prerequisites": ["Masonry"]
     },
     {
@@ -150,15 +186,9 @@
       "baseCost": 200,
       "researched": false,
       "boosted": false,
+      "column": 4,
+      "row": 7,
       "prerequisites": ["Construction"]
-    },
-    {
-      "name": "Military Tactics",
-      "techCivic": "Tech",
-      "baseCost": 300,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Bronze Working"]
     },
     {
       "name": "Buttress",
@@ -166,7 +196,19 @@
       "baseCost": 300,
       "researched": false,
       "boosted": false,
+      "column": 5,
+      "row": 0,
       "prerequisites": ["Shipbuilding"]
+    },
+    {
+      "name": "Military Tactics",
+      "techCivic": "Tech",
+      "baseCost": 300,
+      "researched": false,
+      "boosted": false,
+      "column": 5,
+      "row": 1,
+      "prerequisites": ["Bronze Working"]
     },
     {
       "name": "Apprenticeship",
@@ -174,6 +216,8 @@
       "baseCost": 300,
       "researched": false,
       "boosted": false,
+      "column": 5,
+      "row": 3,
       "prerequisites": ["Currency", "Horseback Riding"]
     },
     {
@@ -182,15 +226,9 @@
       "baseCost": 300,
       "researched": false,
       "boosted": false,
+      "column": 5,
+      "row": 7,
       "prerequisites": ["Engineering"]
-    },
-    {
-      "name": "Stirrups",
-      "techCivic": "Tech",
-      "baseCost": 390,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Horseback Riding"]
     },
     {
       "name": "Education",
@@ -198,7 +236,19 @@
       "baseCost": 390,
       "researched": false,
       "boosted": false,
+      "column": 6,
+      "row": 2,
       "prerequisites": ["Apprenticeship"]
+    },
+    {
+      "name": "Stirrups",
+      "techCivic": "Tech",
+      "baseCost": 390,
+      "researched": false,
+      "boosted": false,
+      "column": 6,
+      "row": 4,
+      "prerequisites": ["Horseback Riding"]
     },
     {
       "name": "Military Engineering",
@@ -206,6 +256,8 @@
       "baseCost": 390,
       "researched": false,
       "boosted": false,
+      "column": 6,
+      "row": 5,
       "prerequisites": ["Construction"]
     },
     {
@@ -214,6 +266,8 @@
       "baseCost": 390,
       "researched": false,
       "boosted": false,
+      "column": 6,
+      "row": 6,
       "prerequisites": ["Engineering"]
     },
     {
@@ -222,6 +276,8 @@
       "baseCost": 600,
       "researched": false,
       "boosted": false,
+      "column": 7,
+      "row": 0,
       "prerequisites": ["Engineering"]
     },
     {
@@ -230,6 +286,8 @@
       "baseCost": 600,
       "researched": false,
       "boosted": false,
+      "column": 7,
+      "row": 1,
       "prerequisites": ["Construction"]
     },
     {
@@ -238,6 +296,8 @@
       "baseCost": 600,
       "researched": false,
       "boosted": false,
+      "column": 7,
+      "row": 3,
       "prerequisites": ["Currency"]
     },
     {
@@ -246,6 +306,8 @@
       "baseCost": 600,
       "researched": false,
       "boosted": false,
+      "column": 7,
+      "row": 4,
       "prerequisites": ["Stirrups"]
     },
     {
@@ -254,6 +316,8 @@
       "baseCost": 600,
       "researched": false,
       "boosted": false,
+      "column": 7,
+      "row": 7,
       "prerequisites": ["Education"]
     },
     {
@@ -262,6 +326,8 @@
       "baseCost": 730,
       "researched": false,
       "boosted": false,
+      "column": 8,
+      "row": 0,
       "prerequisites": ["Celestial Navigation"]
     },
     {
@@ -270,6 +336,8 @@
       "baseCost": 730,
       "researched": false,
       "boosted": false,
+      "column": 8,
+      "row": 2,
       "prerequisites": ["Mathematics"]
     },
     {
@@ -278,6 +346,8 @@
       "baseCost": 730,
       "researched": false,
       "boosted": false,
+      "column": 8,
+      "row": 4,
       "prerequisites": ["Mathematics"]
     },
     {
@@ -286,6 +356,8 @@
       "baseCost": 730,
       "researched": false,
       "boosted": false,
+      "column": 8,
+      "row": 6,
       "prerequisites": ["Military Engineering"]
     },
     {
@@ -294,6 +366,8 @@
       "baseCost": 930,
       "researched": false,
       "boosted": false,
+      "column": 9,
+      "row": 1,
       "prerequisites": ["Apprenticeship"]
     },
     {
@@ -302,6 +376,8 @@
       "baseCost": 930,
       "researched": false,
       "boosted": false,
+      "column": 9,
+      "row": 2,
       "prerequisites": ["Astronomy"]
     },
     {
@@ -310,6 +386,8 @@
       "baseCost": 930,
       "researched": false,
       "boosted": false,
+      "column": 9,
+      "row": 4,
       "prerequisites": ["Apprenticeship"]
     },
     {
@@ -318,6 +396,8 @@
       "baseCost": 930,
       "researched": false,
       "boosted": false,
+      "column": 9,
+      "row": 6,
       "prerequisites": ["Apprenticeship"]
     },
     {
@@ -326,6 +406,8 @@
       "baseCost": 1070,
       "researched": false,
       "boosted": false,
+      "column": 10,
+      "row": 0,
       "prerequisites": ["Industrialization"]
     },
     {
@@ -334,6 +416,8 @@
       "baseCost": 1070,
       "researched": false,
       "boosted": false,
+      "column": 10,
+      "row": 2,
       "prerequisites": ["Engineering"]
     },
     {
@@ -342,6 +426,8 @@
       "baseCost": 1070,
       "researched": false,
       "boosted": false,
+      "column": 10,
+      "row": 3,
       "prerequisites": ["Engineering"]
     },
     {
@@ -350,15 +436,9 @@
       "baseCost": 1070,
       "researched": false,
       "boosted": false,
+      "column": 10,
+      "row": 5,
       "prerequisites": ["Engineering"]
-    },
-    {
-      "name": "Refining",
-      "techCivic": "Tech",
-      "baseCost": 1250,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Scientific Theory"]
     },
     {
       "name": "Flight",
@@ -366,6 +446,8 @@
       "baseCost": 1250,
       "researched": false,
       "boosted": false,
+      "column": 11,
+      "row": 1,
       "prerequisites": ["Refining"]
     },
     {
@@ -374,6 +456,8 @@
       "baseCost": 1250,
       "researched": false,
       "boosted": false,
+      "column": 11,
+      "row": 3,
       "prerequisites": ["Sanitation"]
     },
     {
@@ -382,6 +466,8 @@
       "baseCost": 1250,
       "researched": false,
       "boosted": false,
+      "column": 11,
+      "row": 4,
       "prerequisites": ["Iron Working"]
     },
     {
@@ -390,6 +476,8 @@
       "baseCost": 1250,
       "researched": false,
       "boosted": false,
+      "column": 11,
+      "row": 6,
       "prerequisites": ["Iron Working"]
     },
     {
@@ -398,6 +486,8 @@
       "baseCost": 1370,
       "researched": false,
       "boosted": false,
+      "column": 12,
+      "row": 0,
       "prerequisites": ["Steam Power"]
     },
     {
@@ -406,6 +496,8 @@
       "baseCost": 1370,
       "researched": false,
       "boosted": false,
+      "column": 12,
+      "row": 1,
       "prerequisites": ["Electricity"]
     },
     {
@@ -414,7 +506,19 @@
       "baseCost": 1370,
       "researched": false,
       "boosted": false,
+      "column": 12,
+      "row": 2,
       "prerequisites": ["Machinery"]
+    },
+    {
+      "name": "Advanced Ballistics",
+      "techCivic": "Tech",
+      "baseCost": 1480,
+      "researched": false,
+      "boosted": false,
+      "column": 12,
+      "row": 3,
+      "prerequisites": ["Rocketry"]
     },
     {
       "name": "Combustion",
@@ -422,6 +526,8 @@
       "baseCost": 1370,
       "researched": false,
       "boosted": false,
+      "column": 12,
+      "row": 5,
       "prerequisites": ["Replaceable Parts"]
     },
     {
@@ -430,6 +536,8 @@
       "baseCost": 1480,
       "researched": false,
       "boosted": false,
+      "column": 13,
+      "row": 1,
       "prerequisites": ["Flight"]
     },
     {
@@ -438,15 +546,9 @@
       "baseCost": 1480,
       "researched": false,
       "boosted": false,
+      "column": 13,
+      "row": 2,
       "prerequisites": ["Radio"]
-    },
-    {
-      "name": "Advanced Ballistics",
-      "techCivic": "Tech",
-      "baseCost": 1480,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Rocketry"]
     },
     {
       "name": "Combined Arms",
@@ -454,6 +556,8 @@
       "baseCost": 1480,
       "researched": false,
       "boosted": false,
+      "column": 13,
+      "row": 4,
       "prerequisites": ["Rocketry"]
     },
     {
@@ -462,6 +566,8 @@
       "baseCost": 1480,
       "researched": false,
       "boosted": false,
+      "column": 13,
+      "row": 5,
       "prerequisites": ["Rocketry"]
     },
     {
@@ -470,6 +576,8 @@
       "baseCost": 1660,
       "researched": false,
       "boosted": false,
+      "column": 14,
+      "row": 0,
       "prerequisites": ["Rocketry"]
     },
     {
@@ -478,6 +586,8 @@
       "baseCost": 1660,
       "researched": false,
       "boosted": false,
+      "column": 14,
+      "row": 4,
       "prerequisites": ["Chemistry"]
     },
     {
@@ -486,6 +596,8 @@
       "baseCost": 1660,
       "researched": false,
       "boosted": false,
+      "column": 14,
+      "row": 5,
       "prerequisites": ["Chemistry"]
     },
     {
@@ -494,6 +606,8 @@
       "baseCost": 1850,
       "researched": false,
       "boosted": false,
+      "column": 15,
+      "row": 0,
       "prerequisites": ["Rocketry"]
     },
     {
@@ -502,14 +616,8 @@
       "baseCost": 1850,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Rocketry"]
-    },
-    {
-      "name": "Guidance Systems",
-      "techCivic": "Tech",
-      "baseCost": 1850,
-      "researched": false,
-      "boosted": false,
+      "column": 15,
+      "row": 2,
       "prerequisites": ["Rocketry"]
     },
     {
@@ -518,7 +626,19 @@
       "baseCost": 1850,
       "researched": false,
       "boosted": false,
+      "column": 15,
+      "row": 3,
       "prerequisites": ["Computers"]
+    },
+    {
+      "name": "Guidance Systems",
+      "techCivic": "Tech",
+      "baseCost": 1850,
+      "researched": false,
+      "boosted": false,
+      "column": 15,
+      "row": 4,
+      "prerequisites": ["Rocketry"]
     },
     {
       "name": "Composites",
@@ -526,6 +646,8 @@
       "baseCost": 1850,
       "researched": false,
       "boosted": false,
+      "column": 15,
+      "row": 5,
       "prerequisites": ["Computers"]
     },
     {
@@ -534,6 +656,8 @@
       "baseCost": 1850,
       "researched": false,
       "boosted": false,
+      "column": 15,
+      "row": 6,
       "prerequisites": ["Computers"]
     },
     {
@@ -542,6 +666,8 @@
       "baseCost": 2155,
       "researched": false,
       "boosted": false,
+      "column": 16,
+      "row": 1,
       "prerequisites": ["Nanotechnology"]
     },
     {
@@ -550,6 +676,8 @@
       "baseCost": 2155,
       "researched": false,
       "boosted": false,
+      "column": 16,
+      "row": 4,
       "prerequisites": ["Nuclear Fission"]
     },
     {
@@ -558,15 +686,9 @@
       "baseCost": 2155,
       "researched": false,
       "boosted": false,
+      "column": 16,
+      "row": 5,
       "prerequisites": ["Computers"]
-    },
-    {
-      "name": "Future Tech",
-      "techCivic": "Tech",
-      "baseCost": 2500,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Robotics"]
     },
     {
       "name": "Advanced AI",
@@ -574,6 +696,8 @@
       "baseCost": 2300,
       "researched": false,
       "boosted": false,
+      "column": 17,
+      "row": 1,
       "prerequisites": ["Lasers"]
     },
     {
@@ -582,6 +706,8 @@
       "baseCost": 2300,
       "researched": false,
       "boosted": false,
+      "column": 17,
+      "row": 2,
       "prerequisites": ["Synthetics"]
     },
     {
@@ -590,6 +716,8 @@
       "baseCost": 2300,
       "researched": false,
       "boosted": false,
+      "column": 17,
+      "row": 3,
       "prerequisites": ["Robotics"]
     },
     {
@@ -598,6 +726,8 @@
       "baseCost": 2300,
       "researched": false,
       "boosted": false,
+      "column": 17,
+      "row": 4,
       "prerequisites": ["Advanced Power Cells"]
     },
     {
@@ -606,6 +736,8 @@
       "baseCost": 2300,
       "researched": false,
       "boosted": false,
+      "column": 17,
+      "row": 5,
       "prerequisites": ["Nanotechnology"]
     },
     {
@@ -614,6 +746,8 @@
       "baseCost": 2300,
       "researched": false,
       "boosted": false,
+      "column": 17,
+      "row": 6,
       "prerequisites": ["Nanotechnology"]
     },
     {
@@ -622,7 +756,19 @@
       "baseCost": 2500,
       "researched": false,
       "boosted": false,
+      "column": 18,
+      "row": 4,
       "prerequisites": ["Nanotechnology"]
+    },
+    {
+      "name": "Future Tech",
+      "techCivic": "Tech",
+      "baseCost": 2500,
+      "researched": false,
+      "boosted": false,
+      "column": 19,
+      "row": 4,
+      "prerequisites": ["Offworld Mission"]
     }
   ]
 }
