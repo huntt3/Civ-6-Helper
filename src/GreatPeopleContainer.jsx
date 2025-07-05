@@ -3,12 +3,17 @@ import "./GreatPeopleContainer.css";
 import "./GreatPeopleContainerExtra.css";
 
 // Helper function to get unique people by era and type
+// Helper function to get unique people by era and type, with null safety
 const getPeopleByEraAndType = (people, era, type) => {
-  return people.filter(
-    (person) =>
+  return people.filter((person) => {
+    // Defensive: skip if missing requirement or era
+    if (!person || !person.requirement || !person.era) return false;
+    // Use loose match for type (case-insensitive, substring)
+    return (
       person.era === era &&
       person.requirement.toLowerCase().includes(type.toLowerCase())
-  );
+    );
+  });
 };
 
 // Define the order of types and eras
@@ -32,7 +37,6 @@ const eras = [
   "Atomic",
   "Information",
 ];
-
 
 const GreatPeopleContainer = () => {
   const [greatPeople, setGreatPeople] = useState([]);
@@ -59,7 +63,9 @@ const GreatPeopleContainer = () => {
         setGreatPeople(data.GreatPeople);
       })
       .catch((err) => {
-        setError("Sorry, we couldn't load the Great People data. Please try again later.");
+        setError(
+          "Sorry, we couldn't load the Great People data. Please try again later."
+        );
       });
   }, []);
 
@@ -88,7 +94,14 @@ const GreatPeopleContainer = () => {
 
   return (
     <section className="great-people-container" aria-label="Great People Grid">
-      <header style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem" }}>
+      <header
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "1rem",
+        }}
+      >
         <h2 style={{ margin: 0 }}>Great People</h2>
         <button
           type="button"
@@ -101,14 +114,18 @@ const GreatPeopleContainer = () => {
             borderRadius: "3px",
             padding: "0.3rem 0.9rem",
             fontSize: "1rem",
-            cursor: "pointer"
+            cursor: "pointer",
           }}
         >
           Refresh
         </button>
       </header>
       {error && <p className="error-message">{error}</p>}
-      <div className="great-people-grid" role="table" aria-label="Great People Table">
+      <div
+        className="great-people-grid"
+        role="table"
+        aria-label="Great People Table"
+      >
         {/* Table header */}
         <div className="header-row" role="row">
           {types.map((type) => (
@@ -140,31 +157,42 @@ const GreatPeopleContainer = () => {
                   return (
                     <div key={type} className="cell" role="cell">
                       {people.length > 0 ? (
-                    people.map((person) => (
-                      <article
-                        key={person.name}
-                        className={`great-person-card${checkedCards[person.name] ? " selected" : ""}`}
-                        tabIndex={0}
-                        aria-label={`${person.name}, ${person.ability}`}
-                        role="button"
-                        aria-pressed={!!checkedCards[person.name]}
-                        onClick={() => handleCardClick(person.name)}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" || e.key === " ") {
-                            handleCardClick(person.name);
-                          }
-                        }}
-                        style={{ cursor: "pointer" }}
-                      >
-                        <span style={{ fontWeight: "bold" }}>{person.name}</span>
-                        <p>{person.ability}</p>
-                        {person.charges && (
-                          <p><strong>Charges:</strong> {person.charges}</p>
-                        )}
-                      </article>
-                    ))
+                        people.map((person) => (
+                          <article
+                            key={person.name}
+                            className={`great-person-card${
+                              checkedCards[person.name] ? " selected" : ""
+                            }`}
+                            tabIndex={0}
+                            aria-label={`${person.name}, ${person.ability}`}
+                            role="button"
+                            aria-pressed={!!checkedCards[person.name]}
+                            onClick={() => handleCardClick(person.name)}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter" || e.key === " ") {
+                                handleCardClick(person.name);
+                              }
+                            }}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <span style={{ fontWeight: "bold" }}>
+                              {person.name}
+                            </span>
+                            <p>{person.ability}</p>
+                            {person.charges && (
+                              <p>
+                                <strong>Charges:</strong> {person.charges}
+                              </p>
+                            )}
+                          </article>
+                        ))
                       ) : (
-                        <div className="empty-cell" aria-label="No Great Person">-</div>
+                        <div
+                          className="empty-cell"
+                          aria-label="No Great Person"
+                        >
+                          -
+                        </div>
                       )}
                     </div>
                   );

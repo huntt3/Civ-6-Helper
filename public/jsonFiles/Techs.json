@@ -9,7 +9,7 @@
       "column": 0,
       "row": 3,
       "prerequisites": [],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Animal Husbandry",
@@ -20,7 +20,7 @@
       "column": 0,
       "row": 4,
       "prerequisites": [],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Mining",
@@ -31,7 +31,7 @@
       "column": 0,
       "row": 6,
       "prerequisites": [],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Sailing",
@@ -42,7 +42,7 @@
       "column": 1,
       "row": 0,
       "prerequisites": [],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Astrology",
@@ -53,7 +53,7 @@
       "column": 1,
       "row": 1,
       "prerequisites": [],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Irrigation",
@@ -64,7 +64,7 @@
       "column": 1,
       "row": 2,
       "prerequisites": ["Pottery"],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Writing",
@@ -75,7 +75,7 @@
       "column": 1,
       "row": 3,
       "prerequisites": ["Pottery"],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Archery",
@@ -86,7 +86,7 @@
       "column": 1,
       "row": 4,
       "prerequisites": ["Animal Husbandry"],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Masonry",
@@ -97,7 +97,7 @@
       "column": 2,
       "row": 5,
       "prerequisites": ["Mining"],
-	  "boostPrerequisites": ["Mining"]
+      "boostPrerequisites": ["Mining"]
     },
     {
       "name": "Bronze Working",
@@ -108,7 +108,7 @@
       "column": 2,
       "row": 6,
       "prerequisites": ["Mining"],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "The Wheel",
@@ -119,7 +119,7 @@
       "column": 2,
       "row": 7,
       "prerequisites": ["Mining"],
-	  "boostPrerequisites": ["Mining"]
+      "boostPrerequisites": ["Mining"]
     },
     {
       "name": "Celestial Navigation",
@@ -129,8 +129,8 @@
       "boosted": false,
       "column": 3,
       "row": 1,
-      "prerequisites": ["Sailing"],
-	  "boostPrerequisites": ["Sailing"]
+      "prerequisites": ["Sailing", "Astrology"],
+      "boostPrerequisites": ["Sailing"]
     },
     {
       "name": "Currency",
@@ -141,7 +141,7 @@
       "column": 3,
       "row": 3,
       "prerequisites": ["Writing"],
-	  "boostPrerequisites": ["Foreign Trade"]
+      "boostPrerequisites": ["Foreign Trade"]
     },
     {
       "name": "Horseback Riding",
@@ -152,7 +152,7 @@
       "column": 3,
       "row": 4,
       "prerequisites": ["Archery"],
-	  "boostPrerequisites": ["Animal Husbandry"]
+      "boostPrerequisites": ["Animal Husbandry"]
     },
     {
       "name": "Iron Working",
@@ -163,7 +163,7 @@
       "column": 3,
       "row": 6,
       "prerequisites": ["Bronze Working"],
-	  "boostPrerequisites": ["Mining"]
+      "boostPrerequisites": ["Mining"]
     },
     {
       "name": "Shipbuilding",
@@ -174,7 +174,7 @@
       "column": 4,
       "row": 0,
       "prerequisites": ["Sailing"],
-	  "boostPrerequisites": ["Sailing"]
+      "boostPrerequisites": ["Sailing"]
     },
     {
       "name": "Mathematics",
@@ -185,7 +185,7 @@
       "column": 4,
       "row": 2,
       "prerequisites": ["Currency"],
-	  "boostPrerequisites": ["Writing", "Currency", "State Workforce"]
+      "boostPrerequisites": ["Writing", "Currency", "State Workforce"]
     },
     {
       "name": "Construction",
@@ -196,7 +196,7 @@
       "column": 4,
       "row": 5,
       "prerequisites": ["Masonry"],
-	  "boostPrerequisites": ["Mining"]
+      "boostPrerequisites": ["Mining"]
     },
     {
       "name": "Engineering",
@@ -207,7 +207,7 @@
       "column": 4,
       "row": 7,
       "prerequisites": ["Wheel"],
-	  "boostPrerequisites": ["Masonry"]
+      "boostPrerequisites": ["Masonry"]
     },
     {
       "name": "Buttress",
@@ -218,7 +218,7 @@
       "column": 5,
       "row": 0,
       "prerequisites": ["Shipbuilding", "Mathematics"],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Military Tactics",
@@ -229,7 +229,7 @@
       "column": 5,
       "row": 1,
       "prerequisites": ["Mathematics"],
-	  "boostPrerequisites": ["Bronze Working"]
+      "boostPrerequisites": ["Bronze Working"]
     },
     {
       "name": "Apprenticeship",
@@ -240,7 +240,7 @@
       "column": 5,
       "row": 3,
       "prerequisites": ["Currency", "Horseback Riding"],
-	  "boostPrerequisites": ["Mining"]
+      "boostPrerequisites": ["Mining"]
     },
     {
       "name": "Machinery",
@@ -251,7 +251,7 @@
       "column": 5,
       "row": 7,
       "prerequisites": ["Iron Working", "Engineering"],
-	  "boostPrerequisites": ["Archery"]
+      "boostPrerequisites": ["Archery"]
     },
     {
       "name": "Education",
@@ -262,7 +262,7 @@
       "column": 6,
       "row": 2,
       "prerequisites": ["Mathematics", "Apprenticeship"],
-	  "boostPrerequisites": ["Writing"]
+      "boostPrerequisites": ["Writing"]
     },
     {
       "name": "Stirrups",
@@ -273,7 +273,7 @@
       "column": 6,
       "row": 4,
       "prerequisites": ["Horseback Riding", "Apprenticeship"],
-	  "boostPrerequisites": ["Feudalism"]
+      "boostPrerequisites": ["Feudalism"]
     },
     {
       "name": "Military Engineering",
@@ -284,7 +284,7 @@
       "column": 6,
       "row": 5,
       "prerequisites": ["Construction"],
-	  "boostPrerequisites": ["Engineering"]
+      "boostPrerequisites": ["Engineering"]
     },
     {
       "name": "Castles",
@@ -295,7 +295,7 @@
       "column": 6,
       "row": 6,
       "prerequisites": ["Construction"],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Cartography",
@@ -306,7 +306,7 @@
       "column": 7,
       "row": 0,
       "prerequisites": ["Buttress"],
-	  "boostPrerequisites": ["Celestial Navigation"]
+      "boostPrerequisites": ["Celestial Navigation"]
     },
     {
       "name": "Mass Production",
@@ -317,7 +317,7 @@
       "column": 7,
       "row": 1,
       "prerequisites": ["Buttress", "Military Tactics", "Education"],
-	  "boostPrerequisites": ["Construction"]
+      "boostPrerequisites": ["Construction"]
     },
     {
       "name": "Banking",
@@ -328,7 +328,7 @@
       "column": 7,
       "row": 3,
       "prerequisites": ["Education", "Stirrups"],
-	  "boostPrerequisites": ["Guilds"]
+      "boostPrerequisites": ["Guilds"]
     },
     {
       "name": "Gunpowder",
@@ -339,7 +339,7 @@
       "column": 7,
       "row": 4,
       "prerequisites": ["Stirrups", "Military Engineering"],
-	  "boostPrerequisites": ["Military Engineering"]
+      "boostPrerequisites": ["Military Engineering"]
     },
     {
       "name": "Printing",
@@ -350,7 +350,7 @@
       "column": 7,
       "row": 7,
       "prerequisites": ["Machinery"],
-	  "boostPrerequisites": ["Education"]
+      "boostPrerequisites": ["Education"]
     },
     {
       "name": "Square Rigging",
@@ -361,7 +361,7 @@
       "column": 8,
       "row": 0,
       "prerequisites": ["Cartography"],
-	  "boostPrerequisites": ["Gunpowder"]
+      "boostPrerequisites": ["Gunpowder"]
     },
     {
       "name": "Astronomy",
@@ -372,7 +372,7 @@
       "column": 8,
       "row": 2,
       "prerequisites": ["Education"],
-	  "boostPrerequisites": ["Education"]
+      "boostPrerequisites": ["Education"]
     },
     {
       "name": "Metal Casting",
@@ -383,7 +383,7 @@
       "column": 8,
       "row": 4,
       "prerequisites": ["Gunpowder"],
-	  "boostPrerequisites": ["Machinery"]
+      "boostPrerequisites": ["Machinery"]
     },
     {
       "name": "Siege Tactics",
@@ -394,7 +394,7 @@
       "column": 8,
       "row": 6,
       "prerequisites": ["Castles"],
-	  "boostPrerequisites": ["Military Engineering"]
+      "boostPrerequisites": ["Military Engineering"]
     },
     {
       "name": "Industrialization",
@@ -405,7 +405,7 @@
       "column": 9,
       "row": 1,
       "prerequisites": ["Mass Production", "Square Rigging"],
-	  "boostPrerequisites": ["Apprenticeship"]
+      "boostPrerequisites": ["Apprenticeship"]
     },
     {
       "name": "Scientific Theory",
@@ -416,7 +416,7 @@
       "column": 9,
       "row": 2,
       "prerequisites": ["Banking", "Astronomy"],
-	  "boostPrerequisites": ["The Enlightenment"]
+      "boostPrerequisites": ["The Enlightenment"]
     },
     {
       "name": "Ballistics",
@@ -427,7 +427,7 @@
       "column": 9,
       "row": 4,
       "prerequisites": ["Metal Casting"],
-	  "boostPrerequisites": ["Military Engineering"]
+      "boostPrerequisites": ["Military Engineering"]
     },
     {
       "name": "Military Science",
@@ -438,7 +438,7 @@
       "column": 9,
       "row": 6,
       "prerequisites": ["Printing", "Siege Tactics"],
-	  "boostPrerequisites": ["Stirrups"]
+      "boostPrerequisites": ["Stirrups"]
     },
     {
       "name": "Steam Power",
@@ -449,7 +449,7 @@
       "column": 10,
       "row": 0,
       "prerequisites": ["Industrialization"],
-	  "boostPrerequisites": ["Mass Production"]
+      "boostPrerequisites": ["Mass Production"]
     },
     {
       "name": "Sanitation",
@@ -460,7 +460,7 @@
       "column": 10,
       "row": 2,
       "prerequisites": ["Scientific Theory"],
-	  "boostPrerequisites": ["Urbanization"]
+      "boostPrerequisites": ["Urbanization"]
     },
     {
       "name": "Economics",
@@ -471,7 +471,7 @@
       "column": 10,
       "row": 3,
       "prerequisites": ["Scientific Theory", "Metal Casting"],
-	  "boostPrerequisites": ["Banking"]
+      "boostPrerequisites": ["Banking"]
     },
     {
       "name": "Rifling",
@@ -482,7 +482,7 @@
       "column": 10,
       "row": 5,
       "prerequisites": ["Ballistics", "Military Science"],
-	  "boostPrerequisites": ["Military Engineering"]
+      "boostPrerequisites": ["Military Engineering"]
     },
     {
       "name": "Flight",
@@ -493,7 +493,7 @@
       "column": 11,
       "row": 1,
       "prerequisites": ["Industrialization", "Scientific Theory"],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Replaceable Parts",
@@ -504,7 +504,7 @@
       "column": 11,
       "row": 3,
       "prerequisites": ["Economics"],
-	  "boostPrerequisites": ["Military Science"]
+      "boostPrerequisites": ["Military Science"]
     },
     {
       "name": "Steel",
@@ -515,7 +515,7 @@
       "column": 11,
       "row": 4,
       "prerequisites": ["Rifling"],
-	  "boostPrerequisites": ["Steam Power"]
+      "boostPrerequisites": ["Steam Power"]
     },
     {
       "name": "Refining",
@@ -526,7 +526,7 @@
       "column": 11,
       "row": 6,
       "prerequisites": ["Rifling"],
-	  "boostPrerequisites": ["Industrialization"]
+      "boostPrerequisites": ["Industrialization"]
     },
     {
       "name": "Electricity",
@@ -537,7 +537,7 @@
       "column": 12,
       "row": 0,
       "prerequisites": ["Steam Power"],
-	  "boostPrerequisites": ["Mercantilism"]
+      "boostPrerequisites": ["Mercantilism"]
     },
     {
       "name": "Radio",
@@ -548,7 +548,7 @@
       "column": 12,
       "row": 1,
       "prerequisites": ["Steam Power", "Flight"],
-	  "boostPrerequisites": ["Conservation"]
+      "boostPrerequisites": ["Conservation"]
     },
     {
       "name": "Chemistry",
@@ -559,7 +559,7 @@
       "column": 12,
       "row": 2,
       "prerequisites": ["Sanitation", "Replaceable Parts"],
-	  "boostPrerequisites": ["Civil Service"]
+      "boostPrerequisites": ["Civil Service"]
     },
     {
       "name": "Combustion",
@@ -570,7 +570,7 @@
       "column": 12,
       "row": 5,
       "prerequisites": ["Steel", "Refining"],
-	  "boostPrerequisites": ["Natural History"]
+      "boostPrerequisites": ["Natural History"]
     },
     {
       "name": "Advanced Flight",
@@ -581,7 +581,7 @@
       "column": 13,
       "row": 1,
       "prerequisites": ["Radio"],
-	  "boostPrerequisites": ["Flight"]
+      "boostPrerequisites": ["Flight"]
     },
     {
       "name": "Rocketry",
@@ -592,9 +592,9 @@
       "column": 13,
       "row": 2,
       "prerequisites": ["Radio", "Chemistry"],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
-	{
+    {
       "name": "Advanced Ballistics",
       "techCivic": "Tech",
       "baseCost": 1480,
@@ -603,7 +603,7 @@
       "column": 13,
       "row": 3,
       "prerequisites": ["Replaceable Parts", "Steel"],
-	  "boostPrerequisites": ["Electricity"]
+      "boostPrerequisites": ["Electricity"]
     },
     {
       "name": "Combined Arms",
@@ -614,7 +614,7 @@
       "column": 13,
       "row": 4,
       "prerequisites": ["Combustion"],
-	  "boostPrerequisites": ["Mobalization"]
+      "boostPrerequisites": ["Mobalization"]
     },
     {
       "name": "Plastics",
@@ -625,7 +625,7 @@
       "column": 13,
       "row": 5,
       "prerequisites": ["Combustion"],
-	  "boostPrerequisites": ["Refining"]
+      "boostPrerequisites": ["Refining"]
     },
     {
       "name": "Computers",
@@ -636,7 +636,7 @@
       "column": 14,
       "row": 0,
       "prerequisites": ["Electricity", "Radio"],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Nuclear Fission",
@@ -647,7 +647,7 @@
       "column": 14,
       "row": 4,
       "prerequisites": ["Advanced Ballistics", "Combined Arms"],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Synthetic Materials",
@@ -658,7 +658,7 @@
       "column": 14,
       "row": 5,
       "prerequisites": ["Plastics"],
-	  "boostPrerequisites": ["Flight"]
+      "boostPrerequisites": ["Flight"]
     },
     {
       "name": "Telecommunications",
@@ -669,7 +669,7 @@
       "column": 15,
       "row": 0,
       "prerequisites": ["Computers"],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Satellites",
@@ -680,9 +680,9 @@
       "column": 15,
       "row": 2,
       "prerequisites": ["Advanced Flight", "Rocketry"],
-	  "boostPrerequisites": ["Radio"]
+      "boostPrerequisites": ["Radio"]
     },
-	{
+    {
       "name": "Guidance Systems",
       "techCivic": "Tech",
       "baseCost": 1850,
@@ -691,7 +691,7 @@
       "column": 15,
       "row": 4,
       "prerequisites": ["Rocketry", "Advanced Ballistics"],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Lasers",
@@ -702,7 +702,7 @@
       "column": 15,
       "row": 3,
       "prerequisites": ["Nuclear Fission"],
-	  "boostPrerequisites": ["Computers"]
+      "boostPrerequisites": ["Computers"]
     },
     {
       "name": "Composites",
@@ -713,7 +713,7 @@
       "column": 15,
       "row": 5,
       "prerequisites": ["Synthetic Materials"],
-	  "boostPrerequisites": ["Combustion"]
+      "boostPrerequisites": ["Combustion"]
     },
     {
       "name": "Stealth Technology",
@@ -724,7 +724,7 @@
       "column": 15,
       "row": 6,
       "prerequisites": ["Synthetic Materials"],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Robotics",
@@ -734,8 +734,13 @@
       "boosted": false,
       "column": 16,
       "row": 1,
-      "prerequisites": ["Computers", "Satellites", "Guidance Systems", "Lasers"],
-	  "boostPrerequisites": ["Globalization"]
+      "prerequisites": [
+        "Computers",
+        "Satellites",
+        "Guidance Systems",
+        "Lasers"
+      ],
+      "boostPrerequisites": ["Globalization"]
     },
     {
       "name": "Nuclear Fusion",
@@ -746,7 +751,7 @@
       "column": 16,
       "row": 4,
       "prerequisites": ["Lasers"],
-	  "boostPrerequisites": ["Nuclear Fission"]
+      "boostPrerequisites": ["Nuclear Fission"]
     },
     {
       "name": "Nanotechnology",
@@ -757,7 +762,7 @@
       "column": 16,
       "row": 5,
       "prerequisites": ["Composites"],
-	  "boostPrerequisites": ["Radio"]
+      "boostPrerequisites": ["Radio"]
     },
     {
       "name": "Advanced AI",
@@ -768,7 +773,7 @@
       "column": 17,
       "row": 1,
       "prerequisites": [],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Advanced Power Cells",
@@ -779,7 +784,7 @@
       "column": 17,
       "row": 2,
       "prerequisites": [],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Cybernetics",
@@ -790,7 +795,7 @@
       "column": 17,
       "row": 3,
       "prerequisites": [],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Predictive Systems",
@@ -801,7 +806,7 @@
       "column": 17,
       "row": 4,
       "prerequisites": [],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Seasteads",
@@ -812,7 +817,7 @@
       "column": 17,
       "row": 5,
       "prerequisites": [],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Smart Materials",
@@ -823,7 +828,7 @@
       "column": 17,
       "row": 6,
       "prerequisites": [],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Offworld Mission",
@@ -834,7 +839,7 @@
       "column": 18,
       "row": 4,
       "prerequisites": [],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     },
     {
       "name": "Future Tech",
@@ -845,7 +850,7 @@
       "column": 19,
       "row": 4,
       "prerequisites": ["Offworld Mission"],
-	  "boostPrerequisites": []
+      "boostPrerequisites": []
     }
   ]
 }

@@ -2,26 +2,35 @@
 .tech-carousel {
   width: 100%;
   overflow-x: auto;
-  padding: 1rem 0;
+  padding: 2rem 0 2rem 0;
   margin-bottom: 2rem;
+  background: linear-gradient(135deg, #1e2a4a 0%, #274b7a 100%);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px rgba(30, 42, 74, 0.18);
 }
 
 .tech-carousel-title {
-  font-size: 1.2rem;
-  margin: 0 0 1rem 1rem;
+  font-size: 1.7rem;
+  color: #e3eafc;
+  letter-spacing: 1px;
+  margin: 0 0 1.5rem 1rem;
+  font-family: "Segoe UI", "Arial", sans-serif;
+  text-shadow: 0 2px 8px #1e2a4a44;
 }
 
 .tech-carousel-grid {
   display: grid;
-  grid-template-columns: repeat(20, 1fr);
-  grid-template-rows: repeat(8, 80px);
-  gap: 1rem;
-  min-width: 2200px;
+  grid-template-columns: repeat(20, 120px);
+  grid-template-rows: repeat(8, 100px);
+  gap: 2.5rem;
+  min-width: 2800px;
+  padding: 1rem 0;
+  position: relative;
 }
 
 .tech-card {
-  background: #e0e0e0;
-  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #2a3d5c 60%, #3a5a8c 100%);
+  border-radius: 1rem;
   min-width: 0;
   min-height: 0;
   height: 100%;
@@ -30,14 +39,27 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  font-size: 1.15rem;
+  box-shadow: 0 4px 16px #1e2a4a33;
   cursor: pointer;
-  transition: background 0.2s;
+  border: 2.5px solid #3a5a8c;
+  color: #e3eafc;
+  transition: background 0.2s, box-shadow 0.2s, border 0.2s;
+  position: relative;
+  z-index: 1;
 }
 .tech-card:hover:not(.tech-card-empty),
 .tech-card:focus:not(.tech-card-empty) {
-  background: #b3c6e7;
+  background: linear-gradient(135deg, #3a5a8c 60%, #4a7ad1 100%);
+  box-shadow: 0 6px 24px #1e2a4a55;
+  border-color: #4a7ad1;
+}
+.tech-card.researched {
+  background: linear-gradient(135deg, #2a3d5c 60%, #3a5a8c 100%) !important;
+  color: #7a8bb7;
+  filter: grayscale(0.7) brightness(0.85);
+  border-color: #7a8bb7;
+  cursor: not-allowed;
 }
 .tech-card-empty {
   background: transparent;
@@ -46,11 +68,15 @@
 }
 
 .tech-card-title {
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 0.3rem;
+  font-size: 1.1rem;
+  color: #f7fafc;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 8px #1e2a4a44;
 }
 
 .tech-card-cost {
   font-size: 0.95rem;
-  color: #555;
+  color: #b3cfff;
 }
