@@ -8,7 +8,7 @@ import TechCarousel from "./Tech";
 // Main App component
 function App() {
   return (
-    <>
+    <main>
       <header className="App-header">
         <h1>Civ 6 Helper</h1>
       </header>
@@ -20,7 +20,7 @@ function App() {
       <EraTrackerContainer />
       {/* Render WondersContainer at the bottom */}
       <WondersContainer />
-    </>
+    </main>
   );
 }
 
