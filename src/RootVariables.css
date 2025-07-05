@@ -1,0 +1,37 @@
+:root {
+  --primary-text-color-dark: #000000;
+  --secondary-text-color-dark: #000000;
+  --primary-text-color-light: #ffffff;
+  --secondary-text-color-light: #ffffff;
+  --primary-bg-color: #ffffff;
+  --secondary-bg-color: #f0f0f0;
+  --primary-border-color: #cccccc;
+  --secondary-border-color: #dddddd;
+
+  --collapse-btn-color: #000000;
+  --refresh-btn-color: #000000;
+
+  --primary-container-color: #000000;
+  --secondary-container-color: #000000;
+
+  --tech-card-researched-color: #000000;
+  --tech-card-boosted-cannot-research-color: #000000;
+  --tech-card-boosted-can-research-color: #000000;
+  --tech-card-no-boost-cannot-research-color: #000000;
+  --tech-card-no-boost-can-research-color: #000000;
+  --tech-card-selected-color: #000000;
+  --tech-card-boosts-selected-color: #000000;
+  --tech-card-boosted-by-selected-color: #000000;
+
+  --civic-card-researched-color: #000000;
+  --civic-card-boosted-cannot-research-color: #000000;
+  --civic-card-boosted-can-research-color: #000000;
+  --civic-card-no-boost-cannot-research-color: #000000;
+  --civic-card-no-boost-can-research-color: #000000;
+  --civic-card-selected-color: #000000;
+  --civic-card-boosts-selected-color: #000000;
+  --civic-card-boosted-by-selected-color: #000000;
+
+  --primary-font: sans-serif;
+  --secondary-font: Helvetica;
+}

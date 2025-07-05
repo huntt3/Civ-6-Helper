@@ -19,3 +19,5 @@ We use cookies to store user preferences.
 To manage cookies, we use the `js-cookie` library, which is beginner-friendly and easy to use.
 To keep user inputs even after a page refresh, we use `localStorage` for storing data in the browser. We use this for all form inputs and checkboxes.
 We avoid using sessionStorage for simplicity, as localStorage is more commonly used and easier to understand
+
+We use RootVariables.css to store global CSS variables for colors, fonts, and other styles. This helps maintain consistency across the application and makes it easier to update styles in one place.
