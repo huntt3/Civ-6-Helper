@@ -1,46 +1,42 @@
 import React, { useEffect, useState } from "react";
-import "./EraTrackerContainer.css";
 import EraScore from "./EraScore";
+import CollapsibleContainer from "./CollapsibleContainer";
+import "./EraTrackerContainer.css";
 
-// EraTrackerContainer component
+// EraTrackerContainer component using CollapsibleContainer
 const EraTrackerContainer = () => {
   const [eraScoreItems, setEraScoreItems] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
 
   // Load EraScore data from JSON file
-  useEffect(() => {
+  const fetchEraScore = () => {
     fetch("/jsonFiles/EraScore.json")
       .then((res) => res.json())
-      .then((data) => setEraScoreItems(data.EraScore || []));
+      .then((data) => setEraScoreItems(data.EraScore || []))
+      .catch(() => setEraScoreItems([]));
+  };
+
+  useEffect(() => {
+    fetchEraScore();
   }, []);
 
-  // Toggle collapse state
+  // Collapse/expand handler
   const handleCollapse = () => setCollapsed((prev) => !prev);
 
   return (
-    <section className="era-tracker-container" aria-label="Era Tracker">
-      <div className="era-tracker-header">
-        <h2 className="era-tracker-title">Era Score Tracker</h2>
-        <button
-          className="era-tracker-collapse-btn"
-          onClick={handleCollapse}
-          aria-label={
-            collapsed
-              ? "Expand Era Score Tracker"
-              : "Collapse Era Score Tracker"
-          }
-        >
-          {collapsed ? "Expand" : "Collapse"}
-        </button>
+    <CollapsibleContainer
+      title="Era Score Tracker"
+      collapsed={collapsed}
+      onCollapse={handleCollapse}
+      onRefresh={fetchEraScore}
+      ariaLabel="Era Tracker"
+    >
+      <div className="era-score-list">
+        {eraScoreItems.map((item) => (
+          <EraScore key={item.title} {...item} />
+        ))}
       </div>
-      {!collapsed && (
-        <div className="era-score-list">
-          {eraScoreItems.map((item) => (
-            <EraScore key={item.title} {...item} />
-          ))}
-        </div>
-      )}
-    </section>
+    </CollapsibleContainer>
   );
 };
 

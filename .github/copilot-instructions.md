@@ -21,3 +21,11 @@ To keep user inputs even after a page refresh, we use `localStorage` for storing
 We avoid using sessionStorage for simplicity, as localStorage is more commonly used and easier to understand
 
 We use RootVariables.css to store global CSS variables for colors, fonts, and other styles. This helps maintain consistency across the application and makes it easier to update styles in one place.
+
+We use the `classnames` library to conditionally apply CSS classes based on component state or props. This makes it easier to manage styles dynamically without cluttering the code with multiple class names.
+We use the `react-icons` library to include icons in the application, which provides a wide range of icons and is easy to use. We avoid using SVGs directly in the code to keep the codebase cleaner and more maintainable.
+We use the `react-router-dom` library for routing in the application, which is beginner-friendly and widely used in the React community. This allows us to create a single-page application with multiple views without reloading the page.
+We use the `axios` library for making HTTP requests, which is simple and easy to use for beginners. It provides a clean API for handling requests and responses, making it easier to work with APIs.
+
+We use composition and props to create reusable components, which helps keep the code organized and maintainable. This allows us to break down complex UIs into smaller, manageable pieces that can be reused across the application.
+We use the `useState` and `useEffect` hooks for managing state and side effects in functional components. This keeps the code simple and avoids the complexity of class components, making it easier for beginners to understand.

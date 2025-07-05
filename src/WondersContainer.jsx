@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import CollapsibleContainer from "./CollapsibleContainer";
 import "./WondersContainer.css";
 
 // WonderCard component
@@ -54,17 +55,23 @@ const WonderModal = ({ wonder, onClose, onToggleBuilt }) => {
   );
 };
 
-// WondersContainer component
+// WondersContainer component using CollapsibleContainer
 const WondersContainer = () => {
   const [wonders, setWonders] = useState([]);
   const [selectedWonder, setSelectedWonder] = useState(null);
+  // Add collapsed state for CollapsibleContainer
   const [collapsed, setCollapsed] = useState(false);
 
   // Load wonders from JSON
-  useEffect(() => {
+  const fetchWonders = () => {
     fetch("/jsonFiles/Wonders.json")
       .then((res) => res.json())
-      .then((data) => setWonders(data.Wonder || []));
+      .then((data) => setWonders(data.Wonder || []))
+      .catch(() => setWonders([]));
+  };
+
+  useEffect(() => {
+    fetchWonders();
   }, []);
 
   // Handle card click
@@ -83,22 +90,18 @@ const WondersContainer = () => {
     setSelectedWonder((prev) => prev && { ...prev, built: !prev.built });
   };
 
-  // Toggle collapse state
+  // Collapse/expand handler
   const handleCollapse = () => setCollapsed((prev) => !prev);
 
   return (
-    <section className="wonders-container" aria-label="Wonders">
-      <div className="wonders-header">
-        <h2 className="wonders-title">Wonders</h2>
-        <button
-          className="wonders-collapse-btn"
-          onClick={handleCollapse}
-          aria-label={collapsed ? "Expand Wonders" : "Collapse Wonders"}
-        >
-          {collapsed ? "Expand" : "Collapse"}
-        </button>
-      </div>
-      {!collapsed && (
+    <>
+      <CollapsibleContainer
+        title="Wonders"
+        collapsed={collapsed}
+        onCollapse={handleCollapse}
+        onRefresh={fetchWonders}
+        ariaLabel="Wonders"
+      >
         <div className="wonders-list">
           {wonders.map((wonder) => (
             <WonderCard
@@ -108,13 +111,13 @@ const WondersContainer = () => {
             />
           ))}
         </div>
-      )}
+      </CollapsibleContainer>
       <WonderModal
         wonder={selectedWonder}
         onClose={handleCloseModal}
         onToggleBuilt={handleToggleBuilt}
       />
-    </section>
+    </>
   );
 };
 

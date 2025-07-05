@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./GreatPeopleContainer.css";
 import "./GreatPeopleContainerExtra.css";
+import CollapsibleContainer from "./CollapsibleContainer";
 
 // Helper function to get unique people by era and type
 // Helper function to get unique people by era and type, with null safety
@@ -49,6 +50,8 @@ const GreatPeopleContainer = () => {
     const saved = localStorage.getItem("greatPeopleChecked");
     return saved ? JSON.parse(saved) : {};
   });
+  // Collapsed state for the whole container
+  const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
     // Fetch the GreatPeople.json file
@@ -92,34 +95,17 @@ const GreatPeopleContainer = () => {
     setCheckedCards({});
   };
 
+  // Collapse/expand handler for the whole container
+  const handleCollapseContainer = () => setCollapsed((prev) => !prev);
+
   return (
-    <section className="great-people-container" aria-label="Great People Grid">
-      <header
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "1rem",
-        }}
-      >
-        <h2 style={{ margin: 0 }}>Great People</h2>
-        <button
-          type="button"
-          aria-label="Reset all selected Great People"
-          onClick={handleRefresh}
-          style={{
-            background: "#1976d2",
-            color: "#fff",
-            border: "none",
-            borderRadius: "3px",
-            padding: "0.3rem 0.9rem",
-            fontSize: "1rem",
-            cursor: "pointer",
-          }}
-        >
-          Refresh
-        </button>
-      </header>
+    <CollapsibleContainer
+      title="Great People"
+      className="great-people-container"
+      collapsed={collapsed}
+      onCollapse={handleCollapseContainer}
+      onRefresh={handleRefresh}
+    >
       {error && <p className="error-message">{error}</p>}
       <div
         className="great-people-grid"
@@ -202,7 +188,7 @@ const GreatPeopleContainer = () => {
           </React.Fragment>
         ))}
       </div>
-    </section>
+    </CollapsibleContainer>
   );
 };
 
