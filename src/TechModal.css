@@ -1,0 +1,66 @@
+/* Modal styles for Tech details */
+.tech-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tech-modal {
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  min-width: 300px;
+  max-width: 90vw;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  position: relative;
+}
+.tech-modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 0.2rem 0.7rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.tech-modal-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 0.7rem;
+}
+.tech-modal-section {
+  margin-bottom: 0.7rem;
+}
+.tech-modal-prereqs {
+  margin-top: 0.3rem;
+  font-size: 1rem;
+}
+.tech-card.researched {
+  background: #e0e0e0 !important;
+  color: #888;
+  filter: grayscale(0.7);
+  cursor: not-allowed;
+}
+.tech-card .boost-checkbox {
+  margin-top: 0.5rem;
+  accent-color: #1976d2;
+}
+.tech-card .details-btn {
+  margin-top: 0.5rem;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 0.2rem 0.7rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.tech-card .details-btn:focus {
+  outline: 2px solid #1976d2;
+}

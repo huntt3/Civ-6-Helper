@@ -2,77 +2,77 @@
   "GreatPeople": [
     {
       "name": "Boudica",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Classical",
       "taken": false,
       "ability": "Convert adjacent barbarian units."
     },
     {
       "name": "Hannibal Barca",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Classical",
       "taken": false,
       "ability": "Grants 1 promotion level to a military land unit."
     },
     {
       "name": "Sun Tzu",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Classical",
       "taken": false,
       "ability": "Creates The Art of War Great Work of Writing."
     },
     {
       "name": "Tr\u01b0ng Tr\u1eafc",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Classical",
       "taken": false,
       "ability": "Permanently reduces War Weariness by 25%."
     },
     {
       "name": "\u00c6thelfl\u00e6d",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Medieval",
       "taken": false,
       "ability": "Grants +2 Loyalty per turn for this city."
     },
     {
       "name": "El Cid",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Medieval",
       "taken": false,
       "ability": "Forms a Corps out of a military land unit."
     },
     {
       "name": "Timur",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Medieval",
       "taken": false,
       "ability": "Grants 1 promotion level to a military land unit. +25% combat experience bonus for mounted units."
     },
     {
       "name": "Amina",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Medieval",
       "taken": false,
       "ability": "Gain a free Envoy."
     },
     {
       "name": "Gustavus Adolphus",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Renaissance",
       "taken": false,
       "ability": "Instantly creates a Bombard unit with one promotion level."
     },
     {
       "name": "Jeanne d'Arc",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Renaissance",
       "taken": false,
       "ability": "Creates a Relic."
     },
     {
       "name": "Dandara",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Industrial",
       "taken": false,
       "ability": "Grants a Warrior Monk with one promotion level. (2 charges)",
@@ -80,126 +80,126 @@
     },
     {
       "name": "Jos\u00e9 de San Mart\u00edn",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Industrial",
       "taken": false,
       "ability": "Grants +4 Loyalty per turn for this city."
     },
     {
       "name": "Napoleon Bonaparte",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Industrial",
       "taken": false,
       "ability": "Forms an Army out of a military land unit."
     },
     {
       "name": "Rani Lakshmibai",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Industrial",
       "taken": false,
       "ability": "Instantly creates a Cavalry unit with one promotion level."
     },
     {
       "name": "Tupac Amaru",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Modern",
       "taken": false,
       "ability": "Grants a Musketman in each of the target city's indefensible and undefended districts. Must activates in enemy territory."
     },
     {
       "name": "John Monash",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Modern",
       "taken": false,
       "ability": "Grants 1 promotion level and +75% combat experience to a military land unit."
     },
     {
       "name": "Marina Raskova",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Modern",
       "taken": false,
       "ability": "Gain +1 Air unit slot in this district. Must activates in your Aerodrome."
     },
     {
       "name": "Samori Tour\u00e9",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Modern",
       "taken": false,
       "ability": "Instantly creates a Spec Ops unit with one promotion level."
     },
     {
       "name": "Douglas MacArthur",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Atomic",
       "taken": false,
       "ability": "Instantly creates a Tank unit with one promotion level. Grants +1 Oil per turn."
     },
     {
       "name": "Dwight Eisenhower",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Atomic",
       "taken": false,
       "ability": "+5% Production Production towards military units."
     },
     {
       "name": "Georgy Zhukov",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Atomic",
       "taken": false,
       "ability": "+50% Flanking bonus for all military land units."
     },
     {
       "name": "Sudirman",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Atomic",
       "taken": false,
       "ability": "Grants +6 Loyalty per turn for this city. Must activate in City Center."
     },
     {
       "name": "Ahmad Shah Massoud",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Information",
       "taken": false,
       "ability": "Grants +6 Loyalty per turn for this city. Must activate in City Center."
     },
     {
       "name": "Vijaya Wimalaratne",
-      "requirement": "Great General",
+      "type": "Great General",
       "era": "Information",
       "taken": false,
       "ability": "Grants +6 Loyalty per turn for this city. Must activate in City Center."
     },
     {
       "name": "Themistocles",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Classical",
       "taken": false,
       "ability": "Grants 1 promotion level and 25% combat experience to a military naval unit."
     },
     {
       "name": "Scylax of Caryanda",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Classical",
       "taken": false,
       "ability": "Grants 1 promotion level and 25% combat experience to a military naval unit."
     },
     {
       "name": "Gaius Duilius",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Classical",
       "taken": false,
       "ability": "Grants 1 promotion level and 25% combat experience to a military naval unit."
     },
     {
       "name": "Leif Erikson",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Medieval",
       "taken": false,
       "ability": "Unit and adjacent naval units can enter Ocean tiles. +1 Sight."
     },
     {
       "name": "Zheng He",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Medieval",
       "taken": false,
       "ability": "Grants a Trader unit. (2 charges)",
@@ -207,105 +207,105 @@
     },
     {
       "name": "Teuta",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Medieval",
       "taken": false,
       "ability": "Grants 1 promotion level and 25% combat experience to a military naval unit."
     },
     {
       "name": "Francis Drake",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Renaissance",
       "taken": false,
       "ability": "Gain 50 Gold per naval unit killed."
     },
     {
       "name": "Yi Sun-sin",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Renaissance",
       "taken": false,
       "ability": "Instantly creates an Ironclad with 1 promotion level."
     },
     {
       "name": "Rajendra Chola",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Renaissance",
       "taken": false,
       "ability": "Gain 1 Envoy. Naval units gain +1 Movement."
     },
     {
       "name": "Horatio Nelson",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Industrial",
       "taken": false,
       "ability": "Grants +5 Combat Strength and +1 Movement to Industrial and Modern era naval units."
     },
     {
       "name": "Ching Shih",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Industrial",
       "taken": false,
       "ability": "Grants +5 Combat Strength and +1 Movement to Industrial and Modern era naval units."
     },
     {
       "name": "Ferdinand Magellan",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Industrial",
       "taken": false,
       "ability": "Grants +5 Combat Strength and +1 Movement to Industrial and Modern era naval units."
     },
     {
       "name": "Grace Hopper",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Modern",
       "taken": false,
       "ability": "Grants +1 Level to a military naval unit and increases trade route range by +50%."
     },
     {
       "name": "T\u014dg\u014d Heihachir\u014d",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Modern",
       "taken": false,
       "ability": "Instantly creates a Battleship with 1 promotion level."
     },
     {
       "name": "David Farragut",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Modern",
       "taken": false,
       "ability": "Grants +5 Combat Strength and +1 Movement to Modern and Atomic era naval units."
     },
     {
       "name": "Chester W. Nimitz",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Atomic",
       "taken": false,
       "ability": "Grants +5 Combat Strength and +1 Movement to Atomic and Information era naval units."
     },
     {
       "name": "Semyon Lobov",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Atomic",
       "taken": false,
       "ability": "Grants +5 Combat Strength and +1 Movement to Atomic and Information era naval units."
     },
     {
       "name": "Tamar of Georgia",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Information",
       "taken": false,
       "ability": "Grants +6 Loyalty per turn for this city. Must activate in a Harbor."
     },
     {
       "name": "Cemil Topuzlu",
-      "requirement": "Great Admiral",
+      "type": "Great Admiral",
       "era": "Information",
       "taken": false,
       "ability": "Grants +6 Loyalty per turn for this city. Must activate in a Harbor."
     },
     {
       "name": "Imhotep",
-      "requirement": "Great Engineer",
+      "type": "Great Engineer",
       "era": "Ancient",
       "taken": false,
       "ability": "Grants 215 production toward constructing a Wonder. (2 charges)",
@@ -313,7 +313,7 @@
     },
     {
       "name": "Isidore of Miletus",
-      "requirement": "Great Engineer",
+      "type": "Great Engineer",
       "era": "Classical",
       "taken": false,
       "ability": "Grants 215 production toward constructing a Wonder. (2 charges)",
@@ -321,21 +321,21 @@
     },
     {
       "name": "Bi Sheng",
-      "requirement": "Great Engineer",
+      "type": "Great Engineer",
       "era": "Medieval",
       "taken": false,
       "ability": "Triggers the Eureka moment for 2 random technologies from the Medieval or Renaissance era."
     },
     {
       "name": "Leonardo da Vinci",
-      "requirement": "Great Engineer",
+      "type": "Great Engineer",
       "era": "Renaissance",
       "taken": false,
       "ability": "Workshop buildings provide +3 Culture."
     },
     {
       "name": "Mimar Sinan",
-      "requirement": "Great Engineer",
+      "type": "Great Engineer",
       "era": "Renaissance",
       "taken": false,
       "ability": "Grants 480 production toward constructing a Wonder. (2 charges)",
@@ -343,21 +343,21 @@
     },
     {
       "name": "Ada Lovelace",
-      "requirement": "Great Engineer",
+      "type": "Great Engineer",
       "era": "Industrial",
       "taken": false,
       "ability": "Triggers the Eureka moment for Computers."
     },
     {
       "name": "James Watt",
-      "requirement": "Great Engineer",
+      "type": "Great Engineer",
       "era": "Industrial",
       "taken": false,
       "ability": "Gives +2 Production to all Factories and +1 Production to all Workshops."
     },
     {
       "name": "Gustave Eiffel",
-      "requirement": "Great Engineer",
+      "type": "Great Engineer",
       "era": "Industrial",
       "taken": false,
       "ability": "Grants 720 production toward constructing a Wonder. (2 charges)",
@@ -365,14 +365,14 @@
     },
     {
       "name": "Nikola Tesla",
-      "requirement": "Great Engineer",
+      "type": "Great Engineer",
       "era": "Modern",
       "taken": false,
       "ability": "Regional buildings provide +2 Power and extend 3 tiles farther."
     },
     {
       "name": "John Roebling",
-      "requirement": "Great Engineer",
+      "type": "Great Engineer",
       "era": "Modern",
       "taken": false,
       "ability": "Grants 480 production toward Industrial Zone buildings in this city. (2 charges)",
@@ -380,7 +380,7 @@
     },
     {
       "name": "Gustave Eiffel",
-      "requirement": "Great Engineer",
+      "type": "Great Engineer",
       "era": "Modern",
       "taken": false,
       "ability": "Grants 100% production toward Space Race projects for the city. (2 charges)",
@@ -388,28 +388,28 @@
     },
     {
       "name": "Zaha Hadid",
-      "requirement": "Great Engineer",
+      "type": "Great Engineer",
       "era": "Atomic",
       "taken": false,
       "ability": "Grants +3 Amenities and +4 Housing in this city."
     },
     {
       "name": "Oscar Niemeyer",
-      "requirement": "Great Engineer",
+      "type": "Great Engineer",
       "era": "Atomic",
       "taken": false,
       "ability": "Grants +4 Culture to all Broadcast Centers."
     },
     {
       "name": "Elena Cornaro Piscopia",
-      "requirement": "Great Engineer",
+      "type": "Great Engineer",
       "era": "Atomic",
       "taken": false,
       "ability": "Triggers the Eureka moment for all technologies from the Information era."
     },
     {
       "name": "Robert Goddard",
-      "requirement": "Great Engineer",
+      "type": "Great Engineer",
       "era": "Information",
       "taken": false,
       "ability": "Grants 100% production toward Space Race projects for the city. (2 charges)",
@@ -417,14 +417,14 @@
     },
     {
       "name": "Colaeus",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Classical",
       "taken": false,
       "ability": "Gain 100 Faith (on Standard speed). Grants 1 free copy of the Luxury resource on this tile to your Capital Capital city."
     },
     {
       "name": "Marcus Licinius Crassus",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Classical",
       "taken": false,
       "ability": "Gain 60 Gold Gold (on Standard speed). Annexes any contiguous tile into the nearest of your city's territories. Activates on tiles next to your territory.",
@@ -432,161 +432,161 @@
     },
     {
       "name": "Zhang Qian",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Classical",
       "taken": false,
       "ability": "Increases Trade Route Trade Route capacity by 1. Foreign Trade Route Trade Routes to this city provide +2 Gold Gold to both cities."
     },
     {
       "name": "Ibn Fadlan",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Medieval",
       "taken": false,
       "ability": "Increases Trade Route capacity by 1. Your Trade Routes to City-states now grant you +2 Faith."
     },
     {
       "name": "Irene of Athens",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Renaissance",
       "taken": false,
       "ability": "Grants 1 Governor Title or recruit a new Governor."
     },
     {
       "name": "Marco Polo",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Medieval",
       "taken": false,
       "ability": "Grants a free Trader unit in this city, and increases Trade Route Trade Route capacity by 1. Foreign Trade Route Trade Routes to this city provides +2 Gold Gold to both cities."
     },
     {
       "name": "Piero de' Bardi",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Medieval",
       "taken": false,
       "ability": "Gain 200 Gold Gold and 1 Envoy."
     },
     {
       "name": "Cosimo de' Medici",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Renaissance",
       "taken": false,
       "ability": "Grants 300 Gold and +20% Gold in the city."
     },
     {
       "name": "Zhou Daguan",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Renaissance",
       "taken": false,
       "ability": "Grants 3 Envoys at this City-state."
     },
     {
       "name": "Giovanni de' Medici",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Renaissance",
       "taken": false,
       "ability": "Instantly builds a Market and a Bank in a Commercial Hub district. This Bank gains 2 Great Work slots which can be filled by anything."
     },
     {
       "name": "Jakob Fugger",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Renaissance",
       "taken": false,
       "ability": "Gain 200 Gold Gold and 2 Envoys Envoys."
     },
     {
       "name": "Raja Todar Mal",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Renaissance",
       "taken": false,
       "ability": "Gain an Envoy. Domestic Trade Routes gain +0.5 Gold per district at the destination (rounds down to integer)."
     },
     {
       "name": "Adam Smith",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Industrial",
       "taken": false,
       "ability": "Gain 500 Gold Gold. Grant 1 Governor Governor Title or recruit a new Governor."
     },
     {
       "name": "John Jacob Astor",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Industrial",
       "taken": false,
       "ability": "Gain 500 Gold Gold. Gain 2 Envoys"
     },
     {
       "name": "John Spilsbury",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Industrial",
       "taken": false,
       "ability": "Creates one copy of Toys, which provides +4 Amenities Amenities."
     },
     {
       "name": "Stamford Raffles",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Modern",
       "taken": false,
       "ability": "Absorbs this City-state into your empire. Grants you +10 Loyalty per turn in the city. Activates in a city-state of which you are Suzerain."
     },
     {
       "name": "John Rockefeller",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Modern",
       "taken": false,
       "ability": "Grants 3 Oil per turn. Your Trade Routes gain +2 Gold for each Strategic resource improved by the destination city."
     },
     {
       "name": "Sarah Breedlove",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Modern",
       "taken": false,
       "ability": "+25% Tourism Tourism rate towards other civilizations you have a Trade Route to."
     },
     {
       "name": "Mary Katherine Goddard",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Modern",
       "taken": false,
       "ability": "Gain +1 Diplomatic visibility with other civs."
     },
     {
       "name": "Helena Rubinstein",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Atomic",
       "taken": false,
       "ability": "Creates two copies of Cosmetics, which provide +4 Amenities each."
     },
     {
       "name": "Levi Strauss",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Atomic",
       "taken": false,
       "ability": "Creates two copies of Jeans, which provide +4 Amenities each."
     },
     {
       "name": "Melitta Bentz",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Atomic",
       "taken": false,
       "ability": "Increases Trade Route Trade Route capacity by 1. +25% Tourism Tourism to other civilizations you have a Trade Route Trade Route to."
     },
     {
       "name": "Estée Lauder",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Information",
       "taken": false,
       "ability": "Creates two copies of Perfume, which provide +6 Amenities Amenities each."
     },
     {
       "name": "Jamsetji Tata",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Information",
       "taken": false,
       "ability": "Campus districts provide +10 Tourism Tourism. Activates in your Campus."
     },
     {
       "name": "Masaru Ibuka",
-      "requirement": "Great Merchant",
+      "type": "Great Merchant",
       "era": "Information",
       "taken": false,
       "ability": "Industrial Zone districts provide +10 Tourism Tourism. Activates in your Industrial Zone."
