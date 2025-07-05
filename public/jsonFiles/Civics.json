@@ -6,7 +6,21 @@
       "baseCost": 20,
       "researched": false,
       "boosted": false,
-      "prerequisites": []
+	  "column": 0,
+      "row": 3,
+      "prerequisites": [],
+	  "boostPrerequisites": []
+    },
+	{
+      "name": "Craftsmanship",
+      "techCivic": "Civic",
+      "baseCost": 40,
+      "researched": false,
+      "boosted": false,
+	  "column": 1,
+      "row": 1,
+      "prerequisites": ["Code of Laws"],
+	  "boostPrerequisites": []
     },
     {
       "name": "Foreign Trade",
@@ -14,15 +28,32 @@
       "baseCost": 40,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Code of Laws"]
+	  "column": 1,
+      "row": 5,
+      "prerequisites": ["Code of Laws"],
+	  "boostPrerequisites": []
     },
-    {
-      "name": "Craftsmanship",
+	{
+      "name": "Military Tradition",
       "techCivic": "Civic",
-      "baseCost": 40,
+      "baseCost": 50,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Code of Laws"]
+	  "column": 2,
+      "row": 0,
+      "prerequisites": ["Craftsmanship"],
+	  "boostPrerequisites": []
+    },
+	{
+      "name": "State Workforce",
+      "techCivic": "Civic",
+      "baseCost": 70,
+      "researched": false,
+      "boosted": false,
+	  "column": 2,
+      "row": 3,
+      "prerequisites": ["Craftsmanship"],
+	  "boostPrerequisites": []
     },
     {
       "name": "Early Empire",
@@ -30,383 +61,615 @@
       "baseCost": 70,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Craftsmanship"]
+	  "column": 2,
+      "row": 4,
+      "prerequisites": ["Foreign Trade"],
+	  "boostPrerequisites": []
     },
-    {
-      "name": "Military Tradition",
+	{
+      "name": "Mysticism",
       "techCivic": "Civic",
-      "baseCost": 70,
+      "baseCost": 50,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Foreign Trade"]
+	  "column": 2,
+      "row": 6,
+      "prerequisites": ["Foreign Trade"],
+	  "boostPrerequisites": []
     },
-    {
-      "name": "State Workforce",
+	{
+      "name": "Games and Recreation",
       "techCivic": "Civic",
-      "baseCost": 70,
+      "baseCost": 110,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Craftsmanship"]
+	  "column": 3,
+      "row": 1,
+      "prerequisites": ["State Workforce"],
+	  "boostPrerequisites": ["Construction"]
     },
     {
       "name": "Political Philosophy",
       "techCivic": "Civic",
-      "baseCost": 90,
+      "baseCost": 110,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Early Empire", "State Workforce"]
+	  "column": 3,
+      "row": 3,
+      "prerequisites": ["State Workforce", "Early Empire"],
+	  "boostPrerequisites": []
     },
     {
       "name": "Drama and Poetry",
       "techCivic": "Civic",
-      "baseCost": 70,
+      "baseCost": 110,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Foreign Trade"]
+	  "column": 3,
+      "row": 5,
+      "prerequisites": ["Early Empire"],
+	  "boostPrerequisites": []
+    },
+	{
+      "name": "Military Training",
+      "techCivic": "Civic",
+      "baseCost": 120,
+      "researched": false,
+      "boosted": false,
+	  "column": 4,
+      "row": 0,
+      "prerequisites": ["Military Tradition", "Games and Recreation"],
+	  "boostPrerequisites": ["Bronze Working"]
+    },
+	{
+      "name": "Defensive Tactics",
+      "techCivic": "Civic",
+      "baseCost": 175,
+      "researched": false,
+      "boosted": false,
+	  "column": 4,
+      "row": 2,
+      "prerequisites": ["Games and Recreation", "Political Philosophy"],
+	  "boostPrerequisites": []
     },
     {
       "name": "Recorded History",
       "techCivic": "Civic",
-      "baseCost": 110,
+      "baseCost": 175,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Drama and Poetry", "State Workforce"]
+	  "column": 4,
+      "row": 4,
+      "prerequisites": ["Political Philosophy", "Drama and Poetry"],
+	  "boostPrerequisites": ["Writing"]
     },
     {
       "name": "Theology",
       "techCivic": "Civic",
-      "baseCost": 200,
+      "baseCost": 120,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Political Philosophy"]
+	  "column": 4,
+      "row": 6,
+      "prerequisites": ["Mysticism", "Drama and Poetry"],
+	  "boostPrerequisites": ["Astrology"]
     },
-    {
-      "name": "Defensive Tactics",
+	{
+      "name": "Naval Tradition",
       "techCivic": "Civic",
-      "baseCost": 110,
+      "baseCost": 220,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Political Philosophy"]
+	  "column": 5,
+      "row": 1,
+      "prerequisites": ["Defensive Tactics"],
+	  "boostPrerequisites": ["Shipbuilding"]
     },
     {
       "name": "Feudalism",
       "techCivic": "Civic",
-      "baseCost": 200,
+      "baseCost": 300,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Defensive Tactics"]
+	  "column": 5,
+      "row": 2,
+      "prerequisites": ["Defensive Tactics"],
+	  "boostPrerequisites": []
+    },
+	   {
+      "name": "Civil Service",
+      "techCivic": "Civic",
+      "baseCost": 300,
+      "researched": false,
+      "boosted": false,
+	  "column": 5,
+      "row": 4,
+      "prerequisites": ["Defensive Tactics", "Recorded History"],
+	  "boostPrerequisites": []
+    },
+	{
+      "name": "Mercenaries",
+      "techCivic": "Civic",
+      "baseCost": 340,
+      "researched": false,
+      "boosted": false,
+	  "column": 6,
+      "row": 0,
+      "prerequisites": ["Military Training", "Feudalism"],
+	  "boostPrerequisites": []
+    },
+	{
+      "name": "Medieval Fairs",
+      "techCivic": "Civic",
+      "baseCost": 420,
+      "researched": false,
+      "boosted": false,
+	  "column": 6,
+      "row": 2,
+      "prerequisites": ["Feudalism"],
+	  "boostPrerequisites": []
     },
     {
       "name": "Guilds",
       "techCivic": "Civic",
-      "baseCost": 200,
+      "baseCost": 420,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["State Workforce"]
-    },
-    {
-      "name": "Medieval Fairs",
-      "techCivic": "Civic",
-      "baseCost": 265,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Feudalism"]
+	  "column": 6,
+      "row": 4,
+      "prerequisites": ["Feudalism", "Civil Service"],
+	  "boostPrerequisites": ["Currency"]
     },
     {
       "name": "Divine Right",
       "techCivic": "Civic",
-      "baseCost": 265,
+      "baseCost": 340,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Theology"]
+	  "column": 6,
+      "row": 6,
+      "prerequisites": ["Theology", "Civil Service"],
+	  "boostPrerequisites": ["Theology"]
     },
-    {
-      "name": "Chivalry",
-      "techCivic": "Civic",
-      "baseCost": 140,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Military Tradition"]
-    },
-    {
-      "name": "Naval Tradition",
-      "techCivic": "Civic",
-      "baseCost": 110,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Early Empire"]
-    },
-    {
-      "name": "Civil Service",
-      "techCivic": "Civic",
-      "baseCost": 200,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Defensive Tactics"]
-    },
-    {
+	{
       "name": "Exploration",
       "techCivic": "Civic",
-      "baseCost": 265,
+      "baseCost": 440,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Guilds"]
+	  "column": 7,
+      "row": 0,
+      "prerequisites": ["Mercenaries", "Medieval Fairs"],
+	  "boostPrerequisites": ["Cartography"]
     },
-    {
-      "name": "Reformed Church",
-      "techCivic": "Civic",
-      "baseCost": 320,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Theology"]
-    },
-    {
-      "name": "Mercenaries",
-      "techCivic": "Civic",
-      "baseCost": 265,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Feudalism"]
-    },
-    {
-      "name": "Diplomatic Service",
-      "techCivic": "Civic",
-      "baseCost": 320,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Civil Service"]
-    },
-    {
+	{
       "name": "Humanism",
       "techCivic": "Civic",
-      "baseCost": 400,
+      "baseCost": 600,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Reformed Church"]
+	  "column": 7,
+      "row": 2,
+      "prerequisites": ["Medieval Fairs", "Guilds"],
+	  "boostPrerequisites": ["Drama and Poetry"]
     },
-    {
+	{
+      "name": "Diplomatic Service",
+      "techCivic": "Civic",
+      "baseCost": 600,
+      "researched": false,
+      "boosted": false,
+	  "column": 7,
+      "row": 4,
+      "prerequisites": ["Guilds"],
+	  "boostPrerequisites": ["Civil Service"]
+    },
+	{
+      "name": "Reformed Church",
+      "techCivic": "Civic",
+      "baseCost": 440,
+      "researched": false,
+      "boosted": false,
+	  "column": 7,
+      "row": 6,
+      "prerequisites": ["Guilds", "Divine Right"],
+	  "boostPrerequisites": ["Astrology"]
+    },
+	{
+      "name": "Mercantilism",
+      "techCivic": "Civic",
+      "baseCost": 720,
+      "researched": false,
+      "boosted": false,
+	  "column": 8,
+      "row": 2,
+      "prerequisites": ["Humanism"],
+	  "boostPrerequisites": ["Currency"]
+    },
+	{
       "name": "The Enlightenment",
       "techCivic": "Civic",
-      "baseCost": 400,
+      "baseCost": 720,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Humanism"]
+	  "column": 8,
+      "row": 4,
+      "prerequisites": ["Humanism", "Diplomatic Service"],
+	  "boostPrerequisites": []
+    },
+	{
+      "name": "Colonialism",
+      "techCivic": "Civic",
+      "baseCost": 800,
+      "researched": false,
+      "boosted": false,
+	  "column": 9,
+      "row": 0,
+      "prerequisites": ["Mercantilism"],
+	  "boostPrerequisites": ["Astronomy"]
+    },
+	{
+      "name": "Civil Engineering",
+      "techCivic": "Civic",
+      "baseCost": 1010,
+      "researched": false,
+      "boosted": false,
+	  "column": 9,
+      "row": 2,
+      "prerequisites": ["Mercantilism"],
+	  "boostPrerequisites": []
+    },
+	{
+      "name": "Nationalism",
+      "techCivic": "Civic",
+      "baseCost": 1010,
+      "researched": false,
+      "boosted": false,
+	  "column": 9,
+      "row": 3,
+      "prerequisites": ["The Enlightenment"],
+	  "boostPrerequisites": []
     },
     {
       "name": "Opera and Ballet",
       "techCivic": "Civic",
-      "baseCost": 400,
+      "baseCost": 800,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Humanism"]
-    },
-    {
-      "name": "Colonialism",
-      "techCivic": "Civic",
-      "baseCost": 400,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Diplomatic Service"]
+	  "column": 9,
+      "row": 5,
+      "prerequisites": ["The Enlightenment"],
+	  "boostPrerequisites": ["Humanism"]
     },
     {
       "name": "Natural History",
       "techCivic": "Civic",
-      "baseCost": 640,
+      "baseCost": 1050,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Colonialism"]
+	  "column": 10,
+      "row": 0,
+      "prerequisites": ["Colonialism"],
+	  "boostPrerequisites": ["Humanism"]
+    },
+	{
+      "name": "Urbanization",
+      "techCivic": "Civic",
+      "baseCost": 1210,
+      "researched": false,
+      "boosted": false,
+	  "column": 10,
+      "row": 2,
+      "prerequisites": ["Civil Engineering", "Nationalism"],
+	  "boostPrerequisites": []
     },
     {
       "name": "Scorched Earth",
       "techCivic": "Civic",
-      "baseCost": 640,
+      "baseCost": 1210,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Mercenaries"]
+	  "column": 10,
+      "row": 5,
+      "prerequisites": ["Nationalism"],
+	  "boostPrerequisites": ["Ballistics"]
     },
-    {
-      "name": "Urbanization",
+	{
+      "name": "Conservation",
       "techCivic": "Civic",
-      "baseCost": 640,
+      "baseCost": 1540,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Diplomatic Service"]
+	  "column": 11,
+      "row": 0,
+      "prerequisites": ["Natural History"],
+	  "boostPrerequisites": ["Urbanization"]
     },
-    {
-      "name": "Civil Engineering",
+	{
+      "name": "Mass Media",
       "techCivic": "Civic",
-      "baseCost": 640,
+      "baseCost": 1540,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Urbanization"]
-    },
-    {
-      "name": "Nationalism",
-      "techCivic": "Civic",
-      "baseCost": 895,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Civil Engineering"]
+	  "column": 11,
+      "row": 2,
+      "prerequisites": ["Natural History", "Urbanization"],
+	  "boostPrerequisites": ["Radio"]
     },
     {
       "name": "Mobilization",
       "techCivic": "Civic",
-      "baseCost": 1245,
+      "baseCost": 1540,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Nationalism"]
+	  "column": 11,
+      "row": 4,
+      "prerequisites": ["Urbanization", "Scorched Earth"],
+	  "boostPrerequisites": ["Nationalism"]
     },
     {
       "name": "Capitalism",
       "techCivic": "Civic",
-      "baseCost": 1245,
+      "baseCost": 1580,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Urbanization"]
+	  "column": 12,
+      "row": 1,
+      "prerequisites": ["Mass Media"],
+	  "boostPrerequisites": ["Economics"]
     },
-    {
-      "name": "Conservation",
-      "techCivic": "Civic",
-      "baseCost": 895,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Natural History"]
-    },
-    {
-      "name": "Cultural Heritage",
-      "techCivic": "Civic",
-      "baseCost": 895,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Natural History"]
-    },
-    {
-      "name": "Mass Media",
-      "techCivic": "Civic",
-      "baseCost": 1245,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Social Media"]
-    },
-    {
+	{
       "name": "Ideology",
       "techCivic": "Civic",
-      "baseCost": 1245,
+      "baseCost": 1640,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Nationalism"]
+	  "column": 12,
+      "row": 2,
+      "prerequisites": ["Mass Media", "Mobalization"],
+	  "boostPrerequisites": []
     },
-    {
+	{
+      "name": "Nuclear Program",
+      "techCivic": "Civic",
+      "baseCost": 1715,
+      "researched": false,
+      "boosted": false,
+	  "column": 13,
+      "row": 1,
+      "prerequisites": ["Ideology"],
+	  "boostPrerequisites": ["Chemistry"]
+    },
+	{
+      "name": "Suffrage",
+      "techCivic": "Civic",
+      "baseCost": 1640,
+      "researched": false,
+      "boosted": false,
+	  "column": 13,
+      "row": 3,
+      "prerequisites": ["Ideology"],
+	  "boostPrerequisites": ["Sanitation"]
+    },
+	{
       "name": "Totalitarianism",
       "techCivic": "Civic",
-      "baseCost": 1245,
+      "baseCost": 1640,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Ideology"]
+	  "column": 13,
+      "row": 5,
+      "prerequisites": ["Ideology"],
+	  "boostPrerequisites": ["Military Science"]
     },
     {
       "name": "Class Struggle",
       "techCivic": "Civic",
-      "baseCost": 1245,
+      "baseCost": 1640,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Ideology"]
+	  "column": 13,
+      "row": 6,
+      "prerequisites": ["Ideology"],
+	  "boostPrerequisites": ["Industrialization"]
+    },
+    {
+      "name": "Cultural Heritage",
+      "techCivic": "Civic",
+      "baseCost": 1955,
+      "researched": false,
+      "boosted": false,
+	  "column": 14,
+      "row": 0,
+      "prerequisites": ["Conservation"],
+	  "boostPrerequisites": ["Humanism"]
     },
     {
       "name": "Cold War",
       "techCivic": "Civic",
-      "baseCost": 1750,
+      "baseCost": 2185,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Mobilization"]
+	  "column": 14,
+      "row": 2,
+      "prerequisites": ["Ideology"],
+	  "boostPrerequisites": ["Nuclear Fission"]
+    },
+	{
+      "name": "Professional Sports",
+      "techCivic": "Civic",
+      "baseCost": 2185,
+      "researched": false,
+      "boosted": false,
+	  "column": 14,
+      "row": 5,
+      "prerequisites": ["Ideology"],
+	  "boostPrerequisites": ["Games and Recreation"]
+    },
+	{
+      "name": "Rapid Deployment",
+      "techCivic": "Civic",
+      "baseCost": 2415,
+      "researched": false,
+      "boosted": false,
+	  "column": 15,
+      "row": 2,
+      "prerequisites": ["Cold War"],
+	  "boostPrerequisites": ["Flight"]
+    },
+	{
+      "name": "Space Race",
+      "techCivic": "Civic",
+      "baseCost": 2415,
+      "researched": false,
+      "boosted": false,
+	  "column": 15,
+      "row": 4,
+      "prerequisites": ["Cold War"],
+	  "boostPrerequisites": ["Rocketry"]
+    },
+	{
+      "name": "Environmentalism",
+      "techCivic": "Civic",
+      "baseCost": 2880,
+      "researched": false,
+      "boosted": false,
+	  "column": 16,
+      "row": 1,
+      "prerequisites": ["Cultural Heritage", "Rapid Deployment"],
+	  "boostPrerequisites": ["Satellites"]
+    },
+	{
+      "name": "Globalization",
+      "techCivic": "Civic",
+      "baseCost": 2880,
+      "researched": false,
+      "boosted": false,
+	  "column": 16,
+      "row": 3,
+      "prerequisites": ["Rapid Deployment", "Space Race"],
+	  "boostPrerequisites": ["Advanced Flight"]
     },
     {
       "name": "Social Media",
       "techCivic": "Civic",
-      "baseCost": 1750,
+      "baseCost": 2880,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Cold War"]
+	  "column": 16,
+      "row": 5,
+      "prerequisites": ["Professional Sports", "Space Race"],
+	  "boostPrerequisites": ["Telecommunications"]
     },
-    {
-      "name": "Globalization",
+	{
+      "name": "Near Future Governance",
       "techCivic": "Civic",
-      "baseCost": 1750,
+      "baseCost": 3100,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Cold War"]
+	  "column": 17,
+      "row": 2,
+      "prerequisites": ["Environmentalism", "Globalization"],
+	  "boostPrerequisites": []
     },
-    {
-      "name": "Rapid Deployment",
-      "techCivic": "Civic",
-      "baseCost": 2650,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Cold War"]
-    },
-    {
-      "name": "Environmentalism",
-      "techCivic": "Civic",
-      "baseCost": 2650,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Globalization"]
-    },
-    {
-      "name": "Space Race",
+	{
+      "name": "Venture Politics",
       "techCivic": "Civic",
       "baseCost": 3000,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Globalization"]
+	  "column": 17,
+      "row": 3,
+      "prerequisites": ["Globalization", "Social Media"],
+	  "boostPrerequisites": ["Combined Arms"]
+    },
+	{
+      "name": "Distributed Sovereignty",
+      "techCivic": "Civic",
+      "baseCost": 3000,
+      "researched": false,
+      "boosted": false,
+	  "column": 17,
+      "row": 4,
+      "prerequisites": ["Globalization", "Social Media"],
+	  "boostPrerequisites": ["Cold War"]
+    },
+	{
+      "name": "Optimization Imperative",
+      "techCivic": "Civic",
+      "baseCost": 3000,
+      "researched": false,
+      "boosted": false,
+	  "column": 17,
+      "row": 5,
+      "prerequisites": ["Globalization", "Social Media"],
+	  "boostPrerequisites": ["Robotics"]
+    },
+	{
+      "name": "Information Warfare",
+      "techCivic": "Civic",
+      "baseCost": 3300,
+      "researched": false,
+      "boosted": false,
+	  "column": 18,
+      "row": 0,
+      "prerequisites": ["Near Future Governance"],
+	  "boostPrerequisites": []
     },
     {
       "name": "Global Warming Mitigation",
       "techCivic": "Civic",
-      "baseCost": 3000,
+      "baseCost": 3300,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Environmentalism"]
+	  "column": 18,
+      "row": 1,
+      "prerequisites": ["Near Future Governance"],
+	  "boostPrerequisites": []
     },
     {
-      "name": "Climate Accord",
+      "name": "Cultural Hegemony",
       "techCivic": "Civic",
-      "baseCost": 3360,
+      "baseCost": 3300,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Global Warming Mitigation"]
-    },
-    {
-      "name": "Near Future Governance",
-      "techCivic": "Civic",
-      "baseCost": 3360,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Globalization"]
-    },
-    {
-      "name": "Distributed Sovereignty",
-      "techCivic": "Civic",
-      "baseCost": 3360,
-      "researched": false,
-      "boosted": false,
-      "prerequisites": ["Near Future Governance"]
+	  "column": 18,
+      "row": 2,
+      "prerequisites": ["Near Future Governance"],
+	  "boostPrerequisites": []
     },
     {
       "name": "Smart Power Doctrine",
       "techCivic": "Civic",
-      "baseCost": 3360,
+      "baseCost": 3300,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Distributed Sovereignty"]
+	  "column": 18,
+      "row": 3,
+      "prerequisites": ["Near Future Governance"],
+	  "boostPrerequisites": []
+    },
+	{
+      "name": "Exodus Imperative",
+      "techCivic": "Civic",
+      "baseCost": 3300,
+      "researched": false,
+      "boosted": false,
+	  "column": 18,
+      "row": 3,
+      "prerequisites": ["Near Future Governance"],
+	  "boostPrerequisites": []
     },
     {
       "name": "Future Civic",
       "techCivic": "Civic",
-      "baseCost": 4000,
+      "baseCost": 3500,
       "researched": false,
       "boosted": false,
-      "prerequisites": ["Smart Power Doctrine"]
+	  "column": 19,
+      "row": 3,
+      "prerequisites": [],
+	  "boostPrerequisites": []
     }
   ]
 }
