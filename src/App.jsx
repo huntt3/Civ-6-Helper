@@ -4,6 +4,7 @@ import TreeCarousel from "./TreeCarousel";
 import EraTrackerContainer from "./EraTrackerContainer";
 import WondersContainer from "./WondersContainer";
 import TechCarousel from "./Tech";
+import GreatPeopleContainer from "./GreatPeopleContainer";
 
 // Main App component
 function App() {
@@ -20,6 +21,8 @@ function App() {
       <EraTrackerContainer />
       {/* Render WondersContainer at the bottom */}
       <WondersContainer />
+      {/* Render GreatPeopleContainer at the very bottom */}
+      <GreatPeopleContainer />
     </main>
   );
 }
