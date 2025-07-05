@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./GreatPeopleContainer.css";
+import "./GreatPeopleContainerExtra.css";
 
 // Helper function to get unique people by era and type
 const getPeopleByEraAndType = (people, era, type) => {
@@ -32,9 +33,18 @@ const eras = [
   "Information",
 ];
 
+
 const GreatPeopleContainer = () => {
   const [greatPeople, setGreatPeople] = useState([]);
   const [error, setError] = useState("");
+  // Track which eras are collapsed
+  const [collapsedEras, setCollapsedEras] = useState({});
+  // Track which cards are checked (by name)
+  const [checkedCards, setCheckedCards] = useState(() => {
+    // Try to load from localStorage
+    const saved = localStorage.getItem("greatPeopleChecked");
+    return saved ? JSON.parse(saved) : {};
+  });
 
   useEffect(() => {
     // Fetch the GreatPeople.json file
@@ -53,9 +63,50 @@ const GreatPeopleContainer = () => {
       });
   }, []);
 
+  // Save checkedCards to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("greatPeopleChecked", JSON.stringify(checkedCards));
+  }, [checkedCards]);
+
+  // Toggle collapse for an era
+  const handleCollapse = (era) => {
+    setCollapsedEras((prev) => ({ ...prev, [era]: !prev[era] }));
+  };
+
+  // Toggle card checked state by clicking the card
+  const handleCardClick = (name) => {
+    setCheckedCards((prev) => {
+      const updated = { ...prev, [name]: !prev[name] };
+      return updated;
+    });
+  };
+
+  // Reset all checked cards
+  const handleRefresh = () => {
+    setCheckedCards({});
+  };
+
   return (
     <section className="great-people-container" aria-label="Great People Grid">
-      <h2>Great People</h2>
+      <header style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem" }}>
+        <h2 style={{ margin: 0 }}>Great People</h2>
+        <button
+          type="button"
+          aria-label="Reset all selected Great People"
+          onClick={handleRefresh}
+          style={{
+            background: "#1976d2",
+            color: "#fff",
+            border: "none",
+            borderRadius: "3px",
+            padding: "0.3rem 0.9rem",
+            fontSize: "1rem",
+            cursor: "pointer"
+          }}
+        >
+          Refresh
+        </button>
+      </header>
       {error && <p className="error-message">{error}</p>}
       <div className="great-people-grid" role="table" aria-label="Great People Table">
         {/* Table header */}
@@ -68,35 +119,59 @@ const GreatPeopleContainer = () => {
         </div>
         {/* Table body */}
         {eras.map((era) => (
-          <div key={era} className="era-row" role="row">
-            {types.map((type) => {
-              const people = getPeopleByEraAndType(greatPeople, era, type);
-              return (
-                <div key={type} className="cell" role="cell">
-                  {people.length > 0 ? (
+          <React.Fragment key={era}>
+            {/* Row label and collapse button */}
+            <div className="era-label" aria-label={`Row for ${era} era`}>
+              <button
+                className="collapse-btn"
+                aria-expanded={!collapsedEras[era]}
+                aria-controls={`era-row-${era}`}
+                onClick={() => handleCollapse(era)}
+              >
+                {collapsedEras[era] ? "Show" : "Hide"}
+              </button>
+              <span>{era}</span>
+            </div>
+            {/* Collapsible row */}
+            {!collapsedEras[era] && (
+              <div className="era-row" role="row" id={`era-row-${era}`}>
+                {types.map((type) => {
+                  const people = getPeopleByEraAndType(greatPeople, era, type);
+                  return (
+                    <div key={type} className="cell" role="cell">
+                      {people.length > 0 ? (
                     people.map((person) => (
                       <article
                         key={person.name}
-                        className="great-person-card"
+                        className={`great-person-card${checkedCards[person.name] ? " selected" : ""}`}
                         tabIndex={0}
-                        aria-label={`${person.name}, ${person.requirement}, ${person.era}`}
+                        aria-label={`${person.name}, ${person.ability}`}
+                        role="button"
+                        aria-pressed={!!checkedCards[person.name]}
+                        onClick={() => handleCardClick(person.name)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            handleCardClick(person.name);
+                          }
+                        }}
+                        style={{ cursor: "pointer" }}
                       >
-                        <h3>{person.name}</h3>
-                        <p><strong>Type:</strong> {person.requirement}</p>
-                        <p><strong>Era:</strong> {person.era}</p>
-                        <p><strong>Ability:</strong> {person.ability}</p>
+                        <span style={{ fontWeight: "bold" }}>{person.name}</span>
+                        <p>{person.ability}</p>
                         {person.charges && (
                           <p><strong>Charges:</strong> {person.charges}</p>
                         )}
                       </article>
                     ))
-                  ) : (
-                    <div className="empty-cell" aria-label="No Great Person">-</div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+                      ) : (
+                        <div className="empty-cell" aria-label="No Great Person">-</div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </React.Fragment>
         ))}
       </div>
     </section>
