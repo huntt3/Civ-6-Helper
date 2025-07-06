@@ -1,10 +1,10 @@
 import "./App.css";
-import DistrictCards from "./DistrictCards";
+import DistrictCards from "./DistrictDiscountingTool/DistrictCards";
 
-import EraTrackerContainer from "./EraTrackerContainer";
-import WondersContainer from "./WondersContainer";
-import TechCarousel from "./Tech";
-import GreatPeopleContainer from "./GreatPeopleContainer";
+import EraTrackerContainer from "./EraScoreTracker/EraTrackerContainer";
+import WondersContainer from "./WonderTracker/WondersContainer";
+import TechCarousel from "./TechTree/Tech";
+import GreatPeopleContainer from "./GreatPeopleTracker/GreatPeopleContainer";
 
 // Main App component
 function App() {

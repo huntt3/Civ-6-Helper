@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CollapsibleContainer from "./CollapsibleContainer";
+import CollapsibleContainer from "../CollapsibleContainer";
 import "./WondersContainer.css";
 
 // WonderCard component
