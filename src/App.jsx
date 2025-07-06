@@ -1,6 +1,6 @@
 import "./App.css";
 import DistrictCards from "./DistrictCards";
-import TreeCarousel from "./TreeCarousel";
+
 import EraTrackerContainer from "./EraTrackerContainer";
 import WondersContainer from "./WondersContainer";
 import TechCarousel from "./Tech";

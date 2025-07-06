@@ -1,0 +1,29 @@
+/* TechCarousel styles (moved from Tech.css) */
+.tech-carousel {
+  width: 100%;
+  overflow-x: auto;
+  padding: 2rem 0 2rem 0;
+  margin-bottom: 2rem;
+  background: var(--primary-container-color);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px rgba(30, 42, 74, 0.18);
+}
+
+.tech-carousel-title {
+  font-size: 1.7rem;
+  color: var(--primary-text-color-dark);
+  letter-spacing: 1px;
+  margin: 0 0 1.5rem 1rem;
+  font-family: var(--primary-font);
+  text-shadow: none;
+}
+
+.tech-carousel-grid {
+  display: grid;
+  grid-template-columns: repeat(20, 120px);
+  grid-template-rows: repeat(8, 100px);
+  gap: 2.5rem;
+  min-width: 2800px;
+  padding: 1rem 0;
+  position: relative;
+}
