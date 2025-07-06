@@ -16,6 +16,9 @@ const TechCard = ({
   onBoostToggle,
   onShowDetails,
   allTechs,
+  hoverClass = "",
+  onHover,
+  onUnhover,
 }) => {
   // Figure out the correct class for the tech card
   let cardClass = "tech-card";
@@ -30,6 +33,9 @@ const TechCard = ({
       cardClass += " no-boost";
       cardClass += canResearch ? " can-research" : " cannot-research";
     }
+  }
+  if (hoverClass) {
+    cardClass += ` ${hoverClass}`;
   }
 
   return (
@@ -59,6 +65,10 @@ const TechCard = ({
         }
       }}
       style={{ cursor: "pointer" }}
+      onMouseEnter={onHover}
+      onMouseLeave={onUnhover}
+      onFocus={onHover}
+      onBlur={onUnhover}
     >
       <span className="tech-card-title">{tech.name}</span>
       <label

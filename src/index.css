@@ -23,21 +23,35 @@
   --tech-card-boosted-can-research-color: #00ffff;
   --tech-card-no-boost-cannot-research-color: #7393b3;
   --tech-card-no-boost-can-research-color: #1434a4;
-  --tech-card-selected-color: #f0ffff;
-  --tech-card-boosts-selected-color: #00a36c;
-  --tech-card-boosted-by-selected-color: #96ded1;
+  --tech-card-hovered-color: #f0ffff;
+  --tech-card-boosts-hovered-color: #42c501;
+  --tech-card-boosted-by-hovered-color: #00a36c;
 
   --civic-card-researched-color: #301934;
   --civic-card-boosted-cannot-research-color: #630330;
   --civic-card-boosted-can-research-color: #7f00ff;
   --civic-card-no-boost-cannot-research-color: #bdb5d5;
   --civic-card-no-boost-can-research-color: #7f00ff;
-  --civic-card-selected-color: #e6e6fa;
-  --civic-card-boosts-selected-color: #770737;
-  --civic-card-boosted-by-selected-color: #953553;
+  --civic-card-hovered-color: #e6e6fa;
+  --civic-card-boosts-hovered-color: #770737;
+  --civic-card-boosted-by-hovered-color: #953553;
 
   --primary-font: sans-serif;
   --secondary-font: Helvetica;
+}
+
+/* TechCard hover highlight styles (override all other styles) */
+.tech-card.tech-card-hovered {
+  box-shadow: 0 0 0 4px var(--tech-card-hovered-color) !important;
+  z-index: 2;
+}
+.tech-card.tech-card-boosts-hovered {
+  box-shadow: 0 0 0 4px var(--tech-card-boosts-hovered-color) !important;
+  z-index: 2;
+}
+.tech-card.tech-card-boosted-by-hovered {
+  box-shadow: 0 0 0 4px var(--tech-card-boosted-by-hovered-color) !important;
+  z-index: 2;
 }
 
 body {

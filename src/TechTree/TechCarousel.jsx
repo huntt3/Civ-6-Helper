@@ -146,6 +146,23 @@ const TechCarousel = () => {
     });
   });
 
+  // Hover logic for highlighting
+  const [hoveredTech, setHoveredTech] = useState(null);
+
+  // Find boostPrerequisites for hovered card
+  let boostsSet = new Set();
+  let boostedBySet = new Set();
+  if (hoveredTech) {
+    // Cards that this hovered card boosts
+    boostsSet = new Set(hoveredTech.boostPrerequisites || []);
+    // Cards that list this hovered card in their boostPrerequisites
+    boostedBySet = new Set(
+      techs
+        .filter((t) => (t.boostPrerequisites || []).includes(hoveredTech.name))
+        .map((t) => t.name)
+    );
+  }
+
   return (
     <section
       className="tech-carousel"
@@ -190,26 +207,38 @@ const TechCarousel = () => {
           cardHeight={cardHeight}
           gap={gap}
         />
-        {grid
-          .flat()
-          .map((tech, idx) =>
-            tech ? (
-              <TechCard
-                key={tech.name}
-                tech={tech}
-                allTechs={techs}
-                onResearch={handleResearch}
-                onBoostToggle={handleBoostToggle}
-                onShowDetails={handleShowDetails}
-              />
-            ) : (
+        {grid.flat().map((tech, idx) => {
+          if (!tech) {
+            return (
               <div
                 key={idx}
                 className="tech-card tech-card-empty"
                 aria-hidden="true"
               ></div>
-            )
-          )}
+            );
+          }
+          let extraClass = "";
+          if (hoveredTech && tech.name === hoveredTech.name) {
+            extraClass = "tech-card-hovered";
+          } else if (hoveredTech && boostsSet.has(tech.name)) {
+            extraClass = "tech-card-boosts-hovered";
+          } else if (hoveredTech && boostedBySet.has(tech.name)) {
+            extraClass = "tech-card-boosted-by-hovered";
+          }
+          return (
+            <TechCard
+              key={tech.name}
+              tech={tech}
+              allTechs={techs}
+              onResearch={handleResearch}
+              onBoostToggle={handleBoostToggle}
+              onShowDetails={handleShowDetails}
+              hoverClass={extraClass}
+              onHover={() => setHoveredTech(tech)}
+              onUnhover={() => setHoveredTech(null)}
+            />
+          );
+        })}
       </div>
       <TechModal tech={modalTech} onClose={handleCloseModal} />
     </section>
