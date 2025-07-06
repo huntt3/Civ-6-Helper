@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  background: var(--primary-bg-color);
+  color: var(--primary-text-color-dark);
+  font-family: var(--primary-font);
 }
 
 .App-logo {
@@ -8,22 +11,19 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: var(--primary-container-color);
   min-height: 20vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: var(--primary-text-color-dark);
+  font-family: var(--primary-font);
 }
 
 .App-link {
-  color: #61dafb;
-}
-
-.heart {
-  color: #ff0000;
+  color: var(--tech-card-boosted-can-research-color);
 }
 
 .small {
