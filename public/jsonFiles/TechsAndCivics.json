@@ -859,7 +859,7 @@
       "researched": false,
       "boosted": false,
       "column": 0,
-      "row": 3,
+      "row": 13,
       "prerequisites": [],
       "boostPrerequisites": []
     },
@@ -870,7 +870,7 @@
       "researched": false,
       "boosted": false,
       "column": 1,
-      "row": 1,
+      "row": 11,
       "prerequisites": ["Code of Laws"],
       "boostPrerequisites": []
     },
@@ -881,7 +881,7 @@
       "researched": false,
       "boosted": false,
       "column": 1,
-      "row": 5,
+      "row": 15,
       "prerequisites": ["Code of Laws"],
       "boostPrerequisites": []
     },
@@ -892,7 +892,7 @@
       "researched": false,
       "boosted": false,
       "column": 2,
-      "row": 0,
+      "row": 110,
       "prerequisites": ["Craftsmanship"],
       "boostPrerequisites": []
     },
@@ -903,7 +903,7 @@
       "researched": false,
       "boosted": false,
       "column": 2,
-      "row": 3,
+      "row": 13,
       "prerequisites": ["Craftsmanship"],
       "boostPrerequisites": []
     },
@@ -914,7 +914,7 @@
       "researched": false,
       "boosted": false,
       "column": 2,
-      "row": 4,
+      "row": 14,
       "prerequisites": ["Foreign Trade"],
       "boostPrerequisites": []
     },
@@ -925,7 +925,7 @@
       "researched": false,
       "boosted": false,
       "column": 2,
-      "row": 6,
+      "row": 16,
       "prerequisites": ["Foreign Trade"],
       "boostPrerequisites": []
     },
@@ -936,7 +936,7 @@
       "researched": false,
       "boosted": false,
       "column": 3,
-      "row": 1,
+      "row": 11,
       "prerequisites": ["State Workforce"],
       "boostPrerequisites": ["Construction"]
     },
@@ -947,7 +947,7 @@
       "researched": false,
       "boosted": false,
       "column": 3,
-      "row": 3,
+      "row": 13,
       "prerequisites": ["State Workforce", "Early Empire"],
       "boostPrerequisites": []
     },
@@ -958,7 +958,7 @@
       "researched": false,
       "boosted": false,
       "column": 3,
-      "row": 5,
+      "row": 15,
       "prerequisites": ["Early Empire"],
       "boostPrerequisites": []
     },
@@ -969,7 +969,7 @@
       "researched": false,
       "boosted": false,
       "column": 4,
-      "row": 0,
+      "row": 10,
       "prerequisites": ["Military Tradition", "Games and Recreation"],
       "boostPrerequisites": ["Bronze Working"]
     },
@@ -980,7 +980,7 @@
       "researched": false,
       "boosted": false,
       "column": 4,
-      "row": 2,
+      "row": 12,
       "prerequisites": ["Games and Recreation", "Political Philosophy"],
       "boostPrerequisites": []
     },
@@ -991,7 +991,7 @@
       "researched": false,
       "boosted": false,
       "column": 4,
-      "row": 4,
+      "row": 14,
       "prerequisites": ["Political Philosophy", "Drama and Poetry"],
       "boostPrerequisites": ["Writing"]
     },
@@ -1002,7 +1002,7 @@
       "researched": false,
       "boosted": false,
       "column": 4,
-      "row": 6,
+      "row": 16,
       "prerequisites": ["Mysticism", "Drama and Poetry"],
       "boostPrerequisites": ["Astrology"]
     },
@@ -1013,7 +1013,7 @@
       "researched": false,
       "boosted": false,
       "column": 5,
-      "row": 1,
+      "row": 11,
       "prerequisites": ["Defensive Tactics"],
       "boostPrerequisites": ["Shipbuilding"]
     },
@@ -1024,7 +1024,7 @@
       "researched": false,
       "boosted": false,
       "column": 5,
-      "row": 2,
+      "row": 12,
       "prerequisites": ["Defensive Tactics"],
       "boostPrerequisites": []
     },
@@ -1035,7 +1035,7 @@
       "researched": false,
       "boosted": false,
       "column": 5,
-      "row": 4,
+      "row": 14,
       "prerequisites": ["Defensive Tactics", "Recorded History"],
       "boostPrerequisites": []
     },
@@ -1046,7 +1046,7 @@
       "researched": false,
       "boosted": false,
       "column": 6,
-      "row": 0,
+      "row": 10,
       "prerequisites": ["Military Training", "Feudalism"],
       "boostPrerequisites": []
     },
@@ -1057,7 +1057,7 @@
       "researched": false,
       "boosted": false,
       "column": 6,
-      "row": 2,
+      "row": 12,
       "prerequisites": ["Feudalism"],
       "boostPrerequisites": []
     },
@@ -1068,7 +1068,7 @@
       "researched": false,
       "boosted": false,
       "column": 6,
-      "row": 4,
+      "row": 14,
       "prerequisites": ["Feudalism", "Civil Service"],
       "boostPrerequisites": ["Currency"]
     },
@@ -1079,7 +1079,7 @@
       "researched": false,
       "boosted": false,
       "column": 6,
-      "row": 6,
+      "row": 16,
       "prerequisites": ["Theology", "Civil Service"],
       "boostPrerequisites": ["Theology"]
     },
@@ -1090,7 +1090,7 @@
       "researched": false,
       "boosted": false,
       "column": 7,
-      "row": 0,
+      "row": 10,
       "prerequisites": ["Mercenaries", "Medieval Fairs"],
       "boostPrerequisites": ["Cartography"]
     },
@@ -1101,7 +1101,7 @@
       "researched": false,
       "boosted": false,
       "column": 7,
-      "row": 2,
+      "row": 12,
       "prerequisites": ["Medieval Fairs", "Guilds"],
       "boostPrerequisites": ["Drama and Poetry"]
     },
@@ -1112,7 +1112,7 @@
       "researched": false,
       "boosted": false,
       "column": 7,
-      "row": 4,
+      "row": 14,
       "prerequisites": ["Guilds"],
       "boostPrerequisites": ["Civil Service"]
     },
@@ -1123,7 +1123,7 @@
       "researched": false,
       "boosted": false,
       "column": 7,
-      "row": 6,
+      "row": 16,
       "prerequisites": ["Guilds", "Divine Right"],
       "boostPrerequisites": ["Astrology"]
     },
@@ -1134,7 +1134,7 @@
       "researched": false,
       "boosted": false,
       "column": 8,
-      "row": 2,
+      "row": 12,
       "prerequisites": ["Humanism"],
       "boostPrerequisites": ["Currency"]
     },
@@ -1145,7 +1145,7 @@
       "researched": false,
       "boosted": false,
       "column": 8,
-      "row": 4,
+      "row": 14,
       "prerequisites": ["Humanism", "Diplomatic Service"],
       "boostPrerequisites": []
     },
@@ -1156,7 +1156,7 @@
       "researched": false,
       "boosted": false,
       "column": 9,
-      "row": 0,
+      "row": 10,
       "prerequisites": ["Mercantilism"],
       "boostPrerequisites": ["Astronomy"]
     },
@@ -1167,7 +1167,7 @@
       "researched": false,
       "boosted": false,
       "column": 9,
-      "row": 2,
+      "row": 12,
       "prerequisites": ["Mercantilism"],
       "boostPrerequisites": []
     },
@@ -1178,7 +1178,7 @@
       "researched": false,
       "boosted": false,
       "column": 9,
-      "row": 3,
+      "row": 13,
       "prerequisites": ["The Enlightenment"],
       "boostPrerequisites": []
     },
@@ -1189,7 +1189,7 @@
       "researched": false,
       "boosted": false,
       "column": 9,
-      "row": 5,
+      "row": 15,
       "prerequisites": ["The Enlightenment"],
       "boostPrerequisites": ["Humanism"]
     },
@@ -1200,7 +1200,7 @@
       "researched": false,
       "boosted": false,
       "column": 10,
-      "row": 0,
+      "row": 10,
       "prerequisites": ["Colonialism"],
       "boostPrerequisites": ["Humanism"]
     },
@@ -1211,7 +1211,7 @@
       "researched": false,
       "boosted": false,
       "column": 10,
-      "row": 2,
+      "row": 12,
       "prerequisites": ["Civil Engineering", "Nationalism"],
       "boostPrerequisites": []
     },
@@ -1222,7 +1222,7 @@
       "researched": false,
       "boosted": false,
       "column": 10,
-      "row": 5,
+      "row": 15,
       "prerequisites": ["Nationalism"],
       "boostPrerequisites": ["Ballistics"]
     },
@@ -1233,7 +1233,7 @@
       "researched": false,
       "boosted": false,
       "column": 11,
-      "row": 0,
+      "row": 10,
       "prerequisites": ["Natural History"],
       "boostPrerequisites": ["Urbanization"]
     },
@@ -1244,7 +1244,7 @@
       "researched": false,
       "boosted": false,
       "column": 11,
-      "row": 2,
+      "row": 12,
       "prerequisites": ["Natural History", "Urbanization"],
       "boostPrerequisites": ["Radio"]
     },
@@ -1255,7 +1255,7 @@
       "researched": false,
       "boosted": false,
       "column": 11,
-      "row": 4,
+      "row": 14,
       "prerequisites": ["Urbanization", "Scorched Earth"],
       "boostPrerequisites": ["Nationalism"]
     },
@@ -1266,7 +1266,7 @@
       "researched": false,
       "boosted": false,
       "column": 12,
-      "row": 1,
+      "row": 11,
       "prerequisites": ["Mass Media"],
       "boostPrerequisites": ["Economics"]
     },
@@ -1277,7 +1277,7 @@
       "researched": false,
       "boosted": false,
       "column": 12,
-      "row": 2,
+      "row": 12,
       "prerequisites": ["Mass Media", "Mobalization"],
       "boostPrerequisites": []
     },
@@ -1288,7 +1288,7 @@
       "researched": false,
       "boosted": false,
       "column": 13,
-      "row": 1,
+      "row": 11,
       "prerequisites": ["Ideology"],
       "boostPrerequisites": ["Chemistry"]
     },
@@ -1299,7 +1299,7 @@
       "researched": false,
       "boosted": false,
       "column": 13,
-      "row": 3,
+      "row": 13,
       "prerequisites": ["Ideology"],
       "boostPrerequisites": ["Sanitation"]
     },
@@ -1310,7 +1310,7 @@
       "researched": false,
       "boosted": false,
       "column": 13,
-      "row": 5,
+      "row": 15,
       "prerequisites": ["Ideology"],
       "boostPrerequisites": ["Military Science"]
     },
@@ -1321,7 +1321,7 @@
       "researched": false,
       "boosted": false,
       "column": 13,
-      "row": 6,
+      "row": 16,
       "prerequisites": ["Ideology"],
       "boostPrerequisites": ["Industrialization"]
     },
@@ -1332,7 +1332,7 @@
       "researched": false,
       "boosted": false,
       "column": 14,
-      "row": 0,
+      "row": 10,
       "prerequisites": ["Conservation"],
       "boostPrerequisites": ["Humanism"]
     },
@@ -1343,7 +1343,7 @@
       "researched": false,
       "boosted": false,
       "column": 14,
-      "row": 2,
+      "row": 12,
       "prerequisites": ["Ideology"],
       "boostPrerequisites": ["Nuclear Fission"]
     },
@@ -1354,7 +1354,7 @@
       "researched": false,
       "boosted": false,
       "column": 14,
-      "row": 5,
+      "row": 15,
       "prerequisites": ["Ideology"],
       "boostPrerequisites": ["Games and Recreation"]
     },
@@ -1365,7 +1365,7 @@
       "researched": false,
       "boosted": false,
       "column": 15,
-      "row": 2,
+      "row": 12,
       "prerequisites": ["Cold War"],
       "boostPrerequisites": ["Flight"]
     },
@@ -1376,7 +1376,7 @@
       "researched": false,
       "boosted": false,
       "column": 15,
-      "row": 4,
+      "row": 14,
       "prerequisites": ["Cold War"],
       "boostPrerequisites": ["Rocketry"]
     },
@@ -1387,7 +1387,7 @@
       "researched": false,
       "boosted": false,
       "column": 16,
-      "row": 1,
+      "row": 11,
       "prerequisites": ["Cultural Heritage", "Rapid Deployment"],
       "boostPrerequisites": ["Satellites"]
     },
@@ -1398,7 +1398,7 @@
       "researched": false,
       "boosted": false,
       "column": 16,
-      "row": 3,
+      "row": 13,
       "prerequisites": ["Rapid Deployment", "Space Race"],
       "boostPrerequisites": ["Advanced Flight"]
     },
@@ -1409,7 +1409,7 @@
       "researched": false,
       "boosted": false,
       "column": 16,
-      "row": 5,
+      "row": 15,
       "prerequisites": ["Professional Sports", "Space Race"],
       "boostPrerequisites": ["Telecommunications"]
     },
@@ -1420,7 +1420,7 @@
       "researched": false,
       "boosted": false,
       "column": 17,
-      "row": 2,
+      "row": 12,
       "prerequisites": ["Environmentalism", "Globalization"],
       "boostPrerequisites": []
     },
@@ -1431,7 +1431,7 @@
       "researched": false,
       "boosted": false,
       "column": 17,
-      "row": 3,
+      "row": 13,
       "prerequisites": ["Globalization", "Social Media"],
       "boostPrerequisites": ["Combined Arms"]
     },
@@ -1442,7 +1442,7 @@
       "researched": false,
       "boosted": false,
       "column": 17,
-      "row": 4,
+      "row": 14,
       "prerequisites": ["Globalization", "Social Media"],
       "boostPrerequisites": ["Cold War"]
     },
@@ -1453,7 +1453,7 @@
       "researched": false,
       "boosted": false,
       "column": 17,
-      "row": 5,
+      "row": 15,
       "prerequisites": ["Globalization", "Social Media"],
       "boostPrerequisites": ["Robotics"]
     },
@@ -1464,7 +1464,7 @@
       "researched": false,
       "boosted": false,
       "column": 18,
-      "row": 0,
+      "row": 10,
       "prerequisites": ["Near Future Governance"],
       "boostPrerequisites": []
     },
@@ -1475,7 +1475,7 @@
       "researched": false,
       "boosted": false,
       "column": 18,
-      "row": 1,
+      "row": 11,
       "prerequisites": ["Near Future Governance"],
       "boostPrerequisites": []
     },
@@ -1486,7 +1486,7 @@
       "researched": false,
       "boosted": false,
       "column": 18,
-      "row": 2,
+      "row": 12,
       "prerequisites": ["Near Future Governance"],
       "boostPrerequisites": []
     },
@@ -1497,7 +1497,7 @@
       "researched": false,
       "boosted": false,
       "column": 18,
-      "row": 3,
+      "row": 13,
       "prerequisites": ["Near Future Governance"],
       "boostPrerequisites": []
     },
@@ -1508,7 +1508,7 @@
       "researched": false,
       "boosted": false,
       "column": 18,
-      "row": 3,
+      "row": 13,
       "prerequisites": ["Near Future Governance"],
       "boostPrerequisites": []
     },
@@ -1519,7 +1519,7 @@
       "researched": false,
       "boosted": false,
       "column": 19,
-      "row": 3,
+      "row": 13,
       "prerequisites": [],
       "boostPrerequisites": []
     }

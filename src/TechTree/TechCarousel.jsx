@@ -92,7 +92,7 @@ const TechCarousel = () => {
   };
 
   const columns = 20;
-  const rows = 8;
+  const rows = 17;
   const grid = Array.from({ length: rows }, () => Array(columns).fill(null));
   techs.forEach((tech) => {
     if (
