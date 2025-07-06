@@ -197,6 +197,7 @@ const TechCarousel = () => {
               <TechCard
                 key={tech.name}
                 tech={tech}
+                allTechs={techs}
                 onResearch={handleResearch}
                 onBoostToggle={handleBoostToggle}
                 onShowDetails={handleShowDetails}

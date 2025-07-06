@@ -29,3 +29,6 @@ We use the `axios` library for making HTTP requests, which is simple and easy to
 
 We use composition and props to create reusable components, which helps keep the code organized and maintainable. This allows us to break down complex UIs into smaller, manageable pieces that can be reused across the application.
 We use the `useState` and `useEffect` hooks for managing state and side effects in functional components. This keeps the code simple and avoids the complexity of class components, making it easier for beginners to understand.
+
+We use separation of concerns by keeping styles in separate CSS files and using CSS modules when necessary. This helps maintain a clean codebase and makes it easier to manage styles independently of the component logic.
+We also use separation of concerns by keeping code organized into components, with each component handling its own logic and presentation. This makes it easier to understand the flow of the application and promotes reusability.

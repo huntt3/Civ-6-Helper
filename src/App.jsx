@@ -3,7 +3,7 @@ import DistrictCards from "./DistrictDiscountingTool/DistrictCards";
 
 import EraTrackerContainer from "./EraScoreTracker/EraTrackerContainer";
 import WondersContainer from "./WonderTracker/WondersContainer";
-import TechCarousel from "./TechTree/Tech";
+import TechCarousel from "./TechTree/TechCarousel";
 import GreatPeopleContainer from "./GreatPeopleTracker/GreatPeopleContainer";
 
 // Main App component

@@ -1,6 +1,13 @@
 /* TechCard styles (moved from Tech.css) */
+/*
+  TechCard color logic:
+  - .researched: --tech-card-researched-color
+  - .boosted.cannot-research: --tech-card-boosted-cannot-research-color
+  - .boosted.can-research: --tech-card-boosted-can-research-color
+  - .no-boost.cannot-research: --tech-card-no-boost-cannot-research-color
+  - .no-boost.can-research: --tech-card-no-boost-can-research-color
+*/
 .tech-card {
-  background: var(--tech-card-no-boost-cannot-research-color);
   border-radius: 1rem;
   min-width: 0;
   min-height: 0;
@@ -18,19 +25,44 @@
   transition: background 0.2s, box-shadow 0.2s, border 0.2s;
   position: relative;
   z-index: 1;
+  background: var(--tech-card-no-boost-cannot-research-color);
 }
-.tech-card:hover:not(.tech-card-empty),
-.tech-card:focus:not(.tech-card-empty) {
-  background: var(--tech-card-no-boost-can-research-color);
-  box-shadow: 0 6px 24px #1e2a4a55;
-  border-color: var(--tech-card-boosted-can-research-color);
-}
+
+/* Researched */
 .tech-card.researched {
   background: var(--tech-card-researched-color) !important;
   color: var(--primary-text-color-light);
   filter: grayscale(0.7) brightness(0.85);
   border-color: #7a8bb7;
   cursor: not-allowed;
+}
+
+/* Boosted, cannot research (not all prereqs researched) */
+.tech-card.boosted.cannot-research {
+  background: var(--tech-card-boosted-cannot-research-color) !important;
+  color: var(--primary-text-color-light);
+}
+
+/* Boosted, can research (all prereqs researched) */
+.tech-card.boosted.can-research {
+  background: var(--tech-card-boosted-can-research-color) !important;
+  color: var(--primary-text-color-dark);
+}
+
+/* Not boosted, cannot research (not all prereqs researched) */
+.tech-card.no-boost.cannot-research {
+  background: var(--tech-card-no-boost-cannot-research-color) !important;
+  color: var(--primary-text-color-dark);
+}
+
+/* Not boosted, can research (all prereqs researched) */
+.tech-card.no-boost.can-research {
+  background: var(--tech-card-no-boost-can-research-color) !important;
+  color: var(--primary-text-color-light);
+}
+.tech-card:hover:not(.tech-card-empty):not(.researched) {
+  box-shadow: 0 6px 24px #1e2a4a55;
+  border-color: var(--tech-card-boosted-can-research-color);
 }
 .tech-card-empty {
   background: transparent !important;
