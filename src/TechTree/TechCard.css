@@ -46,7 +46,7 @@
 /* Boosted, can research (all prereqs researched) */
 .tech-card.boosted.can-research {
   background: var(--tech-card-boosted-can-research-color) !important;
-  color: var(--primary-text-color-dark);
+  color: var(--primary-text-color-light);
 }
 
 /* Not boosted, cannot research (not all prereqs researched) */
