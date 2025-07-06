@@ -259,13 +259,26 @@ const TechCarousel = () => {
         typeof toRow !== "number"
       )
         return;
-      // Calculate SVG coordinates (right edge center of prereq to left edge center of tech)
-      const x1 = fromCol * (cardWidth + gap) + cardWidth; // right edge of prereq
-      // Add vertical offset for grid gap (gap/2) to center arrows in the cell+gap area
-      const y1 = fromRow * (cardHeight + gap) + 2 * gap + cardHeight / 2;
-      const x2 = toCol * (cardWidth + gap); // left edge of tech
-      const y2 = toRow * (cardHeight + gap) + 2 * gap + cardHeight / 2;
-      arrowData.push({ x1, y1, x2, y2 });
+      // Only draw arrows if both techs are within the grid
+      if (
+        fromCol >= 0 &&
+        fromCol < columns &&
+        toCol >= 0 &&
+        toCol < columns &&
+        fromRow >= 0 &&
+        fromRow < rows &&
+        toRow >= 0 &&
+        toRow < rows
+      ) {
+        // Calculate SVG coordinates (right edge center of prereq to left edge center of tech)
+        const x1 = fromCol * (cardWidth + gap) + cardWidth; // right edge of prereq
+        // Move arrows up by a quarter of the card height (for better alignment)
+        const yOffset = cardHeight / 4;
+        const y1 = fromRow * (cardHeight + gap) + cardHeight / 1.5;
+        const x2 = toCol * (cardWidth + gap); // left edge of tech
+        const y2 = toRow * (cardHeight + gap) + cardHeight / 1.5;
+        arrowData.push({ x1, y1, x2, y2 });
+      }
     });
   });
 
@@ -304,50 +317,47 @@ const TechCarousel = () => {
           Refresh
         </button>
       </header>
-      {/* SVG arrows between techs */}
-      <svg
-        className="tech-arrows-svg"
-        width={columns * (cardWidth + gap)}
-        height={rows * (cardHeight + gap)}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          zIndex: 0,
-          pointerEvents: "none",
-        }}
-      >
-        {arrowData.map((arrow, i) => (
-          <g key={i}>
-            <line
-              x1={arrow.x1}
-              y1={arrow.y1}
-              x2={arrow.x2}
-              y2={arrow.y2}
-              stroke="#1976d2"
-              strokeWidth="3"
-              markerEnd="url(#arrowhead)"
-            />
-          </g>
-        ))}
-        <defs>
-          <marker
-            id="arrowhead"
-            markerWidth="10"
-            markerHeight="7"
-            refX="10"
-            refY="3.5"
-            orient="auto"
-            markerUnits="strokeWidth"
-          >
-            <polygon points="0 0, 10 3.5, 0 7" fill="#1976d2" />
-          </marker>
-        </defs>
-      </svg>
-      <div
-        className="tech-carousel-grid"
-        style={{ position: "relative", zIndex: 1 }}
-      >
+      <div className="tech-carousel-grid" style={{ position: "relative" }}>
+        {/* SVG arrows between techs, now inside the scrollable grid */}
+        <svg
+          className="tech-arrows-svg"
+          width={columns * (cardWidth + gap)}
+          height={rows * (cardHeight + gap)}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            zIndex: 0,
+            pointerEvents: "none",
+          }}
+        >
+          {arrowData.map((arrow, i) => (
+            <g key={i}>
+              <line
+                x1={arrow.x1}
+                y1={arrow.y1}
+                x2={arrow.x2}
+                y2={arrow.y2}
+                stroke="#1976d2"
+                strokeWidth="3"
+                markerEnd="url(#arrowhead)"
+              />
+            </g>
+          ))}
+          <defs>
+            <marker
+              id="arrowhead"
+              markerWidth="10"
+              markerHeight="7"
+              refX="10"
+              refY="3.5"
+              orient="auto"
+              markerUnits="strokeWidth"
+            >
+              <polygon points="0 0, 10 3.5, 0 7" fill="#1976d2" />
+            </marker>
+          </defs>
+        </svg>
         {grid
           .flat()
           .map((tech, idx) =>

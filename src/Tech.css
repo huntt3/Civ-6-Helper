@@ -4,18 +4,18 @@
   overflow-x: auto;
   padding: 2rem 0 2rem 0;
   margin-bottom: 2rem;
-  background: linear-gradient(135deg, #1e2a4a 0%, #274b7a 100%);
+  background: var(--primary-container-color);
   border-radius: 1.5rem;
   box-shadow: 0 4px 24px rgba(30, 42, 74, 0.18);
 }
 
 .tech-carousel-title {
   font-size: 1.7rem;
-  color: #e3eafc;
+  color: var(--primary-text-color-dark);
   letter-spacing: 1px;
   margin: 0 0 1.5rem 1rem;
-  font-family: "Segoe UI", "Arial", sans-serif;
-  text-shadow: 0 2px 8px #1e2a4a44;
+  font-family: var(--primary-font);
+  text-shadow: none;
 }
 
 .tech-carousel-grid {
@@ -28,8 +28,9 @@
   position: relative;
 }
 
+/* Use Civ 6-inspired colors from RootVariables.css for all tech cards */
 .tech-card {
-  background: linear-gradient(135deg, #2a3d5c 60%, #3a5a8c 100%);
+  background: var(--tech-card-no-boost-cannot-research-color);
   border-radius: 1rem;
   min-width: 0;
   min-height: 0;
@@ -42,28 +43,29 @@
   font-size: 1.15rem;
   box-shadow: 0 4px 16px #1e2a4a33;
   cursor: pointer;
-  border: 2.5px solid #3a5a8c;
-  color: #e3eafc;
+  border: 2.5px solid var(--primary-border-color);
+  color: var(--primary-text-color-dark);
   transition: background 0.2s, box-shadow 0.2s, border 0.2s;
   position: relative;
   z-index: 1;
 }
 .tech-card:hover:not(.tech-card-empty),
 .tech-card:focus:not(.tech-card-empty) {
-  background: linear-gradient(135deg, #3a5a8c 60%, #4a7ad1 100%);
+  background: var(--tech-card-no-boost-can-research-color);
   box-shadow: 0 6px 24px #1e2a4a55;
-  border-color: #4a7ad1;
+  border-color: var(--tech-card-boosted-can-research-color);
 }
 .tech-card.researched {
-  background: linear-gradient(135deg, #2a3d5c 60%, #3a5a8c 100%) !important;
-  color: #7a8bb7;
+  background: var(--tech-card-researched-color) !important;
+  color: var(--primary-text-color-light);
   filter: grayscale(0.7) brightness(0.85);
   border-color: #7a8bb7;
   cursor: not-allowed;
 }
 .tech-card-empty {
-  background: transparent;
-  box-shadow: none;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
   cursor: default;
 }
 
