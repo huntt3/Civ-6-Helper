@@ -92,7 +92,12 @@ const TechCarousel = () => {
   };
 
   const columns = 20;
-  const rows = 17;
+  // Find the max row value in the data to ensure all rows are shown
+  const maxRow = Math.max(
+    ...techs.map((t) => (typeof t.row === "number" ? t.row : 0)),
+    0
+  );
+  const rows = Math.max(17, maxRow + 1); // Always at least 17, but expand if needed
   const grid = Array.from({ length: rows }, () => Array(columns).fill(null));
   techs.forEach((tech) => {
     if (
@@ -137,11 +142,19 @@ const TechCarousel = () => {
         toRow >= 0 &&
         toRow < rows
       ) {
-        const x1 = fromCol * (cardWidth + gap) + cardWidth;
-        const y1 = fromRow * (cardHeight + gap) + cardHeight / 1.5;
-        const x2 = toCol * (cardWidth + gap);
-        const y2 = toRow * (cardHeight + gap) + cardHeight / 1.5;
-        arrowData.push({ x1, y1, x2, y2 });
+        if (fromRow < 10) {
+          const x1 = fromCol * (cardWidth + gap) + cardWidth;
+          const y1 = fromRow * (cardHeight + gap) + cardHeight / 1.5;
+          const x2 = toCol * (cardWidth + gap);
+          const y2 = toRow * (cardHeight + gap) + cardHeight / 1.5;
+          arrowData.push({ x1, y1, x2, y2 });
+        } else {
+          const x1 = fromCol * (cardWidth + gap) + cardWidth;
+          const y1 = fromRow * (cardHeight + gap) - cardHeight / 1.5;
+          const x2 = toCol * (cardWidth + gap);
+          const y2 = toRow * (cardHeight + gap) - cardHeight / 1.5;
+          arrowData.push({ x1, y1, x2, y2 });
+        }
       }
     });
   });

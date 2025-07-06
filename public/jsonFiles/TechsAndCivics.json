@@ -892,7 +892,7 @@
       "researched": false,
       "boosted": false,
       "column": 2,
-      "row": 110,
+      "row": 10,
       "prerequisites": ["Craftsmanship"],
       "boostPrerequisites": []
     },
