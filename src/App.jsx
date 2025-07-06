@@ -4,6 +4,7 @@ import DistrictCards from "./DistrictDiscountingTool/DistrictCards";
 import EraTrackerContainer from "./EraScoreTracker/EraTrackerContainer";
 import WondersContainer from "./WonderTracker/WondersContainer";
 import TechCarousel from "./TechTree/TechCarousel";
+import CivicCarousel from "./CivicTree/CivicCarousel";
 import GreatPeopleContainer from "./GreatPeopleTracker/GreatPeopleContainer";
 
 // Main App component
@@ -15,6 +16,7 @@ function App() {
       </header>
       <DistrictCards />
       <TechCarousel />
+      <CivicCarousel />
       <EraTrackerContainer />
       <WondersContainer />
       <GreatPeopleContainer />
