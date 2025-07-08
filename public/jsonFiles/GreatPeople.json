@@ -427,7 +427,7 @@
       "type": "Great Merchant",
       "era": "Classical",
       "taken": false,
-      "ability": "Gain 60 Gold Gold (on Standard speed). Annexes any contiguous tile into the nearest of your city's territories. Activates on tiles next to your territory.",
+      "ability": "Gain 60 Gold (on Standard speed). Annexes any contiguous tile into the nearest of your city's territories. Activates on tiles next to your territory.",
       "charges": 3
     },
     {
@@ -435,7 +435,7 @@
       "type": "Great Merchant",
       "era": "Classical",
       "taken": false,
-      "ability": "Increases Trade Route Trade Route capacity by 1. Foreign Trade Route Trade Routes to this city provide +2 Gold Gold to both cities."
+      "ability": "Increases Trade Route capacity by 1. Foreign Trade Routes to this city provide +2 Gold to both cities."
     },
     {
       "name": "Ibn Fadlan",
@@ -456,14 +456,14 @@
       "type": "Great Merchant",
       "era": "Medieval",
       "taken": false,
-      "ability": "Grants a free Trader unit in this city, and increases Trade Route Trade Route capacity by 1. Foreign Trade Route Trade Routes to this city provides +2 Gold Gold to both cities."
+      "ability": "Grants a free Trader unit in this city, and increases Trade Route capacity by 1. Foreign Trade Routes to this city provides +2 Gold to both cities."
     },
     {
       "name": "Piero de' Bardi",
       "type": "Great Merchant",
       "era": "Medieval",
       "taken": false,
-      "ability": "Gain 200 Gold Gold and 1 Envoy."
+      "ability": "Gain 200 Gold and 1 Envoy."
     },
     {
       "name": "Cosimo de' Medici",
@@ -491,7 +491,7 @@
       "type": "Great Merchant",
       "era": "Renaissance",
       "taken": false,
-      "ability": "Gain 200 Gold Gold and 2 Envoys Envoys."
+      "ability": "Gain 200 Gold and 2 Envoys."
     },
     {
       "name": "Raja Todar Mal",
@@ -505,21 +505,21 @@
       "type": "Great Merchant",
       "era": "Industrial",
       "taken": false,
-      "ability": "Gain 500 Gold Gold. Grant 1 Governor Governor Title or recruit a new Governor."
+      "ability": "Gain 500 Gold. Grant 1 Governor Governor Title or recruit a new Governor."
     },
     {
       "name": "John Jacob Astor",
       "type": "Great Merchant",
       "era": "Industrial",
       "taken": false,
-      "ability": "Gain 500 Gold Gold. Gain 2 Envoys"
+      "ability": "Gain 500 Gold. Gain 2 Envoys"
     },
     {
       "name": "John Spilsbury",
       "type": "Great Merchant",
       "era": "Industrial",
       "taken": false,
-      "ability": "Creates one copy of Toys, which provides +4 Amenities Amenities."
+      "ability": "Creates one copy of Toys, which provides +4 Amenties."
     },
     {
       "name": "Stamford Raffles",
@@ -568,14 +568,14 @@
       "type": "Great Merchant",
       "era": "Atomic",
       "taken": false,
-      "ability": "Increases Trade Route Trade Route capacity by 1. +25% Tourism Tourism to other civilizations you have a Trade Route Trade Route to."
+      "ability": "Increases Trade Route capacity by 1. +25% Tourism Tourism to other civilizations you have a Trade Route to."
     },
     {
       "name": "Estée Lauder",
       "type": "Great Merchant",
       "era": "Information",
       "taken": false,
-      "ability": "Creates two copies of Perfume, which provide +6 Amenities Amenities each."
+      "ability": "Creates two copies of Perfume, which provide +6 Amenties each."
     },
     {
       "name": "Jamsetji Tata",
@@ -590,6 +590,175 @@
       "era": "Information",
       "taken": false,
       "ability": "Industrial Zone districts provide +10 Tourism Tourism. Activates in your Industrial Zone."
+    },
+    {
+      "name": "Zhang Heng",
+      "type": "Great Scientist",
+      "era": "Classical",
+      "taken": false,
+      "ability": "Triggers the Eureka for Celestial Navigation, Mathematics, and Engineering. If they are already triggered, instead completes the technology."
+    },
+    {
+      "name": "Aryabhata",
+      "type": "Great Scientist",
+      "era": "Classical",
+      "taken": false,
+      "ability": "Triggers the Eureka for Mathematics and one random technology from the Medieval Era."
+    },
+    {
+      "name": "Euclid",
+      "type": "Great Scientist",
+      "era": "Classical",
+      "taken": false,
+      "ability": "Triggers the Eureka for Mathematics and one random technology from the Medieval Era."
+    },
+    {
+      "name": "Hypatia",
+      "type": "Great Scientist",
+      "era": "Classical",
+      "taken": false,
+      "ability": "Libraries provide +1 Science. Instantly builds a Library in this district."
+    },
+    {
+      "name": "Abu al-Qasim al-Zahrawi",
+      "type": "Great Scientist",
+      "era": "Medieval",
+      "taken": false,
+      "ability": "Triggers the Eureka for one random Medieval or Renaissance era technology. Wounded units can heal +5 HP per turn. Can activate anywhere.",
+      "passiveAbility": "+20 HP Healing for all units within one tile."
+    },
+    {
+      "name": "Hildegard of Bingen",
+      "type": "Great Scientist",
+      "era": "Medieval",
+      "taken": false,
+      "ability": "Gain 100 Faith (on Standard speed). This Holy Site's adjacency bonuses gain an additional Science bonus."
+    },
+    {
+      "name": "Omar Khayyam",
+      "type": "Great Scientist",
+      "era": "Medieval",
+      "taken": false,
+      "ability": "Triggers the Eureka for two technologies and the Inspiration Inspiration for one Civic from the Medieval or Renaissance Era."
+    },
+    {
+      "name": "Ibn Khaldun",
+      "type": "Great Scientist",
+      "era": "Renaissance",
+      "taken": false,
+      "ability": "Chosen Campus gains 2 Housing and 1 Amenity. Increases non-Food Food yield benefits of happiness in your empire by 40%"
+    },
+    {
+      "name": "Emilie du Chatelet",
+      "type": "Great Scientist",
+      "era": "Renaissance",
+      "taken": false,
+      "ability": "Triggers the Eureka for three random technologies from the Renaissance or Industrial Era."
+    },
+    {
+      "name": "Galileo Galilei",
+      "type": "Great Scientist",
+      "era": "Renaissance",
+      "taken": false,
+      "ability": "Chosen Campus gains 2 Housing and 1 Amenity. Increases non-Food Food yield benefits of happiness in your empire by 40%"
+    },
+    {
+      "name": "Isaac Newton",
+      "type": "Great Scientist",
+      "era": "Renaissance",
+      "taken": false,
+      "ability": "Instantly builds a Library and a University in this district. Universities provide +2 Science."
+    },
+    {
+      "name": "Charles Darwin",
+      "type": "Great Scientist",
+      "era": "Industrial",
+      "taken": false,
+      "ability": "Gain 500 Science (on Standard speed) for each adjacent Natural Wonder."
+    },
+    {
+      "name": "Dmitri Mendeleev",
+      "type": "Great Scientist",
+      "era": "Industrial",
+      "taken": false,
+      "ability": "Triggers the Eureka for Chemistry and one random technology from the Industrial Era."
+    },
+    {
+      "name": "James Young",
+      "type": "Great Scientist",
+      "era": "Industrial",
+      "taken": false,
+      "ability": "Triggers the Eureka for two random technologies from the Industrial or Modern Era. Reveals Oil without the normal tech requirement."
+    },
+    {
+      "name": "Alan Turing",
+      "type": "Great Scientist",
+      "era": "Modern",
+      "taken": false,
+      "ability": "Triggers the Eureka for Computers and one random technology from the Modern Era."
+    },
+    {
+      "name": "Albert Einstein",
+      "type": "Great Scientist",
+      "era": "Modern",
+      "taken": false,
+      "ability": "Triggers the Eureka for one random technology from the Modern Era. Research Labs provide an additional +4 Science."
+    },
+    {
+      "name": "Alfred Nobel",
+      "type": "Great Scientist",
+      "era": "Modern",
+      "taken": false,
+      "ability": "Triggers one random Eureka for one random technology from the Modern or Atomic Era. Applies 100 free Great People Great People points towards recruiting all current and future Great People."
+    },
+    {
+      "name": "Erwin Schrödinger",
+      "type": "Great Scientist",
+      "era": "Atomic",
+      "taken": false,
+      "ability": "Triggers the Eureka for three random technologies from the Atomic or Information Era."
+    },
+    {
+      "name": "Janaki Ammal",
+      "type": "Great Scientist",
+      "era": "Atomic",
+      "taken": false,
+      "ability": "Gain 400 Science (on Standard speed) for each rainforest tile here or adjacent."
+    },
+    {
+      "name": "Mary Leakey",
+      "type": "Great Scientist",
+      "era": "Atomic",
+      "taken": false,
+      "ability": "Gain 350 Science (on Standard speed) for every Artifiact in this city. Artifiacts in all your cities generate 300% of their normal Tourism Tourism."
+    },
+    {
+      "name": "Margaret Mead",
+      "type": "Great Scientist",
+      "era": "Atomic",
+      "taken": false,
+      "ability": "Gain 1000 Science and Culture (on Standard speed)."
+    },
+    {
+      "name": "Carl Sagan",
+      "type": "Great Scientist",
+      "era": "Information",
+      "taken": false,
+      "ability": "rovides 3000 Production Production (on Standard Speed) towards a Space Race construction project."
+    },
+    {
+      "name": "Stephanie Kwolek",
+      "type": "Great Scientist",
+      "era": "Information",
+      "taken": false,
+      "ability": "+100% Production Production towards Space Race projects."
+    },
+    {
+      "name": "Abdus Salam",
+      "type": "Great Scientist",
+      "era": "Information",
+      "taken": false,
+      "ability": "Triggers the Eureka for all technologies from the Information Era."
     }
   ]
 }
