@@ -13,8 +13,8 @@ function App() {
       <header className="App-header">
         <h1>Civ 6 Helper</h1>
       </header>
-      <DistrictCards />
       <TechCarousel />
+      <DistrictCards />
       <EraTrackerContainer />
       <WondersContainer />
       <GreatPeopleContainer />

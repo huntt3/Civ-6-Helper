@@ -3,9 +3,43 @@ import CollapsibleContainer from "../Templates/CollapsibleContainer";
 import "./WondersContainer.css";
 
 // WonderCard component
+// ...removed duplicate import of useEffect and useState...
+// ...existing code...
 const WonderCard = ({ wonder, onClick }) => {
-  // Add 'built' class if wonder.built is true
-  const cardClass = `wonder-card${wonder.built ? " built" : ""}`;
+  // Check if the requirement is researched
+  const [isAvailable, setIsAvailable] = useState(false);
+  useEffect(() => {
+    // Check for changes in localStorage for tech/civic state
+    const checkResearched = () => {
+      let researched = false;
+      const techState = JSON.parse(
+        localStorage.getItem("civ6_tech_state") || "{}"
+      );
+      const civicState = JSON.parse(
+        localStorage.getItem("civ6_civics_state") || "{}"
+      );
+      if (techState[wonder.requirement]?.researched) researched = true;
+      if (civicState[wonder.requirement]?.researched) researched = true;
+      setIsAvailable(researched);
+    };
+    checkResearched();
+    // Listen for storage changes (from other tabs/windows)
+    window.addEventListener("storage", checkResearched);
+    // Listen for custom event when tech/civic state changes in this tab
+    window.addEventListener("civ6_tech_civic_state_changed", checkResearched);
+    return () => {
+      window.removeEventListener("storage", checkResearched);
+      window.removeEventListener(
+        "civ6_tech_civic_state_changed",
+        checkResearched
+      );
+    };
+  }, [wonder.requirement]);
+
+  // Add 'built' class if wonder.built is true, and 'available' if requirement is researched
+  const cardClass = `wonder-card${wonder.built ? " built" : ""}${
+    isAvailable ? " available" : ""
+  }`;
   return (
     <div
       className={cardClass}
@@ -93,6 +127,23 @@ const WondersContainer = () => {
   // Collapse/expand handler
   const handleCollapse = () => setCollapsed((prev) => !prev);
 
+  // Define the 8 eras in order
+  const eraOrder = [
+    "Ancient",
+    "Classical",
+    "Medieval",
+    "Renaissance",
+    "Industrial",
+    "Modern",
+    "Atomic",
+    "Information",
+  ];
+
+  // Group wonders by era
+  const wondersByEra = eraOrder.map((era) =>
+    wonders.filter((w) => w.era === era)
+  );
+
   return (
     <>
       <CollapsibleContainer
@@ -102,13 +153,39 @@ const WondersContainer = () => {
         onRefresh={fetchWonders}
         ariaLabel="Wonders"
       >
-        <div className="wonders-list">
-          {wonders.map((wonder) => (
-            <WonderCard
-              key={wonder.name}
-              wonder={wonder}
-              onClick={() => handleCardClick(wonder)}
-            />
+        <div
+          className="wonders-rows"
+          style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
+        >
+          {eraOrder.map((era, idx) => (
+            <section key={era} aria-label={era} style={{ width: "100%" }}>
+              <header style={{ marginBottom: "0.5rem" }}>
+                <h3
+                  style={{
+                    margin: 0,
+                    fontSize: "1.1rem",
+                    color: "var(--primary-text-color-dark)",
+                  }}
+                >
+                  {era}
+                </h3>
+              </header>
+              <div className="wonders-list" style={{ minHeight: "2.5rem" }}>
+                {wondersByEra[idx].length === 0 ? (
+                  <span style={{ color: "#888", fontSize: "0.95rem" }}>
+                    No wonders
+                  </span>
+                ) : (
+                  wondersByEra[idx].map((wonder) => (
+                    <WonderCard
+                      key={wonder.name}
+                      wonder={wonder}
+                      onClick={() => handleCardClick(wonder)}
+                    />
+                  ))
+                )}
+              </div>
+            </section>
           ))}
         </div>
       </CollapsibleContainer>

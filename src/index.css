@@ -36,6 +36,9 @@
   --civic-card-boosts-hovered-color: #770737;
   --civic-card-boosted-by-hovered-color: #953553;
 
+  --wonder-card-available-color: #dda833;
+  --wonder-card-available-color-hover: #d5a94b;
+
   --primary-font: sans-serif;
   --secondary-font: Helvetica;
 }

@@ -47,6 +47,7 @@
   justify-content: center;
 }
 
+/* Wonder card base style */
 .wonder-card {
   background: var(--primary-bg-color);
   color: var(--primary-text-color-dark);
@@ -60,6 +61,12 @@
   transition: background 0.2s, box-shadow 0.2s;
   outline: none;
   border: 1px solid var(--primary-border-color);
+}
+
+/* Wonder card available (requirement researched) */
+.wonder-card.available {
+  background: var(--wonder-card-available-color);
+  color: var(--primary-text-color-dark);
 }
 .wonder-card:hover,
 .wonder-card:focus {
