@@ -15,9 +15,9 @@ function App() {
       </header>
       <TechCarousel />
       <DistrictCards />
-      <EraTrackerContainer />
       <WondersContainer />
       <GreatPeopleContainer />
+      <EraTrackerContainer />
     </main>
   );
 }

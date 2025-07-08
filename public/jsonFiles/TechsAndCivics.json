@@ -196,7 +196,7 @@
       "column": 4,
       "row": 5,
       "prerequisites": ["Masonry"],
-      "boostPrerequisites": ["Mining"]
+      "boostPrerequisites": ["Wheel"]
     },
     {
       "name": "Engineering",
