@@ -32,3 +32,8 @@ We use the `useState` and `useEffect` hooks for managing state and side effects 
 
 We use separation of concerns by keeping styles in separate CSS files and using CSS modules when necessary. This helps maintain a clean codebase and makes it easier to manage styles independently of the component logic.
 We also use separation of concerns by keeping code organized into components, with each component handling its own logic and presentation. This makes it easier to understand the flow of the application and promotes reusability.
+
+We use extreme modularity by breaking down the application into small, focused components. Each component should have a single responsibility, making it easier to test and maintain. This approach also promotes reusability across the application.
+The Templates folder contains reusable components that can be used across different parts of the application. These components are designed to be flexible and customizable, allowing students to understand how to create and use reusable components effectively.
+
+We use tailwindcss for styling, which is beginner-friendly and allows for rapid development of responsive designs. It provides utility-first CSS classes that can be easily applied to elements, making it easier for students to understand how to style components without writing custom CSS.

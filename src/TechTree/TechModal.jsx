@@ -22,7 +22,7 @@ const TechModal = ({ tech, onClose }) => {
         <div className="tech-modal-section">
           <strong>Cost:</strong> {tech.baseCost}{" "}
           <img
-            src="../yieldImg/science.webp"
+            src="../../yieldImg/science.webp"
             alt="science"
             style={{ height: "1em", verticalAlign: "middle" }}
           />

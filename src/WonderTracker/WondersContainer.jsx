@@ -136,7 +136,6 @@ const WondersContainer = () => {
     "Industrial",
     "Modern",
     "Atomic",
-    "Information",
   ];
 
   // Group wonders by era
