@@ -1,5 +1,5 @@
 import React from "react";
-import "./DistrictCards.css";
+import "./DistrictDiscountingTool.css";
 
 // List of district titles
 const districtTitles = [
