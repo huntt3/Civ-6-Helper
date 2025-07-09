@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import EraScore from "./EraScore";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
-import "./EraTrackerContainer.css";
+import "./EraTracker.css";
 
 // EraTrackerContainer component using CollapsibleContainer
 const EraTrackerContainer = () => {

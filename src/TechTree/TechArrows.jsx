@@ -1,5 +1,5 @@
 import React from "react";
-import "./TechArrows.css";
+import "./TechTree.css";
 
 const TechArrows = ({
   arrowData,

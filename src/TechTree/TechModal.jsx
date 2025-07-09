@@ -1,5 +1,5 @@
 import React from "react";
-import "./TechModal.css";
+import "./TechTree.css";
 
 const TechModal = ({ tech, onClose }) => {
   if (!tech) return null;

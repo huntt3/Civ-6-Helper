@@ -68,3 +68,42 @@
   text-align: center;
   margin-bottom: 1rem;
 }
+
+/* Add styles for collapsible rows, labels, and card selection */
+.era-label {
+  font-weight: bold;
+  font-size: 1.1rem;
+  background: #e3e3e3;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.collapse-btn {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 0.2rem 0.7rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+.collapse-btn:focus {
+  outline: 2px solid #1976d2;
+}
+.great-person-card {
+  transition: background 0.2s, filter 0.2s, box-shadow 0.2s;
+}
+.great-person-card:hover {
+  background: #e3f0ff;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.12);
+  filter: brightness(0.97);
+}
+.great-person-card.selected {
+  background: #b3d1ff;
+  border-color: #1976d2;
+  filter: brightness(0.85);
+}

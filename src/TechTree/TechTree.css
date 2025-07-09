@@ -1,4 +1,33 @@
-/* TechCard styles (moved from Tech.css) */
+/* Styles for TechCarousel and TechCard */
+.tech-carousel {
+  width: 100%;
+  overflow-x: auto;
+  padding: 2rem 0 2rem 0;
+  margin-bottom: 2rem;
+  background: var(--primary-container-color);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px rgba(30, 42, 74, 0.18);
+}
+
+.tech-carousel-title {
+  font-size: 1.7rem;
+  color: var(--primary-text-color-dark);
+  letter-spacing: 1px;
+  margin: 0 0 1.5rem 1rem;
+  font-family: var(--primary-font);
+  text-shadow: none;
+}
+
+.tech-carousel-grid {
+  display: grid;
+  grid-template-columns: repeat(20, 120px);
+  grid-template-rows: repeat(8, 100px);
+  gap: 2.5rem;
+  min-width: 2800px;
+  padding: 1rem 0;
+  position: relative;
+}
+
 /*
   TechCard color logic:
   - .researched: --tech-card-researched-color
@@ -81,4 +110,62 @@
 .tech-card-cost {
   font-size: 0.95rem;
   color: #b3cfff;
+}
+
+/* Modal styles for Tech details */
+.tech-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tech-modal {
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  min-width: 300px;
+  max-width: 90vw;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+  position: relative;
+}
+.tech-modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 0.2rem 0.7rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.tech-modal-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 0.7rem;
+}
+.tech-modal-section {
+  margin-bottom: 0.7rem;
+}
+.tech-modal-prereqs {
+  margin-top: 0.3rem;
+  font-size: 1rem;
+}
+
+/* SVG arrows for tech prerequisites */
+.tech-arrows-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }

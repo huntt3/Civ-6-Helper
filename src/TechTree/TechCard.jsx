@@ -1,5 +1,5 @@
 import React from "react";
-import "./TechCard.css";
+import "./TechTree.css";
 
 // Helper to determine if all prerequisites are researched
 const allPrereqsResearched = (tech, allTechs) => {

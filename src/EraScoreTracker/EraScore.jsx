@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./EraScore.css";
+import "./EraTracker.css";
 
 // EraScore card component
 const EraScore = ({ title, eraScore, minEra, maxEra, description }) => {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TechCard from "./TechCard";
 import TechModal from "./TechModal";
 import TechArrows from "./TechArrows";
-import "./TechCarousel.css";
+import "./TechTree.css";
 
 const TechCarousel = () => {
   const [techs, setTechs] = useState([]);

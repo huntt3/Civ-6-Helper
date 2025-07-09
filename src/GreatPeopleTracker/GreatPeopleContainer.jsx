@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./GreatPeopleContainer.css";
-import "./GreatPeopleContainerExtra.css";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 
 // Helper function to get unique people by era and type
