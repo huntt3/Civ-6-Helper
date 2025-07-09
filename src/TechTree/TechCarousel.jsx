@@ -9,7 +9,7 @@ const TechCarousel = () => {
   const [modalTech, setModalTech] = useState(null);
 
   useEffect(() => {
-    fetch("/jsonFiles/TechsAndCivics.json")
+    fetch("./jsonFiles/TechsAndCivics.json")
       .then((res) => res.json())
       .then((data) => {
         const saved = localStorage.getItem("civ6_tech_state");

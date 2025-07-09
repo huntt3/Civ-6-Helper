@@ -98,7 +98,7 @@ const WondersContainer = () => {
 
   // Load wonders from JSON
   const fetchWonders = () => {
-    fetch("/jsonFiles/Wonders.json")
+    fetch("./jsonFiles/Wonders.json")
       .then((res) => res.json())
       .then((data) => setWonders(data.Wonder || []))
       .catch(() => setWonders([]));

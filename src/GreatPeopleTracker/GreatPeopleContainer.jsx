@@ -55,7 +55,7 @@ const GreatPeopleContainer = () => {
 
   useEffect(() => {
     // Fetch the GreatPeople.json file
-    fetch("/jsonFiles/GreatPeople.json")
+    fetch("./jsonFiles/GreatPeople.json")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Could not load Great People data.");

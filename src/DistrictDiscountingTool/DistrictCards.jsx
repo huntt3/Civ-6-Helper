@@ -40,7 +40,7 @@ const DistrictCard = ({ title }) => {
         >
           {/* The image path should be relative to the public folder for Vite/React */}
           <img
-            src={`/districtImg/${imgFile}.webp`}
+            src={`./districtImg/${imgFile}.webp`}
             alt={`${title} district`}
             className="district-img"
             onError={(e) => {

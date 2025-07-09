@@ -10,7 +10,7 @@ const EraTrackerContainer = () => {
 
   // Load EraScore data from JSON file
   const fetchEraScore = () => {
-    fetch("/jsonFiles/EraScore.json")
+    fetch("./jsonFiles/EraScore.json")
       .then((res) => res.json())
       .then((data) => setEraScoreItems(data.EraScore || []))
       .catch(() => setEraScoreItems([]));
