@@ -1,9 +1,7 @@
 import "./App.css";
-import DistrictCards from "./DistrictDiscountingTool/DistrictCards";
-
 import EraTrackerContainer from "./EraScoreTracker/EraTrackerContainer";
 import WondersContainer from "./WonderTracker/WondersContainer";
-import TechCarousel from "./TechTree/TechCarousel";
+import TechTreeContainer from "./TechTree/TechTreeContainer";
 import DistrictDiscountingContainer from "./DistrictDiscountingTool/DistrictDiscountingContainer";
 import GreatPeopleContainer from "./GreatPeopleTracker/GreatPeopleContainer";
 
@@ -14,7 +12,7 @@ function App() {
       <header className="App-header">
         <h1>Civ 6 Helper</h1>
       </header>
-      <TechCarousel />
+      <TechTreeContainer />
       <DistrictDiscountingContainer />
       <WondersContainer />
       <GreatPeopleContainer />
