@@ -4,6 +4,7 @@ import WondersContainer from "./WonderTracker/WondersContainer";
 import TechTreeContainer from "./TechTree/TechTreeContainer";
 import DistrictDiscountingContainer from "./DistrictDiscountingTool/DistrictDiscountingContainer";
 import GreatPeopleContainer from "./GreatPeopleTracker/GreatPeopleContainer";
+import Footer from "./Footer/Footer";
 
 // Main App component
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <WondersContainer />
       <GreatPeopleContainer />
       <EraTrackerContainer />
+      <Footer />
     </main>
   );
 }
