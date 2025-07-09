@@ -52,7 +52,7 @@
     {
       "name": "Amina",
       "type": "Great General",
-      "era": "Medieval",
+      "era": "Renaissance",
       "taken": false,
       "ability": "Gain a free Envoy."
     },
@@ -75,7 +75,7 @@
       "type": "Great General",
       "era": "Industrial",
       "taken": false,
-      "ability": "Grants a Warrior Monk with one promotion level. (2 charges)",
+      "ability": "Grants a Warrior Monk with one promotion level.",
       "charges": 2
     },
     {
@@ -139,7 +139,7 @@
       "type": "Great General",
       "era": "Atomic",
       "taken": false,
-      "ability": "+5% Production Production towards military units."
+      "ability": "+5% Production towards military units."
     },
     {
       "name": "Georgy Zhukov",
@@ -170,145 +170,172 @@
       "ability": "Grants +6 Loyalty per turn for this city. Must activate in City Center."
     },
     {
-      "name": "Themistocles",
+      "name": "Artemisia",
       "type": "Great Admiral",
       "era": "Classical",
       "taken": false,
-      "ability": "Grants 1 promotion level and 25% combat experience to a military naval unit."
-    },
-    {
-      "name": "Scylax of Caryanda",
-      "type": "Great Admiral",
-      "era": "Classical",
-      "taken": false,
-      "ability": "Grants 1 promotion level and 25% combat experience to a military naval unit."
+      "ability": "Grants 1 promotion level to a military naval unit."
     },
     {
       "name": "Gaius Duilius",
       "type": "Great Admiral",
       "era": "Classical",
       "taken": false,
-      "ability": "Grants 1 promotion level and 25% combat experience to a military naval unit."
+      "ability": "Forms a Fleet out of a military naval unit."
+    },
+    {
+      "name": "Themistocles",
+      "type": "Great Admiral",
+      "era": "Classical",
+      "taken": false,
+      "ability": "Instantly creates a Quadrireme unit. +20% Production towards Naval Ranged promotion class."
+    },
+    {
+      "name": "Hanno the Navigator",
+      "type": "Great Admiral",
+      "era": "Classical",
+      "taken": false,
+      "ability": "Grants a naval melee unit with +2 Movement."
+    },
+    {
+      "name": "Himerios",
+      "type": "Great Admiral",
+      "era": "Medieval",
+      "taken": false,
+      "ability": "Grants 1 Promotion Promotion level and +25% combat experience to a military naval unit."
     },
     {
       "name": "Leif Erikson",
       "type": "Great Admiral",
       "era": "Medieval",
       "taken": false,
-      "ability": "Unit and adjacent naval units can enter Ocean tiles. +1 Sight."
+      "ability": "+1 Sight Range for all naval units. Allows all naval units to move over ocean tiles without the required technology."
+    },
+    {
+      "name": "Rajendra Chola",
+      "type": "Great Admiral",
+      "era": "Medieval",
+      "taken": false,
+      "ability": "+3 Strength Combat Strength for all naval units."
     },
     {
       "name": "Zheng He",
       "type": "Great Admiral",
       "era": "Medieval",
       "taken": false,
-      "ability": "Grants a Trader unit. (2 charges)",
-      "charges": 2
-    },
-    {
-      "name": "Teuta",
-      "type": "Great Admiral",
-      "era": "Medieval",
-      "taken": false,
-      "ability": "Grants 1 promotion level and 25% combat experience to a military naval unit."
+      "ability": "Grants a free Trader unit and increases Trade Route capacity by 1. Foreign Trade Routes to this city grant +2 Gold to both cities. Activates in your Harbor."
     },
     {
       "name": "Francis Drake",
       "type": "Great Admiral",
       "era": "Renaissance",
       "taken": false,
-      "ability": "Gain 50 Gold per naval unit killed."
+      "ability": "Instantly creates a Privateer with 1 promotion level. Military units get +50% rewards for plundering sea Trade Routes."
+    },
+    {
+      "name": "Santa Cruz",
+      "type": "Great Admiral",
+      "era": "Renaissance",
+      "taken": false,
+      "ability": "Forms an Armada out of a military naval unit."
     },
     {
       "name": "Yi Sun-sin",
       "type": "Great Admiral",
       "era": "Renaissance",
       "taken": false,
-      "ability": "Instantly creates an Ironclad with 1 promotion level."
+      "ability": "Instantly creates an Ironclad unit with 1 promotion level. Grants 1 Coal Coal per turn"
     },
     {
-      "name": "Rajendra Chola",
+      "name": "Ferdinand Magellan",
       "type": "Great Admiral",
       "era": "Renaissance",
       "taken": false,
-      "ability": "Gain 1 Envoy. Naval units gain +1 Movement."
-    },
-    {
-      "name": "Horatio Nelson",
-      "type": "Great Admiral",
-      "era": "Industrial",
-      "taken": false,
-      "ability": "Grants +5 Combat Strength and +1 Movement to Industrial and Modern era naval units."
+      "ability": "Gain 300 Gold (on Standard speed). Grants 1 free copy of the Luxury resource on this tile to your Capital city."
     },
     {
       "name": "Ching Shih",
       "type": "Great Admiral",
       "era": "Industrial",
       "taken": false,
-      "ability": "Grants +5 Combat Strength and +1 Movement to Industrial and Modern era naval units."
+      "ability": "Gain 500 Gold. Military units get +60% rewards for plundering sea Trade Routes."
     },
     {
-      "name": "Ferdinand Magellan",
+      "name": "Horatio Nelson",
       "type": "Great Admiral",
       "era": "Industrial",
       "taken": false,
-      "ability": "Grants +5 Combat Strength and +1 Movement to Industrial and Modern era naval units."
+      "ability": "+50% flanking bonus for all naval units. Instantly builds a Lighthouse and Shipyard in this district. Activates in your Harbor."
     },
     {
-      "name": "Grace Hopper",
+      "name": "Laskarina Bouboulina",
+      "type": "Great Admiral",
+      "era": "Industrial",
+      "taken": false,
+      "ability": "Grants 1 promotion level and +50% combat experience to a military naval unit."
+    },
+    {
+      "name": "Matthew Perry",
       "type": "Great Admiral",
       "era": "Modern",
       "taken": false,
-      "ability": "Grants +1 Level to a military naval unit and increases trade route range by +50%."
+      "ability": "Grants enough Envoys Envoys to become Suzerain at this City-state, then removes all other players' Envoys Envoys. Activates in City-state territory."
     },
     {
-      "name": "T\u014dg\u014d Heihachir\u014d",
+      "name": "Franz von Hipper",
       "type": "Great Admiral",
       "era": "Modern",
       "taken": false,
-      "ability": "Instantly creates a Battleship with 1 promotion level."
+      "ability": "Instantly creates a Battleship with 1 promotion level. Grants 1 Coal Coal per turn."
     },
     {
-      "name": "David Farragut",
+      "name": "Joaquim Marques Lisboa",
       "type": "Great Admiral",
       "era": "Modern",
       "taken": false,
-      "ability": "Grants +5 Combat Strength and +1 Movement to Modern and Atomic era naval units."
+      "ability": "Accumulate 25% less war weariness than usual."
+    },
+    {
+      "name": "Togo Heihachiro",
+      "type": "Great Admiral",
+      "era": "Modern",
+      "taken": false,
+      "ability": "Grants +6 Loyalty per turn for this city. Activates in your Harbor."
     },
     {
       "name": "Chester W. Nimitz",
       "type": "Great Admiral",
       "era": "Atomic",
       "taken": false,
-      "ability": "Grants +5 Combat Strength and +1 Movement to Atomic and Information era naval units."
+      "ability": "Instantly creates a Submarine with 1 promotion level. Grants 1 Oil per turn. +20% Production towards units of the Naval Raider promotion class."
     },
     {
-      "name": "Semyon Lobov",
+      "name": "Grace Hopper",
       "type": "Great Admiral",
       "era": "Atomic",
       "taken": false,
-      "ability": "Grants +5 Combat Strength and +1 Movement to Atomic and Information era naval units."
+      "ability": "Unlocks two randomly chosen free technologies."
     },
     {
-      "name": "Tamar of Georgia",
+      "name": "Sergei Gorshkov",
+      "type": "Great Admiral",
+      "era": "Atomic",
+      "taken": false,
+      "ability": "Gives 1 free promotion to naval units and 100% combat experience."
+    },
+    {
+      "name": "Clancy Fernando",
       "type": "Great Admiral",
       "era": "Information",
       "taken": false,
-      "ability": "Grants +6 Loyalty per turn for this city. Must activate in a Harbor."
-    },
-    {
-      "name": "Cemil Topuzlu",
-      "type": "Great Admiral",
-      "era": "Information",
-      "taken": false,
-      "ability": "Grants +6 Loyalty per turn for this city. Must activate in a Harbor."
+      "ability": "Gives 1 free promotion to naval units and 200% combat experience."
     },
     {
       "name": "Imhotep",
       "type": "Great Engineer",
       "era": "Ancient",
       "taken": false,
-      "ability": "Grants 215 production toward constructing a Wonder. (2 charges)",
+      "ability": "Grants 215 production toward constructing a Wonder.",
       "charges": 2
     },
     {
@@ -316,7 +343,7 @@
       "type": "Great Engineer",
       "era": "Classical",
       "taken": false,
-      "ability": "Grants 215 production toward constructing a Wonder. (2 charges)",
+      "ability": "Grants 215 production toward constructing a Wonder.",
       "charges": 2
     },
     {
@@ -338,7 +365,7 @@
       "type": "Great Engineer",
       "era": "Renaissance",
       "taken": false,
-      "ability": "Grants 480 production toward constructing a Wonder. (2 charges)",
+      "ability": "Grants 480 production toward constructing a Wonder.",
       "charges": 2
     },
     {
@@ -360,7 +387,7 @@
       "type": "Great Engineer",
       "era": "Industrial",
       "taken": false,
-      "ability": "Grants 720 production toward constructing a Wonder. (2 charges)",
+      "ability": "Grants 720 production toward constructing a Wonder.",
       "charges": 2
     },
     {
@@ -375,7 +402,7 @@
       "type": "Great Engineer",
       "era": "Modern",
       "taken": false,
-      "ability": "Grants 480 production toward Industrial Zone buildings in this city. (2 charges)",
+      "ability": "Grants 480 production toward Industrial Zone buildings in this city.",
       "charges": 2
     },
     {
@@ -383,7 +410,7 @@
       "type": "Great Engineer",
       "era": "Modern",
       "taken": false,
-      "ability": "Grants 100% production toward Space Race projects for the city. (2 charges)",
+      "ability": "Grants 100% production toward Space Race projects for the city.",
       "charges": 2
     },
     {
@@ -412,7 +439,7 @@
       "type": "Great Engineer",
       "era": "Information",
       "taken": false,
-      "ability": "Grants 100% production toward Space Race projects for the city. (2 charges)",
+      "ability": "Grants 100% production toward Space Race projects for the city.",
       "charges": 2
     },
     {
@@ -744,14 +771,14 @@
       "type": "Great Scientist",
       "era": "Information",
       "taken": false,
-      "ability": "rovides 3000 Production Production (on Standard Speed) towards a Space Race construction project."
+      "ability": "rovides 3000 Production (on Standard Speed) towards a Space Race construction project."
     },
     {
       "name": "Stephanie Kwolek",
       "type": "Great Scientist",
       "era": "Information",
       "taken": false,
-      "ability": "+100% Production Production towards Space Race projects."
+      "ability": "+100% Production towards Space Race projects."
     },
     {
       "name": "Abdus Salam",

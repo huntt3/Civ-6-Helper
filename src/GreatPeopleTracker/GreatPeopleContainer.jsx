@@ -6,13 +6,10 @@ import CollapsibleContainer from "../Templates/CollapsibleContainer";
 // Helper function to get unique people by era and type, with null safety
 const getPeopleByEraAndType = (people, era, type) => {
   return people.filter((person) => {
-    // Defensive: skip if missing requirement or era
-    if (!person || !person.requirement || !person.era) return false;
-    // Use loose match for type (case-insensitive, substring)
-    return (
-      person.era === era &&
-      person.requirement.toLowerCase().includes(type.toLowerCase())
-    );
+    // Defensive: skip if missing type or era
+    if (!person || !person.type || !person.era) return false;
+    // Match by type and era
+    return person.era === era && person.type === type;
   });
 };
 
@@ -23,9 +20,6 @@ const types = [
   "Great Engineer",
   "Great Merchant",
   "Great Scientist",
-  "Great Writer",
-  "Great Artist",
-  "Great Musician",
 ];
 
 const eras = [
