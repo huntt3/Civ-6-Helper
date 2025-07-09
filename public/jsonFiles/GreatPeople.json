@@ -330,20 +330,13 @@
       "taken": false,
       "ability": "Gives 1 free promotion to naval units and 200% combat experience."
     },
+
     {
       "name": "Imhotep",
       "type": "Great Engineer",
-      "era": "Ancient",
+      "era": "Medieval",
       "taken": false,
-      "ability": "Grants 215 production toward constructing a Wonder.",
-      "charges": 2
-    },
-    {
-      "name": "Isidore of Miletus",
-      "type": "Great Engineer",
-      "era": "Classical",
-      "taken": false,
-      "ability": "Grants 215 production toward constructing a Wonder.",
+      "ability": "Grants 175 Production toward wonder construction, doubled if the wonder is from the Ancient or Classical era.",
       "charges": 2
     },
     {
@@ -351,43 +344,88 @@
       "type": "Great Engineer",
       "era": "Medieval",
       "taken": false,
-      "ability": "Triggers the Eureka moment for 2 random technologies from the Medieval or Renaissance era."
+      "ability": "Lets this city build one more district than the population limit allows. Triggers the Eureka for Printing technology."
+    },
+    {
+      "name": "Isidore of Miletus",
+      "type": "Great Engineer",
+      "era": "Medieval",
+      "taken": false,
+      "ability": "Grants 215 Production towards wonder construction at standard speed.",
+      "charges": 2
+    },
+    {
+      "name": "James of St. George",
+      "type": "Great Engineer",
+      "era": "Medieval",
+      "taken": false,
+      "ability": "Instantly builds Ancient and Medieval Walls in this city.",
+      "charges": 3
+    },
+    {
+      "name": "Filippo Brunelleschi",
+      "type": "Great Engineer",
+      "era": "Renaissance",
+      "taken": false,
+      "ability": "Grants 315 Production towards wonder construction at standard speed.",
+      "charges": 3
     },
     {
       "name": "Leonardo da Vinci",
       "type": "Great Engineer",
       "era": "Renaissance",
       "taken": false,
-      "ability": "Workshop buildings provide +3 Culture."
+      "ability": "Triggers the Eureka for one random technology of the Modern era. Workshops provide +3 Culture."
     },
     {
       "name": "Mimar Sinan",
       "type": "Great Engineer",
       "era": "Renaissance",
       "taken": false,
-      "ability": "Grants 480 production toward constructing a Wonder.",
-      "charges": 2
+      "ability": "Culture Bomb adjacent tiles when completing an Industrial Zone in any city."
     },
     {
       "name": "Ada Lovelace",
       "type": "Great Engineer",
       "era": "Industrial",
       "taken": false,
-      "ability": "Triggers the Eureka moment for Computers."
-    },
-    {
-      "name": "James Watt",
-      "type": "Great Engineer",
-      "era": "Industrial",
-      "taken": false,
-      "ability": "Gives +2 Production to all Factories and +1 Production to all Workshops."
+      "ability": "Lets this city build one more district than the population limit allows. Triggers the Eureka for the Computers technology."
     },
     {
       "name": "Gustave Eiffel",
       "type": "Great Engineer",
       "era": "Industrial",
       "taken": false,
-      "ability": "Grants 720 production toward constructing a Wonder.",
+      "ability": "Grants 480 Production towards wonder construction at standard speed.",
+      "charges": 2
+    },
+    {
+      "name": "James Watt",
+      "type": "Great Engineer",
+      "era": "Industrial",
+      "taken": false,
+      "ability": "Instantly builds a Workshop and a Factory in this district. Factories provide +2 Production to their city."
+    },
+    {
+      "name": "Shah Jahān",
+      "type": "Great Engineer",
+      "era": "Modern",
+      "taken": false,
+      "ability": "Grants Production towards wonder construction, capped at half your current treasury, then reduces your Gold twice the amount of purchased Production."
+    },
+    {
+      "name": "Alvar Aalto",
+      "type": "Great Engineer",
+      "era": "Modern",
+      "taken": false,
+      "ability": "This city provides +1 Appeal to any tile it owns."
+    },
+    {
+      "name": "Robert Goddard",
+      "type": "Great Engineer",
+      "era": "Modern",
+      "taken": false,
+      "ability": "Triggers the Eureka for Rocketry. +20% Production towards Space Race projects.",
       "charges": 2
     },
     {
@@ -395,52 +433,57 @@
       "type": "Great Engineer",
       "era": "Modern",
       "taken": false,
-      "ability": "Regional buildings provide +2 Power and extend 3 tiles farther."
+      "ability": "This district's regional buildings provide +2 Production. This district's regional buildings reach 3 tiles farther."
+    },
+    {
+      "name": "Jane Drew",
+      "type": "Great Engineer",
+      "era": "Atomic",
+      "taken": false,
+      "ability": "Gain +4 Housing and +3 Amenities in this city."
     },
     {
       "name": "John Roebling",
       "type": "Great Engineer",
-      "era": "Modern",
+      "era": "Atomic",
       "taken": false,
-      "ability": "Grants 480 production toward Industrial Zone buildings in this city.",
+      "ability": "Gain +2 Housing and +1 Amenities in a city.",
       "charges": 2
     },
     {
-      "name": "Gustave Eiffel",
-      "type": "Great Engineer",
-      "era": "Modern",
-      "taken": false,
-      "ability": "Grants 100% production toward Space Race projects for the city.",
-      "charges": 2
-    },
-    {
-      "name": "Zaha Hadid",
+      "name": "Sergei Korolev",
       "type": "Great Engineer",
       "era": "Atomic",
       "taken": false,
-      "ability": "Grants +3 Amenities and +4 Housing in this city."
+      "ability": "Grants 1500 Production towards a Space Race project."
     },
     {
-      "name": "Oscar Niemeyer",
-      "type": "Great Engineer",
-      "era": "Atomic",
-      "taken": false,
-      "ability": "Grants +4 Culture to all Broadcast Centers."
-    },
-    {
-      "name": "Elena Cornaro Piscopia",
-      "type": "Great Engineer",
-      "era": "Atomic",
-      "taken": false,
-      "ability": "Triggers the Eureka moment for all technologies from the Information era."
-    },
-    {
-      "name": "Robert Goddard",
+      "name": "Joseph Paxton",
       "type": "Great Engineer",
       "era": "Information",
       "taken": false,
-      "ability": "Grants 100% production toward Space Race projects for the city.",
-      "charges": 2
+      "ability": "This Entertainment Complex's regional buildings provide +1 Amenity. This district's regional buildings reach 3 tiles farther."
+    },
+    {
+      "name": "Charles Correa",
+      "type": "Great Engineer",
+      "era": "Information",
+      "taken": false,
+      "ability": "This city provides +2 Appeal to any tile it owns."
+    },
+    {
+      "name": "Wernher von Braun",
+      "type": "Great Engineer",
+      "era": "Information",
+      "taken": false,
+      "ability": "+100% Production towards Space Race projects."
+    },
+    {
+      "name": "Kenzo Tange",
+      "type": "Great Engineer",
+      "era": "Information",
+      "taken": false,
+      "ability": "Grants Tourism in each of this city's districts equal to its adjacency bonus (halved for Gold)."
     },
     {
       "name": "Colaeus",
@@ -567,7 +610,7 @@
       "type": "Great Merchant",
       "era": "Modern",
       "taken": false,
-      "ability": "+25% Tourism Tourism rate towards other civilizations you have a Trade Route to."
+      "ability": "+25% Tourism rate towards other civilizations you have a Trade Route to."
     },
     {
       "name": "Mary Katherine Goddard",
@@ -595,7 +638,7 @@
       "type": "Great Merchant",
       "era": "Atomic",
       "taken": false,
-      "ability": "Increases Trade Route capacity by 1. +25% Tourism Tourism to other civilizations you have a Trade Route to."
+      "ability": "Increases Trade Route capacity by 1. +25% Tourism to other civilizations you have a Trade Route to."
     },
     {
       "name": "Estée Lauder",
@@ -609,14 +652,14 @@
       "type": "Great Merchant",
       "era": "Information",
       "taken": false,
-      "ability": "Campus districts provide +10 Tourism Tourism. Activates in your Campus."
+      "ability": "Campus districts provide +10 Tourism. Activates in your Campus."
     },
     {
       "name": "Masaru Ibuka",
       "type": "Great Merchant",
       "era": "Information",
       "taken": false,
-      "ability": "Industrial Zone districts provide +10 Tourism Tourism. Activates in your Industrial Zone."
+      "ability": "Industrial Zone districts provide +10 Tourism. Activates in your Industrial Zone."
     },
     {
       "name": "Zhang Heng",
@@ -757,7 +800,7 @@
       "type": "Great Scientist",
       "era": "Atomic",
       "taken": false,
-      "ability": "Gain 350 Science (on Standard speed) for every Artifiact in this city. Artifiacts in all your cities generate 300% of their normal Tourism Tourism."
+      "ability": "Gain 350 Science (on Standard speed) for every Artifiact in this city. Artifiacts in all your cities generate 300% of their normal Tourism."
     },
     {
       "name": "Margaret Mead",

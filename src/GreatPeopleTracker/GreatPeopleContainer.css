@@ -20,7 +20,7 @@
 .header-row,
 .era-row {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(5, 1fr); /* 5 columns for 5 types */
   gap: 0.5rem;
 }
 .header-cell {
