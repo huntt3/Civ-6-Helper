@@ -37,3 +37,5 @@ We use extreme modularity by breaking down the application into small, focused c
 The Templates folder contains reusable components that can be used across different parts of the application. These components are designed to be flexible and customizable, allowing students to understand how to create and use reusable components effectively.
 
 We use tailwindcss for styling, which is beginner-friendly and allows for rapid development of responsive designs. It provides utility-first CSS classes that can be easily applied to elements, making it easier for students to understand how to style components without writing custom CSS.
+
+We don't use magic strings or numbers in the code. Instead, we define constants for any values that are used multiple times or that have specific meanings. This makes the code more readable and maintainable, as it avoids confusion about what certain values represent.
