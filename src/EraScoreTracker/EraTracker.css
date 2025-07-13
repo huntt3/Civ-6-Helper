@@ -3,7 +3,7 @@
   background: var(--primary-container-color);
   color: var(--primary-text-color-dark);
   border-radius: 0.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px var(--container-shadow-light);
   padding: 2rem;
   margin: 2rem auto;
   max-width: 600px;
@@ -53,7 +53,7 @@
   color: var(--primary-text-color-dark);
   border-radius: 0.5rem;
   padding: 1rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 4px var(--container-shadow-light);
   border: 1px solid var(--primary-border-color);
 }
 
@@ -67,10 +67,10 @@
 .era-score-card {
   display: flex;
   align-items: center;
-  background: #fff;
+  background: var(--primary-text-color-light);
   border-radius: 0.5rem;
   padding: 1rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 4px var(--container-shadow-light);
   gap: 1rem;
   margin-bottom: 0.5rem;
   position: relative;
@@ -89,7 +89,7 @@
 }
 
 .era-score-value {
-  background: #e0e0e0;
+  background: var(--secondary-bg-color);
   border-radius: 0.25rem;
   padding: 0.2rem 0.5rem;
   margin-right: 0.5rem;
@@ -98,14 +98,14 @@
 
 .era-score-era {
   font-size: 0.95rem;
-  color: #666;
+  color: var(--secondary-text-color-dark);
   margin-right: 0.5rem;
 }
 
 .era-score-desc-btn {
   margin-left: auto;
-  background: #1976d2;
-  color: #fff;
+  background: var(--wonder-btn-primary-color);
+  color: var(--primary-bg-color);
   border: none;
   border-radius: 0.25rem;
   padding: 0.4rem 0.8rem;
@@ -114,7 +114,7 @@
   transition: background 0.2s;
 }
 .era-score-desc-btn:hover {
-  background: #125ea2;
+  background: var(--wonder-btn-primary-hover-color);
 }
 
 /* Modal styles */
@@ -124,24 +124,24 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--container-shadow-light);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
 }
 .era-score-modal-content {
-  background: #fff;
+  background: var(--primary-bg-color);
   border-radius: 0.5rem;
   padding: 2rem;
   max-width: 400px;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 16px var(--container-shadow-light);
   text-align: center;
 }
 .era-score-modal-close {
   margin-top: 1rem;
-  background: #1976d2;
-  color: #fff;
+  background: var(--wonder-btn-primary-color);
+  color: var(--primary-bg-color);
   border: none;
   border-radius: 0.25rem;
   padding: 0.4rem 0.8rem;
@@ -149,5 +149,5 @@
   font-size: 0.95rem;
 }
 .era-score-modal-close:hover {
-  background: #125ea2;
+  background: var(--wonder-btn-primary-hover-color);
 }

@@ -6,7 +6,7 @@
   background: var(--primary-container-color);
   color: var(--primary-text-color-dark);
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px var(--container-shadow-light);
 }
 .great-people-container h2 {
   text-align: center;
@@ -40,7 +40,7 @@
   background: var(--primary-bg-color);
   color: var(--primary-text-color-dark);
   border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 1px 3px var(--container-shadow-light);
   padding: 0.25rem;
 }
 .great-person-card {
@@ -64,7 +64,7 @@
   padding: 0.5rem 0;
 }
 .error-message {
-  color: #b00;
+  color: var(--error-message-color);
   text-align: center;
   margin-bottom: 1rem;
 }
@@ -73,7 +73,7 @@
 .era-label {
   font-weight: bold;
   font-size: 1.1rem;
-  background: #e3e3e3;
+  background: var(--secondary-bg-color);
   padding: 0.5rem 1rem;
   border-radius: 4px;
   margin-bottom: 0.25rem;
@@ -82,8 +82,8 @@
   gap: 0.5rem;
 }
 .collapse-btn {
-  background: #1976d2;
-  color: #fff;
+  background: var(--wonder-btn-primary-color);
+  color: var(--primary-bg-color);
   border: none;
   border-radius: 3px;
   padding: 0.2rem 0.7rem;
@@ -92,18 +92,18 @@
   margin-right: 0.5rem;
 }
 .collapse-btn:focus {
-  outline: 2px solid #1976d2;
+  outline: 2px solid var(--wonder-btn-primary-hover-color);
 }
 .great-person-card {
   transition: background 0.2s, filter 0.2s, box-shadow 0.2s;
 }
 .great-person-card:hover {
-  background: #e3f0ff;
-  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.12);
+  background: var(--great-people-primary-bg-color);
+  box-shadow: 0 2px 8px var(--great-people-shadow-color);
   filter: brightness(0.97);
 }
 .great-person-card.selected {
-  background: #b3d1ff;
-  border-color: #1976d2;
+  background: var(--great-people-secondary-bg-color);
+  border-color: var(--wonder-btn-primary-color);
   filter: brightness(0.85);
 }

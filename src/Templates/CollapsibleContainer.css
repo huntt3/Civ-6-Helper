@@ -7,7 +7,7 @@
   background: var(--primary-container-color);
   color: var(--primary-text-color-dark);
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px var(--container-shadow-light);
 }
 .collapsible-header {
   display: flex;

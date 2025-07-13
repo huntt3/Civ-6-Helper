@@ -7,9 +7,9 @@
 }
 
 .district-card {
-  background: #fff;
+  background: var(--primary-bg-color);
   border-radius: 0.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px var(--container-shadow-light);
   width: 150px;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@
 }
 
 .district-card-header {
-  background: #f5f5f5;
+  background: var(--district-card-primary-bg-color);
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
   padding: 1rem;
@@ -47,7 +47,7 @@
 .district-card-footer input[type="text"] {
   padding: 0.5rem;
   border-radius: 0.25rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--primary-border-color);
   font-size: 1rem;
 }
 

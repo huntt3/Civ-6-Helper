@@ -28,14 +28,6 @@
   position: relative;
 }
 
-/*
-  TechCard color logic:
-  - .researched: --tech-card-researched-color
-  - .boosted.cannot-research: --tech-card-boosted-cannot-research-color
-  - .boosted.can-research: --tech-card-boosted-can-research-color
-  - .no-boost.cannot-research: --tech-card-no-boost-cannot-research-color
-  - .no-boost.can-research: --tech-card-no-boost-can-research-color
-*/
 .tech-card {
   border-radius: 1rem;
   min-width: 0;
@@ -47,7 +39,7 @@
   align-items: center;
   justify-content: center;
   font-size: 1.15rem;
-  box-shadow: 0 4px 16px #1e2a4a33;
+  box-shadow: 0 4px 16px var(--tech-civic-card-shadow);
   cursor: pointer;
   border: 2.5px solid var(--primary-border-color);
   color: var(--primary-text-color-dark);
@@ -90,7 +82,7 @@
   color: var(--primary-text-color-light);
 }
 .tech-card:hover:not(.tech-card-empty):not(.researched) {
-  box-shadow: 0 6px 24px #1e2a4a55;
+  box-shadow: 0 6px 24px var(--tech-civic-card-shadow);
   border-color: var(--tech-card-boosted-can-research-color);
 }
 .tech-card-empty {
@@ -105,7 +97,7 @@
   font-size: 1.1rem;
   color: #f7fafc;
   letter-spacing: 0.5px;
-  text-shadow: 0 2px 8px #1e2a4a44;
+  text-shadow: 0 2px 8px var(--tech-civic-card-shadow);
 }
 .tech-card-cost {
   font-size: 0.95rem;
@@ -126,7 +118,7 @@
   justify-content: center;
 }
 .tech-modal {
-  background: #fff;
+  background: var(--primary-bg-color);
   border-radius: 8px;
   padding: 2rem 1.5rem 1.5rem 1.5rem;
   min-width: 300px;
@@ -139,7 +131,7 @@
   top: 0.5rem;
   right: 0.5rem;
   background: #1976d2;
-  color: #fff;
+  color: var(--primary-text-color-light);
   border: none;
   border-radius: 3px;
   padding: 0.2rem 0.7rem;
