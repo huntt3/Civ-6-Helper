@@ -40,6 +40,9 @@
 
   --tech-civic-card-shadow: #1e2a4a33;
   --container-shadow-light: rgba(0, 0, 0, 0.05);
+  --tech-civic-container-shadow: rgba(30, 42, 74, 0.18);
+
+  --tech-civic-researched-border-color: #7a8bb7;
 
   --tech-arrow-color: #1434a4;
   --civic-arrow-color: #7f00ff;

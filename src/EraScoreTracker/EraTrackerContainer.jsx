@@ -3,12 +3,10 @@ import EraScore from "./EraScore";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 import "./EraTracker.css";
 
-// EraTrackerContainer component using CollapsibleContainer
 const EraTrackerContainer = () => {
   const [eraScoreItems, setEraScoreItems] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
 
-  // Load EraScore data from JSON file
   const fetchEraScore = () => {
     fetch("./jsonFiles/EraScore.json")
       .then((res) => res.json())
@@ -20,7 +18,6 @@ const EraTrackerContainer = () => {
     fetchEraScore();
   }, []);
 
-  // Collapse/expand handler
   const handleCollapse = () => setCollapsed((prev) => !prev);
 
   return (

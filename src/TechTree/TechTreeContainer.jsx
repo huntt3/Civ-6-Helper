@@ -8,7 +8,6 @@ const TechTreeContainer = () => {
   // State to track if the container is collapsed
   const [collapsed, setCollapsed] = useState(false);
 
-  // Function to handle collapsing/expanding the container
   const handleCollapse = () => {
     setCollapsed((prevCollapsed) => !prevCollapsed);
   };

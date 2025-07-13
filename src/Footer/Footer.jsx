@@ -4,7 +4,6 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-300 py-8 px-6 mt-12 border-t border-gray-700">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
-        {/* Bug Report & Discord Links */}
         <div className="space-y-2">
           <h3 className="text-white font-semibold text-base">Community</h3>
           <a
@@ -34,8 +33,6 @@ const Footer = () => {
             Join our Discord
           </a>
         </div>
-
-        {/* Credits */}
         <div className="space-y-2">
           <h3 className="text-white font-semibold text-base">Credits</h3>
           <p>
@@ -45,8 +42,6 @@ const Footer = () => {
             All game content and assets are property of Firaxis and 2K Games.
           </p>
         </div>
-
-        {/* Additional Reading */}
         <div className="space-y-2">
           <h3 className="text-white font-semibold text-base">
             Additional Reading

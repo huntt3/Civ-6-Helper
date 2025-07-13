@@ -1,26 +1,19 @@
 import React, { useState } from "react";
 import "./EraTracker.css";
 
-// EraScore card component
 const EraScore = ({ title, eraScore, minEra, maxEra, description }) => {
   const [showModal, setShowModal] = useState(false);
 
-  // Function to open/close modal
   const handleModal = () => setShowModal((open) => !open);
 
   return (
     <div className="era-score-card">
-      {/* Checkbox */}
       <input type="checkbox" id={title} className="era-score-checkbox" />
-      {/* Title */}
       <span className="era-score-title">{title}</span>
-      {/* Era Score */}
       <span className="era-score-value">+{eraScore}</span>
-      {/* Min/Max Era */}
       <span className="era-score-era">
         {minEra} - {maxEra}
       </span>
-      {/* Description button */}
       <button
         className="era-score-desc-btn"
         onClick={handleModal}
@@ -28,7 +21,6 @@ const EraScore = ({ title, eraScore, minEra, maxEra, description }) => {
       >
         Description
       </button>
-      {/* Modal for description */}
       {showModal && (
         <div
           className="era-score-modal"

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./GreatPeopleContainer.css";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 
-// Helper function to get unique people by era and type
-// Helper function to get unique people by era and type, with null safety
 const getPeopleByEraAndType = (people, era, type) => {
   return people.filter((person) => {
     // Defensive: skip if missing type or era
@@ -13,7 +11,6 @@ const getPeopleByEraAndType = (people, era, type) => {
   });
 };
 
-// Define the order of types and eras
 const types = [
   "Great General",
   "Great Admiral",
@@ -35,19 +32,14 @@ const eras = [
 const GreatPeopleContainer = () => {
   const [greatPeople, setGreatPeople] = useState([]);
   const [error, setError] = useState("");
-  // Track which eras are collapsed
   const [collapsedEras, setCollapsedEras] = useState({});
-  // Track which cards are checked (by name)
   const [checkedCards, setCheckedCards] = useState(() => {
-    // Try to load from localStorage
     const saved = localStorage.getItem("greatPeopleChecked");
     return saved ? JSON.parse(saved) : {};
   });
-  // Collapsed state for the whole container
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
-    // Fetch the GreatPeople.json file
     fetch("./jsonFiles/GreatPeople.json")
       .then((response) => {
         if (!response.ok) {
@@ -65,17 +57,14 @@ const GreatPeopleContainer = () => {
       });
   }, []);
 
-  // Save checkedCards to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("greatPeopleChecked", JSON.stringify(checkedCards));
   }, [checkedCards]);
 
-  // Toggle collapse for an era
   const handleCollapse = (era) => {
     setCollapsedEras((prev) => ({ ...prev, [era]: !prev[era] }));
   };
 
-  // Toggle card checked state by clicking the card
   const handleCardClick = (name) => {
     setCheckedCards((prev) => {
       const updated = { ...prev, [name]: !prev[name] };
@@ -105,7 +94,6 @@ const GreatPeopleContainer = () => {
         role="table"
         aria-label="Great People Table"
       >
-        {/* Table header */}
         <div className="header-row" role="row">
           {types.map((type) => (
             <div key={type} className="header-cell" role="columnheader">
@@ -113,10 +101,8 @@ const GreatPeopleContainer = () => {
             </div>
           ))}
         </div>
-        {/* Table body */}
         {eras.map((era) => (
           <React.Fragment key={era}>
-            {/* Row label and collapse button */}
             <div className="era-label" aria-label={`Row for ${era} era`}>
               <button
                 className="collapse-btn"
@@ -128,7 +114,6 @@ const GreatPeopleContainer = () => {
               </button>
               <span>{era}</span>
             </div>
-            {/* Collapsible row */}
             {!collapsedEras[era] && (
               <div className="era-row" role="row" id={`era-row-${era}`}>
                 {types.map((type) => {

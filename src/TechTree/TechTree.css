@@ -1,4 +1,3 @@
-/* Styles for TechCarousel and TechCard */
 .tech-carousel {
   width: 100%;
   overflow-x: auto;
@@ -6,7 +5,7 @@
   margin-bottom: 2rem;
   background: var(--primary-container-color);
   border-radius: 1.5rem;
-  box-shadow: 0 4px 24px rgba(30, 42, 74, 0.18);
+  box-shadow: 0 4px 24px var(--tech-civic-container-shadow);
 }
 
 .tech-carousel-title {
@@ -49,34 +48,29 @@
   background: var(--tech-card-no-boost-cannot-research-color);
 }
 
-/* Researched */
 .tech-card.researched {
   background: var(--tech-card-researched-color) !important;
   color: var(--primary-text-color-light);
   filter: grayscale(0.7) brightness(0.85);
-  border-color: #7a8bb7;
+  border-color: var(--tech-civic-researched-border-color);
   cursor: not-allowed;
 }
 
-/* Boosted, cannot research (not all prereqs researched) */
 .tech-card.boosted.cannot-research {
   background: var(--tech-card-boosted-cannot-research-color) !important;
   color: var(--primary-text-color-light);
 }
 
-/* Boosted, can research (all prereqs researched) */
 .tech-card.boosted.can-research {
   background: var(--tech-card-boosted-can-research-color) !important;
   color: var(--primary-text-color-light);
 }
 
-/* Not boosted, cannot research (not all prereqs researched) */
 .tech-card.no-boost.cannot-research {
   background: var(--tech-card-no-boost-cannot-research-color) !important;
   color: var(--primary-text-color-dark);
 }
 
-/* Not boosted, can research (all prereqs researched) */
 .tech-card.no-boost.can-research {
   background: var(--tech-card-no-boost-can-research-color) !important;
   color: var(--primary-text-color-light);
@@ -95,13 +89,9 @@
   font-weight: 600;
   margin-bottom: 0.3rem;
   font-size: 1.1rem;
-  color: #f7fafc;
+  color: var(--primary-text-color-light);
   letter-spacing: 0.5px;
   text-shadow: 0 2px 8px var(--tech-civic-card-shadow);
-}
-.tech-card-cost {
-  font-size: 0.95rem;
-  color: #b3cfff;
 }
 
 /* Modal styles for Tech details */
@@ -111,7 +101,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--wonder-modal-bg-color);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -123,14 +113,14 @@
   padding: 2rem 1.5rem 1.5rem 1.5rem;
   min-width: 300px;
   max-width: 90vw;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 4px 24px var(--container-shadow-light);
   position: relative;
 }
 .tech-modal-close {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  background: #1976d2;
+  background: var(--wonder-btn-primary-color);
   color: var(--primary-text-color-light);
   border: none;
   border-radius: 3px;
@@ -151,7 +141,6 @@
   font-size: 1rem;
 }
 
-/* SVG arrows for tech prerequisites */
 .tech-arrows-svg {
   position: absolute;
   top: 0;
