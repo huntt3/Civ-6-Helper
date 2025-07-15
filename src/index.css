@@ -72,12 +72,24 @@
   box-shadow: 0 0 0 4px var(--tech-card-hovered-color) !important;
   z-index: 2;
 }
+.tech-card.civic-card-hovered {
+  box-shadow: 0 0 0 4px var(--civic-card-hovered-color) !important;
+  z-index: 2;
+}
 .tech-card.tech-card-boosts-hovered {
   box-shadow: 0 0 0 4px var(--tech-card-boosts-hovered-color) !important;
   z-index: 2;
 }
+.tech-card.civic-card-boosts-hovered {
+  box-shadow: 0 0 0 4px var(--civic-card-boosts-hovered-color) !important;
+  z-index: 2;
+}
 .tech-card.tech-card-boosted-by-hovered {
   box-shadow: 0 0 0 4px var(--tech-card-boosted-by-hovered-color) !important;
+  z-index: 2;
+}
+.tech-card.civic-card-boosted-by-hovered {
+  box-shadow: 0 0 0 4px var(--civic-card-boosted-by-hovered-color) !important;
   z-index: 2;
 }
 

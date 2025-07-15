@@ -199,8 +199,8 @@ const TechCarousel = () => {
           aria-label="Reset all researched and boosted techs"
           onClick={handleReset}
           style={{
-            background: "#1976d2",
-            color: "#fff",
+            background: "var(--wonder-btn-primary-color)",
+            color: "var(--primary-text-color-light)",
             border: "none",
             borderRadius: "3px",
             padding: "0.3rem 0.9rem",
@@ -232,11 +232,23 @@ const TechCarousel = () => {
           }
           let extraClass = "";
           if (hoveredTech && tech.name === hoveredTech.name) {
-            extraClass = "tech-card-hovered";
+            if (tech.techCivic === "Tech") {
+              extraClass = "tech-card-hovered";
+            } else {
+              extraClass = "civic-card-hovered";
+            }
           } else if (hoveredTech && boostsSet.has(tech.name)) {
-            extraClass = "tech-card-boosts-hovered";
+            if (tech.techCivic === "Tech") {
+              extraClass = "tech-card-boosts-hovered";
+            } else {
+              extraClass = "civic-card-boosts-hovered";
+            }
           } else if (hoveredTech && boostedBySet.has(tech.name)) {
-            extraClass = "tech-card-boosted-by-hovered";
+            if (tech.techCivic === "Tech") {
+              extraClass = "tech-card-boosted-by-hovered";
+            } else {
+              extraClass = "civic-card-boosted-by-hovered";
+            }
           }
           return (
             <TechCard
