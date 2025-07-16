@@ -21,10 +21,8 @@ const SettingsContainer = () => {
       onCollapse={handleCollapse}
       ariaLabel="Settings"
     >
-      <div className="flex justify-center items-center p-4">
+      <div className="flex justify-center items-center">
         <EraDropdown />
-      </div>
-      <div className="flex justify-center items-center p-4">
         <VersionDropdown />
       </div>
     </CollapsibleContainer>

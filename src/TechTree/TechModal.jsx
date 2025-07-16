@@ -20,12 +20,25 @@ const TechModal = ({ tech, onClose }) => {
         </button>
         <div className="tech-modal-title">{tech.name}</div>
         <div className="tech-modal-section">
-          <strong>Cost:</strong> {tech.baseCost}{" "}
-          <img
-            src="public/yieldImg/science.webp"
-            alt="science"
-            style={{ height: "1em", verticalAlign: "middle" }}
-          />
+          <strong>Cost:</strong>{" "}
+          <span
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.25em",
+            }}
+          >
+            {tech.baseCost}
+            <img
+              src={
+                tech.techCivic === "Civic"
+                  ? "public/yieldImg/culture.webp"
+                  : "public/yieldImg/science.webp"
+              }
+              alt={tech.techCivic === "Civic" ? "culture" : "science"}
+              style={{ height: "1em" }}
+            />
+          </span>
         </div>
         <div className="tech-modal-section">
           <strong>Boosted:</strong> {tech.boosted ? "Yes" : "No"}

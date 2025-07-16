@@ -1278,7 +1278,7 @@
       "boosted": false,
       "column": 12,
       "row": 12,
-      "prerequisites": ["Mass Media", "Mobalization"],
+      "prerequisites": ["Mass Media", "Mobilization"],
       "boostPrerequisites": []
     },
     {
