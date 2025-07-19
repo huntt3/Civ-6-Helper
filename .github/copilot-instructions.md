@@ -20,7 +20,7 @@ To manage cookies, we use the `js-cookie` library, which is beginner-friendly an
 To keep user inputs even after a page refresh, we use `localStorage` for storing data in the browser. We use this for all form inputs and checkboxes.
 We avoid using sessionStorage for simplicity, as localStorage is more commonly used and easier to understand
 
-We use RootVariables.css to store global CSS variables for colors, fonts, and other styles. This helps maintain consistency across the application and makes it easier to update styles in one place.
+We use index.css to store global CSS variables for colors, fonts, and other styles. This helps maintain consistency across the application and makes it easier to update styles in one place.
 
 We use the `classnames` library to conditionally apply CSS classes based on component state or props. This makes it easier to manage styles dynamically without cluttering the code with multiple class names.
 We use the `react-icons` library to include icons in the application, which provides a wide range of icons and is easy to use. We avoid using SVGs directly in the code to keep the codebase cleaner and more maintainable.
