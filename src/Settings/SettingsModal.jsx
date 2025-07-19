@@ -1,5 +1,4 @@
 import React from "react";
-import "./Settings.css";
 import EraDropdown from "./EraDropdown";
 import VersionDropdown from "./VersionDropdown";
 import CivModal from "../Templates/CivModal";

@@ -1,6 +1,5 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import "./Settings.css";
 
 export default function EraDropdown() {
   return (
