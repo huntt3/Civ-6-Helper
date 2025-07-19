@@ -51,7 +51,7 @@ const CivModal = ({
                     {title}
                   </DialogTitle>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500">{message}</p>
+                    <div className="text-sm text-gray-500">{message}</div>
                   </div>
                 </div>
               </div>

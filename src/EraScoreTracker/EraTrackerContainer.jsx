@@ -2,17 +2,11 @@ import React, { useEffect, useState } from "react";
 import EraScore from "./EraScore";
 import ProgressBar from "./ProgressBar";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
-import SettingsModal from "../Settings/SettingsModal";
 import "./EraTracker.css";
 
-const EraTrackerContainer = () => {
+const EraTrackerContainer = ({ settings }) => {
   const [eraScoreItems, setEraScoreItems] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
-  const [settings, setSettings] = useState({
-    heroesLegends: true,
-    monopoliesCorporations: true,
-  });
-  const [showSettings, setShowSettings] = useState(false);
 
   const fetchEraScore = () => {
     fetch("./jsonFiles/EraScore.json")
@@ -52,18 +46,6 @@ const EraTrackerContainer = () => {
       onRefresh={fetchEraScore}
       ariaLabel="Era Tracker"
     >
-      <button
-        className="mb-4 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
-        onClick={() => setShowSettings(true)}
-      >
-        Settings
-      </button>
-      <SettingsModal
-        open={showSettings}
-        setOpen={setShowSettings}
-        settings={settings}
-        setSettings={setSettings}
-      />
       <ProgressBar />
       <div className="era-score-list">
         {filteredItems.map((item) => (

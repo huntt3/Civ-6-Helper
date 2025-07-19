@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SettingsModal from "./SettingsModal";
 import settingsIcon from "/icons/settings.svg";
 
-const SettingsButton = () => {
+const SettingsButton = ({ settings, setSettings }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -16,7 +16,14 @@ const SettingsButton = () => {
       >
         <img src={settingsIcon} alt="Settings" className="h-6 w-6" />
       </button>
-      {isModalOpen && <SettingsModal open={true} setOpen={setIsModalOpen} />}
+      {isModalOpen && (
+        <SettingsModal
+          open={true}
+          setOpen={setIsModalOpen}
+          settings={settings}
+          setSettings={setSettings}
+        />
+      )}
     </>
   );
 };
