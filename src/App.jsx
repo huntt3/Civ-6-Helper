@@ -1,5 +1,5 @@
 import "./App.css";
-import SettingsContainer from "./Settings/SettingsContainer";
+import SettingsButton from "./Settings/SettingsButton";
 import EraTrackerContainer from "./EraScoreTracker/EraTrackerContainer";
 import WondersContainer from "./WonderTracker/WondersContainer";
 import TechTreeContainer from "./TechTree/TechTreeContainer";
@@ -15,7 +15,7 @@ function App() {
       <header className="App-header">
         <h1>Civ 6 Helper</h1>
       </header>
-      <SettingsContainer />
+      <SettingsButton />
       <TechTreeContainer />
       <DistrictDiscountingContainer />
       <WondersContainer />
