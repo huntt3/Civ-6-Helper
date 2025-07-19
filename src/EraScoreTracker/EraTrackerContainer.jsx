@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import EraScore from "./EraScore";
+import ProgressBar from "./ProgressBar";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 import "./EraTracker.css";
 
@@ -28,6 +29,7 @@ const EraTrackerContainer = () => {
       onRefresh={fetchEraScore}
       ariaLabel="Era Tracker"
     >
+      <ProgressBar />
       <div className="era-score-list">
         {eraScoreItems.map((item) => (
           <EraScore key={item.title} {...item} />
