@@ -1,10 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+const ERA_SCORE_KEY = "civ6-helper-eraScore";
+const NEEDED_ERA_SCORE_KEY = "civ6-helper-neededEraScore";
 
 // Semicircular progress bar component
 const ProgressBar = () => {
-  // State for the numerator and denominator
-  const [eraScore, setEraScore] = useState(0);
-  const [neededEraScore, setNeededEraScore] = useState(100);
+  // State for the numerator and denominator, initialized from localStorage
+  const [eraScore, setEraScore] = useState(() => {
+    const saved = localStorage.getItem(ERA_SCORE_KEY);
+    return saved !== null ? parseInt(saved, 10) : 0;
+  });
+  const [neededEraScore, setNeededEraScore] = useState(() => {
+    const saved = localStorage.getItem(NEEDED_ERA_SCORE_KEY);
+    return saved !== null ? parseInt(saved, 10) : 18;
+  });
+
+  // Save to localStorage whenever values change
+  useEffect(() => {
+    localStorage.setItem(ERA_SCORE_KEY, eraScore);
+  }, [eraScore]);
+  useEffect(() => {
+    localStorage.setItem(NEEDED_ERA_SCORE_KEY, neededEraScore);
+  }, [neededEraScore]);
 
   // Calculate progress percentage (avoid division by zero)
   const progress =
