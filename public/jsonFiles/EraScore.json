@@ -452,9 +452,632 @@
       "prerequisites": []
     },
     {
-      "title": "",
+      "title": "First Shipwreck Excavated ",
       "eraScore": 2,
-      "description": "",
+      "description": "Your archaeologists have excavated their first shipwreck.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "City on New Continent",
+      "eraScore": 2,
+      "description": "A city is placed on a continent you have not yet settled.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Gigantic City",
+      "eraScore": 2,
+      "description": "A city has reached 25 Population for the first time in the world.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Enormous City",
+      "eraScore": 2,
+      "description": "A city has reached 20 Population for the first time in the world.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Large City",
+      "eraScore": 2,
+      "description": "A city has reached 15 Population for the first time in the world.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Bustling City",
+      "eraScore": 2,
+      "description": "A city has reached 10 Population for the first time in the world.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Free City Joins",
+      "eraScore": 2,
+      "description": "A Free City has decided to pledge its loyalty to us, joining our empire.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "City Returns to Original Owner",
+      "eraScore": 2,
+      "description": "A city has returned to its original owner.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Civic of New Era",
+      "eraScore": 2,
+      "description": "You have completed the world's first civic from a new era of discovery.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Neighborhood Completed",
+      "eraScore": 2,
+      "description": "You have completed your civilization's first Neighborhood district.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Armada",
+      "eraScore": 2,
+      "description": "The world's very first Armada is formed, under your command.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Army",
+      "eraScore": 2,
+      "description": "The world's very first Army is formed, under your command.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Corps",
+      "eraScore": 2,
+      "description": "The world's very first Corps is formed, under your command.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Fleet",
+      "eraScore": 2,
+      "description": "The world's very first Fleet is formed, under your command.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Tier 1 Government",
+      "eraScore": 2,
+      "description": "Your civilization adopts its first Tier 1 Government.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Tier 2 Government",
+      "eraScore": 2,
+      "description": "Your civilization adopts its first Tier 2 Government.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Tier 3 Government",
+      "eraScore": 2,
+      "description": "Your civilization adopts its first Tier 3 Government.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Seaside Resort ",
+      "eraScore": 2,
+      "description": "You have completed your first Seaside Resort tile improvement.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Inquisition ",
+      "eraScore": 2,
+      "description": "Your Religion launches the world's first inquisition.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Pantheon",
+      "eraScore": 2,
+      "description": "Your people are the first in the world to adopt Belief in a Pantheon.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "City-State's First Suzerain",
+      "eraScore": 2,
+      "description": "You have become the first Suzerain of this city-state.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Levied Army Stands Down",
+      "eraScore": 2,
+      "description": "Your use of Envoys has convinced this city-state's levied army to stand down.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Enemy City-State Pacified",
+      "eraScore": 2,
+      "description": "Your use of Envoys has toppled a hostile city-state's Suzerain, convincing it to end hostilities with you.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "City-State Army Levied Near Enemy",
+      "eraScore": 2,
+      "description": "You have levied the military forces of a city-state within striking distance of an enemy civilization.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Manhattan Project Completed",
+      "eraScore": 2,
+      "description": "Your scientists completed the Manhattan Project.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Martian Colony Established",
+      "eraScore": 2,
+      "description": "You have established a colony on Mars.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Landed on the Moon",
+      "eraScore": 2,
+      "description": "You send a successful mission to land on the moon.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Operation Ivy Completed",
+      "eraScore": 2,
+      "description": "Your scientists completed Operation Ivy.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Satellite Launched Into Orbit",
+      "eraScore": 2,
+      "description": "You launched your civilization's first satellite into orbit.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Religion Founded",
+      "eraScore": 2,
+      "description": "A Great Prophet founds a Religion, bringing light to your people.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Master Spy Earned",
+      "eraScore": 2,
+      "description": "For the first time, one of your Spies has reached its maximum promotion level.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Technology of New Era",
+      "eraScore": 2,
+      "description": "You have completed the world's first technology from a new era of discovery.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "On the Waves",
+      "eraScore": 2,
+      "description": "You own your first seafaring unit. A world of possibility awaits on the horizon.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Strategic Resource Potential Unleashed",
+      "eraScore": 2,
+      "description": "You are the world's first civilization to own a unit using this strategic resource.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Admiral Defeats Enemy",
+      "eraScore": 2,
+      "description": "One of your Great Admirals has overseen their first victorious offensive against an enemy unit.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "General Defeats Enemy",
+      "eraScore": 2,
+      "description": "One of your Great Generals has overseen their first victorious offensive against an enemy unit.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Cause for War",
+      "eraScore": 2,
+      "description": "You have utilized a Casus Belli to make war on another civilization.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Resource consumed for Power",
+      "eraScore": 2,
+      "description": "Your civilization consumes a resource to generate Power for its cities.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Canal Completed",
+      "eraScore": 2,
+      "description": "You have completed your civilization's first Canal district.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Tier 4 Government",
+      "eraScore": 2,
+      "description": "Your civilization adopts its first Tier 4 Government.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Mountain Tunnel",
+      "eraScore": 2,
+      "description": "Your civilization builds its first Mountain Tunnel.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Green Improvement",
+      "eraScore": 2,
+      "description": "Your civilization builds its first tile improvement dedicated to providing renewable Power.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Diplomatic Victory Resolution Won",
+      "eraScore": 2,
+      "description": "You have won the Diplomatic Victory resolution and earned Victory Points.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Exoplanet Expedition Launched",
+      "eraScore": 2,
+      "description": "You have launched your civilization's expedition to a distant planet.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Railroad Connection",
+      "eraScore": 2,
+      "description": "Your civilization builds its first Railroad to connect two of your cities.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Rock Band Concert",
+      "eraScore": 2,
+      "description": "Your civilization performs its first Rock Band concert.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Hero Claimed",
+      "eraScore": 2,
+      "description": "A hero has joined our civilization for the first time!",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Hero Departed",
+      "eraScore": 2,
+      "description": "Our first hero has completed their service to our civilization.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Hero Recalled",
+      "eraScore": 2,
+      "description": "We have recalled a hero to our civilization for the first time!",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Artifact Extracted",
+      "eraScore": 1,
+      "description": "An artifact has been uncovered, giving us insight into the past.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Aggressive City Placement",
+      "eraScore": 1,
+      "description": "A city is placed within 5 tiles of another civilization's city.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Desert City ",
+      "eraScore": 1,
+      "description": "A city is established on difficult Desert terrain, expanding your reach into the wilds.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Snow City",
+      "eraScore": 1,
+      "description": "A city is established on difficult Snow terrain, expanding your reach into the wilds.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Tundra City",
+      "eraScore": 1,
+      "description": "A city is established on difficult Tundra terrain, expanding your reach into the wilds.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Gigantic City",
+      "eraScore": 1,
+      "description": "A city has reached 25 Population for the first time in your civilization.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Enormous City",
+      "eraScore": 1,
+      "description": "A city has reached 20 Population for the first time in your civilization.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Large City",
+      "eraScore": 1,
+      "description": "A city has reached 15 Population for the first time in your civilization.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Bustling City",
+      "eraScore": 1,
+      "description": "A city has reached 10 Population for the first time in your civilization.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Civic of New Era ",
+      "eraScore": 1,
+      "description": "You have completed your civilization's first civic from a new era of discovery.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Discovery of a Natural Wonder",
+      "eraScore": 1,
+      "description": "Your civilization discovers this natural wonder for the first time.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Armada",
+      "eraScore": 1,
+      "description": "Your civilization's first Armada is formed.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Army",
+      "eraScore": 1,
+      "description": "Your civilization's first Army is formed.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Corps",
+      "eraScore": 1,
+      "description": "Your civilization's first Corps is formed.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Fleet",
+      "eraScore": 1,
+      "description": "Your civilization's first Fleet is formed.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "All Governors Appointed",
+      "eraScore": 1,
+      "description": "You have appointed all available Governors, securing the prosperity of many cities.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Governor Fully Promoted",
+      "eraScore": 1,
+      "description": "You have fully promoted a Governor for the first time, unlocking powerful abilities to help a city.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Great Person Recruited ",
+      "eraScore": 1,
+      "description": "A Great Person has traveled to our lands to share unique talents.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Old Great Person Recruited",
+      "eraScore": 1,
+      "description": "A Great Person has traveled to our lands. Though better suited to a past era, they will still contribute great things to our civilization.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Inquisition Begins",
+      "eraScore": 1,
+      "description": "Your Religion launches an inquisition.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Pantheon Founded",
+      "eraScore": 1,
+      "description": "Your people adopt Belief in a Pantheon.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "City-State Army Levied",
+      "eraScore": 1,
+      "description": "You have levied the military forces of a city-state.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Met New Civilization",
+      "eraScore": 1,
+      "description": "You have made contact with a new civilization.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Master Spy Earned",
+      "eraScore": 1,
+      "description": "One of your Spies has reached its maximum promotion level.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Technology of New Era ",
+      "eraScore": 1,
+      "description": "You have completed your civilization's first technology from a new era of discovery. ",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Trading Post Established in New Civilization",
+      "eraScore": 1,
+      "description": "You have established your first Trading Post in this civilization, opening up access to new markets.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Strategic Resource Potential Unleashed",
+      "eraScore": 1,
+      "description": "You own your first unit that uses this strategic resource.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Unit Promoted with Distinction",
+      "eraScore": 1,
+      "description": "One of your units reaches its fourth level of promotion.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Unit Promoted with Distinction",
+      "eraScore": 1,
+      "description": "For the first time, one of your units reaches its fourth level of promotion.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Enemy Formation Defeated",
+      "eraScore": 1,
+      "description": "One of your units defeated an enemy unit with a superior military formation.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "City near Floodable River",
+      "eraScore": 1,
+      "description": "A city is placed within 2 tiles of a river that could flood.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "City near Volcano",
+      "eraScore": 1,
+      "description": "A city is placed within 2 tiles of a volcano that could erupt.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Improvement after Natural Disaster",
+      "eraScore": 1,
+      "description": "Your civilization builds its first improvement on a tile that was enriched by a natural disaster.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Coastal Flood Mitigated",
+      "eraScore": 1,
+      "description": "Your Flood Barrier has prevented catastrophic damage from a coastal flood.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "River Flood Mitigated",
+      "eraScore": 1,
+      "description": "Your constructed infrastructure has prevented damage from a river flood.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Hero Claimed",
+      "eraScore": 1,
+      "description": "A hero has joined our civilization!",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Hero Departed",
+      "eraScore": 1,
+      "description": "A hero has completed their service to our civilization.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Hero Recalled",
+      "eraScore": 1,
+      "description": "A hero has returned to serve our civilization!",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Industry Created",
+      "eraScore": 1,
+      "description": "Your first Industry has been created.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Corporation Created",
+      "eraScore": 1,
+      "description": "A Corporation has been founded.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Luxury Resource Monopoly",
+      "eraScore": 1,
+      "description": "You now control your first monopoly.",
       "repeatable": false,
       "prerequisites": []
     }
