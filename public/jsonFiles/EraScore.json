@@ -1,172 +1,462 @@
 {
   "EraScore": [
     {
+      "title": "Tribal Village Contacted",
+      "eraScore": 1,
+      "description": "A Tribal Village was contacted, giving strength to our budding cities.",
+      "repeatable": true,
+      "maxEra": "Ancient",
+      "prerequisites": []
+    },
+    {
       "title": "Threatening Camp Destroyed",
       "eraScore": 3,
       "description": "A hostile barbarian camp within 6 tiles of one of your cities was destroyed by a unit.",
       "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Medieval"
+      "maxEra": "Medieval",
+      "prerequisites": []
     },
     {
       "title": "Barbarian Camp Destroyed",
       "eraScore": 2,
       "description": "A hostile barbarian camp was leveled to the ground by a unit, spreading peace through the area.",
       "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Medieval"
+      "maxEra": "Medieval",
+      "prerequisites": []
     },
     {
-      "title": "First Civic Completed",
-      "eraScore": 1,
-      "description": "You completed your first civic.",
+      "title": "Final Foreign City Taken",
+      "eraScore": 5,
+      "description": "You have taken control of a civilization's last remaining city.",
       "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Information"
+      "prerequisites": []
     },
     {
-      "title": "First Technology Completed",
-      "eraScore": 1,
-      "description": "You completed your first technology.",
-      "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Information"
+      "title": "World's First to Meet All Civilizations",
+      "eraScore": 5,
+      "description": "You are the first to meet all living civilizations in the world.",
+      "repeatable": false,
+      "prerequisites": []
     },
     {
-      "title": "First Government Established",
+      "title": "First Trading Posts in All Civilizations",
+      "eraScore": 5,
+      "description": "You are the first in the world to establish a Trading Post in all civilizations.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Flight",
+      "eraScore": 5,
+      "description": "You own the world's first flying unit! People rejoice at the new possibilities this entails.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Circumnavigation",
+      "eraScore": 5,
+      "description": "Your civilization is the first to reveal a tile in every vertical line of the map. This forms a path around the world, even if the path does not end where it began.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Religion to Adopt All Beliefs",
+      "eraScore": 4,
+      "description": "Your Religion is the first in the world to add its final Belief and become complete. ",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Unique Building Constructed",
+      "eraScore": 4,
+      "description": "You have completed this unique building for the first time.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World Wonder Completed",
+      "eraScore": 4,
+      "description": "A world wonder is completed, showing our grandeur over other civilizations.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Rival Holy City Converted",
+      "eraScore": 4,
+      "description": "The Holy City of another Religion has converted to our Religion.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Foreign Capital Taken",
+      "eraScore": 4,
+      "description": "You have taken control of a foreign power's original capital city.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Unique District Completed",
+      "eraScore": 4,
+      "description": "You have completed this unique district for the first time.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Emergency Successfully Defended",
+      "eraScore": 4,
+      "description": "As the target, you have succeeded in fighting off an Emergency against you.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Discovery of a New Continent",
+      "eraScore": 4,
+      "description": "Our civilization's explorers are the first in the world to find this continent.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First National Park",
+      "eraScore": 4,
+      "description": "You have founded the world's first National Park.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Martian Colony Established ",
+      "eraScore": 4,
+      "description": "You are the first in the world to establish a colony on Mars. ",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Landing on the Moon",
+      "eraScore": 4,
+      "description": "You are the first in the world to land on the moon. ",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Satellite in Orbit",
+      "eraScore": 4,
+      "description": "You launched the world's first satellite into orbit.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Unique Unit Marches ",
+      "eraScore": 4,
+      "description": "You have trained this unique unit for the first time, giving you an edge on the battlefield.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Exoplanet Expedition Launched",
+      "eraScore": 4,
+      "description": "You are the first in the world to launch an expedition to a distant planet.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Shipwreck Excavated",
       "eraScore": 3,
-      "description": "You established your first government.",
-      "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Information"
+      "description": "Your archaeologists have completed the world's first excavation of a shipwreck.",
+      "repeatable": false,
+      "prerequisites": []
     },
     {
-      "title": "First Great Person Earned",
-      "eraScore": 2,
-      "description": "You earned your first Great Person.",
-      "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Information"
-    },
-    {
-      "title": "First City Founded on a New Continent",
+      "title": "Religion Adopts All Beliefs ",
       "eraScore": 3,
-      "description": "You founded a city on a continent other than your home continent.",
-      "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Information"
+      "description": "Your Religion has added its final Belief and is now complete.",
+      "repeatable": false,
+      "prerequisites": []
     },
     {
-      "title": "First City-State Met",
-      "eraScore": 1,
-      "description": "You met your first city-state.",
-      "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Information"
+      "title": "First Aerodrome Fully Developed",
+      "eraScore": 3,
+      "description": "You have completed every building in an Aerodrome district for the first time.",
+      "repeatable": false,
+      "prerequisites": []
     },
     {
-      "title": "First Major Civilization Met",
-      "eraScore": 1,
-      "description": "You met another major civilization for the first time.",
-      "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Information"
+      "title": "First Encampment Fully Developed",
+      "eraScore": 3,
+      "description": "You have completed every building in an Encampment district for the first time.",
+      "repeatable": false,
+      "prerequisites": []
     },
     {
-      "title": "Natural Wonder Discovered",
+      "title": "First Entertainment Complex Fully Developed",
+      "eraScore": 3,
+      "description": "You have completed every building in an Entertainment Complex district for the first time.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Water Park Fully Developed",
+      "eraScore": 3,
+      "description": "You have completed every building in a Water Park district for the first time.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Old World Wonder Completed",
+      "eraScore": 3,
+      "description": "A World Wonder is completed. Even though it belongs to a bygone era, it will still show our grandeur over other civilizations.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's Largest Civilization",
+      "eraScore": 3,
+      "description": "Your civilization has become the largest in the world, with at least 3 more cities than its next biggest rival.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "City of Awe",
+      "eraScore": 3,
+      "description": "A city is placed within 2 tiles of a natural wonder.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Enemy City Adopts Our Religion",
+      "eraScore": 3,
+      "description": "An enemy city, despite being at war, has seen the light and adopted our Religion.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Splendid Campus Completed",
+      "eraScore": 3,
+      "description": "You have completed your civilization's first Campus with a starting adjacency bonus of 3 Science or higher.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Splendid Commercial Hub Completed",
+      "eraScore": 3,
+      "description": "You have completed your civilization's first Commercial Hub with a starting adjacency bonus of 4 Gold or higher.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Splendid Harbor Completed",
+      "eraScore": 3,
+      "description": "You have completed your civilization's first Harbor with a starting adjacency bonus of 4 Gold or higher.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Splendid Holy Site Completed",
+      "eraScore": 3,
+      "description": "You have completed your civilization's first Holy Site with a starting adjacency bonus of 3 Faith or higher.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Splendid Industrial Zone Completed",
+      "eraScore": 3,
+      "description": "You have completed your civilization's first Industrial Zone with a starting adjacency bonus of 4 Production or higher.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Splendid Theater Square Completed",
+      "eraScore": 3,
+      "description": "You have completed your civilization's first Theater Square with a starting adjacency bonus of 3 Culture or higher.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Neighborhood",
+      "eraScore": 3,
+      "description": "You have completed the world's first Neighborhood district.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Emergency Completed Successfully",
+      "eraScore": 3,
+      "description": "As a member, you have succeeded in an Emergency.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Discovery of a Natural Wonder",
+      "eraScore": 3,
+      "description": "Our civilization's explorers are the first in the world to behold this natural wonder.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Tier 1 Government in World",
+      "eraScore": 3,
+      "description": "Your civilization is the first to adopt a Tier 1 Government in the world.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Tier 2 Government in World",
+      "eraScore": 3,
+      "description": "Your civilization is the first to adopt a Tier 2 Government in the world.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Tier 3 Government in World ",
+      "eraScore": 3,
+      "description": "Your civilization is the first to adopt a Tier 3 Government in the world.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Great Person Lured by Faith",
+      "eraScore": 3,
+      "description": "A Great Person has traveled to our lands to share unique talents, thanks to our use of Faith to make up more than half their recruitment cost.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Great Person Lured by Gold",
+      "eraScore": 3,
+      "description": "A Great Person has traveled to our lands to share unique talents, thanks to our generous stipend of Gold.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Seaside Resort",
+      "eraScore": 3,
+      "description": "You have completed the world's first Seaside Resort tile improvement.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "National Park Founded ",
+      "eraScore": 3,
+      "description": "You have founded a National Park.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Met All Civilizations",
+      "eraScore": 3,
+      "description": "You have met all living civilizations in the world.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Religion",
+      "eraScore": 3,
+      "description": "Your people are the first to form a Religion, bringing light to the world at large!",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Trading Posts in All Civilizations",
+      "eraScore": 3,
+      "description": "You have established a Trading Post in all civilizations.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Taking Flight",
+      "eraScore": 3,
+      "description": "You own your first flying unit. People rejoice at the new possibilities this entails.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World's First Seafaring",
+      "eraScore": 3,
+      "description": "You own the world's first seafaring unit! A world of possibility awaits on the horizon.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "Enemy Veteran Defeated",
+      "eraScore": 3,
+      "description": "One of your units defeated an enemy unit with at least 2 more promotions than it.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "World Circumnavigated",
+      "eraScore": 3,
+      "description": "Your civilization has revealed a tile in every vertical line of the map. This forms a path around the world, even if the path does not end where it began.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Resource consumed for Power in World",
+      "eraScore": 3,
+      "description": "Your civilization is the first in the world to consume a resource to generate Power for its cities.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Tier 4 Government in World",
+      "eraScore": 3,
+      "description": "Your civilization is the first to adopt a Tier 4 Government in the world.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Mountain Tunnel in World",
+      "eraScore": 3,
+      "description": "Your civilization is the first to build a Mountain Tunnel in the world.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Green Improvement in World",
+      "eraScore": 3,
+      "description": "Your civilization is the first to build a tile improvement dedicated to providing renewable Power in the world.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Railroad Connection in World",
+      "eraScore": 3,
+      "description": "Your civilization is the first to build a Railroad to connect two of its cities in the world.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Rock Band Concert in World",
+      "eraScore": 3,
+      "description": "Your civilization is the first to perform a Rock Band concert in the world.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Industry in the World",
+      "eraScore": 3,
+      "description": "The first Industry in the world has been created.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Corporation in the World",
+      "eraScore": 3,
+      "description": "Money made conceptual flesh - the world sees the establishment of its first Corporation! Time to take out the competition.",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "First Luxury Resource Monopoly in the World",
+      "eraScore": 3,
+      "description": "You are the first civilization in the history of the world to control a monopoly over a luxury resource!",
+      "repeatable": false,
+      "prerequisites": []
+    },
+    {
+      "title": "",
       "eraScore": 2,
-      "description": "You discovered a natural wonder.",
-      "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Information"
-    },
-    {
-      "title": "First Religion Founded",
-      "eraScore": 4,
-      "description": "You founded a religion.",
-      "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Information"
-    },
-    {
-      "title": "First City Converted to Religion",
-      "eraScore": 2,
-      "description": "You converted a city to your religion for the first time.",
-      "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Information"
-    },
-    {
-      "title": "First Wonder Built",
-      "eraScore": 4,
-      "description": "You built your first world wonder.",
-      "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Information"
-    },
-    {
-      "title": "First District Built",
-      "eraScore": 1,
-      "description": "You built your first district.",
-      "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Information"
-    },
-    {
-      "title": "First Unique Unit Trained",
-      "eraScore": 2,
-      "description": "You trained your first unique unit.",
-      "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Information"
-    },
-    {
-      "title": "First Unique Building Constructed",
-      "eraScore": 2,
-      "description": "You constructed your first unique building.",
-      "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Information"
-    },
-    {
-      "title": "First Unique Improvement Built",
-      "eraScore": 2,
-      "description": "You built your first unique improvement.",
-      "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Information"
-    },
-    {
-      "title": "First City Population 10",
-      "eraScore": 1,
-      "description": "A city you own reached a population of 10 for the first time.",
-      "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Information"
-    },
-    {
-      "title": "First City Population 20",
-      "eraScore": 2,
-      "description": "A city you own reached a population of 20 for the first time.",
-      "repeatable": true,
-      "minEra": "Ancient",
-      "maxEra": "Information"
-    },
-    {
-      "title": "First Tier 3 Government Established",
-      "eraScore": 4,
-      "description": "You established a Tier 3 government for the first time.",
-      "repeatable": true,
-      "minEra": "Medieval",
-      "maxEra": "Information"
-    },
-    {
-      "title": "First Spaceport Built",
-      "eraScore": 4,
-      "description": "You built your first Spaceport district.",
-      "repeatable": true,
-      "minEra": "Modern",
-      "maxEra": "Information"
+      "description": "",
+      "repeatable": false,
+      "prerequisites": []
     }
   ]
 }
