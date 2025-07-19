@@ -43,14 +43,14 @@
       "eraScore": 5,
       "description": "You are the first in the world to establish a Trading Post in all civilizations.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Foreign Trade"]
     },
     {
       "title": "World's First Flight",
       "eraScore": 5,
       "description": "You own the world's first flying unit! People rejoice at the new possibilities this entails.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Flight"]
     },
     {
       "title": "World's First Circumnavigation",
@@ -62,9 +62,9 @@
     {
       "title": "World's First Religion to Adopt All Beliefs",
       "eraScore": 4,
-      "description": "Your Religion is the first in the world to add its final Belief and become complete. ",
+      "description": "Your Religion is the first in the world to add its final Belief and become complete.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Theology"]
     },
     {
       "title": "Unique Building Constructed",
@@ -85,7 +85,7 @@
       "eraScore": 4,
       "description": "The Holy City of another Religion has converted to our Religion.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Astrology"]
     },
     {
       "title": "Foreign Capital Taken",
@@ -120,31 +120,31 @@
       "eraScore": 4,
       "description": "You have founded the world's first National Park.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Conservation"]
     },
     {
-      "title": "World's First Martian Colony Established ",
+      "title": "World's First Martian Colony Established",
       "eraScore": 4,
-      "description": "You are the first in the world to establish a colony on Mars. ",
+      "description": "You are the first in the world to establish a colony on Mars.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Nanotechnology"]
     },
     {
       "title": "World's First Landing on the Moon",
       "eraScore": 4,
-      "description": "You are the first in the world to land on the moon. ",
+      "description": "You are the first in the world to land on the moon.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Satellites"]
     },
     {
       "title": "World's First Satellite in Orbit",
       "eraScore": 4,
       "description": "You launched the world's first satellite into orbit.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Rocketry"]
     },
     {
-      "title": "Unique Unit Marches ",
+      "title": "Unique Unit Marches",
       "eraScore": 4,
       "description": "You have trained this unique unit for the first time, giving you an edge on the battlefield.",
       "repeatable": false,
@@ -155,49 +155,49 @@
       "eraScore": 4,
       "description": "You are the first in the world to launch an expedition to a distant planet.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Smart Materials"]
     },
     {
       "title": "World's First Shipwreck Excavated",
       "eraScore": 3,
       "description": "Your archaeologists have completed the world's first excavation of a shipwreck.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Cultural Heritage"]
     },
     {
-      "title": "Religion Adopts All Beliefs ",
+      "title": "Religion Adopts All Beliefs",
       "eraScore": 3,
       "description": "Your Religion has added its final Belief and is now complete.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Theology"]
     },
     {
       "title": "First Aerodrome Fully Developed",
       "eraScore": 3,
       "description": "You have completed every building in an Aerodrome district for the first time.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Advanced Flight"]
     },
     {
       "title": "First Encampment Fully Developed",
       "eraScore": 3,
       "description": "You have completed every building in an Encampment district for the first time.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Military Science"]
     },
     {
       "title": "First Entertainment Complex Fully Developed",
       "eraScore": 3,
       "description": "You have completed every building in an Entertainment Complex district for the first time.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Professional Sports"]
     },
     {
       "title": "First Water Park Fully Developed",
       "eraScore": 3,
       "description": "You have completed every building in a Water Park district for the first time.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Professional Sports"]
     },
     {
       "title": "Old World Wonder Completed",
@@ -225,56 +225,56 @@
       "eraScore": 3,
       "description": "An enemy city, despite being at war, has seen the light and adopted our Religion.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Astrology"]
     },
     {
       "title": "Splendid Campus Completed",
       "eraScore": 3,
       "description": "You have completed your civilization's first Campus with a starting adjacency bonus of 3 Science or higher.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Writing"]
     },
     {
       "title": "Splendid Commercial Hub Completed",
       "eraScore": 3,
       "description": "You have completed your civilization's first Commercial Hub with a starting adjacency bonus of 4 Gold or higher.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Currency"]
     },
     {
       "title": "Splendid Harbor Completed",
       "eraScore": 3,
       "description": "You have completed your civilization's first Harbor with a starting adjacency bonus of 4 Gold or higher.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Celestial Navigation"]
     },
     {
       "title": "Splendid Holy Site Completed",
       "eraScore": 3,
       "description": "You have completed your civilization's first Holy Site with a starting adjacency bonus of 3 Faith or higher.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Astrology"]
     },
     {
       "title": "Splendid Industrial Zone Completed",
       "eraScore": 3,
       "description": "You have completed your civilization's first Industrial Zone with a starting adjacency bonus of 4 Production or higher.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Apprenticeship"]
     },
     {
       "title": "Splendid Theater Square Completed",
       "eraScore": 3,
       "description": "You have completed your civilization's first Theater Square with a starting adjacency bonus of 3 Culture or higher.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Drama and Poetry"]
     },
     {
       "title": "World's First Neighborhood",
       "eraScore": 3,
       "description": "You have completed the world's first Neighborhood district.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Urbanization"]
     },
     {
       "title": "Emergency Completed Successfully",
@@ -295,21 +295,21 @@
       "eraScore": 3,
       "description": "Your civilization is the first to adopt a Tier 1 Government in the world.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Political Philosophy"]
     },
     {
       "title": "First Tier 2 Government in World",
       "eraScore": 3,
       "description": "Your civilization is the first to adopt a Tier 2 Government in the world.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Divine Right", "Exploration"]
     },
     {
-      "title": "First Tier 3 Government in World ",
+      "title": "First Tier 3 Government in World",
       "eraScore": 3,
       "description": "Your civilization is the first to adopt a Tier 3 Government in the world.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Suffrage", "Totalitarianism", "Class Struggle"]
     },
     {
       "title": "Great Person Lured by Faith",
@@ -330,14 +330,14 @@
       "eraScore": 3,
       "description": "You have completed the world's first Seaside Resort tile improvement.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Radio"]
     },
     {
-      "title": "National Park Founded ",
+      "title": "National Park Founded",
       "eraScore": 3,
       "description": "You have founded a National Park.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Conservation"]
     },
     {
       "title": "Met All Civilizations",
@@ -351,28 +351,28 @@
       "eraScore": 3,
       "description": "Your people are the first to form a Religion, bringing light to the world at large!",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Astrology"]
     },
     {
       "title": "Trading Posts in All Civilizations",
       "eraScore": 3,
       "description": "You have established a Trading Post in all civilizations.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Currency", "Celestial Navigation"]
     },
     {
       "title": "Taking Flight",
       "eraScore": 3,
       "description": "You own your first flying unit. People rejoice at the new possibilities this entails.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Flight"]
     },
     {
       "title": "World's First Seafaring",
       "eraScore": 3,
       "description": "You own the world's first seafaring unit! A world of possibility awaits on the horizon.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Sailing"]
     },
     {
       "title": "Enemy Veteran Defeated",
@@ -393,70 +393,76 @@
       "eraScore": 3,
       "description": "Your civilization is the first in the world to consume a resource to generate Power for its cities.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Industrialization"]
     },
     {
       "title": "First Tier 4 Government in World",
       "eraScore": 3,
       "description": "Your civilization is the first to adopt a Tier 4 Government in the world.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": [
+        "Venture Politics",
+        "Distributed Sovereignty",
+        "Optimization Imperative"
+      ]
     },
     {
       "title": "First Mountain Tunnel in World",
       "eraScore": 3,
       "description": "Your civilization is the first to build a Mountain Tunnel in the world.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Chemistry"]
     },
     {
       "title": "First Green Improvement in World",
       "eraScore": 3,
       "description": "Your civilization is the first to build a tile improvement dedicated to providing renewable Power in the world.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Satellites", "Composites", "Synthetic Materials"]
     },
     {
       "title": "First Railroad Connection in World",
       "eraScore": 3,
       "description": "Your civilization is the first to build a Railroad to connect two of its cities in the world.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Steam Power"]
     },
     {
       "title": "First Rock Band Concert in World",
       "eraScore": 3,
       "description": "Your civilization is the first to perform a Rock Band concert in the world.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Cold War"]
     },
     {
       "title": "First Industry in the World",
       "eraScore": 3,
       "description": "The first Industry in the world has been created.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Currency"]
     },
     {
       "title": "First Corporation in the World",
       "eraScore": 3,
       "description": "Money made conceptual flesh - the world sees the establishment of its first Corporation! Time to take out the competition.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Economics"],
+      "gameMode": "Monopolies and Corporations"
     },
     {
       "title": "First Luxury Resource Monopoly in the World",
       "eraScore": 3,
       "description": "You are the first civilization in the history of the world to control a monopoly over a luxury resource!",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Sailing", "Animal Husbandry", "Mining", "Irrigation"],
+      "gameMode": "Monopolies and Corporations"
     },
     {
-      "title": "First Shipwreck Excavated ",
+      "title": "First Shipwreck Excavated",
       "eraScore": 2,
       "description": "Your archaeologists have excavated their first shipwreck.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Cultural Heritage"]
     },
     {
       "title": "City on New Continent",
@@ -519,66 +525,66 @@
       "eraScore": 2,
       "description": "You have completed your civilization's first Neighborhood district.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Urbanization"]
     },
     {
       "title": "World's First Armada",
       "eraScore": 2,
       "description": "The world's very first Armada is formed, under your command.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Mobilization"]
     },
     {
       "title": "World's First Army",
       "eraScore": 2,
       "description": "The world's very first Army is formed, under your command.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Mobilization"]
     },
     {
       "title": "World's First Corps",
       "eraScore": 2,
       "description": "The world's very first Corps is formed, under your command.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Nationalism"]
     },
     {
       "title": "World's First Fleet",
       "eraScore": 2,
       "description": "The world's very first Fleet is formed, under your command.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Nationalism"]
     },
     {
       "title": "First Tier 1 Government",
       "eraScore": 2,
       "description": "Your civilization adopts its first Tier 1 Government.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Political Philosophy"]
     },
     {
       "title": "First Tier 2 Government",
       "eraScore": 2,
       "description": "Your civilization adopts its first Tier 2 Government.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Divine Right", "Exploration"]
     },
     {
       "title": "First Tier 3 Government",
       "eraScore": 2,
       "description": "Your civilization adopts its first Tier 3 Government.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Suffrage", "Totalitarianism", "Class Struggle"]
     },
     {
-      "title": "First Seaside Resort ",
+      "title": "First Seaside Resort",
       "eraScore": 2,
       "description": "You have completed your first Seaside Resort tile improvement.",
       "repeatable": false,
       "prerequisites": []
     },
     {
-      "title": "World's First Inquisition ",
+      "title": "World's First Inquisition",
       "eraScore": 2,
       "description": "Your Religion launches the world's first inquisition.",
       "repeatable": false,
@@ -729,21 +735,25 @@
       "eraScore": 2,
       "description": "Your civilization adopts its first Tier 4 Government.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": [
+        "Venture Politics",
+        "Distributed Sovereignty",
+        "Optimization Imperative"
+      ]
     },
     {
       "title": "First Mountain Tunnel",
       "eraScore": 2,
       "description": "Your civilization builds its first Mountain Tunnel.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Chemistry"]
     },
     {
       "title": "First Green Improvement",
       "eraScore": 2,
       "description": "Your civilization builds its first tile improvement dedicated to providing renewable Power.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Satellites", "Composites", "Synthetic Materials"]
     },
     {
       "title": "Diplomatic Victory Resolution Won",
@@ -757,49 +767,52 @@
       "eraScore": 2,
       "description": "You have launched your civilization's expedition to a distant planet.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Smart Materials"]
     },
     {
       "title": "First Railroad Connection",
       "eraScore": 2,
       "description": "Your civilization builds its first Railroad to connect two of your cities.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Steam Power"]
     },
     {
       "title": "First Rock Band Concert",
       "eraScore": 2,
       "description": "Your civilization performs its first Rock Band concert.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Cold War"]
     },
     {
       "title": "First Hero Claimed",
       "eraScore": 2,
       "description": "A hero has joined our civilization for the first time!",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "gameMode": "Heroes & Legends"
     },
     {
       "title": "First Hero Departed",
       "eraScore": 2,
       "description": "Our first hero has completed their service to our civilization.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "gameMode": "Heroes & Legends"
     },
     {
       "title": "First Hero Recalled",
       "eraScore": 2,
       "description": "We have recalled a hero to our civilization for the first time!",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "gameMode": "Heroes & Legends"
     },
     {
       "title": "Artifact Extracted",
       "eraScore": 1,
       "description": "An artifact has been uncovered, giving us insight into the past.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Natural History"]
     },
     {
       "title": "Aggressive City Placement",
@@ -809,7 +822,7 @@
       "prerequisites": []
     },
     {
-      "title": "Desert City ",
+      "title": "Desert City",
       "eraScore": 1,
       "description": "A city is established on difficult Desert terrain, expanding your reach into the wilds.",
       "repeatable": false,
@@ -858,7 +871,7 @@
       "prerequisites": []
     },
     {
-      "title": "First Civic of New Era ",
+      "title": "First Civic of New Era",
       "eraScore": 1,
       "description": "You have completed your civilization's first civic from a new era of discovery.",
       "repeatable": false,
@@ -876,28 +889,28 @@
       "eraScore": 1,
       "description": "Your civilization's first Armada is formed.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Mobilization"]
     },
     {
       "title": "First Army",
       "eraScore": 1,
       "description": "Your civilization's first Army is formed.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Mobilization"]
     },
     {
       "title": "First Corps",
       "eraScore": 1,
       "description": "Your civilization's first Corps is formed.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Nationalism"]
     },
     {
       "title": "First Fleet",
       "eraScore": 1,
       "description": "Your civilization's first Fleet is formed.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Nationalism"]
     },
     {
       "title": "All Governors Appointed",
@@ -914,25 +927,35 @@
       "prerequisites": []
     },
     {
-      "title": "Great Person Recruited ",
+      "title": "Great Person Recruited",
       "eraScore": 1,
       "description": "A Great Person has traveled to our lands to share unique talents.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": [
+        "Astrology",
+        "Writing",
+        "Iron Working",
+        "Drama and Poetry"
+      ]
     },
     {
       "title": "Old Great Person Recruited",
       "eraScore": 1,
       "description": "A Great Person has traveled to our lands. Though better suited to a past era, they will still contribute great things to our civilization.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": [
+        "Astrology",
+        "Writing",
+        "Iron Working",
+        "Drama and Poetry"
+      ]
     },
     {
       "title": "Inquisition Begins",
       "eraScore": 1,
       "description": "Your Religion launches an inquisition.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Theology"]
     },
     {
       "title": "Pantheon Founded",
@@ -960,12 +983,12 @@
       "eraScore": 1,
       "description": "One of your Spies has reached its maximum promotion level.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Diplomatic Service"]
     },
     {
-      "title": "First Technology of New Era ",
+      "title": "First Technology of New Era",
       "eraScore": 1,
-      "description": "You have completed your civilization's first technology from a new era of discovery. ",
+      "description": "You have completed your civilization's first technology from a new era of discovery.",
       "repeatable": false,
       "prerequisites": []
     },
@@ -974,14 +997,14 @@
       "eraScore": 1,
       "description": "You have established your first Trading Post in this civilization, opening up access to new markets.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Foreign Trade"]
     },
     {
       "title": "Strategic Resource Potential Unleashed",
       "eraScore": 1,
       "description": "You own your first unit that uses this strategic resource.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Horseback Riding", "Iron Working"]
     },
     {
       "title": "Unit Promoted with Distinction",
@@ -1030,56 +1053,62 @@
       "eraScore": 1,
       "description": "Your Flood Barrier has prevented catastrophic damage from a coastal flood.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Computers"]
     },
     {
       "title": "River Flood Mitigated",
       "eraScore": 1,
       "description": "Your constructed infrastructure has prevented damage from a river flood.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Pottery", "Buttress"]
     },
     {
       "title": "Hero Claimed",
       "eraScore": 1,
       "description": "A hero has joined our civilization!",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "gameMode": "Heroes & Legends"
     },
     {
       "title": "Hero Departed",
       "eraScore": 1,
       "description": "A hero has completed their service to our civilization.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "gameMode": "Heroes & Legends"
     },
     {
       "title": "Hero Recalled",
       "eraScore": 1,
       "description": "A hero has returned to serve our civilization!",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "gameMode": "Heroes & Legends"
     },
     {
       "title": "First Industry Created",
       "eraScore": 1,
       "description": "Your first Industry has been created.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Currency"],
+      "gameMode": "Monopolies and Corporations"
     },
     {
       "title": "First Corporation Created",
       "eraScore": 1,
       "description": "A Corporation has been founded.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": ["Economics"],
+      "gameMode": "Monopolies and Corporations"
     },
     {
       "title": "First Luxury Resource Monopoly",
       "eraScore": 1,
       "description": "You now control your first monopoly.",
       "repeatable": false,
-      "prerequisites": []
+      "prerequisites": [],
+      "gameMode": "Monopolies and Corporations"
     }
   ]
 }
