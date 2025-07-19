@@ -19,6 +19,7 @@ const TechCard = ({
   hoverClass = "",
   onHover,
   onUnhover,
+  techCivic = "Tech", // Add this prop, default to "Tech"
 }) => {
   // Figure out the correct class for the tech card
   let cardClass = "tech-card";
@@ -37,6 +38,42 @@ const TechCard = ({
   if (hoverClass) {
     cardClass += ` ${hoverClass}`;
   }
+
+  // Set background color based on techCivic and state
+  const getBackgroundColor = () => {
+    if (tech.researched) {
+      // Use a different color for researched techs and civics
+      return techCivic === "Tech"
+        ? "var(--tech-card-researched-color)"
+        : "var(--civic-card-researched-color)";
+    }
+    const canResearch = allPrereqsResearched(tech, allTechs);
+    if (tech.boosted && !canResearch) {
+      // Boosted but cannot research yet
+      return techCivic === "Tech"
+        ? "var(--tech-card-boosted-cannot-research-color)"
+        : "var(--civic-card-boosted-cannot-research-color)";
+    } else if (tech.boosted && canResearch) {
+      // Boosted and can research
+      return techCivic === "Tech"
+        ? "var(--tech-card-boosted-can-research-color)"
+        : "var(--civic-card-boosted-can-research-color)";
+    } else if (!tech.boosted && !canResearch) {
+      // Not boosted and cannot research yet
+      return techCivic === "Tech"
+        ? "var(--tech-card-no-boost-cannot-research-color)"
+        : "var(--civic-card-no-boost-cannot-research-color)";
+    } else if (!tech.boosted && canResearch) {
+      // Not boosted but can research
+      return techCivic === "Tech"
+        ? "var(--tech-card-no-boost-can-research-color)"
+        : "var(--civic-card-no-boost-can-research-color)";
+    }
+    // Default color if none of the above
+    return "";
+  };
+
+  const background = getBackgroundColor();
 
   return (
     <div
@@ -64,7 +101,7 @@ const TechCard = ({
           onResearch(tech.name);
         }
       }}
-      style={{ cursor: "pointer" }}
+      style={{ cursor: "pointer", background }}
       onMouseEnter={onHover}
       onMouseLeave={onUnhover}
       onFocus={onHover}
