@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaStar } from "react-icons/fa";
 import "./EraTracker.css";
 
 const EraScore = ({
@@ -8,6 +9,8 @@ const EraScore = ({
   maxEra,
   description,
   repeatable,
+  favorited = false,
+  onToggleFavorite,
 }) => {
   const [showModal, setShowModal] = useState(false);
   // Track count for repeatable cards (default 0) and for non-repeatable (default 0 = unchecked)
@@ -26,6 +29,26 @@ const EraScore = ({
 
   return (
     <div className="era-score-card">
+      {/* Favorite star icon on the left */}
+      <button
+        type="button"
+        className="mr-2 focus:outline-none"
+        aria-label={favorited ? "Unfavorite" : "Favorite"}
+        onClick={onToggleFavorite}
+        tabIndex={0}
+        style={{
+          background: "none",
+          border: "none",
+          padding: 0,
+          cursor: "pointer",
+        }}
+      >
+        <FaStar
+          size={22}
+          color={favorited ? "#FFD700" : "#A0AEC0"}
+          aria-hidden="true"
+        />
+      </button>
       {repeatable ? (
         <div className="flex items-center gap-2">
           {/* For repeatable cards, show count controls */}

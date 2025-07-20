@@ -4,12 +4,29 @@ import ProgressBar from "./ProgressBar";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 import "./EraTracker.css";
 
+const FAVORITES_KEY = "civ6-helper-eraScore-favorites";
+
 const EraTrackerContainer = ({ settings }) => {
   const [eraScoreItems, setEraScoreItems] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
   const [sortOrder, setSortOrder] = useState("desc"); // 'asc' or 'desc'
   const [eraScoreFilter, setEraScoreFilter] = useState(0);
   const [search, setSearch] = useState("");
+  const [showOnlyFavorited, setShowOnlyFavorited] = useState(false);
+  const [favorites, setFavorites] = useState(() => {
+    // Load favorites from localStorage (array of titles)
+    try {
+      const saved = localStorage.getItem(FAVORITES_KEY);
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  // Save favorites to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+  }, [favorites]);
 
   const fetchEraScore = () => {
     fetch("./jsonFiles/EraScore.json")
@@ -29,33 +46,48 @@ const EraTrackerContainer = ({ settings }) => {
     heroesLegends: false,
     monopoliesCorporations: false,
   };
-  let filteredItems = eraScoreItems.filter((item) => {
-    if (!item.title) return false;
-    if (
-      item.gameMode === "Monopolies and Corporations" &&
-      !safeSettings.monopoliesCorporations
-    )
-      return false;
-    if (item.gameMode === "Heroes & Legends" && !safeSettings.heroesLegends)
-      return false;
-    if (eraScoreFilter && item.eraScore !== eraScoreFilter) return false;
-    if (
-      search &&
-      !(
-        item.title.toLowerCase().includes(search.toLowerCase()) ||
-        (item.description &&
-          item.description.toLowerCase().includes(search.toLowerCase()))
+  let filteredItems = eraScoreItems
+    .map((item) => ({
+      ...item,
+      favorited: favorites.includes(item.title),
+    }))
+    .filter((item) => {
+      if (!item.title) return false;
+      if (
+        item.gameMode === "Monopolies and Corporations" &&
+        !safeSettings.monopoliesCorporations
       )
-    )
-      return false;
-    return true;
-  });
+        return false;
+      if (item.gameMode === "Heroes & Legends" && !safeSettings.heroesLegends)
+        return false;
+      if (eraScoreFilter && item.eraScore !== eraScoreFilter) return false;
+      if (
+        search &&
+        !(
+          item.title.toLowerCase().includes(search.toLowerCase()) ||
+          (item.description &&
+            item.description.toLowerCase().includes(search.toLowerCase()))
+        )
+      )
+        return false;
+      if (showOnlyFavorited && !item.favorited) return false;
+      return true;
+    });
 
   // Sort items by eraScore
   filteredItems = filteredItems.sort((a, b) => {
     if (sortOrder === "asc") return a.eraScore - b.eraScore;
     return b.eraScore - a.eraScore;
   });
+
+  // Handler to toggle favorite for a card by title
+  const handleToggleFavorite = (title) => {
+    setFavorites((prev) =>
+      prev.includes(title)
+        ? prev.filter((t) => t !== title)
+        : [...prev, title]
+    );
+  };
 
   return (
     <CollapsibleContainer
@@ -67,6 +99,15 @@ const EraTrackerContainer = ({ settings }) => {
     >
       <ProgressBar />
       <div className="flex flex-wrap gap-2 mb-4 items-center">
+        <button
+          className={`px-3 py-1 rounded ${
+            showOnlyFavorited ? "bg-yellow-400 text-white" : "bg-gray-200"
+          }`}
+          onClick={() => setShowOnlyFavorited((v) => !v)}
+          aria-pressed={showOnlyFavorited}
+        >
+          {showOnlyFavorited ? "Show All" : "Show Favorites"}
+        </button>
         <button
           className={`px-3 py-1 rounded ${
             sortOrder === "asc" ? "bg-blue-600 text-white" : "bg-gray-200"
@@ -105,7 +146,12 @@ const EraTrackerContainer = ({ settings }) => {
       </div>
       <div className="era-score-list">
         {filteredItems.map((item) => (
-          <EraScore key={item.title} {...item} />
+          <EraScore
+            key={item.title}
+            {...item}
+            favorited={item.favorited}
+            onToggleFavorite={() => handleToggleFavorite(item.title)}
+          />
         ))}
       </div>
     </CollapsibleContainer>
