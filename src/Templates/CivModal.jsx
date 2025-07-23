@@ -67,14 +67,6 @@ const CivModal = ({
               >
                 {confirmText}
               </button>
-              <button
-                ref={cancelButtonRef}
-                type="button"
-                onClick={() => setOpen(false)}
-                className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto"
-              >
-                {cancelText}
-              </button>
             </div>
           </DialogPanel>
         </div>
