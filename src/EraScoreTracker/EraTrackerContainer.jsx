@@ -42,7 +42,7 @@ const EraTrackerContainer = ({ settings }) => {
     localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
   }, [favorites]);
 
-  // Listen for changes to civ6_tech_state in localStorage
+  // Listen for changes to civ6_tech_state in localStorage and also poll for changes every second
   useEffect(() => {
     const handleStorage = (e) => {
       if (e.key === "civ6_tech_state") {
@@ -51,13 +51,31 @@ const EraTrackerContainer = ({ settings }) => {
           setResearchedTechs(
             Object.entries(state)
               .filter(([, val]) => val && val.researched)
-              .map(([name]) => name)
+              .map(([name]) => String(name))
           );
         } catch {}
       }
     };
     window.addEventListener("storage", handleStorage);
-    return () => window.removeEventListener("storage", handleStorage);
+
+    // Poll localStorage every second for real-time updates
+    const interval = setInterval(() => {
+      try {
+        const saved = localStorage.getItem("civ6_tech_state");
+        if (!saved) return;
+        const state = JSON.parse(saved);
+        setResearchedTechs(
+          Object.entries(state)
+            .filter(([, val]) => val && val.researched)
+            .map(([name]) => String(name))
+        );
+      } catch {}
+    }, 1000);
+
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      clearInterval(interval);
+    };
   }, []);
 
   // Also update researchedTechs on mount in case techs are already researched
