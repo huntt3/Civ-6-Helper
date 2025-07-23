@@ -28,9 +28,10 @@ const EraTrackerContainer = ({ settings }) => {
       const saved = localStorage.getItem("civ6_tech_state");
       if (!saved) return [];
       const state = JSON.parse(saved);
+      // Normalize tech names to string for comparison
       return Object.entries(state)
         .filter(([name, val]) => val && val.researched)
-        .map(([name]) => name);
+        .map(([name]) => String(name));
     } catch {
       return [];
     }
@@ -49,7 +50,7 @@ const EraTrackerContainer = ({ settings }) => {
           const state = JSON.parse(e.newValue);
           setResearchedTechs(
             Object.entries(state)
-              .filter(([name, val]) => val && val.researched)
+              .filter(([, val]) => val && val.researched)
               .map(([name]) => name)
           );
         } catch {}
@@ -120,7 +121,11 @@ const EraTrackerContainer = ({ settings }) => {
       if (
         Array.isArray(item.prerequisites) &&
         item.prerequisites.length > 0 &&
-        !item.prerequisites.some((pr) => researchedTechs.includes(pr))
+        !item.prerequisites.some((pr) =>
+          researchedTechs
+            .map((t) => t.toLowerCase())
+            .includes(String(pr).toLowerCase())
+        )
       ) {
         return false;
       }
@@ -178,13 +183,14 @@ const EraTrackerContainer = ({ settings }) => {
         <input
           type="number"
           min="0"
+          max="5"
           placeholder="Filter by Era Score"
           value={eraScoreFilter || ""}
-          onChange={(e) =>
-            setEraScoreFilter(
-              e.target.value === "" ? 0 : parseInt(e.target.value, 10)
-            )
-          }
+          onChange={(e) => {
+            let val = e.target.value === "" ? 0 : parseInt(e.target.value, 10);
+            if (val > 5) val = 5;
+            setEraScoreFilter(val);
+          }}
           className="p-1 border rounded w-36 text-center"
         />
         <input
