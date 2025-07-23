@@ -22,11 +22,56 @@ const EraTrackerContainer = ({ settings }) => {
       return [];
     }
   });
+  const [researchedTechs, setResearchedTechs] = useState(() => {
+    // Load researched techs from localStorage (from civ6_tech_state)
+    try {
+      const saved = localStorage.getItem("civ6_tech_state");
+      if (!saved) return [];
+      const state = JSON.parse(saved);
+      return Object.entries(state)
+        .filter(([name, val]) => val && val.researched)
+        .map(([name]) => name);
+    } catch {
+      return [];
+    }
+  });
 
   // Save favorites to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
   }, [favorites]);
+
+  // Listen for changes to civ6_tech_state in localStorage
+  useEffect(() => {
+    const handleStorage = (e) => {
+      if (e.key === "civ6_tech_state") {
+        try {
+          const state = JSON.parse(e.newValue);
+          setResearchedTechs(
+            Object.entries(state)
+              .filter(([name, val]) => val && val.researched)
+              .map(([name]) => name)
+          );
+        } catch {}
+      }
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, []);
+
+  // Also update researchedTechs on mount in case techs are already researched
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("civ6_tech_state");
+      if (!saved) return;
+      const state = JSON.parse(saved);
+      setResearchedTechs(
+        Object.entries(state)
+          .filter(([name, val]) => val && val.researched)
+          .map(([name]) => name)
+      );
+    } catch {}
+  }, []);
 
   const fetchEraScore = () => {
     fetch("./jsonFiles/EraScore.json")
@@ -71,6 +116,14 @@ const EraTrackerContainer = ({ settings }) => {
       )
         return false;
       if (showOnlyFavorited && !item.favorited) return false;
+      // Hide if prerequisites exist and none are researched
+      if (
+        Array.isArray(item.prerequisites) &&
+        item.prerequisites.length > 0 &&
+        !item.prerequisites.some((pr) => researchedTechs.includes(pr))
+      ) {
+        return false;
+      }
       return true;
     });
 
@@ -83,9 +136,7 @@ const EraTrackerContainer = ({ settings }) => {
   // Handler to toggle favorite for a card by title
   const handleToggleFavorite = (title) => {
     setFavorites((prev) =>
-      prev.includes(title)
-        ? prev.filter((t) => t !== title)
-        : [...prev, title]
+      prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title]
     );
   };
 
