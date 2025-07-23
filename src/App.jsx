@@ -8,8 +8,10 @@ import DistrictDiscountingContainer from "./DistrictDiscountingTool/DistrictDisc
 import GreatPeopleContainer from "./GreatPeopleTracker/GreatPeopleContainer";
 import Footer from "./Footer/Footer";
 import CivModal from "./Templates/CivModal";
+import axios from "axios";
 
 const SETTINGS_KEY = "civ6-helper-settings";
+const TECHS_KEY = "civ6-helper-techs";
 
 // Main App component
 function App() {
@@ -24,9 +26,32 @@ function App() {
         };
   });
 
+  // Global state for TechsAndCivics
+  const [techsAndCivics, setTechsAndCivics] = useState(() => {
+    const saved = localStorage.getItem(TECHS_KEY);
+    return saved ? JSON.parse(saved) : null;
+  });
+
   useEffect(() => {
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
   }, [settings]);
+
+  // Fetch from JSON if not in localStorage
+  useEffect(() => {
+    if (!techsAndCivics) {
+      axios
+        .get("/jsonFiles/TechsAndCivics.json")
+        .then((res) => setTechsAndCivics(res.data))
+        .catch(() => setTechsAndCivics({ Techs: [], Civics: [] }));
+    }
+  }, [techsAndCivics]);
+
+  // Save to localStorage whenever it changes
+  useEffect(() => {
+    if (techsAndCivics) {
+      localStorage.setItem(TECHS_KEY, JSON.stringify(techsAndCivics));
+    }
+  }, [techsAndCivics]);
 
   return (
     <main>
@@ -34,7 +59,10 @@ function App() {
         <h1>Civ 6 Helper</h1>
       </header>
       <SettingsButton settings={settings} setSettings={setSettings} />
-      <TechTreeContainer />
+      <TechTreeContainer
+        techsAndCivics={techsAndCivics}
+        setTechsAndCivics={setTechsAndCivics}
+      />
       <DistrictDiscountingContainer />
       <WondersContainer />
       <GreatPeopleContainer />

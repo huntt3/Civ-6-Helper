@@ -15,8 +15,6 @@ We provide clear and concise error messages, avoiding technical jargon, to help 
 We avoid using advanced features like context, reducers, or custom hooks in beginner-level code.
 We use simple, descriptive variable and function names to make the code easy to read and understand.
 
-We use cookies to store user preferences.
-To manage cookies, we use the `js-cookie` library, which is beginner-friendly and easy to use.
 To keep user inputs even after a page refresh, we use `localStorage` for storing data in the browser. We use this for all form inputs and checkboxes.
 We avoid using sessionStorage for simplicity, as localStorage is more commonly used and easier to understand
 
