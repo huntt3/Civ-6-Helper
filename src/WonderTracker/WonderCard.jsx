@@ -24,12 +24,18 @@ const WonderCard = ({ wonder, onClick }) => {
     window.addEventListener("storage", checkResearched);
     // Listen for custom event when tech/civic state changes in this tab
     window.addEventListener("civ6_tech_civic_state_changed", checkResearched);
+    // Also listen for focus events to update immediately when user returns to tab
+    window.addEventListener("focus", checkResearched);
+    // Also poll every 500ms for changes (for immediate UI update)
+    const interval = setInterval(checkResearched, 500);
     return () => {
       window.removeEventListener("storage", checkResearched);
       window.removeEventListener(
         "civ6_tech_civic_state_changed",
         checkResearched
       );
+      window.removeEventListener("focus", checkResearched);
+      clearInterval(interval);
     };
   }, [wonder.requirement]);
 
