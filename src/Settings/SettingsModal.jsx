@@ -10,7 +10,9 @@ const SettingsModal = ({ open, setOpen, settings, setSettings }) => {
   };
 
   const message = (
-    <div className="flex flex-col items-start space-y-2">
+    <div className="flex flex-col items-stretch space-y-2">
+      <EraDropdown />
+      <VersionDropdown />
       <Checkbox
         label="Heroes & Legends"
         checked={settings.heroesLegends}
@@ -26,10 +28,6 @@ const SettingsModal = ({ open, setOpen, settings, setSettings }) => {
         checked={settings.removeLimitations}
         onChange={() => handleCheckbox("removeLimitations")}
       />
-      <div className="flex justify-center items-center mt-4">
-        <EraDropdown />
-        <VersionDropdown />
-      </div>
     </div>
   );
 
