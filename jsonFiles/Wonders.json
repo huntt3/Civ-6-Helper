@@ -1,0 +1,322 @@
+{
+  "Wonder": [
+    {
+      "name": "Etemenanki",
+      "requirement": "Writing",
+      "era": "Ancient",
+      "built": false
+    },
+    {
+      "name": "Great Bath",
+      "requirement": "Pottery",
+      "era": "Ancient",
+      "built": false
+    },
+    {
+      "name": "Hanging Gardens",
+      "requirement": "Irrigation",
+      "era": "Ancient",
+      "built": false
+    },
+    {
+      "name": "Oracle",
+      "requirement": "Mysticism",
+      "era": "Ancient",
+      "built": false
+    },
+    {
+      "name": "Pyramids",
+      "requirement": "Masonry",
+      "era": "Ancient",
+      "built": false
+    },
+    {
+      "name": "Stonehenge",
+      "requirement": "Astrology",
+      "era": "Ancient",
+      "built": false
+    },
+    {
+      "name": "Temple of Artemis",
+      "requirement": "Archery",
+      "era": "Ancient",
+      "built": false
+    },
+    {
+      "name": "Apadana",
+      "requirement": "Political Philosophy",
+      "era": "Classical",
+      "built": false
+    },
+    {
+      "name": "Colosseum",
+      "requirement": "Games and Recreation",
+      "era": "Classical",
+      "built": false
+    },
+    {
+      "name": "Colossus",
+      "requirement": "Shipbuilding",
+      "era": "Classical",
+      "built": false
+    },
+    {
+      "name": "Great Library",
+      "requirement": "Recorded History",
+      "era": "Classical",
+      "built": false
+    },
+    {
+      "name": "Great Lighthouse",
+      "requirement": "Celestial Navigation",
+      "era": "Classical",
+      "built": false
+    },
+    {
+      "name": "Jebel Barkal",
+      "requirement": "Iron Working",
+      "era": "Classical",
+      "built": false
+    },
+    {
+      "name": "Machu Picchu",
+      "requirement": "Engineering",
+      "era": "Classical",
+      "built": false
+    },
+    {
+      "name": "Mahabodhi Temple",
+      "requirement": "Theology",
+      "era": "Classical",
+      "built": false
+    },
+    {
+      "name": "Mausoleum at Halicarnassus",
+      "requirement": "Defensive Tactics",
+      "era": "Classical",
+      "built": false
+    },
+    {
+      "name": "Petra",
+      "requirement": "Mathematics",
+      "era": "Classical",
+      "built": false
+    },
+    {
+      "name": "Statue of Zeus",
+      "requirement": "Military Training",
+      "era": "Classical",
+      "built": false
+    },
+    {
+      "name": "Terracotta Army",
+      "requirement": "Construction",
+      "era": "Classical",
+      "built": false
+    },
+    {
+      "name": "Alhambra",
+      "requirement": "Castles",
+      "era": "Medieval",
+      "built": false
+    },
+    {
+      "name": "Angkor Wat",
+      "requirement": "Medieval Faires",
+      "era": "Medieval",
+      "built": false
+    },
+    {
+      "name": "Chichen Itza",
+      "requirement": "Guilds",
+      "era": "Medieval",
+      "built": false
+    },
+    {
+      "name": "Hagia Sophia",
+      "requirement": "Buttress",
+      "era": "Medieval",
+      "built": false
+    },
+    {
+      "name": "Huey Teocalli",
+      "requirement": "Military Engineering",
+      "era": "Medieval",
+      "built": false
+    },
+    {
+      "name": "Kilwa Kisiwani",
+      "requirement": "Machinery",
+      "era": "Medieval",
+      "built": false
+    },
+    {
+      "name": "Kotoku-in",
+      "requirement": "Divine Right",
+      "era": "Medieval",
+      "built": false
+    },
+    {
+      "name": "Meenakshi Temple",
+      "requirement": "Civil Service",
+      "era": "Medieval",
+      "built": false
+    },
+    {
+      "name": "Mont St. Michel",
+      "requirement": "Divine Right",
+      "era": "Medieval",
+      "built": false
+    },
+    {
+      "name": "University of Sankore",
+      "requirement": "Education",
+      "era": "Medieval",
+      "built": false
+    },
+    {
+      "name": "Casa de Contratación",
+      "requirement": "Cartography",
+      "era": "Renaissance",
+      "built": false
+    },
+    {
+      "name": "Forbidden City",
+      "requirement": "Printing",
+      "era": "Renaissance",
+      "built": false
+    },
+    {
+      "name": "Great Zimbabwe",
+      "requirement": "Banking",
+      "era": "Renaissance",
+      "built": false
+    },
+    {
+      "name": "Potala Palace",
+      "requirement": "Astronomy",
+      "era": "Renaissance",
+      "built": false
+    },
+    {
+      "name": "St. Basil's Cathedral",
+      "requirement": "Reformed Church",
+      "era": "Renaissance",
+      "built": false
+    },
+    {
+      "name": "Taj Mahal",
+      "requirement": "Humanism",
+      "era": "Renaissance",
+      "built": false
+    },
+    {
+      "name": "Torre de Belém",
+      "requirement": "Mercantilism",
+      "era": "Renaissance",
+      "built": false
+    },
+    {
+      "name": "Venetian Arsenal",
+      "requirement": "Mass Production",
+      "era": "Renaissance",
+      "built": false
+    },
+    {
+      "name": "Big Ben",
+      "requirement": "Economics",
+      "era": "Industrial",
+      "built": false
+    },
+    {
+      "name": "Bolshoi Theatre",
+      "requirement": "Opera and Ballet",
+      "era": "Industrial",
+      "built": false
+    },
+    {
+      "name": "Hermitage",
+      "requirement": "Natural History",
+      "era": "Industrial",
+      "built": false
+    },
+    {
+      "name": "Országház",
+      "requirement": "Sanitation",
+      "era": "Industrial",
+      "built": false
+    },
+    {
+      "name": "Oxford University",
+      "requirement": "Scientific Theory",
+      "era": "Industrial",
+      "built": false
+    },
+    {
+      "name": "Panama Canal",
+      "requirement": "Steam Power",
+      "era": "Industrial",
+      "built": false
+    },
+    {
+      "name": "Ruhr Valley",
+      "requirement": "Industrialization",
+      "era": "Industrial",
+      "built": false
+    },
+    {
+      "name": "Statue of Liberty",
+      "requirement": "Civil Engineering",
+      "era": "Industrial",
+      "built": false
+    },
+    {
+      "name": "Broadway",
+      "requirement": "Mass Media",
+      "era": "Modern",
+      "built": false
+    },
+    {
+      "name": "Eiffel Tower",
+      "requirement": "Steel",
+      "era": "Modern",
+      "built": false
+    },
+    {
+      "name": "Golden Gate Bridge",
+      "requirement": "Combustion",
+      "era": "Modern",
+      "built": false
+    },
+    {
+      "name": "Cristo Redentor",
+      "requirement": "Mass Media",
+      "era": "Modern",
+      "built": false
+    },
+    {
+      "name": "Amundsen-Scott Research Station",
+      "requirement": "Rapid Deployment",
+      "era": "Atomic",
+      "built": false
+    },
+    {
+      "name": "Biosphère",
+      "requirement": "Synthetic Materials",
+      "era": "Atomic",
+      "built": false
+    },
+    {
+      "name": "Estádio do Maracanã",
+      "requirement": "Professional Sports",
+      "era": "Atomic",
+      "built": false
+    },
+    {
+      "name": "Sydney Opera House",
+      "requirement": "Cultural Heritage",
+      "era": "Atomic",
+      "built": false
+    }
+  ]
+}
