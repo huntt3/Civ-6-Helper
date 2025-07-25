@@ -1,7 +1,7 @@
 import React from "react";
 import "./CollapsibleContainer.css";
 
-// CollapsibleContainer: a generic container with title, collapse, and refresh
+// CollapsibleContainer: a generic container with title, collapse, and reset
 const CollapsibleContainer = ({
   title,
   collapsed,
@@ -27,9 +27,9 @@ const CollapsibleContainer = ({
       <button
         className="collapsible-refresh-btn"
         onClick={onRefresh}
-        aria-label={`Refresh ${title}`}
+        aria-label={`Reset ${title}`}
       >
-        Refresh
+        Reset
       </button>
     </div>
     {!collapsed && <div className="collapsible-content">{children}</div>}

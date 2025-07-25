@@ -4,7 +4,7 @@ import TechModal from "./TechModal";
 import TechArrows from "./TechArrows";
 import "./TechTree.css";
 
-const TechCarousel = ({ rowRange, minRow = 0 }) => {
+const TechCarousel = ({ rowRange, minRow = 0, onReset }) => {
   const [techs, setTechs] = useState([]);
   const [modalTech, setModalTech] = useState(null);
 
@@ -58,16 +58,22 @@ const TechCarousel = ({ rowRange, minRow = 0 }) => {
     localStorage.setItem("civ6_tech_state", JSON.stringify(state));
   }, [techs]);
 
-  const handleReset = () => {
-    setTechs((prev) =>
-      prev.map((t) => ({ ...t, researched: false, boosted: false }))
-    );
-    const state = {};
-    techs.forEach((t) => {
-      state[t.name] = { researched: false, boosted: false };
+  // Expose reset logic to parent via onReset prop using useEffect and useCallback
+  React.useEffect(() => {
+    if (!onReset) return;
+    onReset(() => {
+      setTechs((prev) =>
+        prev.map((t) => ({ ...t, researched: false, boosted: false }))
+      );
+      const state = {};
+      techs.forEach((t) => {
+        state[t.name] = { researched: false, boosted: false };
+      });
+      localStorage.setItem("civ6_tech_state", JSON.stringify(state));
     });
-    localStorage.setItem("civ6_tech_state", JSON.stringify(state));
-  };
+    // Only run once when mounted
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onReset]);
 
   const handleResearch = (name) => {
     setTechs((prev) =>
@@ -200,22 +206,6 @@ const TechCarousel = ({ rowRange, minRow = 0 }) => {
         <h2 className="tech-carousel-title" style={{ margin: 0 }}>
           Technologies
         </h2>
-        <button
-          type="button"
-          aria-label="Reset all researched and boosted techs"
-          onClick={handleReset}
-          style={{
-            background: "var(--wonder-btn-primary-color)",
-            color: "var(--primary-text-color-light)",
-            border: "none",
-            borderRadius: "3px",
-            padding: "0.3rem 0.9rem",
-            fontSize: "1rem",
-            cursor: "pointer",
-          }}
-        >
-          Refresh
-        </button>
       </header>
       <div className="tech-carousel-grid" style={{ position: "relative" }}>
         <TechArrows
