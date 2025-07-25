@@ -22,9 +22,12 @@ const EraScoreModal = ({
       <div className="era-score-modal-content">
         <h3 id="modal-title">{title}</h3>
         <p>{description}</p>
-        <div className="era-score-era">
-          {minEra} - {maxEra}
-        </div>
+        {minEra != null ||
+          (maxEra != null && (
+            <div className="era-score-era">
+              {minEra} - {maxEra}
+            </div>
+          ))}
         <button
           onClick={onClose}
           className="era-score-modal-close"

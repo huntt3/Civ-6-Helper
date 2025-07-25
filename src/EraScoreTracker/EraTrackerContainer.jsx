@@ -7,6 +7,17 @@ import "./EraTracker.css";
 const FAVORITES_KEY = "civ6-helper-eraScore-favorites";
 
 const EraTrackerContainer = ({ settings }) => {
+  // State for pagination
+  const [cardsPerPage, setCardsPerPage] = useState(() => {
+    const saved = localStorage.getItem("civ6-helper-cardsPerPage");
+    return saved !== null ? parseInt(saved, 10) : 10;
+  });
+  const [page, setPage] = useState(0);
+
+  // Save cardsPerPage to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("civ6-helper-cardsPerPage", cardsPerPage);
+  }, [cardsPerPage]);
   const [eraScoreItems, setEraScoreItems] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
   const [sortOrder, setSortOrder] = useState("desc"); // 'asc' or 'desc'
@@ -156,6 +167,13 @@ const EraTrackerContainer = ({ settings }) => {
     return b.eraScore - a.eraScore;
   });
 
+  // Pagination logic
+  const totalPages = Math.ceil(filteredItems.length / cardsPerPage);
+  const paginatedItems = filteredItems.slice(
+    page * cardsPerPage,
+    page * cardsPerPage + cardsPerPage
+  );
+
   // Handler to toggle favorite for a card by title
   const handleToggleFavorite = (title) => {
     setFavorites((prev) =>
@@ -218,9 +236,29 @@ const EraTrackerContainer = ({ settings }) => {
           onChange={(e) => setSearch(e.target.value)}
           className="p-1 border rounded w-56"
         />
+        {/* Cards per page input */}
+        <label className="flex items-center ml-auto">
+          <span className="mr-2">Cards per page:</span>
+          <input
+            type="number"
+            min="1"
+            max="100"
+            value={cardsPerPage}
+            onChange={(e) => {
+              let val =
+                e.target.value === "" ? 1 : parseInt(e.target.value, 10);
+              if (val < 1) val = 1;
+              if (val > 100) val = 100;
+              setCardsPerPage(val);
+              setPage(0); // Reset to first page when changing cards per page
+            }}
+            className="p-1 border rounded w-20 text-center"
+            aria-label="Cards per page"
+          />
+        </label>
       </div>
       <div className="era-score-list">
-        {filteredItems.map((item) => (
+        {paginatedItems.map((item) => (
           <EraScore
             key={item.title}
             {...item}
@@ -228,6 +266,32 @@ const EraTrackerContainer = ({ settings }) => {
             onToggleFavorite={() => handleToggleFavorite(item.title)}
           />
         ))}
+      </div>
+      {/* Pagination controls */}
+      <div className="flex justify-center items-center mt-4 gap-4">
+        <button
+          onClick={() => setPage((p) => Math.max(0, p - 1))}
+          disabled={page === 0}
+          className={`px-3 py-2 rounded bg-gray-200 hover:bg-gray-300 ${
+            page === 0 ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          aria-label="Previous page"
+        >
+          &#8592;
+        </button>
+        <span>
+          Page {page + 1} of {totalPages}
+        </span>
+        <button
+          onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
+          disabled={page >= totalPages - 1}
+          className={`px-3 py-2 rounded bg-gray-200 hover:bg-gray-300 ${
+            page >= totalPages - 1 ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          aria-label="Next page"
+        >
+          &#8594;
+        </button>
       </div>
     </CollapsibleContainer>
   );
