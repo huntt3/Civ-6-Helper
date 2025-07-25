@@ -13,14 +13,24 @@ const TechTreeContainer = () => {
   };
 
   return (
-    <CollapsibleContainer
-      title="Tech and Civic Tracker"
-      collapsed={collapsed}
-      onCollapse={handleCollapse}
-      ariaLabel="Tech and Civic Tracker"
-    >
-      <TechCarousel />
-    </CollapsibleContainer>
+    <>
+      <CollapsibleContainer
+        title="Tech Tracker"
+        collapsed={collapsed}
+        onCollapse={handleCollapse}
+        ariaLabel="Tech Tracker"
+      >
+        <TechCarousel rowRange={{ start: 0, end: 7 }} minRow={0} />
+      </CollapsibleContainer>
+      <CollapsibleContainer
+        title="Civic Tracker"
+        collapsed={collapsed}
+        onCollapse={handleCollapse}
+        ariaLabel="Civic Tracker"
+      >
+        <TechCarousel rowRange={{ start: 10, end: 16 }} minRow={10} />
+      </CollapsibleContainer>
+    </>
   );
 };
 

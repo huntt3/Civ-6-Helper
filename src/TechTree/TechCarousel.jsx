@@ -4,7 +4,7 @@ import TechModal from "./TechModal";
 import TechArrows from "./TechArrows";
 import "./TechTree.css";
 
-const TechCarousel = () => {
+const TechCarousel = ({ rowRange, minRow = 0 }) => {
   const [techs, setTechs] = useState([]);
   const [modalTech, setModalTech] = useState(null);
 
@@ -92,23 +92,37 @@ const TechCarousel = () => {
   };
 
   const columns = 20;
-  // Find the max row value in the data to ensure all rows are shown
+  // Filter techs by rowRange if provided
+  let filteredTechs = techs;
+  if (
+    rowRange &&
+    typeof rowRange.start === "number" &&
+    typeof rowRange.end === "number"
+  ) {
+    filteredTechs = techs.filter(
+      (t) =>
+        typeof t.row === "number" &&
+        t.row >= rowRange.start &&
+        t.row <= rowRange.end
+    );
+  }
+  // Find the max row value in the filtered data to ensure all rows are shown
   const maxRow = Math.max(
-    ...techs.map((t) => (typeof t.row === "number" ? t.row : 0)),
-    0
+    ...filteredTechs.map((t) => (typeof t.row === "number" ? t.row : minRow)),
+    minRow
   );
-  const rows = Math.max(17, maxRow + 1); // Always at least 17, but expand if needed
+  const rows = Math.max(1, maxRow - minRow + 1);
   const grid = Array.from({ length: rows }, () => Array(columns).fill(null));
-  techs.forEach((tech) => {
+  filteredTechs.forEach((tech) => {
     if (
       typeof tech.column === "number" &&
       typeof tech.row === "number" &&
       tech.column >= 0 &&
       tech.column < columns &&
-      tech.row >= 0 &&
-      tech.row < rows
+      tech.row >= minRow &&
+      tech.row <= maxRow
     ) {
-      grid[tech.row][tech.column] = tech;
+      grid[tech.row - minRow][tech.column] = tech;
     }
   });
 
@@ -119,7 +133,7 @@ const TechCarousel = () => {
   techs.forEach((tech) => {
     if (!tech.prerequisites || !Array.isArray(tech.prerequisites)) return;
     tech.prerequisites.forEach((prereqName) => {
-      const prereq = techs.find((t) => t.name === prereqName);
+      const prereq = filteredTechs.find((t) => t.name === prereqName);
       if (!prereq) return;
       const fromCol = prereq.column;
       const fromRow = prereq.row;
@@ -137,24 +151,16 @@ const TechCarousel = () => {
         fromCol < columns &&
         toCol >= 0 &&
         toCol < columns &&
-        fromRow >= 0 &&
-        fromRow < rows &&
-        toRow >= 0 &&
-        toRow < rows
+        fromRow >= minRow &&
+        fromRow <= maxRow &&
+        toRow >= minRow &&
+        toRow <= maxRow
       ) {
-        if (fromRow < 10) {
-          const x1 = fromCol * (cardWidth + gap) + cardWidth;
-          const y1 = fromRow * (cardHeight + gap) + cardHeight / 1.5;
-          const x2 = toCol * (cardWidth + gap);
-          const y2 = toRow * (cardHeight + gap) + cardHeight / 1.5;
-          arrowData.push({ x1, y1, x2, y2 });
-        } else {
-          const x1 = fromCol * (cardWidth + gap) + cardWidth;
-          const y1 = fromRow * (cardHeight + gap) - cardHeight / 1.5;
-          const x2 = toCol * (cardWidth + gap);
-          const y2 = toRow * (cardHeight + gap) - cardHeight / 1.5;
-          arrowData.push({ x1, y1, x2, y2 });
-        }
+        const x1 = fromCol * (cardWidth + gap) + cardWidth;
+        const y1 = (fromRow - minRow) * (cardHeight + gap) + cardHeight / 1.5;
+        const x2 = toCol * (cardWidth + gap);
+        const y2 = (toRow - minRow) * (cardHeight + gap) + cardHeight / 1.5;
+        arrowData.push({ x1, y1, x2, y2 });
       }
     });
   });
@@ -254,7 +260,7 @@ const TechCarousel = () => {
             <TechCard
               key={tech.name}
               tech={tech}
-              allTechs={techs}
+              allTechs={filteredTechs}
               onResearch={handleResearch}
               onBoostToggle={handleBoostToggle}
               onShowDetails={handleShowDetails}
