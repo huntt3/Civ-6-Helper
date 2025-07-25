@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import EraScore from "./EraScore";
 import ProgressBar from "./ProgressBar";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
-import "./EraTracker.css";
 
 const FAVORITES_KEY = "civ6-helper-eraScore-favorites";
 

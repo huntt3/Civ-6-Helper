@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import EraScoreModal from "./EraScoreModal";
 import { FaStar } from "react-icons/fa";
-import "./EraTracker.css";
 
 const EraScore = ({
   title,
@@ -28,20 +27,16 @@ const EraScore = ({
   const increment = () => setCount((c) => c + 1);
   const decrement = () => setCount((c) => Math.max(0, c - 1));
 
+  // Card container with Tailwind for background, border, shadow, spacing, and rounded corners
   return (
-    <div className="era-score-card">
+    <div className="flex items-center bg-white text-black rounded-lg p-4 shadow-md border border-gray-300 gap-4 mb-2 relative">
+      {/* Favorite button with accessible label and no default button styling */}
       <button
         type="button"
-        className="mr-2 focus:outline-none"
+        className="mr-2 focus:outline-none bg-transparent border-none p-0 cursor-pointer"
         aria-label={favorited ? "Unfavorite" : "Favorite"}
         onClick={onToggleFavorite}
         tabIndex={0}
-        style={{
-          background: "none",
-          border: "none",
-          padding: 0,
-          cursor: "pointer",
-        }}
       >
         <FaStar
           size={22}
@@ -79,18 +74,18 @@ const EraScore = ({
         // For non-repeatable cards, show a checkbox
         <input
           type="checkbox"
-          className="era-score-checkbox"
+          className="mr-2 w-5 h-5 accent-blue-600 border-gray-400 rounded focus:ring-2 focus:ring-blue-400"
           aria-label="Mark as completed"
-          // For now, just local state
           checked={count > 0}
           onChange={() => setCount((c) => (c === 0 ? 1 : 0))}
-          style={{ width: "1.2rem", height: "1.2rem" }}
         />
       )}
-      <span className="era-score-title">{title}</span>
-      <span className="era-score-value">+{eraScore}</span>
+      <span className="text-lg font-medium mr-2">{title}</span>
+      <span className="bg-gray-100 rounded px-2 py-1 mr-2 text-base">
+        +{eraScore}
+      </span>
       <button
-        className="era-score-desc-btn"
+        className="ml-auto bg-blue-700 text-white rounded px-3 py-2 text-sm hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
         onClick={handleModal}
         aria-label={`Show description for ${title}`}
       >

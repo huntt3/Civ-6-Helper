@@ -7,7 +7,6 @@ import TechTreeContainer from "./TechTree/TechTreeContainer";
 import DistrictDiscountingContainer from "./DistrictDiscountingTool/DistrictDiscountingContainer";
 import GreatPeopleContainer from "./GreatPeopleTracker/GreatPeopleContainer";
 import Footer from "./Footer/Footer";
-import CivModal from "./Templates/CivModal";
 import axios from "axios";
 
 const SETTINGS_KEY = "civ6-helper-settings";
