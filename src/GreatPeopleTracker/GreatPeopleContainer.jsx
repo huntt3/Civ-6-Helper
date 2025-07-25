@@ -32,7 +32,16 @@ const eras = [
 const GreatPeopleContainer = () => {
   const [greatPeople, setGreatPeople] = useState([]);
   const [error, setError] = useState("");
-  const [collapsedEras, setCollapsedEras] = useState({});
+  // Start these eras as collapsed
+  const defaultCollapsed = {
+    Medieval: true,
+    Renaissance: true,
+    Industrial: true,
+    Modern: true,
+    Atomic: true,
+    Information: true,
+  };
+  const [collapsedEras, setCollapsedEras] = useState(defaultCollapsed);
   const [checkedCards, setCheckedCards] = useState(() => {
     const saved = localStorage.getItem("greatPeopleChecked");
     return saved ? JSON.parse(saved) : {};

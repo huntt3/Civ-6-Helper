@@ -202,11 +202,7 @@ const TechCarousel = ({ rowRange, minRow = 0, onReset }) => {
           justifyContent: "center",
           gap: "1rem",
         }}
-      >
-        <h2 className="tech-carousel-title" style={{ margin: 0 }}>
-          Technologies
-        </h2>
-      </header>
+      ></header>
       <div className="tech-carousel-grid" style={{ position: "relative" }}>
         <TechArrows
           arrowData={arrowData}
