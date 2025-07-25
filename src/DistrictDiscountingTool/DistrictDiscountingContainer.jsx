@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./DistrictDiscountingTool.css";
 import DistrictCards from "./DistrictCards";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 

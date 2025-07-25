@@ -1,5 +1,4 @@
 import React from "react";
-import "./DistrictDiscountingTool.css";
 
 // List of district titles
 const districtTitles = [
@@ -30,29 +29,30 @@ const getDistrictImg = (title) => {
 const DistrictCard = ({ title }) => {
   const imgFile = getDistrictImg(title);
   return (
-    <article className="district-card" aria-label={`${title} card`}>
-      <header className="district-card-header">
+    <article
+      className="bg-white rounded-lg shadow-md w-[150px] flex flex-col items-stretch m-2 border border-gray-200"
+      aria-label={`${title} card`}
+    >
+      <header className="bg-gray-100 rounded-t-lg p-4 text-center">
         {/* District image */}
         <div
-          className="district-card-image"
+          className="flex items-center justify-center m-4 rounded"
           aria-label={`${title} image`}
           tabIndex="0"
         >
-          {/* The image path should be relative to the public folder for Vite/React */}
           <img
             src={`./districtImg/${imgFile}.webp`}
             alt={`${title} district`}
-            className="district-img"
+            className="w-16 h-16 object-contain"
             onError={(e) => {
-              // Show a simple fallback if image is missing
               e.target.style.display = "none";
               e.target.parentNode.textContent = "No image available";
             }}
           />
         </div>
       </header>
-      <footer className="district-card-footer">
-        <label htmlFor={`${title}-input`} className="visually-hidden">
+      <footer className="p-4 flex flex-col">
+        <label htmlFor={`${title}-input`} className="sr-only">
           {`Input for ${title}`}
         </label>
         <input
@@ -60,6 +60,7 @@ const DistrictCard = ({ title }) => {
           type="text"
           placeholder={`Number Built`}
           aria-label={`Input for number of ${title} built`}
+          className="p-2 rounded border border-gray-300 text-base"
         />
       </footer>
     </article>
@@ -69,7 +70,10 @@ const DistrictCard = ({ title }) => {
 // Main component to render all cards
 const DistrictCards = () => {
   return (
-    <main className="district-cards-container" aria-label="District cards">
+    <main
+      className="flex flex-wrap gap-6 justify-center p-8"
+      aria-label="District cards"
+    >
       {districtTitles.map((title) => (
         <DistrictCard key={title} title={title} />
       ))}

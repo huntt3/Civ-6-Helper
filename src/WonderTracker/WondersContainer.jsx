@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 import WonderCard from "./WonderCard";
 import WonderModal from "./WonderModal";
-import "./WonderTracker.css";
 
 // WondersContainer component using CollapsibleContainer
 const WondersContainer = () => {
@@ -60,6 +59,7 @@ const WondersContainer = () => {
 
   return (
     <>
+      {/* CollapsibleContainer wraps all wonders grouped by era */}
       <CollapsibleContainer
         title="Wonders"
         collapsed={collapsed}
@@ -68,41 +68,38 @@ const WondersContainer = () => {
         ariaLabel="Wonders"
       >
         <div
-          className="wonders-rows"
-          style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
+          className="wonders-rows flex flex-col gap-6"
+          /* Using Tailwind for layout, accessible structure */
         >
-          {eraOrder.map((era, idx) => (
-            <section key={era} aria-label={era} style={{ width: "100%" }}>
-              <header style={{ marginBottom: "0.5rem" }}>
+          {eraOrder.map((era) => (
+            <section key={era} aria-label={era} className="w-full">
+              <header className="mb-2">
                 <h3
+                  className="text-lg font-semibold"
                   style={{
                     margin: 0,
-                    fontSize: "1.1rem",
                     color: "var(--primary-text-color-dark)",
                   }}
                 >
-                  {era}
+                  {era} Era
                 </h3>
               </header>
-              <div className="wonders-list" style={{ minHeight: "2.5rem" }}>
-                {wondersByEra[idx].length === 0 ? (
-                  <span style={{ color: "#888", fontSize: "0.95rem" }}>
-                    No wonders
-                  </span>
-                ) : (
-                  wondersByEra[idx].map((wonder) => (
+              <div className="flex flex-wrap gap-4 justify-center">
+                {wonders
+                  .filter((w) => w.era === era)
+                  .map((wonder) => (
                     <WonderCard
                       key={wonder.name}
                       wonder={wonder}
                       onClick={() => handleCardClick(wonder)}
                     />
-                  ))
-                )}
+                  ))}
               </div>
             </section>
           ))}
         </div>
       </CollapsibleContainer>
+      {/* WonderModal for showing details */}
       <WonderModal
         wonder={selectedWonder}
         onClose={handleCloseModal}

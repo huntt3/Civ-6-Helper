@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./WonderTracker.css";
 
 // WonderCard component
 const WonderCard = ({ wonder, onClick }) => {
@@ -43,14 +42,29 @@ const WonderCard = ({ wonder, onClick }) => {
   const cardClass = `wonder-card${wonder.built ? " built" : ""}${
     isAvailable ? " available" : ""
   }`;
+  let cardStyle = {
+    background: wonder.built
+      ? "var(--secondary-container-color)"
+      : isAvailable
+      ? "var(--wonder-card-available-color)"
+      : "var(--primary-bg-color)",
+    color: wonder.built
+      ? "var(--secondary-text-color-dark)"
+      : "var(--primary-text-color-dark)",
+    border: "1px solid var(--primary-border-color)",
+  };
   return (
     <div
-      className={cardClass}
-      onClick={onClick}
+      className={`rounded-lg shadow-md px-8 py-4 min-w-[180px] text-center text-lg cursor-pointer transition-colors transition-shadow outline-none focus:ring-2 focus:ring-yellow-400 hover:bg-gray-100 mb-2`}
       tabIndex={0}
-      aria-label={`Show details for ${wonder.name}`}
+      role="button"
+      aria-pressed={wonder.built}
+      onClick={onClick}
+      aria-label={wonder.name}
+      style={cardStyle}
     >
-      <span className="wonder-card-title">{wonder.name}</span>
+      <h3 className="font-semibold text-xl mb-2">{wonder.name}</h3>
+      <p className="text-base">{wonder.description}</p>
     </div>
   );
 };

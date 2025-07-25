@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./WonderTracker.css";
 import CivModal from "../Templates/CivModal";
 
 // Modal for Wonder details
