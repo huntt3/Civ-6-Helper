@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import EraScoreModal from "./EraScoreModal";
 import { FaStar } from "react-icons/fa";
 import "./EraTracker.css";
 
@@ -29,7 +30,6 @@ const EraScore = ({
 
   return (
     <div className="era-score-card">
-      {/* Favorite star icon on the left */}
       <button
         type="button"
         className="mr-2 focus:outline-none"
@@ -51,7 +51,6 @@ const EraScore = ({
       </button>
       {repeatable ? (
         <div className="flex items-center gap-2">
-          {/* For repeatable cards, show count controls */}
           <button
             type="button"
             className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
@@ -90,9 +89,6 @@ const EraScore = ({
       )}
       <span className="era-score-title">{title}</span>
       <span className="era-score-value">+{eraScore}</span>
-      <span className="era-score-era">
-        {minEra} - {maxEra}
-      </span>
       <button
         className="era-score-desc-btn"
         onClick={handleModal}
@@ -100,26 +96,14 @@ const EraScore = ({
       >
         Description
       </button>
-      {showModal && (
-        <div
-          className="era-score-modal"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-title"
-        >
-          <div className="era-score-modal-content">
-            <h3 id="modal-title">{title}</h3>
-            <p>{description}</p>
-            <button
-              onClick={handleModal}
-              className="era-score-modal-close"
-              aria-label="Close description"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+      <EraScoreModal
+        open={showModal}
+        title={title}
+        description={description}
+        minEra={minEra}
+        maxEra={maxEra}
+        onClose={handleModal}
+      />
     </div>
   );
 };
