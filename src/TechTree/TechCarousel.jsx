@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import TechCard from "./TechCard";
 import TechModal from "./TechModal";
 import TechArrows from "./TechArrows";
-import "./TechTree.css";
 
 const TechCarousel = ({ rowRange, minRow = 0, onReset }) => {
   const [techs, setTechs] = useState([]);
@@ -190,7 +189,7 @@ const TechCarousel = ({ rowRange, minRow = 0, onReset }) => {
 
   return (
     <section
-      className="tech-carousel"
+      className="w-full overflow-x-auto py-8 mb-8 bg-white rounded-3xl shadow-lg"
       aria-label="Technologies"
       tabIndex="0"
       style={{ position: "relative" }}
@@ -203,7 +202,13 @@ const TechCarousel = ({ rowRange, minRow = 0, onReset }) => {
           gap: "1rem",
         }}
       ></header>
-      <div className="tech-carousel-grid" style={{ position: "relative" }}>
+      <div
+        className="grid grid-cols-20 grid-rows-8 gap-10 min-w-[2800px] py-4 relative"
+        style={{
+          gridTemplateColumns: "repeat(20, 120px)",
+          gridTemplateRows: "repeat(8, 100px)",
+        }}
+      >
         <TechArrows
           arrowData={arrowData}
           columns={columns}
@@ -217,7 +222,7 @@ const TechCarousel = ({ rowRange, minRow = 0, onReset }) => {
             return (
               <div
                 key={idx}
-                className="tech-card tech-card-empty"
+                className="bg-transparent shadow-none border-none cursor-default"
                 aria-hidden="true"
               ></div>
             );
@@ -225,21 +230,21 @@ const TechCarousel = ({ rowRange, minRow = 0, onReset }) => {
           let extraClass = "";
           if (hoveredTech && tech.name === hoveredTech.name) {
             if (tech.techCivic === "Tech") {
-              extraClass = "tech-card-hovered";
+              extraClass = "ring-4 ring-yellow-400";
             } else {
-              extraClass = "civic-card-hovered";
+              extraClass = "ring-4 ring-purple-400";
             }
           } else if (hoveredTech && boostsSet.has(tech.name)) {
             if (tech.techCivic === "Tech") {
-              extraClass = "tech-card-boosts-hovered";
+              extraClass = "ring-2 ring-green-400";
             } else {
-              extraClass = "civic-card-boosts-hovered";
+              extraClass = "ring-2 ring-blue-400";
             }
           } else if (hoveredTech && boostedBySet.has(tech.name)) {
             if (tech.techCivic === "Tech") {
-              extraClass = "tech-card-boosted-by-hovered";
+              extraClass = "ring-2 ring-orange-400";
             } else {
-              extraClass = "civic-card-boosted-by-hovered";
+              extraClass = "ring-2 ring-pink-400";
             }
           }
           return (
@@ -253,6 +258,7 @@ const TechCarousel = ({ rowRange, minRow = 0, onReset }) => {
               hoverClass={extraClass}
               onHover={() => setHoveredTech(tech)}
               onUnhover={() => setHoveredTech(null)}
+              techCivic={tech.techCivic}
             />
           );
         })}

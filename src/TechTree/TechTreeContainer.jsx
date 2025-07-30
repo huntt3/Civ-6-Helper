@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./TechTree.css";
 import TechCarousel from "./TechCarousel";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 

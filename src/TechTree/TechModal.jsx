@@ -1,5 +1,4 @@
 import React from "react";
-import "./TechTree.css";
 import CivModal from "../Templates/CivModal";
 
 const TechModal = ({ tech, onClose }) => {

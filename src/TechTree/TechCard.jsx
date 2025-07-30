@@ -1,5 +1,4 @@
 import React from "react";
-import "./TechTree.css";
 
 // Helper to determine if all prerequisites are researched
 const allPrereqsResearched = (tech, allTechs) => {
@@ -21,63 +20,59 @@ const TechCard = ({
   onUnhover,
   techCivic = "Tech", // Add this prop, default to "Tech"
 }) => {
-  // Figure out the correct class for the tech card
-  let cardClass = "tech-card";
-  if (tech.researched) {
-    cardClass += " researched";
-  } else {
-    const canResearch = allPrereqsResearched(tech, allTechs);
-    if (tech.boosted) {
-      cardClass += " boosted";
-      cardClass += canResearch ? " can-research" : " cannot-research";
-    } else {
-      cardClass += " no-boost";
-      cardClass += canResearch ? " can-research" : " cannot-research";
-    }
-  }
-  if (hoverClass) {
-    cardClass += ` ${hoverClass}`;
+  // Handle empty cards
+  if (!tech || !tech.name) {
+    return (
+      <div
+        className="bg-transparent shadow-none border-none cursor-default"
+        aria-hidden="true"
+      ></div>
+    );
   }
 
-  // Set background color based on techCivic and state
-  const getBackgroundColor = () => {
+  // Get CSS classes for Tailwind
+  const getCardClasses = () => {
+    let classes =
+      "rounded-2xl min-w-0 min-h-0 h-full w-full flex flex-col items-center justify-center text-lg shadow-lg cursor-pointer border-2 border-gray-300 text-gray-800 transition-all duration-200 relative z-10 hover:shadow-xl hover:border-green-500";
+
     if (tech.researched) {
-      // Use a different color for researched techs and civics
-      return techCivic === "Tech"
-        ? "var(--tech-card-researched-color)"
-        : "var(--civic-card-researched-color)";
+      classes +=
+        " !bg-gray-500 text-white grayscale brightness-75 border-gray-600 cursor-not-allowed hover:shadow-lg hover:border-gray-600";
+    } else {
+      const canResearch = allPrereqsResearched(tech, allTechs);
+      if (tech.boosted && !canResearch) {
+        classes +=
+          techCivic === "Tech"
+            ? " !bg-yellow-600 text-white"
+            : " !bg-purple-600 text-white";
+      } else if (tech.boosted && canResearch) {
+        classes +=
+          techCivic === "Tech"
+            ? " !bg-green-500 text-white"
+            : " !bg-blue-500 text-white";
+      } else if (!tech.boosted && !canResearch) {
+        classes +=
+          techCivic === "Tech"
+            ? " !bg-red-400 text-gray-800"
+            : " !bg-pink-400 text-gray-800";
+      } else if (!tech.boosted && canResearch) {
+        classes +=
+          techCivic === "Tech"
+            ? " !bg-blue-400 text-white"
+            : " !bg-indigo-400 text-white";
+      }
     }
-    const canResearch = allPrereqsResearched(tech, allTechs);
-    if (tech.boosted && !canResearch) {
-      // Boosted but cannot research yet
-      return techCivic === "Tech"
-        ? "var(--tech-card-boosted-cannot-research-color)"
-        : "var(--civic-card-boosted-cannot-research-color)";
-    } else if (tech.boosted && canResearch) {
-      // Boosted and can research
-      return techCivic === "Tech"
-        ? "var(--tech-card-boosted-can-research-color)"
-        : "var(--civic-card-boosted-can-research-color)";
-    } else if (!tech.boosted && !canResearch) {
-      // Not boosted and cannot research yet
-      return techCivic === "Tech"
-        ? "var(--tech-card-no-boost-cannot-research-color)"
-        : "var(--civic-card-no-boost-cannot-research-color)";
-    } else if (!tech.boosted && canResearch) {
-      // Not boosted but can research
-      return techCivic === "Tech"
-        ? "var(--tech-card-no-boost-can-research-color)"
-        : "var(--civic-card-no-boost-can-research-color)";
-    }
-    // Default color if none of the above
-    return "";
-  };
 
-  const background = getBackgroundColor();
+    if (hoverClass) {
+      classes += ` ${hoverClass}`;
+    }
+
+    return classes;
+  };
 
   return (
     <div
-      className={cardClass}
+      className={getCardClasses()}
       tabIndex={0}
       aria-label={`Show details for ${tech.name}`}
       role="button"
@@ -101,19 +96,21 @@ const TechCard = ({
           onResearch(tech.name);
         }
       }}
-      style={{ cursor: "pointer", background }}
       onMouseEnter={onHover}
       onMouseLeave={onUnhover}
       onFocus={onHover}
       onBlur={onUnhover}
     >
-      <span className="tech-card-title">{tech.name}</span>
-      <label
-        style={{ display: "block", marginTop: "0.5rem", fontSize: "0.95rem" }}
+      <span
+        className="font-semibold mb-1 text-base text-white tracking-wide"
+        style={{ textShadow: "0 2px 8px rgba(0,0,0,0.3)" }}
       >
+        {tech.name}
+      </span>
+      <label className="block mt-2 text-sm">
         <input
           type="checkbox"
-          className="boost-checkbox"
+          className="boost-checkbox mr-1"
           checked={!!tech.boosted}
           onChange={(e) => {
             e.stopPropagation();
@@ -127,7 +124,7 @@ const TechCard = ({
         Boosted
       </label>
       <button
-        className="details-btn"
+        className="details-btn mt-1 px-2 py-1 bg-gray-200 text-gray-800 rounded text-xs hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
         type="button"
         tabIndex={0}
         aria-label={`Show details for ${tech.name}`}

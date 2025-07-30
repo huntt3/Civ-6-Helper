@@ -1,5 +1,4 @@
 import React from "react";
-import "./TechTree.css";
 
 const TechArrows = ({
   arrowData,
@@ -10,16 +9,9 @@ const TechArrows = ({
   gap,
 }) => (
   <svg
-    className="tech-arrows-svg"
+    className="absolute top-0 left-0 w-full h-full pointer-events-none z-0"
     width={columns * (cardWidth + gap)}
     height={rows * (cardHeight + gap)}
-    style={{
-      position: "absolute",
-      top: 0,
-      left: 0,
-      zIndex: 0,
-      pointerEvents: "none",
-    }}
   >
     {arrowData.map((arrow, i) => (
       <g key={i}>
