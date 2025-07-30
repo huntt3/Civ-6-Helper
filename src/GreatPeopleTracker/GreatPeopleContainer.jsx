@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./GreatPeopleContainer.css";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 
 const getPeopleByEraAndType = (people, era, type) => {
@@ -92,29 +91,36 @@ const GreatPeopleContainer = () => {
   return (
     <CollapsibleContainer
       title="Great People"
-      className="great-people-container"
+      className="my-8 mx-auto p-4 max-w-full bg-white text-gray-900 rounded-lg shadow-md"
       collapsed={collapsed}
       onCollapse={handleCollapseContainer}
       onRefresh={handleRefresh}
     >
-      {error && <p className="error-message">{error}</p>}
+      {error && <p className="text-red-600 text-center mb-4">{error}</p>}
       <div
-        className="great-people-grid"
+        className="flex flex-col gap-2"
         role="table"
         aria-label="Great People Table"
       >
-        <div className="header-row" role="row">
+        <div className="grid grid-cols-5 gap-2" role="row">
           {types.map((type) => (
-            <div key={type} className="header-cell" role="columnheader">
+            <div
+              key={type}
+              className="font-bold text-center bg-gray-100 text-gray-800 py-2 rounded"
+              role="columnheader"
+            >
               {type}
             </div>
           ))}
         </div>
         {eras.map((era) => (
           <React.Fragment key={era}>
-            <div className="era-label" aria-label={`Row for ${era} era`}>
+            <div
+              className="font-bold text-base bg-gray-100 px-4 py-2 rounded mb-1 flex items-center gap-2"
+              aria-label={`Row for ${era} era`}
+            >
               <button
-                className="collapse-btn"
+                className="bg-blue-600 text-white border-none rounded px-3 py-1 text-base cursor-pointer transition-colors duration-200 mr-2 hover:bg-blue-700 focus:bg-blue-700 focus:outline-none"
                 aria-expanded={!collapsedEras[era]}
                 aria-controls={`era-row-${era}`}
                 onClick={() => handleCollapse(era)}
@@ -124,17 +130,27 @@ const GreatPeopleContainer = () => {
               <span>{era}</span>
             </div>
             {!collapsedEras[era] && (
-              <div className="era-row" role="row" id={`era-row-${era}`}>
+              <div
+                className="grid grid-cols-5 gap-2"
+                role="row"
+                id={`era-row-${era}`}
+              >
                 {types.map((type) => {
                   const people = getPeopleByEraAndType(greatPeople, era, type);
                   return (
-                    <div key={type} className="cell" role="cell">
+                    <div
+                      key={type}
+                      className="min-h-[80px] flex flex-col items-center justify-start bg-white text-gray-800 rounded shadow p-1"
+                      role="cell"
+                    >
                       {people.length > 0 ? (
                         people.map((person) => (
                           <article
                             key={person.name}
-                            className={`great-person-card${
-                              checkedCards[person.name] ? " selected" : ""
+                            className={`transition-colors duration-200 border rounded w-full box-border text-sm p-2 mb-1 cursor-pointer ${
+                              checkedCards[person.name]
+                                ? "bg-blue-100 border-blue-600 filter brightness-90"
+                                : "bg-gray-50 border-gray-300 hover:bg-blue-50 hover:shadow-md"
                             }`}
                             tabIndex={0}
                             aria-label={`${person.name}, ${person.ability}`}
@@ -146,11 +162,8 @@ const GreatPeopleContainer = () => {
                                 handleCardClick(person.name);
                               }
                             }}
-                            style={{ cursor: "pointer" }}
                           >
-                            <span style={{ fontWeight: "bold" }}>
-                              {person.name}
-                            </span>
+                            <span className="font-bold">{person.name}</span>
                             <p>{person.ability}</p>
                             {person.charges && (
                               <p>
@@ -161,7 +174,7 @@ const GreatPeopleContainer = () => {
                         ))
                       ) : (
                         <div
-                          className="empty-cell"
+                          className="text-gray-400 text-center py-2"
                           aria-label="No Great Person"
                         >
                           -

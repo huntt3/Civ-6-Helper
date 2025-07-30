@@ -30,13 +30,13 @@ const DistrictCard = ({ title }) => {
   const imgFile = getDistrictImg(title);
   return (
     <article
-      className="bg-white rounded-lg shadow-md w-[150px] flex flex-col items-stretch m-2 border border-gray-200"
+      className="bg-white rounded-md shadow-lg w-[150px] flex flex-col items-stretch m-2 border border-gray-200"
       aria-label={`${title} card`}
     >
-      <header className="bg-gray-100 rounded-t-lg p-4 text-center">
+      <header className="bg-gray-100 rounded-t-md p-4 text-center">
         {/* District image */}
         <div
-          className="flex items-center justify-center m-4 rounded"
+          className="flex items-center justify-center m-4 rounded-sm"
           aria-label={`${title} image`}
           tabIndex="0"
         >
@@ -60,7 +60,7 @@ const DistrictCard = ({ title }) => {
           type="text"
           placeholder={`Number Built`}
           aria-label={`Input for number of ${title} built`}
-          className="p-2 rounded border border-gray-300 text-base"
+          className="p-2 rounded-sm border border-gray-300 text-base"
         />
       </footer>
     </article>
