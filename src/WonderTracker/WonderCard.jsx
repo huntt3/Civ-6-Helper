@@ -38,10 +38,7 @@ const WonderCard = ({ wonder, onClick }) => {
     };
   }, [wonder.requirement]);
 
-  // Add 'built' class if wonder.built is true, and 'available' if requirement is researched
-  const cardClass = `wonder-card${wonder.built ? " built" : ""}${
-    isAvailable ? " available" : ""
-  }`;
+  // Set the card style based on whether the wonder is built or available
   let cardStyle = {
     background: wonder.built
       ? "var(--secondary-container-color)"
@@ -55,7 +52,7 @@ const WonderCard = ({ wonder, onClick }) => {
   };
   return (
     <div
-      className={`rounded-lg shadow-md px-8 py-4 min-w-[180px] text-center text-lg cursor-pointer transition-colors transition-shadow outline-none focus:ring-2 focus:ring-yellow-400 hover:bg-gray-100 mb-2`}
+      className={`rounded-lg shadow-md px-8 py-4 min-w-[180px] text-center text-lg cursor-pointer transition-colors outline-none focus:ring-2 focus:ring-yellow-400 hover:bg-gray-100 mb-2`}
       tabIndex={0}
       role="button"
       aria-pressed={wonder.built}
