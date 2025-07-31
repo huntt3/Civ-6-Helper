@@ -28,7 +28,7 @@ const TechArrows = ({
               y1={arrow.y1}
               x2={arrow.x2}
               y2={arrow.y2}
-              stroke="var(--tech-arrow-color)"
+              stroke="#1434a4"
               strokeWidth="3"
               markerEnd={`url(#${markerId})`}
             />
@@ -45,7 +45,7 @@ const TechArrows = ({
           orient="auto"
           markerUnits="strokeWidth"
         >
-          <polygon points="0 0, 10 3.5, 0 7" fill="var(--tech-arrow-color)" />
+          <polygon points="0 0, 10 3.5, 0 7" fill="#1434a4" />
         </marker>
       </defs>
     </svg>
