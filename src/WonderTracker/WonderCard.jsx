@@ -38,27 +38,22 @@ const WonderCard = ({ wonder, onClick }) => {
     };
   }, [wonder.requirement]);
 
-  // Set the card style based on whether the wonder is built or available
-  let cardStyle = {
-    background: wonder.built
-      ? "var(--secondary-container-color)"
-      : isAvailable
-      ? "var(--wonder-card-available-color)"
-      : "var(--primary-bg-color)",
-    color: wonder.built
-      ? "var(--secondary-text-color-dark)"
-      : "var(--primary-text-color-dark)",
-    border: "1px solid var(--primary-border-color)",
-  };
+  // Set Tailwind classes for color based on built/available state
+  let colorClass = "bg-white text-gray-900 border border-gray-300";
+  if (wonder.built) {
+    colorClass = "bg-gray-200 text-black-900 border-gray-400";
+  } else if (isAvailable) {
+    colorClass = "bg-green-100 text-green-900 border-green-400";
+  }
+
   return (
     <div
-      className={`rounded-lg shadow-md px-8 py-4 min-w-[180px] text-center text-lg cursor-pointer transition-colors outline-none focus:ring-2 focus:ring-yellow-400 hover:bg-gray-100 mb-2`}
+      className={`rounded-lg shadow-md px-8 py-4 min-w-[180px] text-center text-lg cursor-pointer transition-colors outline-none focus:ring-2 focus:ring-yellow-400 hover:bg-gray-100 mb-2 ${colorClass}`}
       tabIndex={0}
       role="button"
       aria-pressed={wonder.built}
       onClick={onClick}
       aria-label={wonder.name}
-      style={cardStyle}
     >
       <h3 className="font-semibold text-xl mb-2">{wonder.name}</h3>
       <p className="text-base">{wonder.description}</p>
