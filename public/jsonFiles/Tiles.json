@@ -1,0 +1,214 @@
+{
+  "Tiles": [
+    {
+      "name": "Campus",
+      "type": "district",
+      "requirement": "Writing",
+      "appeal": 0,
+      "minorAdjacencies": [
+        "City Center",
+        "Campus",
+        "Theater Square",
+        "Holy Site",
+        "Encampment",
+        "Commercial Hub",
+        "Harbor",
+        "Industrial Zone",
+        "Preserve",
+        "Entertainment Complex",
+        "Water Park",
+        "Aerodrome",
+        "Spaceport",
+        "Government Plaza",
+        "Diplomatic Quarter"
+      ],
+      "normalAdjacencies": ["Mountain"],
+      "majorAdjacencies": [
+        "Geothermal Fissure",
+        "Reef",
+        "Great Barrier Reef",
+        "Pamukkale"
+      ]
+    },
+    {
+      "name": "Theater Square",
+      "type": "district",
+      "requirement": "Drama and Poetry",
+      "appeal": 1,
+      "minorAdjacencies": [
+        "City Center",
+        "Campus",
+        "Theater Square",
+        "Holy Site",
+        "Encampment",
+        "Commercial Hub",
+        "Harbor",
+        "Industrial Zone",
+        "Preserve",
+        "Entertainment Complex",
+        "Water Park",
+        "Aerodrome",
+        "Spaceport",
+        "Government Plaza",
+        "Diplomatic Quarter"
+      ],
+      "normalAdjacencies": [],
+      "majorAdjacencies": [
+        "Wonder",
+        "Entertainment Complex",
+        "Water Park",
+        "Pamukkale"
+      ]
+    },
+    {
+      "name": "Holy Site",
+      "type": "district",
+      "requirement": "Astrology",
+      "appeal": 1,
+      "minorAdjacencies": [
+        "Woods",
+        "City Center",
+        "Campus",
+        "Theater Square",
+        "Holy Site",
+        "Encampment",
+        "Commercial Hub",
+        "Harbor",
+        "Industrial Zone",
+        "Preserve",
+        "Entertainment Complex",
+        "Water Park",
+        "Aerodrome",
+        "Spaceport",
+        "Government Plaza",
+        "Diplomatic Quarter"
+      ],
+      "normalAdjacencies": ["Mountain"],
+      "majorAdjacencies": ["Natural Wonder"]
+    },
+    {
+      "name": "Encampment",
+      "type": "district",
+      "requirement": "Bronze Working",
+      "appeal": -1
+    },
+    {
+      "name": "Commercial Hub",
+      "type": "district",
+      "requirement": "Currency",
+      "appeal": 0,
+      "minorAdjacencies": [
+        "City Center",
+        "Campus",
+        "Theater Square",
+        "Holy Site",
+        "Encampment",
+        "Commercial Hub",
+        "Harbor",
+        "Industrial Zone",
+        "Preserve",
+        "Entertainment Complex",
+        "Water Park",
+        "Aerodrome",
+        "Spaceport",
+        "Government Plaza",
+        "Diplomatic Quarter"
+      ],
+      "normalAdjacencies": [],
+      "majorAdjacencies": ["River", "Harbor", "Pamukkale"]
+    },
+    {
+      "name": "Harbor",
+      "type": "district",
+      "requirement": "Celestial Navigation",
+      "appeal": 0,
+      "minorAdjacencies": [
+        "Campus",
+        "Theater Square",
+        "Holy Site",
+        "Encampment",
+        "Commercial Hub",
+        "Harbor",
+        "Industrial Zone",
+        "Preserve",
+        "Entertainment Complex",
+        "Water Park",
+        "Aerodrome",
+        "Spaceport",
+        "Government Plaza",
+        "Diplomatic Quarter"
+      ],
+      "normalAdjacencies": ["Sea Resource"],
+      "majorAdjacencies": ["City Center"]
+    },
+    {
+      "name": "Industrial Zone",
+      "type": "district",
+      "requirement": "Apprenticeship",
+      "appeal": -1,
+      "minorAdjacencies": [
+        "Mine",
+        "Lumber Mill",
+        "City Center",
+        "Campus",
+        "Theater Square",
+        "Holy Site",
+        "Encampment",
+        "Commercial Hub",
+        "Harbor",
+        "Industrial Zone",
+        "Preserve",
+        "Entertainment Complex",
+        "Water Park",
+        "Aerodrome",
+        "Spaceport",
+        "Government Plaza",
+        "Diplomatic Quarter"
+      ],
+      "normalAdjacencies": ["Quarry", "Strategic Resource"],
+      "majorAdjacencies": ["Aqueduct", "Bath", "Canal", "Dam"]
+    },
+    {
+      "name": "Preserve",
+      "type": "district",
+      "requirement": "Mysticism",
+      "appeal": 1
+    },
+    {
+      "name": "Entertainment Complex",
+      "type": "district",
+      "requirement": "Games and Recreation",
+      "appeal": 1
+    },
+    {
+      "name": "Water Park",
+      "type": "district",
+      "requirement": "Natural History",
+      "appeal": 1
+    },
+    {
+      "name": "Aerodrome",
+      "type": "district",
+      "requirement": "Flight",
+      "appeal": -1
+    },
+    {
+      "name": "Spaceport",
+      "type": "district",
+      "requirement": "Rocketry",
+      "appeal": -1
+    },
+    {
+      "name": "Government Plaza",
+      "type": "district",
+      "requirement": "State Workforce",
+      "appeal": 1
+    },
+    {
+      "name": "Diplomatic Quarter",
+      "type": "district",
+      "requirement": "Mathematics",
+      "appeal": 1
+    }
+  ]
+}
