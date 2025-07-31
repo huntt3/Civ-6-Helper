@@ -209,6 +209,162 @@
       "type": "district",
       "requirement": "Mathematics",
       "appeal": 1
+    },
+    {
+      "name": "Aqueduct",
+      "type": "district",
+      "requirement": "Mathematics",
+      "appeal": 0
+    },
+    {
+      "name": "Canal",
+      "type": "district",
+      "requirement": "Mathematics",
+      "appeal": 1
+    },
+    {
+      "name": "Dam",
+      "type": "district",
+      "requirement": "Mathematics",
+      "appeal": 1
+    },
+    {
+      "name": "Neighborhood",
+      "type": "district",
+      "requirement": "Mathematics",
+      "appeal": 0
+    },
+    {
+      "name": "Farm",
+      "type": "Tile Improvement",
+      "requirement": "",
+      "appeal": 0
+    },
+    {
+      "name": "Mine",
+      "type": "Tile Improvement",
+      "requirement": "Mining",
+      "appeal": -1
+    },
+    {
+      "name": "Quarry",
+      "type": "Tile Improvement",
+      "requirement": "Mining",
+      "appeal": -1
+    },
+    {
+      "name": "Plantation",
+      "type": "Tile Improvement",
+      "requirement": "Irrigation",
+      "appeal": 0
+    },
+    {
+      "name": "Camp",
+      "type": "Tile Improvement",
+      "requirement": "Animal Husbandry",
+      "appeal": 0
+    },
+    {
+      "name": "Pasture",
+      "type": "Tile Improvement",
+      "requirement": "Animal Husbandry",
+      "appeal": 0
+    },
+    {
+      "name": "Camp",
+      "type": "Tile Improvement",
+      "requirement": "Animal Husbandry",
+      "appeal": 0
+    },
+    {
+      "name": "Fishing Boat",
+      "type": "Tile Improvement",
+      "requirement": "Sailing",
+      "appeal": 0
+    },
+    {
+      "name": "Lumber Mill",
+      "type": "Tile Improvement",
+      "requirement": "Machinery",
+      "appeal": 0
+    },
+    {
+      "name": "Fort",
+      "type": "Tile Improvement",
+      "requirement": "Siege Tactics",
+      "appeal": 0
+    },
+    {
+      "name": "Airstrip",
+      "type": "Tile Improvement",
+      "requirement": "Flight",
+      "appeal": -1
+    },
+    {
+      "name": "Seaside Resort",
+      "type": "Tile Improvement",
+      "requirement": "Radio",
+      "appeal": 0
+    },
+    {
+      "name": "Geothermal Plant",
+      "type": "Tile Improvement",
+      "requirement": "Synthetic Materials",
+      "appeal": 0
+    },
+    {
+      "name": "Wind Farm",
+      "type": "Tile Improvement",
+      "requirement": "Composites",
+      "appeal": 0
+    },
+    {
+      "name": "Solar Farm",
+      "type": "Tile Improvement",
+      "requirement": "Satellites",
+      "appeal": 0
+    },
+    {
+      "name": "Offshore Wind Farm",
+      "type": "Tile Improvement",
+      "requirement": "Predictive Systems",
+      "appeal": 0
+    },
+    {
+      "name": "Ski Resort",
+      "type": "Tile Improvement",
+      "requirement": "Siege Tactics",
+      "appeal": 0
+    },
+    {
+      "name": "Oil Well",
+      "type": "Tile Improvement",
+      "requirement": "Steel",
+      "appeal": -1
+    },
+    {
+      "name": "Offshore Oil Rig",
+      "type": "Tile Improvement",
+      "requirement": "Plastics",
+      "appeal": -1
+    },
+    {
+      "name": "Missile Silo",
+      "type": "Tile Improvement",
+      "requirement": "Siege Tactics",
+      "appeal": 0
+    },
+    {
+      "name": "Mountain Tunnel",
+      "type": "Tile Improvement",
+      "requirement": "Chemistry",
+      "appeal": 0
+    },
+    {
+      "name": "Seastead",
+      "type": "Tile Improvement",
+      "requirement": "Seasteads",
+      "appeal": 0
     }
   ]
 }
