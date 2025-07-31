@@ -1,11 +1,16 @@
 {
   "Tiles": [
     {
+      "name": "City Center",
+      "type": "district",
+      "appeal": 0
+    },
+    {
       "name": "Campus",
       "type": "district",
       "requirement": "Writing",
       "appeal": 0,
-      "minorAdjacencies": [
+      "districtMinorAdjacencies": [
         "City Center",
         "Campus",
         "Theater Square",
@@ -20,8 +25,13 @@
         "Aerodrome",
         "Spaceport",
         "Government Plaza",
-        "Diplomatic Quarter"
+        "Diplomatic Quarter",
+        "Aqueduct",
+        "Canal",
+        "Dam",
+        "Neighborhood"
       ],
+      "otherMinorAdjacencies": [],
       "normalAdjacencies": ["Mountain"],
       "majorAdjacencies": [
         "Geothermal Fissure",
@@ -35,7 +45,7 @@
       "type": "district",
       "requirement": "Drama and Poetry",
       "appeal": 1,
-      "minorAdjacencies": [
+      "districtMinorAdjacencies": [
         "City Center",
         "Campus",
         "Theater Square",
@@ -50,8 +60,13 @@
         "Aerodrome",
         "Spaceport",
         "Government Plaza",
-        "Diplomatic Quarter"
+        "Diplomatic Quarter",
+        "Aqueduct",
+        "Canal",
+        "Dam",
+        "Neighborhood"
       ],
+      "otherMinorAdjacencies": [],
       "normalAdjacencies": [],
       "majorAdjacencies": [
         "Wonder",
@@ -65,8 +80,7 @@
       "type": "district",
       "requirement": "Astrology",
       "appeal": 1,
-      "minorAdjacencies": [
-        "Woods",
+      "districtMinorAdjacencies": [
         "City Center",
         "Campus",
         "Theater Square",
@@ -81,8 +95,13 @@
         "Aerodrome",
         "Spaceport",
         "Government Plaza",
-        "Diplomatic Quarter"
+        "Diplomatic Quarter",
+        "Aqueduct",
+        "Canal",
+        "Dam",
+        "Neighborhood"
       ],
+      "otherMinorAdjacencies": ["Woods"],
       "normalAdjacencies": ["Mountain"],
       "majorAdjacencies": ["Natural Wonder"]
     },
@@ -97,7 +116,7 @@
       "type": "district",
       "requirement": "Currency",
       "appeal": 0,
-      "minorAdjacencies": [
+      "districtMinorAdjacencies": [
         "City Center",
         "Campus",
         "Theater Square",
@@ -112,8 +131,13 @@
         "Aerodrome",
         "Spaceport",
         "Government Plaza",
-        "Diplomatic Quarter"
+        "Diplomatic Quarter",
+        "Aqueduct",
+        "Canal",
+        "Dam",
+        "Neighborhood"
       ],
+      "otherMinorAdjacencies": [],
       "normalAdjacencies": [],
       "majorAdjacencies": ["River", "Harbor", "Pamukkale"]
     },
@@ -122,7 +146,7 @@
       "type": "district",
       "requirement": "Celestial Navigation",
       "appeal": 0,
-      "minorAdjacencies": [
+      "districtMinorAdjacencies": [
         "Campus",
         "Theater Square",
         "Holy Site",
@@ -136,8 +160,13 @@
         "Aerodrome",
         "Spaceport",
         "Government Plaza",
-        "Diplomatic Quarter"
+        "Diplomatic Quarter",
+        "Aqueduct",
+        "Canal",
+        "Dam",
+        "Neighborhood"
       ],
+      "otherMinorAdjacencies": [],
       "normalAdjacencies": ["Sea Resource"],
       "majorAdjacencies": ["City Center"]
     },
@@ -146,9 +175,7 @@
       "type": "district",
       "requirement": "Apprenticeship",
       "appeal": -1,
-      "minorAdjacencies": [
-        "Mine",
-        "Lumber Mill",
+      "districtMinorAdjacencies": [
         "City Center",
         "Campus",
         "Theater Square",
@@ -163,8 +190,13 @@
         "Aerodrome",
         "Spaceport",
         "Government Plaza",
-        "Diplomatic Quarter"
+        "Diplomatic Quarter",
+        "Aqueduct",
+        "Canal",
+        "Dam",
+        "Neighborhood"
       ],
+      "otherMinorAdjacencies": ["Mine", "Lumber Mill"],
       "normalAdjacencies": ["Quarry", "Strategic Resource"],
       "majorAdjacencies": ["Aqueduct", "Bath", "Canal", "Dam"]
     },
@@ -235,9 +267,13 @@
       "appeal": 0
     },
     {
+      "name": "Wonder",
+      "type": "Wonder",
+      "appeal": 1
+    },
+    {
       "name": "Farm",
       "type": "Tile Improvement",
-      "requirement": "",
       "appeal": 0
     },
     {
