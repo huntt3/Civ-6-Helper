@@ -6,6 +6,7 @@ import WondersContainer from "./WonderTracker/WondersContainer";
 import TechTreeContainer from "./TechTree/TechTreeContainer";
 import DistrictDiscountingContainer from "./DistrictDiscountingTool/DistrictDiscountingContainer";
 import GreatPeopleContainer from "./GreatPeopleTracker/GreatPeopleContainer";
+import DistrictPlannerContainer from "./DistrictPlanner/DistrictPlannerContainer.jsx";
 import Footer from "./Footer/Footer";
 import axios from "axios";
 
@@ -66,6 +67,7 @@ function App() {
       <WondersContainer />
       <GreatPeopleContainer />
       <EraTrackerContainer settings={settings} setSettings={setSettings} />
+      <DistrictPlannerContainer />
       <Footer />
     </main>
   );
