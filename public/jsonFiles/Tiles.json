@@ -307,12 +307,6 @@
       "appeal": 0
     },
     {
-      "name": "Camp",
-      "type": "Tile Improvement",
-      "requirement": "Animal Husbandry",
-      "appeal": 0
-    },
-    {
       "name": "Fishing Boat",
       "type": "Tile Improvement",
       "requirement": "Sailing",
