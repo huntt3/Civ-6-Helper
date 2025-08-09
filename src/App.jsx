@@ -67,7 +67,6 @@ function App() {
       <WondersContainer />
       <GreatPeopleContainer />
       <EraTrackerContainer settings={settings} setSettings={setSettings} />
-      <DistrictPlannerContainer />
       <Footer />
     </main>
   );
