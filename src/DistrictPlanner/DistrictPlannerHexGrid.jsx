@@ -1,8 +1,53 @@
 import React, { useState, forwardRef, useImperativeHandle } from "react";
-import { HexGrid, Layout, Hexagon, Text } from "react-hexgrid";
+import { HexGrid, Layout, Hexagon, Text, Pattern } from "react-hexgrid";
 
 const DistrictPlannerHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
   const [hexagons, setHexagons] = useState([]);
+
+  // Helper function to convert tile name to camelCase filename
+  const toCamelCase = (str) => {
+    return str
+      .replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => {
+        return index === 0 ? word.toLowerCase() : word.toUpperCase();
+      })
+      .replace(/\s+/g, "");
+  };
+
+  // Helper function to check if image exists and return the pattern
+  const getImagePattern = (tileName) => {
+    if (!tileName) return null;
+    const camelCaseName = toCamelCase(tileName);
+
+    // List of known images to check against
+    const knownImages = [
+      "cityCenter",
+      "campus",
+      "commercialHub",
+      "harbor",
+      "holySite",
+      "industrialZone",
+      "theaterSquare",
+      "encampment",
+      "aerodrome",
+      "entertainmentComplex",
+      "waterPark",
+      "neighborhood",
+      "spaceport",
+      "governmentPlaza",
+      "diplomaticQuarter",
+      "preserve",
+      "aqueduct",
+      "canal",
+      "dam",
+    ];
+
+    // Only return image path if we know the image exists
+    if (knownImages.includes(camelCaseName)) {
+      return `./districtImg/${camelCaseName}.webp`;
+    }
+
+    return null;
+  };
 
   // Generate a hex grid centered around (0,0) with configurable radius
   const generateHexagons = (gridRadius) => {
@@ -92,30 +137,48 @@ const DistrictPlannerHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
           spacing={1.1}
           origin={{ x: 0, y: 0 }}
         >
-          {hexagons.map((hex) => (
-            <Hexagon
-              key={`${hex.id}-${hex.tile ? hex.tile.name : "empty"}`}
-              q={hex.q}
-              r={hex.r}
-              s={hex.s}
-              className="hex-tile cursor-pointer hover:opacity-75 transition-opacity"
-              fill={hex.tile ? "#10b981" : "#e5e7eb"}
-              stroke="#374151"
-              strokeWidth={0.5}
-              onClick={handleHexClick}
-            >
-              {hex.tile && (
-                <Text
-                  className="hex-text"
-                  fill="white"
-                  fontSize="0.08em"
-                  fontWeight="bold"
-                >
-                  {hex.tile.name}
-                </Text>
-              )}
-            </Hexagon>
-          ))}
+          {hexagons.map((hex) => {
+            const imagePath = hex.tile ? getImagePattern(hex.tile.name) : null;
+            const patternId = hex.tile
+              ? `pattern-${hex.id.replace(",", "-")}`
+              : null;
+
+            console.log("Rendering hex:", {
+              id: hex.id,
+              tileName: hex.tile?.name,
+              imagePath,
+              patternId,
+              hasImage: !!imagePath,
+            });
+
+            return (
+              <Hexagon
+                key={`${hex.id}-${hex.tile ? hex.tile.name : "empty"}`}
+                q={hex.q}
+                r={hex.r}
+                s={hex.s}
+                className="hex-tile cursor-pointer hover:opacity-75 transition-opacity"
+                fill={hex.tile ? "#10b981" : "#e5e7eb"}
+                stroke="#374151"
+                strokeWidth={0.5}
+                onClick={handleHexClick}
+              >
+                {hex.tile && imagePath && (
+                  <Pattern id={patternId} link={imagePath} />
+                )}
+                {hex.tile && (
+                  <Text
+                    className="hex-text"
+                    fill="white"
+                    fontSize="0.08em"
+                    fontWeight="bold"
+                  >
+                    {hex.tile.name}
+                  </Text>
+                )}
+              </Hexagon>
+            );
+          })}
         </Layout>
       </HexGrid>
     </div>
