@@ -56,9 +56,6 @@ function App() {
   return (
     <main>
       <Navbar />
-      <header className="App-header">
-        <h1>Civ 6 Helper</h1>
-      </header>
       <SettingsButton settings={settings} setSettings={setSettings} />
       <TechTreeContainer
         techsAndCivics={techsAndCivics}

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
-import DistrictPlannerHexGrid from "./DistrictPlannerHexGrid";
-import DistrictPlannerModal from "./DistrictPlannerModal";
+import DistrictPlannerHexGrid from "./HexPlannerHexGrid";
+import DistrictPlannerModal from "./HexPlannerModal";
 
 // This component manages the collapsed state for the CollapsibleContainer
 const DistrictPlannerContainer = () => {
