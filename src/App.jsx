@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import Navbar from "./Navbar.jsx";
 import SettingsButton from "./Settings/SettingsButton";
 import EraTrackerContainer from "./EraScoreTracker/EraTrackerContainer";
 import WondersContainer from "./WonderTracker/WondersContainer";
 import TechTreeContainer from "./TechTree/TechTreeContainer";
 import DistrictDiscountingContainer from "./DistrictDiscountingTool/DistrictDiscountingContainer";
 import GreatPeopleContainer from "./GreatPeopleTracker/GreatPeopleContainer";
-import DistrictPlannerContainer from "./DistrictPlanner/DistrictPlannerContainer.jsx";
 import Footer from "./Footer/Footer";
 import axios from "axios";
 
@@ -55,6 +55,7 @@ function App() {
 
   return (
     <main>
+      <Navbar />
       <header className="App-header">
         <h1>Civ 6 Helper</h1>
       </header>
