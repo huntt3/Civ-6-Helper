@@ -33,6 +33,7 @@ const DistrictCard = ({
   civicsCompleted = 0,
 }) => {
   const imgFile = getDistrictImg(title);
+  const [researched, setResearched] = React.useState(false);
   // Determine base cost
   let baseCost = 54;
   if (title === "Spaceport") baseCost = 1800;
@@ -43,7 +44,12 @@ const DistrictCard = ({
     Number(techsCompleted) / 77 || 0,
     Number(civicsCompleted) / 61 || 0
   );
-  const productionCost = (1 + 9 * maxCompleted) * baseCost;
+  let productionCost = 54;
+  if (title === "Spaceport") {
+    productionCost = baseCost;
+  } else {
+    productionCost = (1 + 9 * maxCompleted) * baseCost;
+  }
   // Calculate discounted production cost
   let discountedProductionCost = "-";
   if (productionCost > 0) {
@@ -73,6 +79,22 @@ const DistrictCard = ({
             e.target.style.display = "none";
             e.target.parentNode.textContent = "No image available";
           }}
+        />
+      </div>
+      {/* Researched checkbox */}
+      <div className="flex flex-col items-center mr-4">
+        <label
+          htmlFor={`${title}-researched`}
+          className="text-xs font-semibold mb-1"
+        >
+          Researched
+        </label>
+        <input
+          id={`${title}-researched`}
+          type="checkbox"
+          checked={researched}
+          onChange={(e) => setResearched(e.target.checked)}
+          className="w-5 h-5 accent-green-600"
         />
       </div>
       {/* Number Built input */}
