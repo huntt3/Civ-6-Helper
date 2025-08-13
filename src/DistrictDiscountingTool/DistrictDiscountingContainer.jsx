@@ -56,6 +56,8 @@ const DistrictDiscountingContainer = () => {
         setResearchedStates={setResearchedStates}
         numberBuiltStates={numberBuiltStates}
         setNumberBuiltStates={setNumberBuiltStates}
+        numSpecialtyDistrictsCompleted={numSpecialtyDistrictsCompleted}
+        numSpecialtyDistrictsUnlocked={numSpecialtyDistrictsUnlocked}
       />
     </CollapsibleContainer>
   );

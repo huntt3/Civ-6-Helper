@@ -35,6 +35,8 @@ const DistrictCard = ({
   setResearched,
   numberBuilt,
   setNumberBuilt,
+  numSpecialtyDistrictsCompleted = 0,
+  numSpecialtyDistrictsUnlocked = 0,
 }) => {
   const imgFile = getDistrictImg(title);
   // Determine base cost
@@ -62,6 +64,18 @@ const DistrictCard = ({
       discountedProductionCost = Math.round(productionCost * 0.6);
     }
   }
+
+  // Calculate discount condition checkboxes
+  const condition1 =
+    numSpecialtyDistrictsCompleted >= numSpecialtyDistrictsUnlocked &&
+    numSpecialtyDistrictsUnlocked > 0;
+  let condition2 = false;
+  if (numSpecialtyDistrictsUnlocked > 0) {
+    condition2 =
+      numberBuilt >=
+      numSpecialtyDistrictsCompleted / numSpecialtyDistrictsUnlocked;
+  }
+  const isDiscounted = condition1 && condition2;
   return (
     <article
       className="bg-white rounded-md shadow-lg min-w-[400px] flex flex-row items-center m-2 border border-gray-200 p-2"
@@ -128,11 +142,34 @@ const DistrictCard = ({
       <div className="flex flex-col items-start mr-4 min-w-[110px]">
         <span
           className={`font-bold ${
-            discounted ? "text-green-600" : "text-red-600"
+            isDiscounted ? "text-green-600" : "text-red-600"
           }`}
         >
-          {discounted ? "Discounted" : "Not Discounted"}
+          {isDiscounted ? "Discounted" : "Not Discounted"}
         </span>
+        {/* Discounting condition checkboxes */}
+        <div className="flex flex-col gap-1 mt-2">
+          <label className="flex items-center gap-1 text-xs">
+            <input
+              type="checkbox"
+              checked={condition1}
+              readOnly
+              disabled
+              className="w-3 h-3"
+            />
+            Completed ≥ Unlocked
+          </label>
+          <label className="flex items-center gap-1 text-xs">
+            <input
+              type="checkbox"
+              checked={condition2}
+              readOnly
+              disabled
+              className="w-3 h-3"
+            />
+            Built ≥ Completed/Unlocked
+          </label>
+        </div>
       </div>
       {/* Production Cost field */}
       <div className="flex flex-col items-start mr-4">
@@ -162,6 +199,8 @@ const DistrictCards = ({
   setResearchedStates,
   numberBuiltStates,
   setNumberBuiltStates,
+  numSpecialtyDistrictsCompleted = 0,
+  numSpecialtyDistrictsUnlocked = 0,
 }) => {
   return (
     <main
@@ -187,6 +226,8 @@ const DistrictCards = ({
             updated[idx] = val;
             setNumberBuiltStates(updated);
           }}
+          numSpecialtyDistrictsCompleted={numSpecialtyDistrictsCompleted}
+          numSpecialtyDistrictsUnlocked={numSpecialtyDistrictsUnlocked}
         />
       ))}
     </main>
