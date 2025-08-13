@@ -172,7 +172,7 @@ const DistrictCard = ({
               disabled
               className="w-3 h-3"
             />
-            Built ≥ Completed/Unlocked
+            Built &lt; Completed/Unlocked
           </label>
         </div>
       </div>

@@ -5,23 +5,33 @@ const navLinks = [
   { href: "districtDiscountingTool.html", label: "District Discounting Tool" },
   { href: "eraScoreTracker.html", label: "Era Score Tracker" },
   { href: "greatPeopleTracker.html", label: "Great People Tracker" },
-  { href: "hexPlanner.html", label: "Hex Planner" },
   { href: "techsAndCivicsTree.html", label: "Techs and Civics Tree" },
+  { href: "hexPlanner.html", label: "Hex Planner" },
 ];
 
 export default function Navbar() {
+  // Get current page (strip leading / if present)
+  const currentPage = window.location.pathname.split("/").pop();
   return (
     <nav className="bg-gray-800 text-white px-4 py-2 shadow flex items-center justify-between">
       <div className="flex space-x-4">
-        {navLinks.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className="hover:bg-gray-700 rounded px-3 py-2 transition-colors font-semibold"
-          >
-            {link.label}
-          </a>
-        ))}
+        {navLinks.map((link) => {
+          const isActive = link.href === currentPage;
+          return (
+            <a
+              key={link.href}
+              href={link.href}
+              className={`rounded px-3 py-2 transition-colors font-semibold ${
+                isActive
+                  ? "bg-yellow-400 text-gray-900 shadow font-bold"
+                  : "hover:bg-gray-700"
+              }`}
+              aria-current={isActive ? "page" : undefined}
+            >
+              {link.label}
+            </a>
+          );
+        })}
       </div>
     </nav>
   );
