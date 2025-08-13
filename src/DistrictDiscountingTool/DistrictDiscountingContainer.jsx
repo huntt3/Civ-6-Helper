@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import DistrictCards from "./DistrictCards";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
+import ManualInputDistrictInfo from "./ManualInputDistrictInfo";
 
 // This component manages the collapsed state for the CollapsibleContainer
 const DistrictDiscountingContainer = () => {
   // State to track if the container is collapsed
   const [collapsed, setCollapsed] = useState(false);
+  const [techsCompleted, setTechsCompleted] = useState(0);
+  const [civicsCompleted, setCivicsCompleted] = useState(0);
 
   // Function to handle collapsing/expanding the container
   const handleCollapse = () => {
@@ -19,6 +22,14 @@ const DistrictDiscountingContainer = () => {
       onCollapse={handleCollapse}
       ariaLabel="District Discounting Tool"
     >
+      <div className="flex justify-center w-full">
+        <ManualInputDistrictInfo
+          techsCompleted={techsCompleted}
+          setTechsCompleted={setTechsCompleted}
+          civicsCompleted={civicsCompleted}
+          setCivicsCompleted={setCivicsCompleted}
+        />
+      </div>
       <DistrictCards />
     </CollapsibleContainer>
   );

@@ -28,6 +28,16 @@ const getDistrictImg = (title) => {
 // Functional component for a single card
 const DistrictCard = ({ title, discounted = false, productionCost = "" }) => {
   const imgFile = getDistrictImg(title);
+  // Calculate discounted production cost
+  let discountedProductionCost = "-";
+  const prodCostNum = Number(productionCost);
+  if (!isNaN(prodCostNum) && prodCostNum > 0) {
+    if (title === "Government Plaza") {
+      discountedProductionCost = Math.round(prodCostNum * 0.75);
+    } else {
+      discountedProductionCost = Math.round(prodCostNum * 0.6);
+    }
+  }
   return (
     <article
       className="bg-white rounded-md shadow-lg min-w-[400px] flex flex-row items-center m-2 border border-gray-200 p-2"
@@ -81,10 +91,19 @@ const DistrictCard = ({ title, discounted = false, productionCost = "" }) => {
         </span>
       </div>
       {/* Production Cost field */}
-      <div className="flex flex-col items-start">
+      <div className="flex flex-col items-start mr-4">
         <label className="text-xs font-semibold mb-1">Production Cost</label>
         <span className="p-2 rounded-sm border border-gray-300 text-base w-24 bg-gray-50">
           {productionCost || "-"}
+        </span>
+      </div>
+      {/* Discounted Production Cost field */}
+      <div className="flex flex-col items-start">
+        <label className="text-xs font-semibold mb-1">
+          Discounted Production Cost
+        </label>
+        <span className="p-2 rounded-sm border border-gray-300 text-base w-24 bg-gray-50">
+          {discountedProductionCost}
         </span>
       </div>
     </article>
