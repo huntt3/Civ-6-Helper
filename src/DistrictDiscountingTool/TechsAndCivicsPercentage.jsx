@@ -15,8 +15,11 @@ const TechsAndCivicsPercentage = ({
     totalPossibleCivics > 0
       ? (Number(civicsCompleted) / totalPossibleCivics) * 100
       : 0;
-  // Highlight the higher percentage
-  const techIsHigher = techPercent >= civicsPercent;
+  // Highlight both if equal, otherwise highlight the higher percentage
+  const techRounded = techPercent.toFixed(2);
+  const civicsRounded = civicsPercent.toFixed(2);
+  const bothEqual = techRounded === civicsRounded;
+  const techIsHigher = techPercent > civicsPercent;
   return (
     <section className="flex flex-row gap-8 items-center mb-6">
       <div className="flex flex-col items-start">
@@ -25,10 +28,12 @@ const TechsAndCivicsPercentage = ({
         </label>
         <div
           className={`text-base ${
-            techIsHigher ? "text-green-600 font-bold text-xl" : "text-gray-700"
+            bothEqual || techIsHigher
+              ? "text-green-600 font-bold text-xl"
+              : "text-gray-700"
           }`}
         >
-          {techPercent.toFixed(2)}%
+          {techRounded}%
         </div>
       </div>
       <div className="flex flex-col items-start">
@@ -37,10 +42,12 @@ const TechsAndCivicsPercentage = ({
         </label>
         <div
           className={`text-base ${
-            !techIsHigher ? "text-green-600 font-bold text-xl" : "text-gray-700"
+            bothEqual || !techIsHigher
+              ? "text-green-600 font-bold text-xl"
+              : "text-gray-700"
           }`}
         >
-          {civicsPercent.toFixed(2)}%
+          {civicsRounded}%
         </div>
       </div>
     </section>
