@@ -31,9 +31,12 @@ const DistrictCard = ({
   discounted = false,
   techsCompleted = 0,
   civicsCompleted = 0,
+  researched,
+  setResearched,
+  numberBuilt,
+  setNumberBuilt,
 }) => {
   const imgFile = getDistrictImg(title);
-  const [researched, setResearched] = React.useState(false);
   // Determine base cost
   let baseCost = 54;
   if (title === "Spaceport") baseCost = 1800;
@@ -115,6 +118,10 @@ const DistrictCard = ({
           placeholder={`Number Built`}
           aria-label={`Input for number of ${title} built`}
           className="p-2 rounded-sm border border-gray-300 text-base w-24"
+          value={numberBuilt}
+          onChange={(e) =>
+            setNumberBuilt(Math.max(0, parseInt(e.target.value) || 0))
+          }
         />
       </div>
       {/* Discounted status */}
@@ -148,19 +155,38 @@ const DistrictCard = ({
 };
 
 // Main component to render all cards
-const DistrictCards = ({ techsCompleted = 0, civicsCompleted = 0 }) => {
+const DistrictCards = ({
+  techsCompleted = 0,
+  civicsCompleted = 0,
+  researchedStates,
+  setResearchedStates,
+  numberBuiltStates,
+  setNumberBuiltStates,
+}) => {
   return (
     <main
       className="flex flex-wrap gap-6 justify-center p-8"
       aria-label="District cards"
     >
-      {districtTitles.map((title) => (
+      {districtTitles.map((title, idx) => (
         <DistrictCard
           key={title}
           title={title}
           discounted={false}
           techsCompleted={techsCompleted}
           civicsCompleted={civicsCompleted}
+          researched={researchedStates[idx]}
+          setResearched={(val) => {
+            const updated = [...researchedStates];
+            updated[idx] = val;
+            setResearchedStates(updated);
+          }}
+          numberBuilt={numberBuiltStates[idx]}
+          setNumberBuilt={(val) => {
+            const updated = [...numberBuiltStates];
+            updated[idx] = val;
+            setNumberBuiltStates(updated);
+          }}
         />
       ))}
     </main>

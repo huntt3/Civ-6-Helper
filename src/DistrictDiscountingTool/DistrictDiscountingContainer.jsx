@@ -10,6 +10,18 @@ const DistrictDiscountingContainer = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [techsCompleted, setTechsCompleted] = useState(0);
   const [civicsCompleted, setCivicsCompleted] = useState(0);
+  const numDistricts = 14;
+  const [researchedStates, setResearchedStates] = useState(
+    Array(numDistricts).fill(false)
+  );
+  const [numberBuiltStates, setNumberBuiltStates] = useState(
+    Array(numDistricts).fill(0)
+  );
+  const numSpecialtyDistrictsCompleted = numberBuiltStates.reduce(
+    (a, b) => a + b,
+    0
+  );
+  const numSpecialtyDistrictsUnlocked = researchedStates.filter(Boolean).length;
 
   // Function to handle collapsing/expanding the container
   const handleCollapse = () => {
@@ -24,7 +36,10 @@ const DistrictDiscountingContainer = () => {
       ariaLabel="District Discounting Tool"
     >
       <div className="mb-6">
-        <DistrictDiscountingExplanation />
+        <DistrictDiscountingExplanation
+          numSpecialtyDistrictsCompleted={numSpecialtyDistrictsCompleted}
+          numSpecialtyDistrictsUnlocked={numSpecialtyDistrictsUnlocked}
+        />
       </div>
       <div className="flex justify-center w-full">
         <ManualInputDistrictInfo
@@ -37,6 +52,10 @@ const DistrictDiscountingContainer = () => {
       <DistrictCards
         techsCompleted={techsCompleted}
         civicsCompleted={civicsCompleted}
+        researchedStates={researchedStates}
+        setResearchedStates={setResearchedStates}
+        numberBuiltStates={numberBuiltStates}
+        setNumberBuiltStates={setNumberBuiltStates}
       />
     </CollapsibleContainer>
   );
