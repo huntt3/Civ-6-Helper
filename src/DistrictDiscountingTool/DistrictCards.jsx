@@ -17,6 +17,9 @@ const districtTitles = [
   "Diplomatic Quarter",
 ];
 
+const totalPossibleTechs = 77;
+const totalPossibleCivics = 61;
+
 // Helper function to get the image file name from the title
 const getDistrictImg = (title) => {
   // Remove spaces and make first character lowercase
@@ -44,8 +47,8 @@ const DistrictCard = ({
     baseCost = 30;
   // Calculate production cost
   const maxCompleted = Math.max(
-    Number(techsCompleted) / 77 || 0,
-    Number(civicsCompleted) / 61 || 0
+    Number(techsCompleted) / totalPossibleTechs || 0,
+    Number(civicsCompleted) / totalPossibleCivics || 0
   );
   let productionCost = (1 + 9 * maxCompleted) * baseCost;
   // Calculate discounted production cost

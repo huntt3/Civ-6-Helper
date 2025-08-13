@@ -3,6 +3,7 @@ import DistrictCards from "./DistrictCards";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 import ManualInputDistrictInfo from "./ManualInputDistrictInfo";
 import DistrictDiscountingExplanation from "./DistrictDiscountingExplanation";
+import TechsAndCivicsPercentage from "./TechsAndCivicsPercentage";
 
 // This component manages the collapsed state for the CollapsibleContainer
 const DistrictDiscountingContainer = () => {
@@ -43,6 +44,14 @@ const DistrictDiscountingContainer = () => {
       </div>
       <div className="flex justify-center w-full">
         <ManualInputDistrictInfo
+          techsCompleted={techsCompleted}
+          setTechsCompleted={setTechsCompleted}
+          civicsCompleted={civicsCompleted}
+          setCivicsCompleted={setCivicsCompleted}
+        />
+      </div>
+      <div className="flex justify-center w-full">
+        <TechsAndCivicsPercentage
           techsCompleted={techsCompleted}
           setTechsCompleted={setTechsCompleted}
           civicsCompleted={civicsCompleted}
