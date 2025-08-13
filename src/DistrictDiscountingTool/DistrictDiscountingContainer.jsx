@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DistrictCards from "./DistrictCards";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 import ManualInputDistrictInfo from "./ManualInputDistrictInfo";
+import DistrictDiscountingExplanation from "./DistrictDiscountingExplanation";
 
 // This component manages the collapsed state for the CollapsibleContainer
 const DistrictDiscountingContainer = () => {
@@ -22,6 +23,9 @@ const DistrictDiscountingContainer = () => {
       onCollapse={handleCollapse}
       ariaLabel="District Discounting Tool"
     >
+      <div className="mb-6">
+        <DistrictDiscountingExplanation />
+      </div>
       <div className="flex justify-center w-full">
         <ManualInputDistrictInfo
           techsCompleted={techsCompleted}
