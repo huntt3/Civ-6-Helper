@@ -72,7 +72,7 @@ const DistrictCard = ({
   let condition2 = false;
   if (numSpecialtyDistrictsUnlocked > 0) {
     condition2 =
-      numberBuilt >=
+      numberBuilt <
       numSpecialtyDistrictsCompleted / numSpecialtyDistrictsUnlocked;
   }
   const isDiscounted = condition1 && condition2;
@@ -136,6 +136,7 @@ const DistrictCard = ({
           onChange={(e) =>
             setNumberBuilt(Math.max(0, parseInt(e.target.value) || 0))
           }
+          disabled={!researched}
         />
       </div>
       {/* Discounted status */}
