@@ -13,7 +13,6 @@ const districtTitles = [
   "Entertainment Complex",
   "Water Park",
   "Aerodrome",
-  "Spaceport",
   "Government Plaza",
   "Diplomatic Quarter",
 ];
@@ -41,7 +40,6 @@ const DistrictCard = ({
   const imgFile = getDistrictImg(title);
   // Determine base cost
   let baseCost = 54;
-  if (title === "Spaceport") baseCost = 1800;
   if (title === "Government Plaza" || title === "Diplomatic Quarter")
     baseCost = 30;
   // Calculate production cost
@@ -49,12 +47,7 @@ const DistrictCard = ({
     Number(techsCompleted) / 77 || 0,
     Number(civicsCompleted) / 61 || 0
   );
-  let productionCost = 54;
-  if (title === "Spaceport") {
-    productionCost = baseCost;
-  } else {
-    productionCost = (1 + 9 * maxCompleted) * baseCost;
-  }
+  let productionCost = (1 + 9 * maxCompleted) * baseCost;
   // Calculate discounted production cost
   let discountedProductionCost = "-";
   if (productionCost > 0) {
@@ -143,10 +136,18 @@ const DistrictCard = ({
       <div className="flex flex-col items-start mr-4 min-w-[110px]">
         <span
           className={`font-bold ${
-            isDiscounted ? "text-green-600" : "text-red-600"
+            !researched
+              ? "text-gray-500"
+              : isDiscounted
+              ? "text-green-600"
+              : "text-red-600"
           }`}
         >
-          {isDiscounted ? "Discounted" : "Not Discounted"}
+          {!researched
+            ? "Not Researched"
+            : isDiscounted
+            ? "Discounted"
+            : "Not Discounted"}
         </span>
         {/* Discounting condition checkboxes */}
         <div className="flex flex-col gap-1 mt-2">
