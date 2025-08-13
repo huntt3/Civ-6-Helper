@@ -30,7 +30,10 @@ const DistrictDiscountingContainer = () => {
           setCivicsCompleted={setCivicsCompleted}
         />
       </div>
-      <DistrictCards />
+      <DistrictCards
+        techsCompleted={techsCompleted}
+        civicsCompleted={civicsCompleted}
+      />
     </CollapsibleContainer>
   );
 };

@@ -26,16 +26,31 @@ const getDistrictImg = (title) => {
 };
 
 // Functional component for a single card
-const DistrictCard = ({ title, discounted = false, productionCost = "" }) => {
+const DistrictCard = ({
+  title,
+  discounted = false,
+  techsCompleted = 0,
+  civicsCompleted = 0,
+}) => {
   const imgFile = getDistrictImg(title);
+  // Determine base cost
+  let baseCost = 54;
+  if (title === "Spaceport") baseCost = 1800;
+  if (title === "Government Plaza" || title === "Diplomatic Quarter")
+    baseCost = 30;
+  // Calculate production cost
+  const maxCompleted = Math.max(
+    Number(techsCompleted) / 77 || 0,
+    Number(civicsCompleted) / 61 || 0
+  );
+  const productionCost = (1 + 9 * maxCompleted) * baseCost;
   // Calculate discounted production cost
   let discountedProductionCost = "-";
-  const prodCostNum = Number(productionCost);
-  if (!isNaN(prodCostNum) && prodCostNum > 0) {
+  if (productionCost > 0) {
     if (title === "Government Plaza") {
-      discountedProductionCost = Math.round(prodCostNum * 0.75);
+      discountedProductionCost = Math.round(productionCost * 0.75);
     } else {
-      discountedProductionCost = Math.round(prodCostNum * 0.6);
+      discountedProductionCost = Math.round(productionCost * 0.6);
     }
   }
   return (
@@ -94,7 +109,7 @@ const DistrictCard = ({ title, discounted = false, productionCost = "" }) => {
       <div className="flex flex-col items-start mr-4">
         <label className="text-xs font-semibold mb-1">Production Cost</label>
         <span className="p-2 rounded-sm border border-gray-300 text-base w-24 bg-gray-50">
-          {productionCost || "-"}
+          {productionCost > 0 ? Math.round(productionCost) : "-"}
         </span>
       </div>
       {/* Discounted Production Cost field */}
@@ -111,7 +126,7 @@ const DistrictCard = ({ title, discounted = false, productionCost = "" }) => {
 };
 
 // Main component to render all cards
-const DistrictCards = () => {
+const DistrictCards = ({ techsCompleted = 0, civicsCompleted = 0 }) => {
   return (
     <main
       className="flex flex-wrap gap-6 justify-center p-8"
@@ -122,7 +137,8 @@ const DistrictCards = () => {
           key={title}
           title={title}
           discounted={false}
-          productionCost={""}
+          techsCompleted={techsCompleted}
+          civicsCompleted={civicsCompleted}
         />
       ))}
     </main>
