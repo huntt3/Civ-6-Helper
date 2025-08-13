@@ -1,5 +1,8 @@
 import React from "react";
 
+const totalPossibleTechs = 77;
+const totalPossibleCivics = 61;
+
 const ManualInputDistrictInfo = ({
   techsCompleted,
   setTechsCompleted,
@@ -16,6 +19,7 @@ const ManualInputDistrictInfo = ({
           id="techs-completed"
           type="number"
           min="0"
+          max={totalPossibleTechs}
           step="1"
           inputMode="numeric"
           pattern="[0-9]+"
@@ -37,6 +41,7 @@ const ManualInputDistrictInfo = ({
           id="civics-completed"
           type="number"
           min="0"
+          max={totalPossibleCivics}
           step="1"
           inputMode="numeric"
           pattern="[0-9]+"

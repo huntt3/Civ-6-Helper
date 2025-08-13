@@ -61,7 +61,7 @@ const WondersContainer = () => {
     <>
       {/* CollapsibleContainer wraps all wonders grouped by era */}
       <CollapsibleContainer
-        title="Wonders"
+        title="Wonder Tracker"
         collapsed={collapsed}
         onCollapse={handleCollapse}
         onRefresh={fetchWonders}

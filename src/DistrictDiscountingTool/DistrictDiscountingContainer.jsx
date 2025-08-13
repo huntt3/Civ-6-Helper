@@ -72,7 +72,7 @@ const DistrictDiscountingContainer = () => {
 
   return (
     <CollapsibleContainer
-      title="District Discounting Tool"
+      title="District Discount Tracker"
       collapsed={collapsed}
       onCollapse={handleCollapse}
       onRefresh={handleReset}

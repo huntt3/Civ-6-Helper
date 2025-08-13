@@ -90,7 +90,7 @@ const GreatPeopleContainer = () => {
 
   return (
     <CollapsibleContainer
-      title="Great People"
+      title="Great People Tracker"
       className="my-8 mx-auto p-4 max-w-full bg-white text-gray-900 rounded-lg shadow-md"
       collapsed={collapsed}
       onCollapse={handleCollapseContainer}
