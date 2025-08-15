@@ -188,7 +188,7 @@ const EraTrackerContainer = ({ settings }) => {
       onRefresh={fetchEraScore}
       ariaLabel="Era Tracker"
     >
-      <ProgressBar />
+      {/*<ProgressBar />*/}
       <div className="flex flex-wrap gap-2 mb-4 items-center">
         <button
           className={`px-3 py-1 rounded ${

@@ -49,8 +49,25 @@ const CivModal = ({
                   >
                     {title}
                   </DialogTitle>
-                  <div className="mt-2">
-                    <div className="text-sm text-gray-500">{message}</div>
+                  <div className="mt-2 space-y-2">
+                    {typeof message === "string" && message.includes("\n") ? (
+                      message.split("\n").map((line, idx) => {
+                        // Try to bold the label if present
+                        const match = line.match(/^(.*?:)\s*(.*)$/);
+                        return (
+                          <div key={idx} className="flex text-sm text-gray-700">
+                            {match ? (
+                              <span className="font-semibold mr-1 text-gray-900">
+                                {match[1]}
+                              </span>
+                            ) : null}
+                            <span>{match ? match[2] : line}</span>
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <div className="text-sm text-gray-700">{message}</div>
+                    )}
                   </div>
                 </div>
               </div>
