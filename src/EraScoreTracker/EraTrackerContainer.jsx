@@ -27,6 +27,7 @@ const EraTrackerContainer = ({ settings }) => {
   const [previousEraScore, setPreviousEraScore] = useState(0);
   const [currentEraScore, setCurrentEraScore] = useState(0);
   const [itemScores, setItemScores] = useState({});
+  const [nextEraFunctions, setNextEraFunctions] = useState({});
   const [favorites, setFavorites] = useState(() => {
     // Load favorites from localStorage (array of titles)
     try {
@@ -196,6 +197,24 @@ const EraTrackerContainer = ({ settings }) => {
     });
   };
 
+  // Handler to register next era functions from individual cards
+  const handleNextEraRegister = (title, nextEraFunction) => {
+    setNextEraFunctions((prev) => ({
+      ...prev,
+      [title]: nextEraFunction,
+    }));
+  };
+
+  // Handler for the Next Era button
+  const handleNextEra = () => {
+    // Call all registered next era functions
+    Object.values(nextEraFunctions).forEach((nextEraFunction) => {
+      if (typeof nextEraFunction === "function") {
+        nextEraFunction();
+      }
+    });
+  };
+
   // Calculate total scores when itemScores changes
   useEffect(() => {
     let previousTotal = 0;
@@ -218,11 +237,12 @@ const EraTrackerContainer = ({ settings }) => {
       onRefresh={fetchEraScore}
       ariaLabel="Era Tracker"
     >
+      <ProgressBar eraScore={currentEraScore} />
       <EraScoreSums
         previousEraScore={previousEraScore}
         currentEraScore={currentEraScore}
+        onNextEra={handleNextEra}
       />
-      {/*<ProgressBar />*/}
       <div className="flex flex-wrap gap-2 mb-4 items-center">
         <button
           className={`px-3 py-1 rounded ${
@@ -298,6 +318,7 @@ const EraTrackerContainer = ({ settings }) => {
             favorited={item.favorited}
             onToggleFavorite={() => handleToggleFavorite(item.title)}
             onScoreChange={handleScoreChange}
+            onNextEra={handleNextEraRegister}
           />
         ))}
       </div>

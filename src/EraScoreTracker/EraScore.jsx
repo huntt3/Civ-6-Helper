@@ -12,6 +12,7 @@ const EraScore = ({
   favorited = false,
   onToggleFavorite,
   onScoreChange,
+  onNextEra,
 }) => {
   const [showModal, setShowModal] = useState(false);
   // Track count for repeatable cards (default 0) and for non-repeatable (default 0 = unchecked)
@@ -19,6 +20,28 @@ const EraScore = ({
   const [currentEraCount, setCurrentEraCount] = useState(0);
 
   const handleModal = () => setShowModal((open) => !open);
+
+  // Function to move current era values to previous eras
+  const moveCurrentToPrevious = () => {
+    if (currentEraCount > 0) {
+      if (repeatable) {
+        // For repeatable items, add current count to previous count
+        setPreviousEraCount((prev) => prev + currentEraCount);
+      } else {
+        // For non-repeatable items, just move the checkbox state
+        setPreviousEraCount(1);
+      }
+      // Reset current era count to 0
+      setCurrentEraCount(0);
+    }
+  };
+
+  // Register this function with the parent component
+  useEffect(() => {
+    if (onNextEra) {
+      onNextEra(title, moveCurrentToPrevious);
+    }
+  }, [title, onNextEra, currentEraCount, repeatable]);
 
   // Update scores whenever counts change
   useEffect(() => {

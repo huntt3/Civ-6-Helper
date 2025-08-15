@@ -1,24 +1,16 @@
 import React, { useState, useEffect } from "react";
 
-const ERA_SCORE_KEY = "civ6-helper-eraScore";
 const NEEDED_ERA_SCORE_KEY = "civ6-helper-neededEraScore";
 
 // Semicircular progress bar component
-const ProgressBar = () => {
-  // State for the numerator and denominator, initialized from localStorage
-  const [eraScore, setEraScore] = useState(() => {
-    const saved = localStorage.getItem(ERA_SCORE_KEY);
-    return saved !== null ? parseInt(saved, 10) : 0;
-  });
+const ProgressBar = ({ eraScore = 0 }) => {
+  // State for the denominator, initialized from localStorage
   const [neededEraScore, setNeededEraScore] = useState(() => {
     const saved = localStorage.getItem(NEEDED_ERA_SCORE_KEY);
     return saved !== null ? parseInt(saved, 10) : 18;
   });
 
-  // Save to localStorage whenever values change
-  useEffect(() => {
-    localStorage.setItem(ERA_SCORE_KEY, eraScore);
-  }, [eraScore]);
+  // Save to localStorage whenever neededEraScore changes
   useEffect(() => {
     localStorage.setItem(NEEDED_ERA_SCORE_KEY, neededEraScore);
   }, [neededEraScore]);
@@ -27,11 +19,7 @@ const ProgressBar = () => {
   const progress =
     neededEraScore > 0 ? Math.min(eraScore / neededEraScore, 1) : 0;
 
-  // Handle input changes, only allow integers
-  const handleEraScoreChange = (e) => {
-    const value = e.target.value.replace(/[^0-9]/g, "");
-    setEraScore(value === "" ? 0 : parseInt(value, 10));
-  };
+  // Handle input change, only allow integers
   const handleNeededEraScoreChange = (e) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
     setNeededEraScore(value === "" ? 0 : parseInt(value, 10));
@@ -78,20 +66,18 @@ const ProgressBar = () => {
           style={{ transition: "stroke-dashoffset 0.5s" }}
         />
       </svg>
+      {/* Display current era score and percentage */}
+      <div className="text-center mt-2">
+        <div className="text-2xl font-bold text-blue-600">
+          {eraScore} / {neededEraScore}
+        </div>
+        <div className="text-sm text-gray-600">
+          {Math.round(progress * 100)}% Complete
+        </div>
+      </div>
+
       {/* Inputs below the progress bar */}
       <form className="flex flex-col items-center mt-4 space-y-2">
-        <label className="flex flex-col items-center">
-          Era Score
-          <input
-            type="text"
-            inputMode="numeric"
-            pattern="[0-9]*"
-            value={eraScore}
-            onChange={handleEraScoreChange}
-            className="mt-1 p-1 border rounded w-24 text-center"
-            aria-label="Era Score"
-          />
-        </label>
         <label className="flex flex-col items-center">
           Needed Era Score
           <input
