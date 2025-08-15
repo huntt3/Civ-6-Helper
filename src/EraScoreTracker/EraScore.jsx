@@ -15,11 +15,33 @@ const EraScore = ({
   onNextEra,
 }) => {
   const [showModal, setShowModal] = useState(false);
+
+  // Create localStorage keys for this specific item
+  const previousEraKey = `civ6-helper-eraScore-${title}-previous`;
+  const currentEraKey = `civ6-helper-eraScore-${title}-current`;
+
   // Track count for repeatable cards (default 0) and for non-repeatable (default 0 = unchecked)
-  const [previousEraCount, setPreviousEraCount] = useState(0);
-  const [currentEraCount, setCurrentEraCount] = useState(0);
+  // Load from localStorage if available
+  const [previousEraCount, setPreviousEraCount] = useState(() => {
+    const saved = localStorage.getItem(previousEraKey);
+    return saved !== null ? parseInt(saved, 10) : 0;
+  });
+
+  const [currentEraCount, setCurrentEraCount] = useState(() => {
+    const saved = localStorage.getItem(currentEraKey);
+    return saved !== null ? parseInt(saved, 10) : 0;
+  });
 
   const handleModal = () => setShowModal((open) => !open);
+
+  // Save to localStorage whenever counts change
+  useEffect(() => {
+    localStorage.setItem(previousEraKey, previousEraCount.toString());
+  }, [previousEraCount, previousEraKey]);
+
+  useEffect(() => {
+    localStorage.setItem(currentEraKey, currentEraCount.toString());
+  }, [currentEraCount, currentEraKey]);
 
   // Function to move current era values to previous eras
   const moveCurrentToPrevious = () => {
@@ -36,10 +58,18 @@ const EraScore = ({
     }
   };
 
-  // Register this function with the parent component
+  // Function to clear localStorage data for this item
+  const clearStoredData = () => {
+    localStorage.removeItem(previousEraKey);
+    localStorage.removeItem(currentEraKey);
+    setPreviousEraCount(0);
+    setCurrentEraCount(0);
+  };
+
+  // Register functions with the parent component
   useEffect(() => {
     if (onNextEra) {
-      onNextEra(title, moveCurrentToPrevious);
+      onNextEra(title, moveCurrentToPrevious, clearStoredData);
     }
   }, [title, onNextEra, currentEraCount, repeatable]);
 

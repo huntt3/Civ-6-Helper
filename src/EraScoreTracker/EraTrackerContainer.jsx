@@ -5,6 +5,10 @@ import EraScoreSums from "./EraScoreSums";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 
 const FAVORITES_KEY = "civ6-helper-eraScore-favorites";
+const SORT_ORDER_KEY = "civ6-helper-eraScore-sortOrder";
+const ERA_SCORE_FILTER_KEY = "civ6-helper-eraScore-filter";
+const SEARCH_KEY = "civ6-helper-eraScore-search";
+const SHOW_ONLY_FAVORITED_KEY = "civ6-helper-eraScore-showOnlyFavorited";
 
 const EraTrackerContainer = ({ settings }) => {
   // State for pagination
@@ -20,14 +24,27 @@ const EraTrackerContainer = ({ settings }) => {
   }, [cardsPerPage]);
   const [eraScoreItems, setEraScoreItems] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
-  const [sortOrder, setSortOrder] = useState("desc"); // 'asc' or 'desc'
-  const [eraScoreFilter, setEraScoreFilter] = useState(0);
-  const [search, setSearch] = useState("");
-  const [showOnlyFavorited, setShowOnlyFavorited] = useState(false);
+  const [sortOrder, setSortOrder] = useState(() => {
+    const saved = localStorage.getItem(SORT_ORDER_KEY);
+    return saved !== null ? saved : "desc";
+  });
+  const [eraScoreFilter, setEraScoreFilter] = useState(() => {
+    const saved = localStorage.getItem(ERA_SCORE_FILTER_KEY);
+    return saved !== null ? parseInt(saved, 10) : 0;
+  });
+  const [search, setSearch] = useState(() => {
+    const saved = localStorage.getItem(SEARCH_KEY);
+    return saved !== null ? saved : "";
+  });
+  const [showOnlyFavorited, setShowOnlyFavorited] = useState(() => {
+    const saved = localStorage.getItem(SHOW_ONLY_FAVORITED_KEY);
+    return saved !== null ? JSON.parse(saved) : false;
+  });
   const [previousEraScore, setPreviousEraScore] = useState(0);
   const [currentEraScore, setCurrentEraScore] = useState(0);
   const [itemScores, setItemScores] = useState({});
   const [nextEraFunctions, setNextEraFunctions] = useState({});
+  const [clearDataFunctions, setClearDataFunctions] = useState({});
   const [favorites, setFavorites] = useState(() => {
     // Load favorites from localStorage (array of titles)
     try {
@@ -56,6 +73,26 @@ const EraTrackerContainer = ({ settings }) => {
   useEffect(() => {
     localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
   }, [favorites]);
+
+  // Save other state variables to localStorage when they change
+  useEffect(() => {
+    localStorage.setItem(SORT_ORDER_KEY, sortOrder);
+  }, [sortOrder]);
+
+  useEffect(() => {
+    localStorage.setItem(ERA_SCORE_FILTER_KEY, eraScoreFilter.toString());
+  }, [eraScoreFilter]);
+
+  useEffect(() => {
+    localStorage.setItem(SEARCH_KEY, search);
+  }, [search]);
+
+  useEffect(() => {
+    localStorage.setItem(
+      SHOW_ONLY_FAVORITED_KEY,
+      JSON.stringify(showOnlyFavorited)
+    );
+  }, [showOnlyFavorited]);
 
   // Listen for changes to civ6_tech_state in localStorage and also poll for changes every second
   useEffect(() => {
@@ -198,11 +235,17 @@ const EraTrackerContainer = ({ settings }) => {
   };
 
   // Handler to register next era functions from individual cards
-  const handleNextEraRegister = (title, nextEraFunction) => {
+  const handleNextEraRegister = (title, nextEraFunction, clearDataFunction) => {
     setNextEraFunctions((prev) => ({
       ...prev,
       [title]: nextEraFunction,
     }));
+    if (clearDataFunction) {
+      setClearDataFunctions((prev) => ({
+        ...prev,
+        [title]: clearDataFunction,
+      }));
+    }
   };
 
   // Handler for the Next Era button
@@ -213,6 +256,37 @@ const EraTrackerContainer = ({ settings }) => {
         nextEraFunction();
       }
     });
+  };
+
+  // Handler for the Reset button - clear all Era Score localStorage data
+  const handleReset = () => {
+    // Call all registered clear data functions
+    Object.values(clearDataFunctions).forEach((clearDataFunction) => {
+      if (typeof clearDataFunction === "function") {
+        clearDataFunction();
+      }
+    });
+
+    // Remove all Era Tracker related localStorage keys
+    localStorage.removeItem("civ6-helper-neededEraScore");
+    localStorage.removeItem(FAVORITES_KEY);
+    localStorage.removeItem("civ6-helper-cardsPerPage");
+    localStorage.removeItem(SORT_ORDER_KEY);
+    localStorage.removeItem(ERA_SCORE_FILTER_KEY);
+    localStorage.removeItem(SEARCH_KEY);
+    localStorage.removeItem(SHOW_ONLY_FAVORITED_KEY);
+
+    // Reset local state
+    setFavorites([]);
+    setCardsPerPage(10);
+    setPage(0);
+    setSortOrder("desc");
+    setEraScoreFilter(0);
+    setSearch("");
+    setShowOnlyFavorited(false);
+
+    // Refresh the data
+    fetchEraScore();
   };
 
   // Calculate total scores when itemScores changes
@@ -234,7 +308,7 @@ const EraTrackerContainer = ({ settings }) => {
       title="Era Score Tracker"
       collapsed={collapsed}
       onCollapse={handleCollapse}
-      onRefresh={fetchEraScore}
+      onRefresh={handleReset}
       ariaLabel="Era Tracker"
     >
       <ProgressBar eraScore={currentEraScore} />
