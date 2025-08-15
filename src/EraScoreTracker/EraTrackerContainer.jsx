@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import EraScore from "./EraScore";
 import ProgressBar from "./ProgressBar";
 import EraScoreSums from "./EraScoreSums";
@@ -43,8 +43,11 @@ const EraTrackerContainer = ({ settings }) => {
   const [previousEraScore, setPreviousEraScore] = useState(0);
   const [currentEraScore, setCurrentEraScore] = useState(0);
   const [itemScores, setItemScores] = useState({});
-  const [nextEraFunctions, setNextEraFunctions] = useState({});
-  const [clearDataFunctions, setClearDataFunctions] = useState({});
+  
+  // Use refs instead of state to store functions to prevent re-renders
+  const nextEraFunctionsRef = useRef({});
+  const clearDataFunctionsRef = useRef({});
+  
   const [favorites, setFavorites] = useState(() => {
     // Load favorites from localStorage (array of titles)
     try {
@@ -223,7 +226,7 @@ const EraTrackerContainer = ({ settings }) => {
   };
 
   // Handler for score changes from individual cards
-  const handleScoreChange = (title, eraType, newScore) => {
+  const handleScoreChange = useCallback((title, eraType, newScore) => {
     setItemScores((prev) => {
       const updated = { ...prev };
       if (!updated[title]) {
@@ -232,36 +235,30 @@ const EraTrackerContainer = ({ settings }) => {
       updated[title][eraType] = newScore;
       return updated;
     });
-  };
+  }, []);
 
   // Handler to register next era functions from individual cards
-  const handleNextEraRegister = (title, nextEraFunction, clearDataFunction) => {
-    setNextEraFunctions((prev) => ({
-      ...prev,
-      [title]: nextEraFunction,
-    }));
+  const handleNextEraRegister = useCallback((title, nextEraFunction, clearDataFunction) => {
+    nextEraFunctionsRef.current[title] = nextEraFunction;
     if (clearDataFunction) {
-      setClearDataFunctions((prev) => ({
-        ...prev,
-        [title]: clearDataFunction,
-      }));
+      clearDataFunctionsRef.current[title] = clearDataFunction;
     }
-  };
+  }, []);
 
   // Handler for the Next Era button
-  const handleNextEra = () => {
+  const handleNextEra = useCallback(() => {
     // Call all registered next era functions
-    Object.values(nextEraFunctions).forEach((nextEraFunction) => {
+    Object.values(nextEraFunctionsRef.current).forEach((nextEraFunction) => {
       if (typeof nextEraFunction === "function") {
         nextEraFunction();
       }
     });
-  };
+  }, []);
 
   // Handler for the Reset button - clear all Era Score localStorage data
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     // Call all registered clear data functions
-    Object.values(clearDataFunctions).forEach((clearDataFunction) => {
+    Object.values(clearDataFunctionsRef.current).forEach((clearDataFunction) => {
       if (typeof clearDataFunction === "function") {
         clearDataFunction();
       }
@@ -287,7 +284,7 @@ const EraTrackerContainer = ({ settings }) => {
 
     // Refresh the data
     fetchEraScore();
-  };
+  }, []);
 
   // Calculate total scores when itemScores changes
   useEffect(() => {

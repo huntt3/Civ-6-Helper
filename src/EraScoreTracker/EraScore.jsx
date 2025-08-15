@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import EraScoreModal from "./EraScoreModal";
 import { FaStar } from "react-icons/fa";
 
@@ -16,9 +16,15 @@ const EraScore = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
 
-  // Create localStorage keys for this specific item
-  const previousEraKey = `civ6-helper-eraScore-${title}-previous`;
-  const currentEraKey = `civ6-helper-eraScore-${title}-current`;
+  // Create localStorage keys for this specific item (memoized to prevent re-creation)
+  const previousEraKey = useMemo(
+    () => `civ6-helper-eraScore-${title}-previous`,
+    [title]
+  );
+  const currentEraKey = useMemo(
+    () => `civ6-helper-eraScore-${title}-current`,
+    [title]
+  );
 
   // Track count for repeatable cards (default 0) and for non-repeatable (default 0 = unchecked)
   // Load from localStorage if available
@@ -44,7 +50,7 @@ const EraScore = ({
   }, [currentEraCount, currentEraKey]);
 
   // Function to move current era values to previous eras
-  const moveCurrentToPrevious = () => {
+  const moveCurrentToPrevious = useCallback(() => {
     if (currentEraCount > 0) {
       if (repeatable) {
         // For repeatable items, add current count to previous count
@@ -56,22 +62,22 @@ const EraScore = ({
       // Reset current era count to 0
       setCurrentEraCount(0);
     }
-  };
+  }, [currentEraCount, repeatable]);
 
   // Function to clear localStorage data for this item
-  const clearStoredData = () => {
+  const clearStoredData = useCallback(() => {
     localStorage.removeItem(previousEraKey);
     localStorage.removeItem(currentEraKey);
     setPreviousEraCount(0);
     setCurrentEraCount(0);
-  };
+  }, [previousEraKey, currentEraKey]);
 
-  // Register functions with the parent component
+  // Register functions with the parent component (only on mount/title change)
   useEffect(() => {
     if (onNextEra) {
       onNextEra(title, moveCurrentToPrevious, clearStoredData);
     }
-  }, [title, onNextEra, currentEraCount, repeatable]);
+  }, [title, onNextEra, moveCurrentToPrevious, clearStoredData]);
 
   // Update scores whenever counts change
   useEffect(() => {
