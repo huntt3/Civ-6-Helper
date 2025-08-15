@@ -45,30 +45,25 @@ const EraScore = ({
         />
       </button>
       {repeatable ? (
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
-            onClick={decrement}
-            aria-label="Decrease count"
+        <div className="flex flex-col items-start">
+          <label
+            htmlFor={`repeatable-count-${title}`}
+            className="text-xs font-semibold mb-1"
           >
-            -
-          </button>
+            Times Completed
+          </label>
           <input
-            type="text"
+            id={`repeatable-count-${title}`}
+            type="number"
+            min="0"
+            step="1"
+            inputMode="numeric"
+            pattern="[0-9]+"
             value={count}
             onChange={handleCountChange}
-            className="w-12 text-center border rounded"
+            className="p-2 rounded-sm border border-gray-300 text-base w-24"
             aria-label="Times completed"
           />
-          <button
-            type="button"
-            className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
-            onClick={increment}
-            aria-label="Increase count"
-          >
-            +
-          </button>
         </div>
       ) : (
         // For non-repeatable cards, show a checkbox
