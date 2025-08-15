@@ -11,21 +11,50 @@ const EraScore = ({
   repeatable,
   favorited = false,
   onToggleFavorite,
+  onScoreChange,
 }) => {
   const [showModal, setShowModal] = useState(false);
   // Track count for repeatable cards (default 0) and for non-repeatable (default 0 = unchecked)
-  const [count, setCount] = useState(0);
+  const [previousEraCount, setPreviousEraCount] = useState(0);
+  const [currentEraCount, setCurrentEraCount] = useState(0);
 
   const handleModal = () => setShowModal((open) => !open);
 
   // Handlers for repeatable count
   // Allow 0 as a valid value for repeatable count
-  const handleCountChange = (e) => {
+  const handlePreviousEraCountChange = (e) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
-    setCount(value === "" ? 0 : Math.max(0, parseInt(value, 10)));
+    const newCount = value === "" ? 0 : Math.max(0, parseInt(value, 10));
+    setPreviousEraCount(newCount);
+    if (onScoreChange) {
+      onScoreChange(title, "previous", newCount * eraScore);
+    }
   };
-  const increment = () => setCount((c) => c + 1);
-  const decrement = () => setCount((c) => Math.max(0, c - 1));
+
+  const handleCurrentEraCountChange = (e) => {
+    const value = e.target.value.replace(/[^0-9]/g, "");
+    const newCount = value === "" ? 0 : Math.max(0, parseInt(value, 10));
+    setCurrentEraCount(newCount);
+    if (onScoreChange) {
+      onScoreChange(title, "current", newCount * eraScore);
+    }
+  };
+
+  const handlePreviousEraToggle = () => {
+    const newCount = previousEraCount === 0 ? 1 : 0;
+    setPreviousEraCount(newCount);
+    if (onScoreChange) {
+      onScoreChange(title, "previous", newCount * eraScore);
+    }
+  };
+
+  const handleCurrentEraToggle = () => {
+    const newCount = currentEraCount === 0 ? 1 : 0;
+    setCurrentEraCount(newCount);
+    if (onScoreChange) {
+      onScoreChange(title, "current", newCount * eraScore);
+    }
+  };
 
   // Card container with Tailwind for background, border, shadow, spacing, and rounded corners
   return (
@@ -45,35 +74,72 @@ const EraScore = ({
         />
       </button>
       {repeatable ? (
-        <div className="flex flex-col items-start">
-          <label
-            htmlFor={`repeatable-count-${title}`}
-            className="text-xs font-semibold mb-1"
-          >
-            Times Completed
-          </label>
-          <input
-            id={`repeatable-count-${title}`}
-            type="number"
-            min="0"
-            step="1"
-            inputMode="numeric"
-            pattern="[0-9]+"
-            value={count}
-            onChange={handleCountChange}
-            className="p-2 rounded-sm border border-gray-300 text-base w-24"
-            aria-label="Times completed"
-          />
+        <div className="flex gap-4">
+          <div className="flex flex-col items-start">
+            <label
+              htmlFor={`previous-era-count-${title}`}
+              className="text-xs font-semibold mb-1"
+            >
+              Previous Eras
+            </label>
+            <input
+              id={`previous-era-count-${title}`}
+              type="number"
+              min="0"
+              step="1"
+              inputMode="numeric"
+              pattern="[0-9]+"
+              value={previousEraCount}
+              onChange={handlePreviousEraCountChange}
+              className="p-2 rounded-sm border border-gray-300 text-base w-24"
+              aria-label="Times completed in previous eras"
+            />
+          </div>
+          <div className="flex flex-col items-start">
+            <label
+              htmlFor={`current-era-count-${title}`}
+              className="text-xs font-semibold mb-1"
+            >
+              Current Era
+            </label>
+            <input
+              id={`current-era-count-${title}`}
+              type="number"
+              min="0"
+              step="1"
+              inputMode="numeric"
+              pattern="[0-9]+"
+              value={currentEraCount}
+              onChange={handleCurrentEraCountChange}
+              className="p-2 rounded-sm border border-gray-300 text-base w-24"
+              aria-label="Times completed in current era"
+            />
+          </div>
         </div>
       ) : (
-        // For non-repeatable cards, show a checkbox
-        <input
-          type="checkbox"
-          className="mr-2 w-5 h-5 accent-blue-600 border-gray-400 rounded focus:ring-2 focus:ring-blue-400"
-          aria-label="Mark as completed"
-          checked={count > 0}
-          onChange={() => setCount((c) => (c === 0 ? 1 : 0))}
-        />
+        // For non-repeatable cards, show two checkboxes
+        <div className="flex gap-4 items-center">
+          <div className="flex flex-col items-center">
+            <label className="text-xs font-semibold mb-1">Previous Eras</label>
+            <input
+              type="checkbox"
+              className="w-5 h-5 accent-blue-600 border-gray-400 rounded focus:ring-2 focus:ring-blue-400"
+              aria-label="Mark as completed in previous eras"
+              checked={previousEraCount > 0}
+              onChange={handlePreviousEraToggle}
+            />
+          </div>
+          <div className="flex flex-col items-center">
+            <label className="text-xs font-semibold mb-1">Current Era</label>
+            <input
+              type="checkbox"
+              className="w-5 h-5 accent-blue-600 border-gray-400 rounded focus:ring-2 focus:ring-blue-400"
+              aria-label="Mark as completed in current era"
+              checked={currentEraCount > 0}
+              onChange={handleCurrentEraToggle}
+            />
+          </div>
+        </div>
       )}
       <span className="text-lg font-medium mr-2">{title}</span>
       <span className="bg-gray-100 rounded px-2 py-1 mr-2 text-base">

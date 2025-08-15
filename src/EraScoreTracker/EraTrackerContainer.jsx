@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import EraScore from "./EraScore";
 import ProgressBar from "./ProgressBar";
+import EraScoreSums from "./EraScoreSums";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 
 const FAVORITES_KEY = "civ6-helper-eraScore-favorites";
@@ -23,6 +24,8 @@ const EraTrackerContainer = ({ settings }) => {
   const [eraScoreFilter, setEraScoreFilter] = useState(0);
   const [search, setSearch] = useState("");
   const [showOnlyFavorited, setShowOnlyFavorited] = useState(false);
+  const [previousEraScore, setPreviousEraScore] = useState(0);
+  const [currentEraScore, setCurrentEraScore] = useState(0);
   const [favorites, setFavorites] = useState(() => {
     // Load favorites from localStorage (array of titles)
     try {
@@ -180,6 +183,21 @@ const EraTrackerContainer = ({ settings }) => {
     );
   };
 
+  // Handler for score changes from individual cards
+  const handleScoreChange = (title, eraType, score) => {
+    if (eraType === "previous") {
+      setPreviousEraScore((prev) => {
+        // Remove any existing score for this title and add the new score
+        return prev + score;
+      });
+    } else if (eraType === "current") {
+      setCurrentEraScore((prev) => {
+        // Remove any existing score for this title and add the new score
+        return prev + score;
+      });
+    }
+  };
+
   return (
     <CollapsibleContainer
       title="Era Score Tracker"
@@ -188,6 +206,10 @@ const EraTrackerContainer = ({ settings }) => {
       onRefresh={fetchEraScore}
       ariaLabel="Era Tracker"
     >
+      <EraScoreSums
+        previousEraScore={previousEraScore}
+        currentEraScore={currentEraScore}
+      />
       {/*<ProgressBar />*/}
       <div className="flex flex-wrap gap-2 mb-4 items-center">
         <button
@@ -263,6 +285,7 @@ const EraTrackerContainer = ({ settings }) => {
             {...item}
             favorited={item.favorited}
             onToggleFavorite={() => handleToggleFavorite(item.title)}
+            onScoreChange={handleScoreChange}
           />
         ))}
       </div>
