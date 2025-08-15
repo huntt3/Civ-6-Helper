@@ -26,6 +26,7 @@ const EraTrackerContainer = ({ settings }) => {
   const [showOnlyFavorited, setShowOnlyFavorited] = useState(false);
   const [previousEraScore, setPreviousEraScore] = useState(0);
   const [currentEraScore, setCurrentEraScore] = useState(0);
+  const [itemScores, setItemScores] = useState({});
   const [favorites, setFavorites] = useState(() => {
     // Load favorites from localStorage (array of titles)
     try {
@@ -184,19 +185,30 @@ const EraTrackerContainer = ({ settings }) => {
   };
 
   // Handler for score changes from individual cards
-  const handleScoreChange = (title, eraType, score) => {
-    if (eraType === "previous") {
-      setPreviousEraScore((prev) => {
-        // Remove any existing score for this title and add the new score
-        return prev + score;
-      });
-    } else if (eraType === "current") {
-      setCurrentEraScore((prev) => {
-        // Remove any existing score for this title and add the new score
-        return prev + score;
-      });
-    }
+  const handleScoreChange = (title, eraType, newScore) => {
+    setItemScores((prev) => {
+      const updated = { ...prev };
+      if (!updated[title]) {
+        updated[title] = { previous: 0, current: 0 };
+      }
+      updated[title][eraType] = newScore;
+      return updated;
+    });
   };
+
+  // Calculate total scores when itemScores changes
+  useEffect(() => {
+    let previousTotal = 0;
+    let currentTotal = 0;
+
+    Object.values(itemScores).forEach((scores) => {
+      previousTotal += scores.previous || 0;
+      currentTotal += scores.current || 0;
+    });
+
+    setPreviousEraScore(previousTotal);
+    setCurrentEraScore(currentTotal);
+  }, [itemScores]);
 
   return (
     <CollapsibleContainer

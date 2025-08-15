@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import EraScoreModal from "./EraScoreModal";
 import { FaStar } from "react-icons/fa";
 
@@ -20,40 +20,41 @@ const EraScore = ({
 
   const handleModal = () => setShowModal((open) => !open);
 
+  // Update scores whenever counts change
+  useEffect(() => {
+    if (onScoreChange) {
+      onScoreChange(title, "previous", previousEraCount * eraScore);
+    }
+  }, [previousEraCount, eraScore, title, onScoreChange]);
+
+  useEffect(() => {
+    if (onScoreChange) {
+      onScoreChange(title, "current", currentEraCount * eraScore);
+    }
+  }, [currentEraCount, eraScore, title, onScoreChange]);
+
   // Handlers for repeatable count
   // Allow 0 as a valid value for repeatable count
   const handlePreviousEraCountChange = (e) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
     const newCount = value === "" ? 0 : Math.max(0, parseInt(value, 10));
     setPreviousEraCount(newCount);
-    if (onScoreChange) {
-      onScoreChange(title, "previous", newCount * eraScore);
-    }
   };
 
   const handleCurrentEraCountChange = (e) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
     const newCount = value === "" ? 0 : Math.max(0, parseInt(value, 10));
     setCurrentEraCount(newCount);
-    if (onScoreChange) {
-      onScoreChange(title, "current", newCount * eraScore);
-    }
   };
 
   const handlePreviousEraToggle = () => {
     const newCount = previousEraCount === 0 ? 1 : 0;
     setPreviousEraCount(newCount);
-    if (onScoreChange) {
-      onScoreChange(title, "previous", newCount * eraScore);
-    }
   };
 
   const handleCurrentEraToggle = () => {
     const newCount = currentEraCount === 0 ? 1 : 0;
     setCurrentEraCount(newCount);
-    if (onScoreChange) {
-      onScoreChange(title, "current", newCount * eraScore);
-    }
   };
 
   // Card container with Tailwind for background, border, shadow, spacing, and rounded corners
