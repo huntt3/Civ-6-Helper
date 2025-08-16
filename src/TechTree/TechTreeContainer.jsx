@@ -102,15 +102,15 @@ const TechTreeContainer = () => {
         onRefresh={handleTechResetView}
         ariaLabel="Tech Tracker"
       >
-        <div className="mb-4">
-          <div className="flex gap-2 justify-center">
+        <div className="mb-2">
+          <div className="flex gap-2 justify-center items-center">
             <button
               onClick={handleTechResetView}
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+              className="px-2 py-1 bg-blue-500 text-white rounded text-xs hover:bg-blue-600 transition-colors"
             >
               Reset View
             </button>
-            <div className="text-sm text-gray-600 flex items-center">
+            <div className="text-xs text-gray-500">
               Scroll to zoom • Drag to pan
             </div>
           </div>
@@ -133,15 +133,15 @@ const TechTreeContainer = () => {
         onRefresh={handleCivicResetView}
         ariaLabel="Civic Tracker"
       >
-        <div className="mb-4">
-          <div className="flex gap-2 justify-center">
+        <div className="mb-2">
+          <div className="flex gap-2 justify-center items-center">
             <button
               onClick={handleCivicResetView}
-              className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition-colors"
+              className="px-2 py-1 bg-purple-500 text-white rounded text-xs hover:bg-purple-600 transition-colors"
             >
               Reset View
             </button>
-            <div className="text-sm text-gray-600 flex items-center">
+            <div className="text-xs text-gray-500">
               Scroll to zoom • Drag to pan
             </div>
           </div>

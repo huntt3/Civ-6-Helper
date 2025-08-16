@@ -23,8 +23,8 @@ const TechCarousel = forwardRef(
   ) => {
     const [modalTech, setModalTech] = useState(null);
 
-    // Pan and zoom state
-    const [zoom, setZoom] = useState(1);
+    // Pan and zoom state - start with smaller zoom to show more cards
+    const [zoom, setZoom] = useState(0.6);
     const [pan, setPan] = useState({ x: 0, y: 0 });
     const [isDragging, setIsDragging] = useState(false);
     const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
@@ -38,8 +38,9 @@ const TechCarousel = forwardRef(
       const wheelHandler = (e) => {
         e.preventDefault();
         const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
+        // Allow more zoom out to show all cards (0.3) and more zoom in (5)
         setZoom((prevZoom) =>
-          Math.max(0.5, Math.min(3, prevZoom * zoomFactor))
+          Math.max(0.45, Math.min(5, prevZoom * zoomFactor))
         );
       };
 
@@ -86,12 +87,12 @@ const TechCarousel = forwardRef(
       setTimeout(() => setIsDragging(false), 100);
     };
 
-    // Expose reset view functionality
+    // Expose reset view functionality - reset to default smaller zoom
     useImperativeHandle(
       ref,
       () => ({
         resetView: () => {
-          setZoom(1);
+          setZoom(0.6);
           setPan({ x: 0, y: 0 });
         },
       }),
@@ -246,7 +247,7 @@ const TechCarousel = forwardRef(
     return (
       <section
         ref={containerRef}
-        className="w-full h-96 bg-white rounded-3xl shadow-lg overflow-hidden cursor-grab active:cursor-grabbing"
+        className="w-full h-[500px] bg-white rounded-3xl shadow-lg overflow-hidden cursor-grab active:cursor-grabbing"
         aria-label="Technologies"
         tabIndex="0"
         style={{ position: "relative" }}
