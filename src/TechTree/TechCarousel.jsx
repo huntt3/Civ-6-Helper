@@ -280,17 +280,21 @@ const TechCarousel = forwardRef(
             setAllTechs((prev) =>
               prev.map((t) => {
                 // Find the original tech data to restore original position
-                const originalTech = (originalData.Techs || []).find(orig => orig.name === t.name);
-                const originalPosition = originalTech ? { row: originalTech.row, column: originalTech.column } : {};
-                return { 
-                  ...t, 
-                  researched: false, 
+                const originalTech = (originalData.Techs || []).find(
+                  (orig) => orig.name === t.name
+                );
+                const originalPosition = originalTech
+                  ? { row: originalTech.row, column: originalTech.column }
+                  : {};
+                return {
+                  ...t,
+                  researched: false,
                   boosted: false,
-                  ...originalPosition // Restore original position
+                  ...originalPosition, // Restore original position
                 };
               })
             );
-            
+
             // Clear both localStorage entries
             const state = {};
             techs.forEach((t) => {
@@ -484,24 +488,14 @@ const TechCarousel = forwardRef(
                     const isDraggable = draggableCards.includes(tech.name);
 
                     let extraClass = "";
-                    if (hoveredTech && tech.name === hoveredTech.name) {
-                      if (tech.techCivic === "Tech") {
-                        extraClass = "ring-4 ring-yellow-400";
-                      } else {
-                        extraClass = "ring-4 ring-purple-400";
-                      }
-                    } else if (hoveredTech && boostsSet.has(tech.name)) {
-                      if (tech.techCivic === "Tech") {
-                        extraClass = "ring-2 ring-green-400";
-                      } else {
-                        extraClass = "ring-2 ring-blue-400";
-                      }
-                    } else if (hoveredTech && boostedBySet.has(tech.name)) {
-                      if (tech.techCivic === "Tech") {
-                        extraClass = "ring-2 ring-orange-400";
-                      } else {
-                        extraClass = "ring-2 ring-pink-400";
-                      }
+                    // Only yellow rings for all hover states
+                    if (
+                      hoveredTech &&
+                      (tech.name === hoveredTech.name ||
+                        boostsSet.has(tech.name) ||
+                        boostedBySet.has(tech.name))
+                    ) {
+                      extraClass = "ring-7 ring-amber-400";
                     }
 
                     if (isDraggable) {

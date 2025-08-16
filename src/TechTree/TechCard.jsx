@@ -33,7 +33,7 @@ const TechCard = ({
   // Get CSS classes for Tailwind
   const getCardClasses = () => {
     let classes =
-      "rounded-2xl min-w-0 min-h-0 h-full w-full flex flex-col items-center justify-center text-lg shadow-lg cursor-pointer border-2 border-gray-300 text-gray-800 transition-all duration-200 relative z-10 hover:shadow-xl hover:border-green-500";
+      "rounded-2xl min-w-0 min-h-0 h-full w-full flex flex-col items-center justify-center text-lg shadow-lg cursor-pointer border-2 border-gray-300 text-gray-800 transition-all duration-200 relative z-10 hover:shadow-xl";
 
     if (tech.researched) {
       classes +=
