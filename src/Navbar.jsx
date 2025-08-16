@@ -2,10 +2,11 @@ import React from "react";
 
 const navLinks = [
   { href: "index.html", label: "Home" },
-  { href: "districtDiscountingTool.html", label: "District Discounting Tool" },
-  { href: "eraScoreTracker.html", label: "Era Score Tracker" },
-  { href: "greatPeopleTracker.html", label: "Great People Tracker" },
   { href: "techsAndCivicsTree.html", label: "Techs and Civics Tree" },
+  { href: "districtDiscountingTool.html", label: "District Discount Tracker" },
+  { href: "wonderTracker.html", label: "Wonder Tracker" },
+  { href: "greatPeopleTracker.html", label: "Great People Tracker" },
+  { href: "eraScoreTracker.html", label: "Era Score Tracker" },
   { href: "hexPlanner.html", label: "Hex Planner" },
 ];
 
