@@ -4,9 +4,58 @@ import React, {
   forwardRef,
   useImperativeHandle,
 } from "react";
+import {
+  DndContext,
+  closestCenter,
+  useSensor,
+  useSensors,
+  PointerSensor,
+  DragOverlay,
+  useDroppable,
+  useDraggable,
+} from "@dnd-kit/core";
+import { restrictToParentElement } from "@dnd-kit/modifiers";
 import TechCard from "./TechCard";
 import TechModal from "./TechModal";
 import TechArrows from "./TechArrows";
+
+// Droppable slot component for empty grid positions
+const DroppableSlot = ({ index, children }) => {
+  const { isOver, setNodeRef } = useDroppable({
+    id: `slot-${index}`,
+  });
+
+  const style = {
+    backgroundColor: isOver ? "rgba(0, 255, 0, 0.1)" : "transparent",
+  };
+
+  return (
+    <div ref={setNodeRef} style={style} className="w-full h-full">
+      {children}
+    </div>
+  );
+};
+
+// Draggable tech card wrapper
+const DraggableTechCard = ({ tech, ...props }) => {
+  const { attributes, listeners, setNodeRef, transform, isDragging } =
+    useDraggable({
+      id: tech.name,
+    });
+
+  const style = transform
+    ? {
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+        opacity: isDragging ? 0.5 : 1,
+      }
+    : {};
+
+  return (
+    <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
+      <TechCard tech={tech} {...props} />
+    </div>
+  );
+};
 
 const TechCarousel = forwardRef(
   (
@@ -22,6 +71,93 @@ const TechCarousel = forwardRef(
     ref
   ) => {
     const [modalTech, setModalTech] = useState(null);
+    const [activeId, setActiveId] = useState(null);
+
+    // Define draggable Future Era cards
+    const draggableTechs = [
+      "Advanced AI",
+      "Advanced Power Cells",
+      "Cybernetics",
+      "Future Governance",
+      "Nanotechnology",
+      "Seasteads",
+      "Smart Materials",
+    ];
+
+    const draggableCivics = [
+      "Corporate Libertarianism",
+      "Cultural Hegemony",
+      "Distributed Sovereignty",
+      "Global Warming Mitigation",
+      "Information Warfare",
+      "Near Future Governance",
+      "Optimization Imperative",
+      "Synthetic Technocracy",
+    ];
+
+    const draggableCards = [...draggableTechs, ...draggableCivics];
+
+    const handleDragStart = (event) => {
+      setActiveId(event.active.id);
+    };
+
+    const handleDragEnd = (event) => {
+      const { active, over } = event;
+
+      if (!over || !active) {
+        setActiveId(null);
+        return;
+      }
+
+      const draggedTechName = active.id;
+      const targetSlot = over.id; // This should be "slot-index" format
+
+      if (!targetSlot.startsWith("slot-")) {
+        setActiveId(null);
+        return;
+      }
+
+      const slotIndex = parseInt(targetSlot.replace("slot-", ""));
+      const draggedTech = allTechs.find((t) => t.name === draggedTechName);
+
+      if (!draggedTech || !draggableCards.includes(draggedTechName)) {
+        setActiveId(null);
+        return;
+      }
+
+      // Calculate target row and column from slot index
+      const columns = Math.ceil(Math.sqrt(allTechs.length));
+      const targetRow = Math.floor(slotIndex / columns);
+      const targetCol = slotIndex % columns;
+
+      // Check column constraints
+      const isTechCard = draggedTech.techCivic === "Tech";
+      const isCivicCard = draggedTech.techCivic === "Civic";
+
+      const allowedTechColumns = [17, 18, 19];
+      const allowedCivicColumns = [18, 19, 20];
+
+      const isValidDrop =
+        (isTechCard && allowedTechColumns.includes(targetCol)) ||
+        (isCivicCard && allowedCivicColumns.includes(targetCol));
+
+      if (!isValidDrop) {
+        setActiveId(null);
+        return;
+      }
+
+      // Update tech position
+      setAllTechs((prev) =>
+        prev.map((tech) => {
+          if (tech.name === draggedTechName) {
+            return { ...tech, row: targetRow, column: targetCol };
+          }
+          return tech;
+        })
+      );
+
+      setActiveId(null);
+    };
 
     // Pan and zoom state - start with smaller zoom to show more cards
     const [zoom, setZoom] = useState(0.6);
@@ -245,107 +381,124 @@ const TechCarousel = forwardRef(
     }
 
     return (
-      <section
-        ref={containerRef}
-        className="w-full h-[500px] bg-white rounded-3xl shadow-lg overflow-hidden cursor-grab active:cursor-grabbing"
-        aria-label="Technologies"
-        tabIndex="0"
-        style={{ position: "relative" }}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-      >
-        <header
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "1rem",
-          }}
-        ></header>
-        <div
-          style={{
-            transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
-            transformOrigin: "0 0",
-            width: columns * (cardWidth + gap),
-            height: rows * (cardHeight + gap),
-            position: "relative",
-            transition: isDragging ? "none" : "transform 0.1s ease-out",
-          }}
+      <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+        <section
+          ref={containerRef}
+          className="w-full h-[500px] bg-white rounded-3xl shadow-lg overflow-hidden cursor-grab active:cursor-grabbing"
+          aria-label="Technologies"
+          tabIndex="0"
+          style={{ position: "relative" }}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
         >
-          <svg
-            className="absolute top-0 left-0 w-full h-full pointer-events-none z-0"
-            width={columns * (cardWidth + gap)}
-            height={rows * (cardHeight + gap)}
-          >
-            <TechArrows
-              arrowData={arrowData}
-              columns={columns}
-              rows={rows}
-              cardWidth={cardWidth}
-              cardHeight={cardHeight}
-              gap={gap}
-              zoom={zoom}
-            />
-          </svg>
-          <div
-            className="grid gap-10 py-4 relative z-10"
+          <header
             style={{
-              gridTemplateColumns: `repeat(${columns}, ${cardWidth}px)`,
-              gridTemplateRows: `repeat(${rows}, ${cardHeight}px)`,
-              gap: `${gap}px`,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "1rem",
+            }}
+          ></header>
+          <div
+            style={{
+              transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+              transformOrigin: "0 0",
+              width: columns * (cardWidth + gap),
+              height: rows * (cardHeight + gap),
+              position: "relative",
+              transition: isDragging ? "none" : "transform 0.1s ease-out",
             }}
           >
-            {grid.flat().map((tech, idx) => {
-              if (!tech) {
+            <svg
+              className="absolute top-0 left-0 w-full h-full pointer-events-none z-0"
+              width={columns * (cardWidth + gap)}
+              height={rows * (cardHeight + gap)}
+            >
+              <TechArrows
+                arrowData={arrowData}
+                columns={columns}
+                rows={rows}
+                cardWidth={cardWidth}
+                cardHeight={cardHeight}
+                gap={gap}
+                zoom={zoom}
+              />
+            </svg>
+            <div
+              className="grid gap-10 py-4 relative z-10"
+              style={{
+                gridTemplateColumns: `repeat(${columns}, ${cardWidth}px)`,
+                gridTemplateRows: `repeat(${rows}, ${cardHeight}px)`,
+                gap: `${gap}px`,
+              }}
+            >
+              {grid.flat().map((tech, idx) => {
+                if (!tech) {
+                  return <DroppableSlot key={idx} index={idx} />;
+                }
+
+                const isDraggable = draggableCards.includes(tech.name);
+
+                let extraClass = "";
+                if (hoveredTech && tech.name === hoveredTech.name) {
+                  if (tech.techCivic === "Tech") {
+                    extraClass = "ring-4 ring-yellow-400";
+                  } else {
+                    extraClass = "ring-4 ring-purple-400";
+                  }
+                } else if (hoveredTech && boostsSet.has(tech.name)) {
+                  if (tech.techCivic === "Tech") {
+                    extraClass = "ring-2 ring-green-400";
+                  } else {
+                    extraClass = "ring-2 ring-blue-400";
+                  }
+                } else if (hoveredTech && boostedBySet.has(tech.name)) {
+                  if (tech.techCivic === "Tech") {
+                    extraClass = "ring-2 ring-orange-400";
+                  } else {
+                    extraClass = "ring-2 ring-pink-400";
+                  }
+                }
+
+                if (isDraggable) {
+                  return (
+                    <DraggableTechCard
+                      key={tech.name}
+                      tech={tech}
+                      allTechs={filteredTechs}
+                      onResearch={handleResearch}
+                      onBoostToggle={handleBoostToggle}
+                      onShowDetails={handleShowDetails}
+                      hoverClass={`tech-card ${extraClass}`}
+                      onHover={() => setHoveredTech(tech)}
+                      onUnhover={() => setHoveredTech(null)}
+                      techCivic={tech.techCivic}
+                    />
+                  );
+                }
+
                 return (
-                  <div
-                    key={idx}
-                    className="bg-transparent shadow-none border-none cursor-default"
-                    aria-hidden="true"
-                  ></div>
+                  <TechCard
+                    key={tech.name}
+                    tech={tech}
+                    allTechs={filteredTechs}
+                    onResearch={handleResearch}
+                    onBoostToggle={handleBoostToggle}
+                    onShowDetails={handleShowDetails}
+                    hoverClass={`tech-card ${extraClass}`}
+                    onHover={() => setHoveredTech(tech)}
+                    onUnhover={() => setHoveredTech(null)}
+                    techCivic={tech.techCivic}
+                  />
                 );
-              }
-              let extraClass = "";
-              if (hoveredTech && tech.name === hoveredTech.name) {
-                if (tech.techCivic === "Tech") {
-                  extraClass = "ring-4 ring-yellow-400";
-                } else {
-                  extraClass = "ring-4 ring-purple-400";
-                }
-              } else if (hoveredTech && boostsSet.has(tech.name)) {
-                if (tech.techCivic === "Tech") {
-                  extraClass = "ring-2 ring-green-400";
-                } else {
-                  extraClass = "ring-2 ring-blue-400";
-                }
-              } else if (hoveredTech && boostedBySet.has(tech.name)) {
-                if (tech.techCivic === "Tech") {
-                  extraClass = "ring-2 ring-orange-400";
-                } else {
-                  extraClass = "ring-2 ring-pink-400";
-                }
-              }
-              return (
-                <TechCard
-                  key={tech.name}
-                  tech={tech}
-                  allTechs={filteredTechs}
-                  onResearch={handleResearch}
-                  onBoostToggle={handleBoostToggle}
-                  onShowDetails={handleShowDetails}
-                  hoverClass={`tech-card ${extraClass}`}
-                  onHover={() => setHoveredTech(tech)}
-                  onUnhover={() => setHoveredTech(null)}
-                  techCivic={tech.techCivic}
-                />
-              );
-            })}
+              })}
+            </div>
           </div>
-        </div>
-        <TechModal tech={modalTech} onClose={handleCloseModal} />
-      </section>
+          <TechModal tech={modalTech} onClose={handleCloseModal} />
+        </section>
+      </DndContext>
     );
   }
 );
