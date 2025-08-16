@@ -1,20 +1,20 @@
+// Layout and pan/zoom constants
+const CARD_WIDTH = 120;
+const CARD_HEIGHT = 100;
+const GRID_GAP = 40;
+const DEFAULT_ZOOM = 0.45;
+const MAX_ZOOM = 0.45;
+const MIN_ZOOM = 5;
+const DEFAULT_CONTAINER_WIDTH = 800;
+const DEFAULT_CONTAINER_HEIGHT = 500;
+
 import React, {
   useEffect,
   useState,
   forwardRef,
   useImperativeHandle,
 } from "react";
-import {
-  DndContext,
-  closestCenter,
-  useSensor,
-  useSensors,
-  PointerSensor,
-  DragOverlay,
-  useDroppable,
-  useDraggable,
-} from "@dnd-kit/core";
-import { restrictToParentElement } from "@dnd-kit/modifiers";
+import { DndContext, useDroppable, useDraggable } from "@dnd-kit/core";
 import TechCard from "./TechCard";
 import TechModal from "./TechModal";
 import TechArrows from "./TechArrows";
@@ -163,7 +163,7 @@ const TechCarousel = forwardRef(
     };
 
     // Pan and zoom state - start with smaller zoom to show more cards
-    const [zoom, setZoom] = useState(0.6);
+    const [zoom, setZoom] = useState(DEFAULT_ZOOM);
     const [pan, setPan] = useState({ x: 0, y: 0 });
     const [isDragging, setIsDragging] = useState(false);
     const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
@@ -173,20 +173,16 @@ const TechCarousel = forwardRef(
     useEffect(() => {
       const containerElement = containerRef.current;
       if (!containerElement) return;
-
       const wheelHandler = (e) => {
         e.preventDefault();
         const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
-        // Allow more zoom out to show all cards (0.3) and more zoom in (5)
         setZoom((prevZoom) =>
-          Math.max(0.45, Math.min(5, prevZoom * zoomFactor))
+          Math.max(MAX_ZOOM, Math.min(MIN_ZOOM, prevZoom * zoomFactor))
         );
       };
-
       containerElement.addEventListener("wheel", wheelHandler, {
         passive: false,
       });
-
       return () => {
         containerElement.removeEventListener("wheel", wheelHandler);
       };
@@ -215,11 +211,15 @@ const TechCarousel = forwardRef(
         }
 
         // Clamp pan so the grid cannot be dragged out of view
-        const gridWidth = columns * (cardWidth + gap);
-        const gridHeight = rows * (cardHeight + gap);
+        const gridWidth = columns * (CARD_WIDTH + GRID_GAP);
+        const gridHeight = rows * (CARD_HEIGHT + GRID_GAP);
         const container = containerRef.current;
-        const containerWidth = container ? container.offsetWidth : 800;
-        const containerHeight = container ? container.offsetHeight : 500;
+        const containerWidth = container
+          ? container.offsetWidth
+          : DEFAULT_CONTAINER_WIDTH;
+        const containerHeight = container
+          ? container.offsetHeight
+          : DEFAULT_CONTAINER_HEIGHT;
 
         let newX = e.clientX - dragStart.x;
         let newY = e.clientY - dragStart.y;
@@ -245,7 +245,7 @@ const TechCarousel = forwardRef(
       ref,
       () => ({
         resetView: () => {
-          setZoom(0.6);
+          setZoom(DEFAULT_ZOOM);
           setPan({ x: 0, y: 0 });
         },
       }),
@@ -380,9 +380,6 @@ const TechCarousel = forwardRef(
     });
 
     const arrowData = [];
-    const cardWidth = 120;
-    const cardHeight = 100;
-    const gap = 40;
     techs.forEach((tech) => {
       if (!tech.prerequisites || !Array.isArray(tech.prerequisites)) return;
       tech.prerequisites.forEach((prereqName) => {
@@ -409,10 +406,12 @@ const TechCarousel = forwardRef(
           toRow >= minRow &&
           toRow <= maxRow
         ) {
-          const x1 = fromCol * (cardWidth + gap) + cardWidth;
-          const y1 = (fromRow - minRow) * (cardHeight + gap) + cardHeight / 1.5;
-          const x2 = toCol * (cardWidth + gap);
-          const y2 = (toRow - minRow) * (cardHeight + gap) + cardHeight / 1.5;
+          const x1 = fromCol * (CARD_WIDTH + GRID_GAP) + CARD_WIDTH;
+          const y1 =
+            (fromRow - minRow) * (CARD_HEIGHT + GRID_GAP) + CARD_HEIGHT / 1.5;
+          const x2 = toCol * (CARD_WIDTH + GRID_GAP);
+          const y2 =
+            (toRow - minRow) * (CARD_HEIGHT + GRID_GAP) + CARD_HEIGHT / 1.5;
           arrowData.push({ x1, y1, x2, y2 });
         }
       });
@@ -459,33 +458,33 @@ const TechCarousel = forwardRef(
             style={{
               transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
               transformOrigin: "0 0",
-              width: columns * (cardWidth + gap),
-              height: rows * (cardHeight + gap),
+              width: columns * (CARD_WIDTH + GRID_GAP),
+              height: rows * (CARD_HEIGHT + GRID_GAP),
               position: "relative",
               transition: isDragging ? "none" : "transform 0.1s ease-out",
             }}
           >
             <svg
               className="absolute top-0 left-0 w-full h-full pointer-events-none z-0"
-              width={columns * (cardWidth + gap)}
-              height={rows * (cardHeight + gap)}
+              width={columns * (CARD_WIDTH + GRID_GAP)}
+              height={rows * (CARD_HEIGHT + GRID_GAP)}
             >
               <TechArrows
                 arrowData={arrowData}
                 columns={columns}
                 rows={rows}
-                cardWidth={cardWidth}
-                cardHeight={cardHeight}
-                gap={gap}
+                cardWidth={CARD_WIDTH}
+                cardHeight={CARD_HEIGHT}
+                gap={GRID_GAP}
                 zoom={zoom}
               />
             </svg>
             <div
               className="grid gap-10 py-4 relative z-10"
               style={{
-                gridTemplateColumns: `repeat(${columns}, ${cardWidth}px)`,
-                gridTemplateRows: `repeat(${rows}, ${cardHeight}px)`,
-                gap: `${gap}px`,
+                gridTemplateColumns: `repeat(${columns}, ${CARD_WIDTH}px)`,
+                gridTemplateRows: `repeat(${rows}, ${CARD_HEIGHT}px)`,
+                gap: `${GRID_GAP}px`,
               }}
             >
               {grid
