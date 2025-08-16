@@ -1,5 +1,7 @@
 import React, { useState, forwardRef, useImperativeHandle } from "react";
 
+const HEX_PLANNER_DATA_KEY = "civ6-helper-hex-planner-data";
+
 const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
   const [hexagons, setHexagons] = useState([]);
   const [tiles, setTiles] = useState([]);
@@ -15,6 +17,35 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
       .then((res) => res.json())
       .then((data) => setTiles(data.Tiles || []))
       .catch(() => setTiles([]));
+  }, []);
+
+  // Save hexagon data to localStorage whenever it changes
+  React.useEffect(() => {
+    const hexDataToSave = hexagons
+      .filter((hex) => hex.tile) // Only save hexes with tiles
+      .map((hex) => ({
+        id: hex.id,
+        q: hex.q,
+        r: hex.r,
+        s: hex.s,
+        tile: hex.tile,
+      }));
+
+    if (hexDataToSave.length > 0) {
+      localStorage.setItem(HEX_PLANNER_DATA_KEY, JSON.stringify(hexDataToSave));
+    } else {
+      localStorage.removeItem(HEX_PLANNER_DATA_KEY);
+    }
+  }, [hexagons]);
+
+  // Load saved hex data from localStorage
+  const loadSavedHexData = React.useCallback(() => {
+    try {
+      const saved = localStorage.getItem(HEX_PLANNER_DATA_KEY);
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
   }, []);
 
   // Helper function to convert tile name to camelCase filename
@@ -81,14 +112,24 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
   React.useEffect(() => {
     setHexagons((prevHexagons) => {
       const newHexagons = generateHexagons(radius);
-      // Preserve existing tile data when radius changes
+      const savedHexData = loadSavedHexData();
+
+      // Preserve existing tile data when radius changes, prioritizing saved data
       const preservedHexagons = newHexagons.map((newHex) => {
+        // First check saved data
+        const savedHex = savedHexData.find((hex) => hex.id === newHex.id);
+        if (savedHex) {
+          return { ...newHex, tile: savedHex.tile };
+        }
+
+        // Then check previous state
         const existingHex = prevHexagons.find((hex) => hex.id === newHex.id);
         return existingHex ? { ...newHex, tile: existingHex.tile } : newHex;
       });
+
       return preservedHexagons;
     });
-  }, [radius]);
+  }, [radius, loadSavedHexData]);
 
   // Add wheel event listener with passive: false to allow preventDefault
   React.useEffect(() => {
@@ -245,10 +286,16 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
     });
   };
 
+  const clearHexData = () => {
+    setHexagons((prev) => prev.map((hex) => ({ ...hex, tile: null })));
+    localStorage.removeItem(HEX_PLANNER_DATA_KEY);
+  };
+
   useImperativeHandle(
     ref,
     () => ({
       updateHexTile,
+      clearHexData,
       resetView: () => {
         setZoom(1);
         setPan({ x: 0, y: 0 });

@@ -4,9 +4,15 @@ import CollapsibleContainer from "../Templates/CollapsibleContainer";
 
 // TechTreeContainer manages the collapsed state for the CollapsibleContainer
 const TechTreeContainer = () => {
-  // State to track if the containers are collapsed (start collapsed for performance)
-  const [techCollapsed, setTechCollapsed] = useState(true);
-  const [civicCollapsed, setCivicCollapsed] = useState(true);
+  // State to track if the containers are collapsed (start collapsed for performance) with localStorage
+  const [techCollapsed, setTechCollapsed] = useState(() => {
+    const saved = localStorage.getItem("civ6-helper-tech-collapsed");
+    return saved ? JSON.parse(saved) : true;
+  });
+  const [civicCollapsed, setCivicCollapsed] = useState(() => {
+    const saved = localStorage.getItem("civ6-helper-civic-collapsed");
+    return saved ? JSON.parse(saved) : true;
+  });
 
   // Shared hover state for cross-container highlighting
   const [hoveredTech, setHoveredTech] = useState(null);
@@ -20,22 +26,22 @@ const TechTreeContainer = () => {
       .then((data) => {
         const saved = localStorage.getItem("civ6_tech_state");
         const savedPositions = localStorage.getItem("civ6_tech_positions");
-        
+
         let techState = {};
         let positionState = {};
-        
+
         if (saved) {
           try {
             techState = JSON.parse(saved);
           } catch {}
         }
-        
+
         if (savedPositions) {
           try {
             positionState = JSON.parse(savedPositions);
           } catch {}
         }
-        
+
         const merged = (data.Techs || []).map((t) => {
           const state = techState[t.name] || {};
           const position = positionState[t.name] || {};
@@ -47,22 +53,22 @@ const TechTreeContainer = () => {
       if (e.key === "civ6_tech_state" || e.key === "civ6_tech_positions") {
         const saved = localStorage.getItem("civ6_tech_state");
         const savedPositions = localStorage.getItem("civ6_tech_positions");
-        
+
         let techState = {};
         let positionState = {};
-        
+
         if (saved) {
           try {
             techState = JSON.parse(saved);
           } catch {}
         }
-        
+
         if (savedPositions) {
           try {
             positionState = JSON.parse(savedPositions);
           } catch {}
         }
-        
+
         setAllTechs((prev) =>
           prev.map((t) => ({
             ...t,
@@ -75,6 +81,21 @@ const TechTreeContainer = () => {
     window.addEventListener("storage", handleStorage);
     return () => window.removeEventListener("storage", handleStorage);
   }, []);
+
+  // Save collapsed states to localStorage
+  useEffect(() => {
+    localStorage.setItem(
+      "civ6-helper-tech-collapsed",
+      JSON.stringify(techCollapsed)
+    );
+  }, [techCollapsed]);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "civ6-helper-civic-collapsed",
+      JSON.stringify(civicCollapsed)
+    );
+  }, [civicCollapsed]);
 
   const handleTechCollapse = () => {
     setTechCollapsed((prevCollapsed) => !prevCollapsed);

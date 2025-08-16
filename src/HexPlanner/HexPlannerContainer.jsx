@@ -1,15 +1,34 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 import CustomHexGrid from "./CustomHexGrid";
 import HexPlannerModal from "./HexPlannerModal";
 
+const HEX_PLANNER_GRID_RADIUS_KEY = "civ6-helper-hex-planner-grid-radius";
+const HEX_PLANNER_COLLAPSED_KEY = "civ6-helper-hex-planner-collapsed";
+
 const HexPlannerContainer = () => {
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(() => {
+    const saved = localStorage.getItem(HEX_PLANNER_COLLAPSED_KEY);
+    return saved ? JSON.parse(saved) : true;
+  });
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedHex, setSelectedHex] = useState(null);
-  const [gridRadius, setGridRadius] = useState(3);
+  const [gridRadius, setGridRadius] = useState(() => {
+    const saved = localStorage.getItem(HEX_PLANNER_GRID_RADIUS_KEY);
+    return saved ? parseInt(saved, 10) : 3;
+  });
 
   const hexGridRef = useRef(null);
+
+  // Save grid radius to localStorage
+  useEffect(() => {
+    localStorage.setItem(HEX_PLANNER_GRID_RADIUS_KEY, gridRadius.toString());
+  }, [gridRadius]);
+
+  // Save collapsed state to localStorage
+  useEffect(() => {
+    localStorage.setItem(HEX_PLANNER_COLLAPSED_KEY, JSON.stringify(collapsed));
+  }, [collapsed]);
 
   const handleCollapse = () => {
     setCollapsed((prevCollapsed) => !prevCollapsed);
@@ -40,11 +59,20 @@ const HexPlannerContainer = () => {
     if (hexGridRef.current && hexGridRef.current.resetView) {
       hexGridRef.current.resetView();
     }
+    // Clear localStorage hex tile data
+    if (hexGridRef.current && hexGridRef.current.clearHexData) {
+      hexGridRef.current.clearHexData();
+    }
+    // Reset grid radius to default and collapsed state
+    setGridRadius(3);
+    setCollapsed(true);
+    localStorage.removeItem(HEX_PLANNER_GRID_RADIUS_KEY);
+    localStorage.removeItem(HEX_PLANNER_COLLAPSED_KEY);
+
     // Force re-render of hex grid by changing radius slightly and back
     setGridRadius((prev) => (prev === 3 ? 3.1 : 3));
     setTimeout(() => setGridRadius(3), 100);
   };
-
   const handleResetView = () => {
     // Just reset view without clearing tiles
     if (hexGridRef.current && hexGridRef.current.resetView) {

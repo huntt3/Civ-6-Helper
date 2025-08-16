@@ -9,6 +9,7 @@ const SORT_ORDER_KEY = "civ6-helper-eraScore-sortOrder";
 const ERA_SCORE_FILTER_KEY = "civ6-helper-eraScore-filter";
 const SEARCH_KEY = "civ6-helper-eraScore-search";
 const SHOW_ONLY_FAVORITED_KEY = "civ6-helper-eraScore-showOnlyFavorited";
+const ERA_TRACKER_COLLAPSED_KEY = "civ6-helper-eraScore-collapsed";
 
 const EraTrackerContainer = ({ settings }) => {
   // State for pagination
@@ -23,7 +24,10 @@ const EraTrackerContainer = ({ settings }) => {
     localStorage.setItem("civ6-helper-cardsPerPage", cardsPerPage);
   }, [cardsPerPage]);
   const [eraScoreItems, setEraScoreItems] = useState([]);
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(() => {
+    const saved = localStorage.getItem(ERA_TRACKER_COLLAPSED_KEY);
+    return saved ? JSON.parse(saved) : true;
+  });
   const [sortOrder, setSortOrder] = useState(() => {
     const saved = localStorage.getItem(SORT_ORDER_KEY);
     return saved !== null ? saved : "desc";
@@ -96,6 +100,11 @@ const EraTrackerContainer = ({ settings }) => {
       JSON.stringify(showOnlyFavorited)
     );
   }, [showOnlyFavorited]);
+
+  // Save collapsed state to localStorage
+  useEffect(() => {
+    localStorage.setItem(ERA_TRACKER_COLLAPSED_KEY, JSON.stringify(collapsed));
+  }, [collapsed]);
 
   // Listen for changes to civ6_tech_state in localStorage and also poll for changes every second
   useEffect(() => {
@@ -277,6 +286,7 @@ const EraTrackerContainer = ({ settings }) => {
     localStorage.removeItem(ERA_SCORE_FILTER_KEY);
     localStorage.removeItem(SEARCH_KEY);
     localStorage.removeItem(SHOW_ONLY_FAVORITED_KEY);
+    localStorage.removeItem(ERA_TRACKER_COLLAPSED_KEY);
 
     // Reset local state
     setFavorites([]);
@@ -286,6 +296,7 @@ const EraTrackerContainer = ({ settings }) => {
     setEraScoreFilter(0);
     setSearch("");
     setShowOnlyFavorited(false);
+    setCollapsed(true);
 
     // Refresh the data
     fetchEraScore();

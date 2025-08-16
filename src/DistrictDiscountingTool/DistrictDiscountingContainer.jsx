@@ -8,8 +8,11 @@ import TechsAndCivicsPercentage from "./TechsAndCivicsPercentage";
 
 // This component manages the collapsed state for the CollapsibleContainer
 const DistrictDiscountingContainer = () => {
-  // State to track if the container is collapsed
-  const [collapsed, setCollapsed] = useState(true);
+  // State to track if the container is collapsed with localStorage
+  const [collapsed, setCollapsed] = useState(() => {
+    const saved = localStorage.getItem("civ6-helper-district-collapsed");
+    return saved ? JSON.parse(saved) : true;
+  });
   // Local storage keys
   const LS_TECHS = "districtDiscounting_techsCompleted";
   const LS_CIVICS = "districtDiscounting_civicsCompleted";
@@ -49,16 +52,27 @@ const DistrictDiscountingContainer = () => {
   useEffect(() => {
     localStorage.setItem(LS_BUILT, JSON.stringify(numberBuiltStates));
   }, [numberBuiltStates]);
+
+  // Save collapsed state to localStorage
+  useEffect(() => {
+    localStorage.setItem(
+      "civ6-helper-district-collapsed",
+      JSON.stringify(collapsed)
+    );
+  }, [collapsed]);
+
   // Reset all inputs and localStorage
   const handleReset = () => {
     localStorage.removeItem(LS_TECHS);
     localStorage.removeItem(LS_CIVICS);
     localStorage.removeItem(LS_RESEARCHED);
     localStorage.removeItem(LS_BUILT);
+    localStorage.removeItem("civ6-helper-district-collapsed");
     setTechsCompleted(0);
     setCivicsCompleted(0);
     setResearchedStates(Array(numDistricts).fill(false));
     setNumberBuiltStates(Array(numDistricts).fill(0));
+    setCollapsed(true);
   };
   const numSpecialtyDistrictsCompleted = numberBuiltStates.reduce(
     (a, b) => a + b,

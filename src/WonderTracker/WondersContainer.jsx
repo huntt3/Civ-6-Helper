@@ -3,18 +3,47 @@ import CollapsibleContainer from "../Templates/CollapsibleContainer";
 import WonderCard from "./WonderCard";
 import WonderModal from "./WonderModal";
 
+const WONDERS_BUILT_KEY = "civ6-helper-wonders-built";
+const WONDERS_COLLAPSED_KEY = "civ6-helper-wonders-collapsed";
+
 // WondersContainer component using CollapsibleContainer
 const WondersContainer = () => {
   const [wonders, setWonders] = useState([]);
   const [selectedWonder, setSelectedWonder] = useState(null);
-  // Add collapsed state for CollapsibleContainer
-  const [collapsed, setCollapsed] = useState(true);
+  // Add collapsed state for CollapsibleContainer with localStorage
+  const [collapsed, setCollapsed] = useState(() => {
+    const saved = localStorage.getItem(WONDERS_COLLAPSED_KEY);
+    return saved ? JSON.parse(saved) : true;
+  });
+  // Track built wonders in localStorage
+  const [wondersBuilt, setWondersBuilt] = useState(() => {
+    const saved = localStorage.getItem(WONDERS_BUILT_KEY);
+    return saved ? JSON.parse(saved) : {};
+  });
+
+  // Save wonder built states to localStorage
+  useEffect(() => {
+    localStorage.setItem(WONDERS_BUILT_KEY, JSON.stringify(wondersBuilt));
+  }, [wondersBuilt]);
+
+  // Save collapsed state to localStorage
+  useEffect(() => {
+    localStorage.setItem(WONDERS_COLLAPSED_KEY, JSON.stringify(collapsed));
+  }, [collapsed]);
 
   // Load wonders from JSON
   const fetchWonders = () => {
     fetch("./jsonFiles/Wonders.json")
       .then((res) => res.json())
-      .then((data) => setWonders(data.Wonder || []))
+      .then((data) => {
+        const wondersData = data.Wonder || [];
+        // Merge with built states from localStorage
+        const wondersWithBuiltState = wondersData.map((wonder) => ({
+          ...wonder,
+          built: wondersBuilt[wonder.name] || false,
+        }));
+        setWonders(wondersWithBuiltState);
+      })
       .catch(() => setWonders([]));
   };
 
@@ -30,12 +59,23 @@ const WondersContainer = () => {
 
   // Toggle built status
   const handleToggleBuilt = () => {
+    const newBuiltState = !selectedWonder.built;
+
+    // Update wonder built state in localStorage
+    setWondersBuilt((prev) => ({
+      ...prev,
+      [selectedWonder.name]: newBuiltState,
+    }));
+
+    // Update wonders state
     setWonders((prev) =>
       prev.map((w) =>
-        w.name === selectedWonder.name ? { ...w, built: !w.built } : w
+        w.name === selectedWonder.name ? { ...w, built: newBuiltState } : w
       )
     );
-    setSelectedWonder((prev) => prev && { ...prev, built: !prev.built });
+
+    // Update selected wonder
+    setSelectedWonder((prev) => prev && { ...prev, built: newBuiltState });
   };
 
   // Collapse/expand handler
@@ -64,7 +104,14 @@ const WondersContainer = () => {
         title="Wonder Tracker"
         collapsed={collapsed}
         onCollapse={handleCollapse}
-        onRefresh={fetchWonders}
+        onRefresh={() => {
+          // Reset built states, collapsed state, and refresh
+          setWondersBuilt({});
+          setCollapsed(true);
+          localStorage.removeItem(WONDERS_BUILT_KEY);
+          localStorage.removeItem(WONDERS_COLLAPSED_KEY);
+          fetchWonders();
+        }}
         ariaLabel="Wonders"
       >
         <div

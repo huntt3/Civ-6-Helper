@@ -88,12 +88,18 @@ const GreatPeopleContainer = () => {
     Atomic: true,
     Information: true,
   };
-  const [collapsedEras, setCollapsedEras] = useState(defaultCollapsed);
+  const [collapsedEras, setCollapsedEras] = useState(() => {
+    const saved = localStorage.getItem("civ6-helper-greatPeople-collapsedEras");
+    return saved ? JSON.parse(saved) : defaultCollapsed;
+  });
   const [checkedCards, setCheckedCards] = useState(() => {
     const saved = localStorage.getItem("greatPeopleChecked");
     return saved ? JSON.parse(saved) : {};
   });
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(() => {
+    const saved = localStorage.getItem("civ6-helper-greatPeople-collapsed");
+    return saved ? JSON.parse(saved) : true;
+  });
 
   useEffect(() => {
     fetch("./jsonFiles/GreatPeople.json")
@@ -117,6 +123,22 @@ const GreatPeopleContainer = () => {
     localStorage.setItem("greatPeopleChecked", JSON.stringify(checkedCards));
   }, [checkedCards]);
 
+  // Save collapsed eras state to localStorage
+  useEffect(() => {
+    localStorage.setItem(
+      "civ6-helper-greatPeople-collapsedEras",
+      JSON.stringify(collapsedEras)
+    );
+  }, [collapsedEras]);
+
+  // Save main collapsed state to localStorage
+  useEffect(() => {
+    localStorage.setItem(
+      "civ6-helper-greatPeople-collapsed",
+      JSON.stringify(collapsed)
+    );
+  }, [collapsed]);
+
   const handleCollapse = (era) => {
     setCollapsedEras((prev) => ({ ...prev, [era]: !prev[era] }));
   };
@@ -128,9 +150,25 @@ const GreatPeopleContainer = () => {
     });
   };
 
-  // Reset all checked cards
+  // Reset all checked cards and collapsed states
   const handleRefresh = () => {
+    const defaultCollapsed = {
+      Medieval: true,
+      Renaissance: true,
+      Industrial: true,
+      Modern: true,
+      Atomic: true,
+      Information: true,
+    };
+
     setCheckedCards({});
+    setCollapsedEras(defaultCollapsed);
+    setCollapsed(true);
+
+    // Clear localStorage
+    localStorage.removeItem("greatPeopleChecked");
+    localStorage.removeItem("civ6-helper-greatPeople-collapsedEras");
+    localStorage.removeItem("civ6-helper-greatPeople-collapsed");
   };
 
   // Collapse/expand handler for the whole container
