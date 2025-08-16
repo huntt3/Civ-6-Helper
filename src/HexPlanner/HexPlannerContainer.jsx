@@ -1,61 +1,60 @@
 import React, { useState, useRef } from "react";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
-import DistrictPlannerHexGrid from "./HexPlannerHexGrid";
-import DistrictPlannerModal from "./HexPlannerModal";
+import CustomHexGrid from "./CustomHexGrid";
+import HexPlannerModal from "./HexPlannerModal";
 
-// This component manages the collapsed state for the CollapsibleContainer
-const DistrictPlannerContainer = () => {
-  // State to track if the container is collapsed
+const HexPlannerContainer = () => {
   const [collapsed, setCollapsed] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedHex, setSelectedHex] = useState(null);
   const [gridRadius, setGridRadius] = useState(3);
 
-  // Reference to the hex grid component
   const hexGridRef = useRef(null);
 
-  // Function to handle collapsing/expanding the container
   const handleCollapse = () => {
     setCollapsed((prevCollapsed) => !prevCollapsed);
   };
 
-  // Function to handle hex click
   const handleHexClick = (hexId, coords) => {
     setSelectedHex({ id: hexId, coords });
     setModalOpen(true);
   };
 
-  // Function to handle tile selection
   const handleTileSelect = (hexId, tileData) => {
     if (hexGridRef.current && hexGridRef.current.updateHexTile) {
       hexGridRef.current.updateHexTile(hexId, tileData);
     }
   };
 
-  // Function to handle modal close
   const handleModalClose = () => {
     setModalOpen(false);
     setSelectedHex(null);
   };
 
-  // Function to handle radius change
   const handleRadiusChange = (newRadius) => {
     setGridRadius(newRadius);
+  };
+
+  const handleReset = () => {
+    // Force re-render of hex grid by changing radius slightly and back
+    setGridRadius((prev) => (prev === 3 ? 3.1 : 3));
+    setTimeout(() => setGridRadius(3), 100);
   };
 
   return (
     <>
       <CollapsibleContainer
-        title="District Planner"
+        title="Hex Planner"
         collapsed={collapsed}
         onCollapse={handleCollapse}
-        ariaLabel="District Planner"
+        onRefresh={handleReset}
+        ariaLabel="Hex Planner"
       >
         <div className="p-4">
           <div className="flex items-center justify-between mb-4">
             <p className="text-sm text-gray-600">
-              Click on any hex to place a district, improvement, or feature. Use
-              this to plan your city layout and optimize adjacency bonuses.
+              Click on any hex to place a district, improvement, or feature.
+              Districts show their adjacency bonus in gold.
             </p>
             <div className="flex items-center gap-2 ml-4">
               <label className="text-sm font-medium text-gray-700">
@@ -70,18 +69,28 @@ const DistrictPlannerContainer = () => {
                 <option value={3}>Medium (3)</option>
                 <option value={4}>Large (4)</option>
                 <option value={5}>Extra Large (5)</option>
+                <option value={6}>Extra Large (6)</option>
+                <option value={7}>Huge (7)</option>
               </select>
             </div>
           </div>
-          <DistrictPlannerHexGrid
+          <CustomHexGrid
             ref={hexGridRef}
             onHexClick={handleHexClick}
             radius={gridRadius}
           />
+          <div className="mt-4 text-xs text-gray-500">
+            <p>
+              <strong>Adjacency Bonus Legend:</strong>
+            </p>
+            <p>• Minor adjacencies (other districts): +0.5 points</p>
+            <p>• Normal adjacencies (features/terrain): +1 point</p>
+            <p>• Major adjacencies (special features): +2 points</p>
+          </div>
         </div>
       </CollapsibleContainer>
 
-      <DistrictPlannerModal
+      <HexPlannerModal
         open={modalOpen}
         onClose={handleModalClose}
         onTileSelect={handleTileSelect}
@@ -91,4 +100,4 @@ const DistrictPlannerContainer = () => {
   );
 };
 
-export default DistrictPlannerContainer;
+export default HexPlannerContainer;
