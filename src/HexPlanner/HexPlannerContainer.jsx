@@ -36,9 +36,20 @@ const HexPlannerContainer = () => {
   };
 
   const handleReset = () => {
+    // Reset hex grid view and clear tiles
+    if (hexGridRef.current && hexGridRef.current.resetView) {
+      hexGridRef.current.resetView();
+    }
     // Force re-render of hex grid by changing radius slightly and back
     setGridRadius((prev) => (prev === 3 ? 3.1 : 3));
     setTimeout(() => setGridRadius(3), 100);
+  };
+
+  const handleResetView = () => {
+    // Just reset view without clearing tiles
+    if (hexGridRef.current && hexGridRef.current.resetView) {
+      hexGridRef.current.resetView();
+    }
   };
 
   return (
@@ -54,9 +65,16 @@ const HexPlannerContainer = () => {
           <div className="flex items-center justify-between mb-4">
             <p className="text-sm text-gray-600">
               Click on any hex to place a district, improvement, or feature.
-              Districts show their adjacency bonus in gold.
+              Districts show their adjacency bonus in gold. Use scroll wheel to
+              zoom, drag to pan.
             </p>
             <div className="flex items-center gap-2 ml-4">
+              <button
+                onClick={handleResetView}
+                className="px-3 py-1 text-xs bg-gray-500 text-white rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              >
+                Reset View
+              </button>
               <label className="text-sm font-medium text-gray-700">
                 Grid Size:
               </label>

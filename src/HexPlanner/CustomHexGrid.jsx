@@ -3,6 +3,11 @@ import React, { useState, forwardRef, useImperativeHandle } from "react";
 const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
   const [hexagons, setHexagons] = useState([]);
   const [tiles, setTiles] = useState([]);
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const svgRef = React.useRef(null);
 
   // Load tiles data on component mount
   React.useEffect(() => {
@@ -85,6 +90,24 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
     });
   }, [radius]);
 
+  // Add wheel event listener with passive: false to allow preventDefault
+  React.useEffect(() => {
+    const svgElement = svgRef.current;
+    if (!svgElement) return;
+
+    const wheelHandler = (e) => {
+      e.preventDefault();
+      const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
+      setZoom((prevZoom) => Math.max(0.5, Math.min(3, prevZoom * zoomFactor)));
+    };
+
+    svgElement.addEventListener("wheel", wheelHandler, { passive: false });
+
+    return () => {
+      svgElement.removeEventListener("wheel", wheelHandler);
+    };
+  }, []);
+
   // Calculate adjacency bonus for a district
   const calculateAdjacencyBonus = (hex) => {
     if (!hex.tile || hex.tile.type !== "district") return 0;
@@ -159,7 +182,59 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
   };
 
   const handleHexClick = (hex) => {
-    onHexClick(hex.id, { q: hex.q, r: hex.r, s: hex.s });
+    if (!isDragging) {
+      onHexClick(hex.id, { q: hex.q, r: hex.r, s: hex.s });
+    }
+  };
+
+  // Mouse event handlers for pan functionality
+  const handleMouseDown = (e) => {
+    setIsDragging(false);
+    setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y });
+  };
+
+  const handleMouseMove = (e) => {
+    if (dragStart.x !== 0 || dragStart.y !== 0) {
+      const deltaX = Math.abs(e.clientX - (dragStart.x + pan.x));
+      const deltaY = Math.abs(e.clientY - (dragStart.y + pan.y));
+
+      if (deltaX > 5 || deltaY > 5) {
+        setIsDragging(true);
+      }
+
+      setPan({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y,
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setDragStart({ x: 0, y: 0 });
+    setTimeout(() => setIsDragging(false), 100);
+  };
+
+  // Calculate bounds for all hexagons to prevent clipping
+  const calculateBounds = () => {
+    if (hexagons.length === 0) return { minX: 0, maxX: 0, minY: 0, maxY: 0 };
+
+    const size = 30;
+    let minX = Infinity,
+      maxX = -Infinity,
+      minY = Infinity,
+      maxY = -Infinity;
+
+    hexagons.forEach((hex) => {
+      const pixel = hexToPixel(hex, size);
+      // Account for hexagon radius in bounds calculation
+      const hexRadius = size;
+      minX = Math.min(minX, pixel.x - hexRadius);
+      maxX = Math.max(maxX, pixel.x + hexRadius);
+      minY = Math.min(minY, pixel.y - hexRadius);
+      maxY = Math.max(maxY, pixel.y + hexRadius);
+    });
+
+    return { minX, maxX, minY, maxY };
   };
 
   const updateHexTile = (hexId, tileData) => {
@@ -174,23 +249,38 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
     ref,
     () => ({
       updateHexTile,
+      resetView: () => {
+        setZoom(1);
+        setPan({ x: 0, y: 0 });
+      },
     }),
     []
   );
 
   const size = 30;
-  const padding = 50;
-  const maxCoord = radius * size * 2;
-  const svgWidth = maxCoord + padding * 2;
-  const svgHeight = maxCoord + padding * 2;
+  const bounds = calculateBounds();
+  const padding = 60; // Increased padding to ensure no clipping
+
+  // Calculate proper SVG dimensions based on actual hex bounds
+  const svgWidth = bounds.maxX - bounds.minX + padding * 2;
+  const svgHeight = bounds.maxY - bounds.minY + padding * 2;
+
+  // Center offset to position hexagons in the middle of the SVG
+  const centerOffsetX = -bounds.minX + padding;
+  const centerOffsetY = -bounds.minY + padding;
 
   return (
-    <div className="w-full flex justify-center items-center bg-gray-50 rounded-lg">
+    <div className="w-full h-96 bg-gray-50 rounded-lg overflow-hidden cursor-grab active:cursor-grabbing">
       <svg
-        width={svgWidth}
-        height={svgHeight}
+        ref={svgRef}
+        width="100%"
+        height="100%"
         viewBox={`0 0 ${svgWidth} ${svgHeight}`}
-        className="max-w-full max-h-full"
+        className="select-none"
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
       >
         <defs>
           {hexagons
@@ -220,85 +310,93 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
             .filter(Boolean)}
         </defs>
 
-        {hexagons.map((hex) => {
-          const pixel = hexToPixel(hex, size);
-          const centerX = pixel.x + svgWidth / 2;
-          const centerY = pixel.y + svgHeight / 2;
-          const path = generateHexPath(centerX, centerY, size);
-          const imagePath = hex.tile ? getImagePath(hex.tile.name) : null;
-          const adjacencyBonus = calculateAdjacencyBonus(hex);
+        <g transform={`translate(${pan.x}, ${pan.y}) scale(${zoom})`}>
+          <g transform={`translate(${centerOffsetX}, ${centerOffsetY})`}>
+            {hexagons.map((hex) => {
+              const pixel = hexToPixel(hex, size);
+              const centerX = pixel.x;
+              const centerY = pixel.y;
+              const path = generateHexPath(centerX, centerY, size);
+              const imagePath = hex.tile ? getImagePath(hex.tile.name) : null;
+              const adjacencyBonus = calculateAdjacencyBonus(hex);
 
-          return (
-            <g key={hex.id}>
-              {/* Hexagon */}
-              <path
-                d={path}
-                fill={
-                  hex.tile && imagePath
-                    ? `url(#pattern-${hex.id.replace(",", "-")})`
-                    : hex.tile
-                    ? "#10b981"
-                    : "#e5e7eb"
-                }
-                stroke="#374151"
-                strokeWidth="1"
-                className="cursor-pointer hover:opacity-75 transition-opacity"
-                onClick={() => handleHexClick(hex)}
-              />
-
-              {/* Tile name text */}
-              {hex.tile && !imagePath && (
-                <text
-                  x={centerX}
-                  y={centerY - 5}
-                  textAnchor="middle"
-                  fontSize="8"
-                  fill="white"
-                  fontWeight="bold"
-                >
-                  {hex.tile.name.length > 10
-                    ? hex.tile.name.substring(0, 10) + "..."
-                    : hex.tile.name}
-                </text>
-              )}
-
-              {/* Adjacency bonus for districts */}
-              {hex.tile && hex.tile.type === "district" && (
-                <g>
-                  <rect
-                    x={centerX - 15}
-                    y={centerY + 8}
-                    width="30"
-                    height="14"
-                    fill="rgba(0, 0, 0, 0.8)"
-                    rx="2"
+              return (
+                <g key={hex.id}>
+                  {/* Hexagon */}
+                  <path
+                    d={path}
+                    fill={
+                      hex.tile && imagePath
+                        ? `url(#pattern-${hex.id.replace(",", "-")})`
+                        : hex.tile
+                        ? "#10b981"
+                        : "#e5e7eb"
+                    }
+                    stroke="#374151"
+                    strokeWidth="1"
+                    className="cursor-pointer hover:opacity-75 transition-opacity"
+                    onClick={() => handleHexClick(hex)}
                   />
+
+                  {/* Tile name text */}
+                  {hex.tile && !imagePath && (
+                    <text
+                      x={centerX}
+                      y={centerY - 5}
+                      textAnchor="middle"
+                      fontSize="8"
+                      fill="white"
+                      fontWeight="bold"
+                      pointerEvents="none"
+                    >
+                      {hex.tile.name.length > 10
+                        ? hex.tile.name.substring(0, 10) + "..."
+                        : hex.tile.name}
+                    </text>
+                  )}
+
+                  {/* Adjacency bonus for districts */}
+                  {hex.tile && hex.tile.type === "district" && (
+                    <g>
+                      <rect
+                        x={centerX - 15}
+                        y={centerY + 8}
+                        width="30"
+                        height="14"
+                        fill="rgba(0, 0, 0, 0.8)"
+                        rx="2"
+                        pointerEvents="none"
+                      />
+                      <text
+                        x={centerX}
+                        y={centerY + 18}
+                        textAnchor="middle"
+                        fontSize="10"
+                        fill="gold"
+                        fontWeight="bold"
+                        pointerEvents="none"
+                      >
+                        +{adjacencyBonus}
+                      </text>
+                    </g>
+                  )}
+
+                  {/* Coordinates for debugging */}
                   <text
                     x={centerX}
-                    y={centerY + 18}
+                    y={centerY + (hex.tile ? 30 : 5)}
                     textAnchor="middle"
-                    fontSize="10"
-                    fill="gold"
-                    fontWeight="bold"
+                    fontSize="6"
+                    fill="#666"
+                    pointerEvents="none"
                   >
-                    +{adjacencyBonus}
+                    {hex.q},{hex.r}
                   </text>
                 </g>
-              )}
-
-              {/* Coordinates for debugging */}
-              <text
-                x={centerX}
-                y={centerY + (hex.tile ? 30 : 5)}
-                textAnchor="middle"
-                fontSize="6"
-                fill="#666"
-              >
-                {hex.q},{hex.r}
-              </text>
-            </g>
-          );
-        })}
+              );
+            })}
+          </g>
+        </g>
       </svg>
     </div>
   );
