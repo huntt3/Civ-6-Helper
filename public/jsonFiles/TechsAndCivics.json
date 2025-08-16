@@ -1465,7 +1465,7 @@
       "boosted": false,
       "column": 18,
       "row": 10,
-      "prerequisites": ["Near Future Governance"],
+      "prerequisites": [],
       "boostPrerequisites": []
     },
     {
@@ -1476,7 +1476,7 @@
       "boosted": false,
       "column": 18,
       "row": 11,
-      "prerequisites": ["Near Future Governance"],
+      "prerequisites": [],
       "boostPrerequisites": []
     },
     {
@@ -1487,7 +1487,7 @@
       "boosted": false,
       "column": 18,
       "row": 12,
-      "prerequisites": ["Near Future Governance"],
+      "prerequisites": [],
       "boostPrerequisites": []
     },
     {
@@ -1498,7 +1498,7 @@
       "boosted": false,
       "column": 18,
       "row": 13,
-      "prerequisites": ["Near Future Governance"],
+      "prerequisites": [],
       "boostPrerequisites": []
     },
     {
@@ -1508,8 +1508,8 @@
       "researched": false,
       "boosted": false,
       "column": 18,
-      "row": 13,
-      "prerequisites": ["Near Future Governance"],
+      "row": 14,
+      "prerequisites": [],
       "boostPrerequisites": []
     },
     {
@@ -1518,7 +1518,7 @@
       "baseCost": 3500,
       "researched": false,
       "boosted": false,
-      "column": 19,
+      "column": 20,
       "row": 13,
       "prerequisites": [],
       "boostPrerequisites": []

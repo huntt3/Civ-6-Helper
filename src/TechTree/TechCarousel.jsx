@@ -20,9 +20,9 @@ import TechModal from "./TechModal";
 import TechArrows from "./TechArrows";
 
 // Droppable slot component for empty grid positions
-const DroppableSlot = ({ index, children }) => {
+const DroppableSlot = ({ row, col, children }) => {
   const { isOver, setNodeRef } = useDroppable({
-    id: `slot-${index}`,
+    id: `slot-${row}-${col}`,
   });
 
   const style = {
@@ -78,21 +78,20 @@ const TechCarousel = forwardRef(
       "Advanced AI",
       "Advanced Power Cells",
       "Cybernetics",
-      "Future Governance",
-      "Nanotechnology",
+      "Predictive Systems",
       "Seasteads",
       "Smart Materials",
+      "Offworld Mission",
+      "Future Tech",
     ];
 
     const draggableCivics = [
-      "Corporate Libertarianism",
-      "Cultural Hegemony",
-      "Distributed Sovereignty",
-      "Global Warming Mitigation",
       "Information Warfare",
-      "Near Future Governance",
-      "Optimization Imperative",
-      "Synthetic Technocracy",
+      "Global Warming Mitigation",
+      "Cultural Hegemony",
+      "Smart Power Doctrine",
+      "Exodus Imperative",
+      "Future Civic",
     ];
 
     const draggableCards = [...draggableTechs, ...draggableCivics];
@@ -110,25 +109,29 @@ const TechCarousel = forwardRef(
       }
 
       const draggedTechName = active.id;
-      const targetSlot = over.id; // This should be "slot-index" format
+      const targetSlot = over.id; // This should be "slot-row-col" format
 
       if (!targetSlot.startsWith("slot-")) {
         setActiveId(null);
         return;
       }
 
-      const slotIndex = parseInt(targetSlot.replace("slot-", ""));
+      // Parse the slot ID to get row and column
+      const slotParts = targetSlot.split("-");
+      if (slotParts.length !== 3) {
+        setActiveId(null);
+        return;
+      }
+
+      const targetRow = parseInt(slotParts[1]) + minRow; // Add minRow offset
+      const targetCol = parseInt(slotParts[2]);
+
       const draggedTech = allTechs.find((t) => t.name === draggedTechName);
 
       if (!draggedTech || !draggableCards.includes(draggedTechName)) {
         setActiveId(null);
         return;
       }
-
-      // Calculate target row and column from slot index
-      const columns = Math.ceil(Math.sqrt(allTechs.length));
-      const targetRow = Math.floor(slotIndex / columns);
-      const targetCol = slotIndex % columns;
 
       // Check column constraints
       const isTechCard = draggedTech.techCivic === "Tech";
@@ -251,6 +254,21 @@ const TechCarousel = forwardRef(
       localStorage.setItem("civ6_tech_state", JSON.stringify(state));
     }, [techs]);
 
+    // Save position changes for draggable cards
+    useEffect(() => {
+      if (!techs.length) return;
+      const positionData = {};
+      techs.forEach((t) => {
+        if (draggableCards.includes(t.name)) {
+          positionData[t.name] = {
+            row: t.row,
+            column: t.column,
+          };
+        }
+      });
+      localStorage.setItem("civ6_tech_positions", JSON.stringify(positionData));
+    }, [techs, draggableCards]);
+
     // Expose reset logic to parent via onReset prop using useEffect and useCallback
     React.useEffect(() => {
       if (!onReset) return;
@@ -290,7 +308,7 @@ const TechCarousel = forwardRef(
       setModalTech(null);
     };
 
-    const columns = 20;
+    const columns = 21;
     // Filter techs by rowRange if provided
     let filteredTechs = techs;
     if (
@@ -434,66 +452,74 @@ const TechCarousel = forwardRef(
                 gap: `${gap}px`,
               }}
             >
-              {grid.flat().map((tech, idx) => {
-                if (!tech) {
-                  return <DroppableSlot key={idx} index={idx} />;
-                }
+              {grid
+                .map((row, rowIdx) =>
+                  row.map((tech, colIdx) => {
+                    const key = tech ? tech.name : `empty-${rowIdx}-${colIdx}`;
 
-                const isDraggable = draggableCards.includes(tech.name);
+                    if (!tech) {
+                      return (
+                        <DroppableSlot key={key} row={rowIdx} col={colIdx} />
+                      );
+                    }
 
-                let extraClass = "";
-                if (hoveredTech && tech.name === hoveredTech.name) {
-                  if (tech.techCivic === "Tech") {
-                    extraClass = "ring-4 ring-yellow-400";
-                  } else {
-                    extraClass = "ring-4 ring-purple-400";
-                  }
-                } else if (hoveredTech && boostsSet.has(tech.name)) {
-                  if (tech.techCivic === "Tech") {
-                    extraClass = "ring-2 ring-green-400";
-                  } else {
-                    extraClass = "ring-2 ring-blue-400";
-                  }
-                } else if (hoveredTech && boostedBySet.has(tech.name)) {
-                  if (tech.techCivic === "Tech") {
-                    extraClass = "ring-2 ring-orange-400";
-                  } else {
-                    extraClass = "ring-2 ring-pink-400";
-                  }
-                }
+                    const isDraggable = draggableCards.includes(tech.name);
 
-                if (isDraggable) {
-                  return (
-                    <DraggableTechCard
-                      key={tech.name}
-                      tech={tech}
-                      allTechs={filteredTechs}
-                      onResearch={handleResearch}
-                      onBoostToggle={handleBoostToggle}
-                      onShowDetails={handleShowDetails}
-                      hoverClass={`tech-card ${extraClass}`}
-                      onHover={() => setHoveredTech(tech)}
-                      onUnhover={() => setHoveredTech(null)}
-                      techCivic={tech.techCivic}
-                    />
-                  );
-                }
+                    let extraClass = "";
+                    if (hoveredTech && tech.name === hoveredTech.name) {
+                      if (tech.techCivic === "Tech") {
+                        extraClass = "ring-4 ring-yellow-400";
+                      } else {
+                        extraClass = "ring-4 ring-purple-400";
+                      }
+                    } else if (hoveredTech && boostsSet.has(tech.name)) {
+                      if (tech.techCivic === "Tech") {
+                        extraClass = "ring-2 ring-green-400";
+                      } else {
+                        extraClass = "ring-2 ring-blue-400";
+                      }
+                    } else if (hoveredTech && boostedBySet.has(tech.name)) {
+                      if (tech.techCivic === "Tech") {
+                        extraClass = "ring-2 ring-orange-400";
+                      } else {
+                        extraClass = "ring-2 ring-pink-400";
+                      }
+                    }
 
-                return (
-                  <TechCard
-                    key={tech.name}
-                    tech={tech}
-                    allTechs={filteredTechs}
-                    onResearch={handleResearch}
-                    onBoostToggle={handleBoostToggle}
-                    onShowDetails={handleShowDetails}
-                    hoverClass={`tech-card ${extraClass}`}
-                    onHover={() => setHoveredTech(tech)}
-                    onUnhover={() => setHoveredTech(null)}
-                    techCivic={tech.techCivic}
-                  />
-                );
-              })}
+                    if (isDraggable) {
+                      return (
+                        <DraggableTechCard
+                          key={tech.name}
+                          tech={tech}
+                          allTechs={filteredTechs}
+                          onResearch={handleResearch}
+                          onBoostToggle={handleBoostToggle}
+                          onShowDetails={handleShowDetails}
+                          hoverClass={`tech-card ${extraClass}`}
+                          onHover={() => setHoveredTech(tech)}
+                          onUnhover={() => setHoveredTech(null)}
+                          techCivic={tech.techCivic}
+                        />
+                      );
+                    }
+
+                    return (
+                      <TechCard
+                        key={tech.name}
+                        tech={tech}
+                        allTechs={filteredTechs}
+                        onResearch={handleResearch}
+                        onBoostToggle={handleBoostToggle}
+                        onShowDetails={handleShowDetails}
+                        hoverClass={`tech-card ${extraClass}`}
+                        onHover={() => setHoveredTech(tech)}
+                        onUnhover={() => setHoveredTech(null)}
+                        techCivic={tech.techCivic}
+                      />
+                    );
+                  })
+                )
+                .flat()}
             </div>
           </div>
           <TechModal tech={modalTech} onClose={handleCloseModal} />
