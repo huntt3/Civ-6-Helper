@@ -1,0 +1,395 @@
+{
+  "Tiles": [
+    {
+      "name": "City Center",
+      "type": "district",
+      "appeal": 0
+    },
+    {
+      "name": "Campus",
+      "type": "district",
+      "requirement": "Writing",
+      "appeal": 0,
+      "districtMinorAdjacencies": [
+        "City Center",
+        "Campus",
+        "Theater Square",
+        "Holy Site",
+        "Encampment",
+        "Commercial Hub",
+        "Harbor",
+        "Industrial Zone",
+        "Preserve",
+        "Entertainment Complex",
+        "Water Park",
+        "Aerodrome",
+        "Spaceport",
+        "Government Plaza",
+        "Diplomatic Quarter",
+        "Aqueduct",
+        "Canal",
+        "Dam",
+        "Neighborhood"
+      ],
+      "otherMinorAdjacencies": [],
+      "normalAdjacencies": ["Mountain"],
+      "majorAdjacencies": [
+        "Geothermal Fissure",
+        "Reef",
+        "Great Barrier Reef",
+        "Pamukkale"
+      ]
+    },
+    {
+      "name": "Theater Square",
+      "type": "district",
+      "requirement": "Drama and Poetry",
+      "appeal": 1,
+      "districtMinorAdjacencies": [
+        "City Center",
+        "Campus",
+        "Theater Square",
+        "Holy Site",
+        "Encampment",
+        "Commercial Hub",
+        "Harbor",
+        "Industrial Zone",
+        "Preserve",
+        "Aerodrome",
+        "Spaceport",
+        "Government Plaza",
+        "Diplomatic Quarter",
+        "Aqueduct",
+        "Canal",
+        "Dam",
+        "Neighborhood"
+      ],
+      "otherMinorAdjacencies": [],
+      "normalAdjacencies": [],
+      "majorAdjacencies": [
+        "Wonder",
+        "Entertainment Complex",
+        "Water Park",
+        "Pamukkale"
+      ]
+    },
+    {
+      "name": "Holy Site",
+      "type": "district",
+      "requirement": "Astrology",
+      "appeal": 1,
+      "districtMinorAdjacencies": [
+        "City Center",
+        "Campus",
+        "Theater Square",
+        "Holy Site",
+        "Encampment",
+        "Commercial Hub",
+        "Harbor",
+        "Industrial Zone",
+        "Preserve",
+        "Entertainment Complex",
+        "Water Park",
+        "Aerodrome",
+        "Spaceport",
+        "Government Plaza",
+        "Diplomatic Quarter",
+        "Aqueduct",
+        "Canal",
+        "Dam",
+        "Neighborhood"
+      ],
+      "otherMinorAdjacencies": ["Woods"],
+      "normalAdjacencies": ["Mountain"],
+      "majorAdjacencies": ["Natural Wonder"]
+    },
+    {
+      "name": "Encampment",
+      "type": "district",
+      "requirement": "Bronze Working",
+      "appeal": -1
+    },
+    {
+      "name": "Commercial Hub",
+      "type": "district",
+      "requirement": "Currency",
+      "appeal": 0,
+      "districtMinorAdjacencies": [
+        "City Center",
+        "Campus",
+        "Theater Square",
+        "Holy Site",
+        "Encampment",
+        "Commercial Hub",
+        "Harbor",
+        "Industrial Zone",
+        "Preserve",
+        "Entertainment Complex",
+        "Water Park",
+        "Aerodrome",
+        "Spaceport",
+        "Government Plaza",
+        "Diplomatic Quarter",
+        "Aqueduct",
+        "Canal",
+        "Dam",
+        "Neighborhood"
+      ],
+      "otherMinorAdjacencies": [],
+      "normalAdjacencies": [],
+      "majorAdjacencies": ["River", "Harbor", "Pamukkale"]
+    },
+    {
+      "name": "Harbor",
+      "type": "district",
+      "requirement": "Celestial Navigation",
+      "appeal": 0,
+      "districtMinorAdjacencies": [
+        "Campus",
+        "Theater Square",
+        "Holy Site",
+        "Encampment",
+        "Commercial Hub",
+        "Harbor",
+        "Industrial Zone",
+        "Preserve",
+        "Entertainment Complex",
+        "Water Park",
+        "Aerodrome",
+        "Spaceport",
+        "Government Plaza",
+        "Diplomatic Quarter",
+        "Aqueduct",
+        "Canal",
+        "Dam",
+        "Neighborhood"
+      ],
+      "otherMinorAdjacencies": [],
+      "normalAdjacencies": ["Sea Resource"],
+      "majorAdjacencies": ["City Center"]
+    },
+    {
+      "name": "Industrial Zone",
+      "type": "district",
+      "requirement": "Apprenticeship",
+      "appeal": -1,
+      "districtMinorAdjacencies": [
+        "City Center",
+        "Campus",
+        "Theater Square",
+        "Holy Site",
+        "Encampment",
+        "Commercial Hub",
+        "Harbor",
+        "Industrial Zone",
+        "Preserve",
+        "Entertainment Complex",
+        "Water Park",
+        "Aerodrome",
+        "Spaceport",
+        "Government Plaza",
+        "Diplomatic Quarter",
+        "Neighborhood"
+      ],
+      "otherMinorAdjacencies": ["Mine", "Lumber Mill"],
+      "normalAdjacencies": ["Quarry", "Strategic Resource"],
+      "majorAdjacencies": ["Aqueduct", "Bath", "Canal", "Dam"]
+    },
+    {
+      "name": "Preserve",
+      "type": "district",
+      "requirement": "Mysticism",
+      "appeal": 1
+    },
+    {
+      "name": "Entertainment Complex",
+      "type": "district",
+      "requirement": "Games and Recreation",
+      "appeal": 1
+    },
+    {
+      "name": "Water Park",
+      "type": "district",
+      "requirement": "Natural History",
+      "appeal": 1
+    },
+    {
+      "name": "Aerodrome",
+      "type": "district",
+      "requirement": "Flight",
+      "appeal": -1
+    },
+    {
+      "name": "Spaceport",
+      "type": "district",
+      "requirement": "Rocketry",
+      "appeal": -1
+    },
+    {
+      "name": "Government Plaza",
+      "type": "district",
+      "requirement": "State Workforce",
+      "appeal": 1
+    },
+    {
+      "name": "Diplomatic Quarter",
+      "type": "district",
+      "requirement": "Mathematics",
+      "appeal": 1
+    },
+    {
+      "name": "Aqueduct",
+      "type": "district",
+      "requirement": "Mathematics",
+      "appeal": 0
+    },
+    {
+      "name": "Canal",
+      "type": "district",
+      "requirement": "Mathematics",
+      "appeal": 1
+    },
+    {
+      "name": "Dam",
+      "type": "district",
+      "requirement": "Mathematics",
+      "appeal": 1
+    },
+    {
+      "name": "Neighborhood",
+      "type": "district",
+      "requirement": "Mathematics",
+      "appeal": 0
+    },
+    {
+      "name": "Wonder",
+      "type": "Wonder",
+      "appeal": 1
+    },
+    {
+      "name": "Farm",
+      "type": "Tile Improvement",
+      "appeal": 0
+    },
+    {
+      "name": "Mine",
+      "type": "Tile Improvement",
+      "requirement": "Mining",
+      "appeal": -1
+    },
+    {
+      "name": "Quarry",
+      "type": "Tile Improvement",
+      "requirement": "Mining",
+      "appeal": -1
+    },
+    {
+      "name": "Plantation",
+      "type": "Tile Improvement",
+      "requirement": "Irrigation",
+      "appeal": 0
+    },
+    {
+      "name": "Camp",
+      "type": "Tile Improvement",
+      "requirement": "Animal Husbandry",
+      "appeal": 0
+    },
+    {
+      "name": "Pasture",
+      "type": "Tile Improvement",
+      "requirement": "Animal Husbandry",
+      "appeal": 0
+    },
+    {
+      "name": "Fishing Boat",
+      "type": "Tile Improvement",
+      "requirement": "Sailing",
+      "appeal": 0
+    },
+    {
+      "name": "Lumber Mill",
+      "type": "Tile Improvement",
+      "requirement": "Machinery",
+      "appeal": 0
+    },
+    {
+      "name": "Fort",
+      "type": "Tile Improvement",
+      "requirement": "Siege Tactics",
+      "appeal": 0
+    },
+    {
+      "name": "Airstrip",
+      "type": "Tile Improvement",
+      "requirement": "Flight",
+      "appeal": -1
+    },
+    {
+      "name": "Seaside Resort",
+      "type": "Tile Improvement",
+      "requirement": "Radio",
+      "appeal": 0
+    },
+    {
+      "name": "Geothermal Plant",
+      "type": "Tile Improvement",
+      "requirement": "Synthetic Materials",
+      "appeal": 0
+    },
+    {
+      "name": "Wind Farm",
+      "type": "Tile Improvement",
+      "requirement": "Composites",
+      "appeal": 0
+    },
+    {
+      "name": "Solar Farm",
+      "type": "Tile Improvement",
+      "requirement": "Satellites",
+      "appeal": 0
+    },
+    {
+      "name": "Offshore Wind Farm",
+      "type": "Tile Improvement",
+      "requirement": "Predictive Systems",
+      "appeal": 0
+    },
+    {
+      "name": "Ski Resort",
+      "type": "Tile Improvement",
+      "requirement": "Siege Tactics",
+      "appeal": 0
+    },
+    {
+      "name": "Oil Well",
+      "type": "Tile Improvement",
+      "requirement": "Steel",
+      "appeal": -1
+    },
+    {
+      "name": "Offshore Oil Rig",
+      "type": "Tile Improvement",
+      "requirement": "Plastics",
+      "appeal": -1
+    },
+    {
+      "name": "Missile Silo",
+      "type": "Tile Improvement",
+      "requirement": "Siege Tactics",
+      "appeal": 0
+    },
+    {
+      "name": "Mountain Tunnel",
+      "type": "Tile Improvement",
+      "requirement": "Chemistry",
+      "appeal": 0
+    },
+    {
+      "name": "Seastead",
+      "type": "Tile Improvement",
+      "requirement": "Seasteads",
+      "appeal": 0
+    }
+  ]
+}
