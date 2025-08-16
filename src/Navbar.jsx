@@ -1,23 +1,34 @@
 import React from "react";
 
 const navLinks = [
-  { href: "index.html", label: "Home" },
-  { href: "techsAndCivicsTree.html", label: "Techs and Civics Tree" },
-  { href: "districtDiscountingTool.html", label: "District Discount Tracker" },
-  { href: "wonderTracker.html", label: "Wonder Tracker" },
-  { href: "greatPeopleTracker.html", label: "Great People Tracker" },
-  { href: "eraScoreTracker.html", label: "Era Score Tracker" },
-  { href: "hexPlanner.html", label: "Hex Planner" },
+  { href: "./", label: "Home" },
+  { href: "./techsAndCivicsTree.html", label: "Techs and Civics Tree" },
+  { href: "./districtDiscountingTool.html", label: "District Discount Tracker" },
+  { href: "./wonderTracker.html", label: "Wonder Tracker" },
+  { href: "./greatPeopleTracker.html", label: "Great People Tracker" },
+  { href: "./eraScoreTracker.html", label: "Era Score Tracker" },
+  { href: "./hexPlanner.html", label: "Hex Planner" },
 ];
 
 export default function Navbar() {
   // Get current page (strip leading / if present)
-  const currentPage = window.location.pathname.split("/").pop();
+  const currentPath = window.location.pathname;
+  const currentPage = currentPath.split("/").pop();
+  
+  // Handle root path and index.html both as "home"
+  const isHomePage = currentPage === "" || currentPage === "index.html" || currentPath.endsWith("/");
+  
   return (
     <nav className="bg-gray-800 text-white px-4 py-2 shadow flex items-center justify-between">
       <div className="flex space-x-4">
         {navLinks.map((link) => {
-          const isActive = link.href === currentPage;
+          let isActive = false;
+          if (link.href === "./") {
+            isActive = isHomePage;
+          } else {
+            isActive = link.href.replace("./", "") === currentPage;
+          }
+          
           return (
             <a
               key={link.href}
