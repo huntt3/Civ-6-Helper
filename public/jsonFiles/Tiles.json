@@ -55,8 +55,6 @@
         "Harbor",
         "Industrial Zone",
         "Preserve",
-        "Entertainment Complex",
-        "Water Park",
         "Aerodrome",
         "Spaceport",
         "Government Plaza",
@@ -191,9 +189,6 @@
         "Spaceport",
         "Government Plaza",
         "Diplomatic Quarter",
-        "Aqueduct",
-        "Canal",
-        "Dam",
         "Neighborhood"
       ],
       "otherMinorAdjacencies": ["Mine", "Lumber Mill"],
