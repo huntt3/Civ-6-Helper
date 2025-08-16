@@ -89,13 +89,13 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
   const calculateAdjacencyBonus = (hex) => {
     if (!hex.tile || hex.tile.type !== "district") return 0;
 
-    const tileData = tiles.find(t => t.name === hex.tile.name);
+    const tileData = tiles.find((t) => t.name === hex.tile.name);
     if (!tileData) return 0;
 
     const adjacentHexes = getAdjacentHexes(hex);
     let bonus = 0;
 
-    adjacentHexes.forEach(adjacentHex => {
+    adjacentHexes.forEach((adjacentHex) => {
       if (!adjacentHex.tile) return;
 
       const adjacentTileName = adjacentHex.tile.name;
@@ -125,34 +125,37 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
       { q: 0, r: -1 },
       { q: -1, r: 0 },
       { q: -1, r: 1 },
-      { q: 0, r: 1 }
+      { q: 0, r: 1 },
     ];
 
-    return directions.map(dir => {
-      const adjacentQ = hex.q + dir.q;
-      const adjacentR = hex.r + dir.r;
-      const adjacentId = `${adjacentQ},${adjacentR}`;
-      return hexagons.find(h => h.id === adjacentId);
-    }).filter(Boolean);
+    return directions
+      .map((dir) => {
+        const adjacentQ = hex.q + dir.q;
+        const adjacentR = hex.r + dir.r;
+        const adjacentId = `${adjacentQ},${adjacentR}`;
+        return hexagons.find((h) => h.id === adjacentId);
+      })
+      .filter(Boolean);
   };
 
-  // Convert hex coordinates to pixel coordinates
+  // Convert hex coordinates to pixel coordinates (pointy-top orientation)
   const hexToPixel = (hex, size) => {
-    const x = size * (3/2 * hex.q);
-    const y = size * (Math.sqrt(3)/2 * hex.q + Math.sqrt(3) * hex.r);
+    const x = size * (Math.sqrt(3) * hex.q + (Math.sqrt(3) / 2) * hex.r);
+    const y = size * ((3 / 2) * hex.r);
     return { x, y };
   };
 
-  // Generate SVG path for hexagon
+  // Generate SVG path for hexagon (pointy-top orientation)
   const generateHexPath = (centerX, centerY, size) => {
     const points = [];
     for (let i = 0; i < 6; i++) {
-      const angle = (Math.PI / 3) * i;
+      // Add Math.PI/6 (30 degrees) to rotate hexagon to pointy-top
+      const angle = (Math.PI / 3) * i + Math.PI / 6;
       const x = centerX + size * Math.cos(angle);
       const y = centerY + size * Math.sin(angle);
       points.push(`${x},${y}`);
     }
-    return `M ${points.join(' L ')} Z`;
+    return `M ${points.join(" L ")} Z`;
   };
 
   const handleHexClick = (hex) => {
@@ -190,28 +193,31 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
         className="max-w-full max-h-full"
       >
         <defs>
-          {hexagons.filter(hex => hex.tile).map(hex => {
-            const imagePath = getImagePath(hex.tile.name);
-            if (!imagePath) return null;
-            return (
-              <pattern
-                key={`pattern-${hex.id}`}
-                id={`pattern-${hex.id.replace(",", "-")}`}
-                patternUnits="objectBoundingBox"
-                width="1"
-                height="1"
-              >
-                <image
-                  href={imagePath}
-                  width="60"
-                  height="60"
-                  x="0"
-                  y="0"
-                  preserveAspectRatio="xMidYMid slice"
-                />
-              </pattern>
-            );
-          }).filter(Boolean)}
+          {hexagons
+            .filter((hex) => hex.tile)
+            .map((hex) => {
+              const imagePath = getImagePath(hex.tile.name);
+              if (!imagePath) return null;
+              return (
+                <pattern
+                  key={`pattern-${hex.id}`}
+                  id={`pattern-${hex.id.replace(",", "-")}`}
+                  patternUnits="objectBoundingBox"
+                  width="1"
+                  height="1"
+                >
+                  <image
+                    href={imagePath}
+                    width="60"
+                    height="60"
+                    x="0"
+                    y="0"
+                    preserveAspectRatio="xMidYMid slice"
+                  />
+                </pattern>
+              );
+            })
+            .filter(Boolean)}
         </defs>
 
         {hexagons.map((hex) => {
