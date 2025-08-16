@@ -28,6 +28,54 @@ const eras = [
   "Information",
 ];
 
+// Get color scheme based on Great Person type
+const getTypeColorScheme = (type) => {
+  switch (type) {
+    case "Great General":
+      return {
+        header: "bg-red-500 text-white",
+        card: "bg-red-50 border-red-300",
+        cardHover: "hover:bg-red-100",
+        cardChecked: "bg-red-200 border-red-600",
+      };
+    case "Great Admiral":
+      return {
+        header: "bg-teal-500 text-white",
+        card: "bg-teal-50 border-teal-300",
+        cardHover: "hover:bg-teal-100",
+        cardChecked: "bg-teal-200 border-teal-600",
+      };
+    case "Great Engineer":
+      return {
+        header: "bg-orange-500 text-white",
+        card: "bg-orange-50 border-orange-300",
+        cardHover: "hover:bg-orange-100",
+        cardChecked: "bg-orange-200 border-orange-600",
+      };
+    case "Great Merchant":
+      return {
+        header: "bg-yellow-500 text-white",
+        card: "bg-yellow-50 border-yellow-300",
+        cardHover: "hover:bg-yellow-100",
+        cardChecked: "bg-yellow-200 border-yellow-600",
+      };
+    case "Great Scientist":
+      return {
+        header: "bg-blue-500 text-white",
+        card: "bg-blue-50 border-blue-300",
+        cardHover: "hover:bg-blue-100",
+        cardChecked: "bg-blue-200 border-blue-600",
+      };
+    default:
+      return {
+        header: "bg-gray-100 text-gray-800",
+        card: "bg-gray-50 border-gray-300",
+        cardHover: "hover:bg-blue-50",
+        cardChecked: "bg-blue-100 border-blue-600",
+      };
+  }
+};
+
 const GreatPeopleContainer = () => {
   const [greatPeople, setGreatPeople] = useState([]);
   const [error, setError] = useState("");
@@ -103,15 +151,18 @@ const GreatPeopleContainer = () => {
         aria-label="Great People Table"
       >
         <div className="grid grid-cols-5 gap-2" role="row">
-          {types.map((type) => (
-            <div
-              key={type}
-              className="font-bold text-center bg-gray-100 text-gray-800 py-2 rounded"
-              role="columnheader"
-            >
-              {type}
-            </div>
-          ))}
+          {types.map((type) => {
+            const colorScheme = getTypeColorScheme(type);
+            return (
+              <div
+                key={type}
+                className={`font-bold text-center py-2 rounded ${colorScheme.header}`}
+                role="columnheader"
+              >
+                {type}
+              </div>
+            );
+          })}
         </div>
         {eras.map((era) => (
           <React.Fragment key={era}>
@@ -137,6 +188,7 @@ const GreatPeopleContainer = () => {
               >
                 {types.map((type) => {
                   const people = getPeopleByEraAndType(greatPeople, era, type);
+                  const colorScheme = getTypeColorScheme(type);
                   return (
                     <div
                       key={type}
@@ -149,8 +201,8 @@ const GreatPeopleContainer = () => {
                             key={person.name}
                             className={`transition-colors duration-200 border rounded w-full box-border text-sm p-2 mb-1 cursor-pointer ${
                               checkedCards[person.name]
-                                ? "bg-blue-100 border-blue-600 filter brightness-90"
-                                : "bg-gray-50 border-gray-300 hover:bg-blue-50 hover:shadow-md"
+                                ? `${colorScheme.cardChecked} filter brightness-90`
+                                : `${colorScheme.card} ${colorScheme.cardHover} hover:shadow-md`
                             }`}
                             tabIndex={0}
                             aria-label={`${person.name}, ${person.ability}`}
