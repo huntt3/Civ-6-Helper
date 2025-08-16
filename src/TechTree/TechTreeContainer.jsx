@@ -19,31 +19,55 @@ const TechTreeContainer = () => {
       .then((res) => res.json())
       .then((data) => {
         const saved = localStorage.getItem("civ6_tech_state");
+        const savedPositions = localStorage.getItem("civ6_tech_positions");
+        
         let techState = {};
+        let positionState = {};
+        
         if (saved) {
           try {
             techState = JSON.parse(saved);
           } catch {}
         }
+        
+        if (savedPositions) {
+          try {
+            positionState = JSON.parse(savedPositions);
+          } catch {}
+        }
+        
         const merged = (data.Techs || []).map((t) => {
           const state = techState[t.name] || {};
-          return { ...t, ...state };
+          const position = positionState[t.name] || {};
+          return { ...t, ...state, ...position };
         });
         setAllTechs(merged);
       });
     const handleStorage = (e) => {
-      if (e.key === "civ6_tech_state") {
-        const saved = e.newValue;
+      if (e.key === "civ6_tech_state" || e.key === "civ6_tech_positions") {
+        const saved = localStorage.getItem("civ6_tech_state");
+        const savedPositions = localStorage.getItem("civ6_tech_positions");
+        
         let techState = {};
+        let positionState = {};
+        
         if (saved) {
           try {
             techState = JSON.parse(saved);
           } catch {}
         }
+        
+        if (savedPositions) {
+          try {
+            positionState = JSON.parse(savedPositions);
+          } catch {}
+        }
+        
         setAllTechs((prev) =>
           prev.map((t) => ({
             ...t,
             ...((techState && techState[t.name]) || {}),
+            ...((positionState && positionState[t.name]) || {}),
           }))
         );
       }

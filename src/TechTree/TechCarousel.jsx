@@ -273,14 +273,32 @@ const TechCarousel = forwardRef(
     React.useEffect(() => {
       if (!onReset) return;
       onReset(() => {
-        setAllTechs((prev) =>
-          prev.map((t) => ({ ...t, researched: false, boosted: false }))
-        );
-        const state = {};
-        techs.forEach((t) => {
-          state[t.name] = { researched: false, boosted: false };
-        });
-        localStorage.setItem("civ6_tech_state", JSON.stringify(state));
+        // Reset researched/boosted states and restore original positions
+        fetch("./jsonFiles/TechsAndCivics.json")
+          .then((res) => res.json())
+          .then((originalData) => {
+            setAllTechs((prev) =>
+              prev.map((t) => {
+                // Find the original tech data to restore original position
+                const originalTech = (originalData.Techs || []).find(orig => orig.name === t.name);
+                const originalPosition = originalTech ? { row: originalTech.row, column: originalTech.column } : {};
+                return { 
+                  ...t, 
+                  researched: false, 
+                  boosted: false,
+                  ...originalPosition // Restore original position
+                };
+              })
+            );
+            
+            // Clear both localStorage entries
+            const state = {};
+            techs.forEach((t) => {
+              state[t.name] = { researched: false, boosted: false };
+            });
+            localStorage.setItem("civ6_tech_state", JSON.stringify(state));
+            localStorage.removeItem("civ6_tech_positions"); // Clear position data
+          });
       });
       // Only run once when mounted
       // eslint-disable-next-line react-hooks/exhaustive-deps
