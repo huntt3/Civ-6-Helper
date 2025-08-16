@@ -60,9 +60,11 @@ const TechTreeContainer = () => {
     setCivicCollapsed((prevCollapsed) => !prevCollapsed);
   };
 
-  // Store reset handlers for each carousel using refs
+  // Store reset handlers and refs for each carousel
   const techResetRef = React.useRef(null);
   const civicResetRef = React.useRef(null);
+  const techCarouselRef = React.useRef(null);
+  const civicCarouselRef = React.useRef(null);
 
   // Callback to receive reset function from TechCarousel
   const setTechReset = (fn) => {
@@ -72,16 +74,49 @@ const TechTreeContainer = () => {
     civicResetRef.current = fn;
   };
 
+  // Reset view handlers
+  const handleTechResetView = () => {
+    if (techCarouselRef.current && techCarouselRef.current.resetView) {
+      techCarouselRef.current.resetView();
+    }
+    if (techResetRef.current) {
+      techResetRef.current();
+    }
+  };
+
+  const handleCivicResetView = () => {
+    if (civicCarouselRef.current && civicCarouselRef.current.resetView) {
+      civicCarouselRef.current.resetView();
+    }
+    if (civicResetRef.current) {
+      civicResetRef.current();
+    }
+  };
+
   return (
     <>
       <CollapsibleContainer
         title="Tech Tracker"
         collapsed={techCollapsed}
         onCollapse={handleTechCollapse}
-        onRefresh={() => techResetRef.current && techResetRef.current()}
+        onRefresh={handleTechResetView}
         ariaLabel="Tech Tracker"
       >
+        <div className="mb-4">
+          <div className="flex gap-2 justify-center">
+            <button
+              onClick={handleTechResetView}
+              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+            >
+              Reset View
+            </button>
+            <div className="text-sm text-gray-600 flex items-center">
+              Scroll to zoom • Drag to pan
+            </div>
+          </div>
+        </div>
         <TechCarousel
+          ref={techCarouselRef}
           rowRange={{ start: 0, end: 7 }}
           minRow={0}
           onReset={setTechReset}
@@ -95,10 +130,24 @@ const TechTreeContainer = () => {
         title="Civic Tracker"
         collapsed={civicCollapsed}
         onCollapse={handleCivicCollapse}
-        onRefresh={() => civicResetRef.current && civicResetRef.current()}
+        onRefresh={handleCivicResetView}
         ariaLabel="Civic Tracker"
       >
+        <div className="mb-4">
+          <div className="flex gap-2 justify-center">
+            <button
+              onClick={handleCivicResetView}
+              className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition-colors"
+            >
+              Reset View
+            </button>
+            <div className="text-sm text-gray-600 flex items-center">
+              Scroll to zoom • Drag to pan
+            </div>
+          </div>
+        </div>
         <TechCarousel
+          ref={civicCarouselRef}
           rowRange={{ start: 10, end: 16 }}
           minRow={10}
           onReset={setCivicReset}

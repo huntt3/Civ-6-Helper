@@ -9,8 +9,20 @@ const TechArrows = ({
   cardWidth,
   cardHeight,
   gap,
+  zoom = 1,
 }) => {
   const markerId = useId();
+
+  // Scale arrows naturally with zoom level
+  // When zoomed out, arrows get smaller; when zoomed in, arrows get larger
+  const baseStrokeWidth = 3;
+  const baseMarkerSize = 10;
+  const baseMarkerHeight = 7;
+
+  const strokeWidth = baseStrokeWidth;
+  const markerSize = baseMarkerSize;
+  const markerHeight = baseMarkerHeight;
+
   return (
     <svg
       className="absolute top-0 left-0 w-full h-full pointer-events-none z-0"
@@ -29,7 +41,7 @@ const TechArrows = ({
               x2={arrow.x2}
               y2={arrow.y2}
               stroke="#1434a4"
-              strokeWidth="3"
+              strokeWidth={strokeWidth}
               markerEnd={`url(#${markerId})`}
             />
           </g>
@@ -38,14 +50,17 @@ const TechArrows = ({
       <defs>
         <marker
           id={markerId}
-          markerWidth="10"
-          markerHeight="7"
-          refX="10"
-          refY="3.5"
+          markerWidth={markerSize}
+          markerHeight={markerHeight}
+          refX={markerSize}
+          refY={markerHeight / 2}
           orient="auto"
           markerUnits="strokeWidth"
         >
-          <polygon points="0 0, 10 3.5, 0 7" fill="#1434a4" />
+          <polygon
+            points={`0 0, ${markerSize} ${markerHeight / 2}, 0 ${markerHeight}`}
+            fill="#1434a4"
+          />
         </marker>
       </defs>
     </svg>
