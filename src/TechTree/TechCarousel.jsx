@@ -214,9 +214,23 @@ const TechCarousel = forwardRef(
           setIsDragging(true);
         }
 
+        // Clamp pan so the grid cannot be dragged out of view
+        const gridWidth = columns * (cardWidth + gap);
+        const gridHeight = rows * (cardHeight + gap);
+        const container = containerRef.current;
+        const containerWidth = container ? container.offsetWidth : 800;
+        const containerHeight = container ? container.offsetHeight : 500;
+
+        let newX = e.clientX - dragStart.x;
+        let newY = e.clientY - dragStart.y;
+
+        // Clamp so the grid cannot be dragged out of view
+        newX = Math.min(0, Math.max(newX, containerWidth - gridWidth * zoom));
+        newY = Math.min(0, Math.max(newY, containerHeight - gridHeight * zoom));
+
         setPan({
-          x: e.clientX - dragStart.x,
-          y: e.clientY - dragStart.y,
+          x: newX,
+          y: newY,
         });
       }
     };
