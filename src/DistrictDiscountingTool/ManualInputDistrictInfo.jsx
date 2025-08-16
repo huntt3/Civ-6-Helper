@@ -12,7 +12,10 @@ const ManualInputDistrictInfo = ({
   return (
     <section className="flex flex-row gap-8 items-center mb-6">
       <div className="flex flex-col items-start">
-        <label htmlFor="techs-completed" className="text-sm font-semibold mb-1">
+        <label
+          htmlFor="techs-completed"
+          className="text-sm font-semibold mb-1 w-24 leading-tight break-words whitespace-normal"
+        >
           Techs Completed
         </label>
         <input
@@ -33,7 +36,7 @@ const ManualInputDistrictInfo = ({
       <div className="flex flex-col items-start">
         <label
           htmlFor="civics-completed"
-          className="text-sm font-semibold mb-1"
+          className="text-sm font-semibold mb-1 w-24 leading-tight break-words whitespace-normal"
         >
           Civics Completed
         </label>

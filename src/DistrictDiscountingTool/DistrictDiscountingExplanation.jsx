@@ -1,9 +1,6 @@
 import React from "react";
 
-const DistrictDiscountingExplanation = ({
-  numSpecialtyDistrictsCompleted,
-  numSpecialtyDistrictsUnlocked,
-}) => (
+const DistrictDiscountingExplanation = ({}) => (
   <div className="p-4 bg-blue-50 rounded-xl shadow-md border border-blue-200">
     <div className="mb-4 text-lg font-semibold text-blue-900">
       Districts are discounted when <span className="underline">both</span> of
@@ -38,12 +35,6 @@ const DistrictDiscountingExplanation = ({
         </div>
       </li>
     </ul>
-    <div className="mt-4 font-bold text-blue-700">
-      Total Specialty Districts Completed: {numSpecialtyDistrictsCompleted}
-    </div>
-    <div className="mb-2 font-bold text-blue-700">
-      Total Specialty Districts Unlocked: {numSpecialtyDistrictsUnlocked}
-    </div>
   </div>
 );
 

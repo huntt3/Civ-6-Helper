@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DistrictCards from "./DistrictCards";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
+import DistrictDiscountingFormulaInputs from "./DistrictDiscountingFormulaInputs.jsx";
 import ManualInputDistrictInfo from "./ManualInputDistrictInfo";
 import DistrictDiscountingExplanation from "./DistrictDiscountingExplanation";
 import TechsAndCivicsPercentage from "./TechsAndCivicsPercentage";
@@ -80,6 +81,12 @@ const DistrictDiscountingContainer = () => {
     >
       <div className="mb-6">
         <DistrictDiscountingExplanation
+          numSpecialtyDistrictsCompleted={numSpecialtyDistrictsCompleted}
+          numSpecialtyDistrictsUnlocked={numSpecialtyDistrictsUnlocked}
+        />
+      </div>
+      <div className="flex justify-center w-full">
+        <DistrictDiscountingFormulaInputs
           numSpecialtyDistrictsCompleted={numSpecialtyDistrictsCompleted}
           numSpecialtyDistrictsUnlocked={numSpecialtyDistrictsUnlocked}
         />
