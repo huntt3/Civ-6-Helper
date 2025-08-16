@@ -3,48 +3,21 @@ import TechCard from "./TechCard";
 import TechModal from "./TechModal";
 import TechArrows from "./TechArrows";
 
-const TechCarousel = ({ rowRange, minRow = 0, onReset }) => {
-  const [techs, setTechs] = useState([]);
+const TechCarousel = ({
+  rowRange,
+  minRow = 0,
+  onReset,
+  allTechs,
+  setAllTechs,
+  hoveredTech,
+  setHoveredTech,
+}) => {
   const [modalTech, setModalTech] = useState(null);
 
-  useEffect(() => {
-    fetch("./jsonFiles/TechsAndCivics.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const saved = localStorage.getItem("civ6_tech_state");
-        let techState = {};
-        if (saved) {
-          try {
-            techState = JSON.parse(saved);
-          } catch {}
-        }
-        const merged = (data.Techs || []).map((t) => {
-          const state = techState[t.name] || {};
-          return { ...t, ...state };
-        });
-        setTechs(merged);
-      });
-    const handleStorage = (e) => {
-      if (e.key === "civ6_tech_state") {
-        const saved = e.newValue;
-        let techState = {};
-        if (saved) {
-          try {
-            techState = JSON.parse(saved);
-          } catch {}
-        }
-        setTechs((prev) =>
-          prev.map((t) => ({
-            ...t,
-            ...((techState && techState[t.name]) || {}),
-          }))
-        );
-      }
-    };
-    window.addEventListener("storage", handleStorage);
-    return () => window.removeEventListener("storage", handleStorage);
-  }, []);
+  // Use allTechs from parent instead of local state
+  const techs = allTechs;
 
+  // Keep the localStorage save effect but use setAllTechs instead of setTechs
   useEffect(() => {
     if (!techs.length) return;
     const state = {};
@@ -61,7 +34,7 @@ const TechCarousel = ({ rowRange, minRow = 0, onReset }) => {
   React.useEffect(() => {
     if (!onReset) return;
     onReset(() => {
-      setTechs((prev) =>
+      setAllTechs((prev) =>
         prev.map((t) => ({ ...t, researched: false, boosted: false }))
       );
       const state = {};
@@ -72,10 +45,10 @@ const TechCarousel = ({ rowRange, minRow = 0, onReset }) => {
     });
     // Only run once when mounted
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onReset]);
+  }, [onReset, setAllTechs, techs]);
 
   const handleResearch = (name) => {
-    setTechs((prev) =>
+    setAllTechs((prev) =>
       prev.map((t) =>
         t.name === name ? { ...t, researched: !t.researched } : t
       )
@@ -83,7 +56,7 @@ const TechCarousel = ({ rowRange, minRow = 0, onReset }) => {
   };
 
   const handleBoostToggle = (name) => {
-    setTechs((prev) =>
+    setAllTechs((prev) =>
       prev.map((t) => (t.name === name ? { ...t, boosted: !t.boosted } : t))
     );
   };
@@ -170,16 +143,13 @@ const TechCarousel = ({ rowRange, minRow = 0, onReset }) => {
     });
   });
 
-  // Hover logic for highlighting
-  const [hoveredTech, setHoveredTech] = useState(null);
-
-  // Find boostPrerequisites for hovered card
+  // Find boostPrerequisites for hovered card - now using all techs for cross-container highlighting
   let boostsSet = new Set();
   let boostedBySet = new Set();
   if (hoveredTech) {
     // Cards that this hovered card boosts
     boostsSet = new Set(hoveredTech.boostPrerequisites || []);
-    // Cards that list this hovered card in their boostPrerequisites
+    // Cards that list this hovered card in their boostPrerequisites - search ALL techs, not just filtered ones
     boostedBySet = new Set(
       techs
         .filter((t) => (t.boostPrerequisites || []).includes(hoveredTech.name))
