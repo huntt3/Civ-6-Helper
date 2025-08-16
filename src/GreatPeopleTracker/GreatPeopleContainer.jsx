@@ -45,7 +45,7 @@ const GreatPeopleContainer = () => {
     const saved = localStorage.getItem("greatPeopleChecked");
     return saved ? JSON.parse(saved) : {};
   });
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   useEffect(() => {
     fetch("./jsonFiles/GreatPeople.json")

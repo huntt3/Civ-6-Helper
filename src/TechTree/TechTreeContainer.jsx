@@ -4,11 +4,16 @@ import CollapsibleContainer from "../Templates/CollapsibleContainer";
 
 // TechTreeContainer manages the collapsed state for the CollapsibleContainer
 const TechTreeContainer = () => {
-  // State to track if the container is collapsed
-  const [collapsed, setCollapsed] = useState(false);
+  // State to track if the containers are collapsed (start collapsed for performance)
+  const [techCollapsed, setTechCollapsed] = useState(true);
+  const [civicCollapsed, setCivicCollapsed] = useState(true);
 
-  const handleCollapse = () => {
-    setCollapsed((prevCollapsed) => !prevCollapsed);
+  const handleTechCollapse = () => {
+    setTechCollapsed((prevCollapsed) => !prevCollapsed);
+  };
+
+  const handleCivicCollapse = () => {
+    setCivicCollapsed((prevCollapsed) => !prevCollapsed);
   };
 
   // Store reset handlers for each carousel using refs
@@ -27,8 +32,8 @@ const TechTreeContainer = () => {
     <>
       <CollapsibleContainer
         title="Tech Tracker"
-        collapsed={collapsed}
-        onCollapse={handleCollapse}
+        collapsed={techCollapsed}
+        onCollapse={handleTechCollapse}
         onRefresh={() => techResetRef.current && techResetRef.current()}
         ariaLabel="Tech Tracker"
       >
@@ -40,8 +45,8 @@ const TechTreeContainer = () => {
       </CollapsibleContainer>
       <CollapsibleContainer
         title="Civic Tracker"
-        collapsed={collapsed}
-        onCollapse={handleCollapse}
+        collapsed={civicCollapsed}
+        onCollapse={handleCivicCollapse}
         onRefresh={() => civicResetRef.current && civicResetRef.current()}
         ariaLabel="Civic Tracker"
       >

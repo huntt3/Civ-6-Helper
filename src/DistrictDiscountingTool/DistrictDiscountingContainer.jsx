@@ -8,7 +8,7 @@ import TechsAndCivicsPercentage from "./TechsAndCivicsPercentage";
 // This component manages the collapsed state for the CollapsibleContainer
 const DistrictDiscountingContainer = () => {
   // State to track if the container is collapsed
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   // Local storage keys
   const LS_TECHS = "districtDiscounting_techsCompleted";
   const LS_CIVICS = "districtDiscounting_civicsCompleted";

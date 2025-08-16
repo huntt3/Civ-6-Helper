@@ -8,7 +8,7 @@ const WondersContainer = () => {
   const [wonders, setWonders] = useState([]);
   const [selectedWonder, setSelectedWonder] = useState(null);
   // Add collapsed state for CollapsibleContainer
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   // Load wonders from JSON
   const fetchWonders = () => {

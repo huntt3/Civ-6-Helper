@@ -23,7 +23,7 @@ const EraTrackerContainer = ({ settings }) => {
     localStorage.setItem("civ6-helper-cardsPerPage", cardsPerPage);
   }, [cardsPerPage]);
   const [eraScoreItems, setEraScoreItems] = useState([]);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [sortOrder, setSortOrder] = useState(() => {
     const saved = localStorage.getItem(SORT_ORDER_KEY);
     return saved !== null ? saved : "desc";
@@ -43,11 +43,11 @@ const EraTrackerContainer = ({ settings }) => {
   const [previousEraScore, setPreviousEraScore] = useState(0);
   const [currentEraScore, setCurrentEraScore] = useState(0);
   const [itemScores, setItemScores] = useState({});
-  
+
   // Use refs instead of state to store functions to prevent re-renders
   const nextEraFunctionsRef = useRef({});
   const clearDataFunctionsRef = useRef({});
-  
+
   const [favorites, setFavorites] = useState(() => {
     // Load favorites from localStorage (array of titles)
     try {
@@ -238,12 +238,15 @@ const EraTrackerContainer = ({ settings }) => {
   }, []);
 
   // Handler to register next era functions from individual cards
-  const handleNextEraRegister = useCallback((title, nextEraFunction, clearDataFunction) => {
-    nextEraFunctionsRef.current[title] = nextEraFunction;
-    if (clearDataFunction) {
-      clearDataFunctionsRef.current[title] = clearDataFunction;
-    }
-  }, []);
+  const handleNextEraRegister = useCallback(
+    (title, nextEraFunction, clearDataFunction) => {
+      nextEraFunctionsRef.current[title] = nextEraFunction;
+      if (clearDataFunction) {
+        clearDataFunctionsRef.current[title] = clearDataFunction;
+      }
+    },
+    []
+  );
 
   // Handler for the Next Era button
   const handleNextEra = useCallback(() => {
@@ -258,11 +261,13 @@ const EraTrackerContainer = ({ settings }) => {
   // Handler for the Reset button - clear all Era Score localStorage data
   const handleReset = useCallback(() => {
     // Call all registered clear data functions
-    Object.values(clearDataFunctionsRef.current).forEach((clearDataFunction) => {
-      if (typeof clearDataFunction === "function") {
-        clearDataFunction();
+    Object.values(clearDataFunctionsRef.current).forEach(
+      (clearDataFunction) => {
+        if (typeof clearDataFunction === "function") {
+          clearDataFunction();
+        }
       }
-    });
+    );
 
     // Remove all Era Tracker related localStorage keys
     localStorage.removeItem("civ6-helper-neededEraScore");

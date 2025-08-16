@@ -6,7 +6,7 @@ import DistrictPlannerModal from "./HexPlannerModal";
 // This component manages the collapsed state for the CollapsibleContainer
 const DistrictPlannerContainer = () => {
   // State to track if the container is collapsed
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedHex, setSelectedHex] = useState(null);
   const [gridRadius, setGridRadius] = useState(3);
