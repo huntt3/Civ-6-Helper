@@ -37,11 +37,20 @@ const DroppableSlot = ({ row, col, children }) => {
 };
 
 // Draggable tech card wrapper
-const DraggableTechCard = ({ tech, ...props }) => {
+const DraggableTechCard = ({
+  tech,
+  onResearch,
+  onBoostToggle,
+  onShowDetails,
+  ...props
+}) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useDraggable({
       id: tech.name,
     });
+
+  const [dragStartTime, setDragStartTime] = React.useState(null);
+  const [dragStartPos, setDragStartPos] = React.useState(null);
 
   const style = transform
     ? {
@@ -50,9 +59,56 @@ const DraggableTechCard = ({ tech, ...props }) => {
       }
     : {};
 
+  const handlePointerDown = (e) => {
+    setDragStartTime(Date.now());
+    setDragStartPos({ x: e.clientX, y: e.clientY });
+    if (listeners.onPointerDown) listeners.onPointerDown(e);
+  };
+
+  const handlePointerUp = (e) => {
+    const now = Date.now();
+    const timeDiff = now - (dragStartTime || now);
+    const distance = dragStartPos
+      ? Math.sqrt(
+          Math.pow(e.clientX - dragStartPos.x, 2) +
+            Math.pow(e.clientY - dragStartPos.y, 2)
+        )
+      : 0;
+
+    // If it's a quick click with minimal movement, treat as click
+    if (timeDiff < 200 && distance < 5) {
+      // Check if clicking on interactive elements
+      if (
+        e.target.classList.contains("details-btn") ||
+        e.target.classList.contains("boost-checkbox")
+      ) {
+        // Let the interactive elements handle their own clicks
+        return;
+      }
+      // Otherwise, research the tech
+      onResearch(tech.name);
+    }
+
+    setDragStartTime(null);
+    setDragStartPos(null);
+    if (listeners.onPointerUp) listeners.onPointerUp(e);
+  };
+
   return (
-    <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
-      <TechCard tech={tech} {...props} />
+    <div
+      ref={setNodeRef}
+      style={style}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
+      {...attributes}
+    >
+      <TechCard
+        tech={tech}
+        onResearch={() => {}} // Disable TechCard's own click handler
+        onBoostToggle={onBoostToggle}
+        onShowDetails={onShowDetails}
+        {...props}
+      />
     </div>
   );
 };
