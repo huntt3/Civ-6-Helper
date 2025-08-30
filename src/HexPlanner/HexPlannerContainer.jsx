@@ -19,6 +19,7 @@ const HexPlannerContainer = () => {
   );
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedHex, setSelectedHex] = useState(null);
+  const [currentTileData, setCurrentTileData] = useState(null);
   const [gridRadius, setGridRadius] = useState(() =>
     loadPageSpecificState(HEX_PLANNER_GRID_RADIUS_KEY, 3)
   );
@@ -40,7 +41,11 @@ const HexPlannerContainer = () => {
   };
 
   const handleHexClick = (hexId, coords) => {
+    // Get current tile data from the hex grid
+    const tileData = hexGridRef.current?.getHexTileData?.(hexId) || null;
+
     setSelectedHex({ id: hexId, coords });
+    setCurrentTileData(tileData);
     setModalOpen(true);
   };
 
@@ -146,6 +151,7 @@ const HexPlannerContainer = () => {
         onClose={handleModalClose}
         onTileSelect={handleTileSelect}
         selectedHex={selectedHex}
+        currentTileData={currentTileData}
       />
     </>
   );

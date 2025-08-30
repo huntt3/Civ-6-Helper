@@ -1,4 +1,10 @@
 import React, { useState, forwardRef, useImperativeHandle } from "react";
+import {
+  getTileDisplayInfo,
+  tileHasContent,
+  tileHasActualContent,
+  updateRiverEdges,
+} from "../utils/hexPlannerUtils";
 
 const HEX_PLANNER_DATA_KEY = "civ6-helper-hex-planner-data";
 
@@ -22,7 +28,7 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
   // Save hexagon data to localStorage whenever it changes
   React.useEffect(() => {
     const hexDataToSave = hexagons
-      .filter((hex) => hex.tile) // Only save hexes with tiles
+      .filter((hex) => tileHasActualContent(hex.tile)) // Only save hexes with actual content
       .map((hex) => ({
         id: hex.id,
         q: hex.q,
@@ -58,8 +64,14 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
   };
 
   // Helper function to check if image exists
-  const getImagePath = (tileName) => {
-    if (!tileName) return null;
+  const getImagePath = (tileData) => {
+    if (!tileData) return null;
+
+    // Get the primary display element for this tile
+    const displayInfo = getTileDisplayInfo(tileData);
+    if (!displayInfo) return null;
+
+    const tileName = displayInfo.name;
     const camelCaseName = toCamelCase(tileName);
 
     const knownImages = [
@@ -151,9 +163,12 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
 
   // Calculate adjacency bonus for a district
   const calculateAdjacencyBonus = (hex) => {
-    if (!hex.tile || hex.tile.type !== "district") return 0;
+    if (!hex.tile || !tileHasContent(hex.tile, "district")) return 0;
 
-    const tileData = tiles.find((t) => t.name === hex.tile.name);
+    const displayInfo = getTileDisplayInfo(hex.tile);
+    if (!displayInfo || displayInfo.type !== "district") return 0;
+
+    const tileData = tiles.find((t) => t.name === displayInfo.name);
     if (!tileData) return 0;
 
     const adjacentHexes = getAdjacentHexes(hex);
@@ -162,7 +177,10 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
     adjacentHexes.forEach((adjacentHex) => {
       if (!adjacentHex.tile) return;
 
-      const adjacentTileName = adjacentHex.tile.name;
+      const adjacentDisplayInfo = getTileDisplayInfo(adjacentHex.tile);
+      if (!adjacentDisplayInfo) return;
+
+      const adjacentTileName = adjacentDisplayInfo.name;
 
       // Check minor adjacencies (0.5 points)
       if (tileData.districtMinorAdjacencies?.includes(adjacentTileName)) {
@@ -184,12 +202,12 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
   // Get adjacent hexes for a given hex
   const getAdjacentHexes = (hex) => {
     const directions = [
-      { q: 1, r: 0 },
-      { q: 1, r: -1 },
-      { q: 0, r: -1 },
-      { q: -1, r: 0 },
-      { q: -1, r: 1 },
-      { q: 0, r: 1 },
+      { q: 0, r: -1 }, // northwest
+      { q: 1, r: -1 }, // northeast
+      { q: 1, r: 0 }, // east
+      { q: 0, r: 1 }, // southeast
+      { q: -1, r: 1 }, // southwest
+      { q: -1, r: 0 }, // west
     ];
 
     return directions
@@ -220,6 +238,32 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
       points.push(`${x},${y}`);
     }
     return `M ${points.join(" L ")} Z`;
+  };
+
+  // Generate river edge path for a specific edge
+  const generateRiverEdgePath = (centerX, centerY, size, edge) => {
+    const edgeAngles = {
+      northeast: 4, // Top-right edge
+      east: 5, // Bottom-right edge
+      southeast: 0, // Bottom edge
+      southwest: 1, // Bottom-left edge
+      west: 2, // Top-left edge
+      northwest: 3, // Top edge
+    };
+
+    const edgeIndex = edgeAngles[edge];
+    if (edgeIndex === undefined) return null;
+
+    // Calculate the two corner points for this edge
+    const angle1 = (Math.PI / 3) * edgeIndex + Math.PI / 6;
+    const angle2 = (Math.PI / 3) * (edgeIndex + 1) + Math.PI / 6;
+
+    const x1 = centerX + size * Math.cos(angle1);
+    const y1 = centerY + size * Math.sin(angle1);
+    const x2 = centerX + size * Math.cos(angle2);
+    const y2 = centerY + size * Math.sin(angle2);
+
+    return `M ${x1},${y1} L ${x2},${y2}`;
   };
 
   const handleHexClick = (hex) => {
@@ -280,10 +324,14 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
 
   const updateHexTile = (hexId, tileData) => {
     setHexagons((prev) => {
-      return prev.map((hex) =>
-        hex.id === hexId ? { ...hex, tile: tileData } : hex
-      );
+      // Use the river edge synchronization utility
+      return updateRiverEdges(prev, hexId, tileData);
     });
+  };
+
+  const getHexTileData = (hexId) => {
+    const hex = hexagons.find((h) => h.id === hexId);
+    return hex?.tile || null;
   };
 
   const clearHexData = () => {
@@ -295,13 +343,14 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
     ref,
     () => ({
       updateHexTile,
+      getHexTileData,
       clearHexData,
       resetView: () => {
         setZoom(1);
         setPan({ x: 0, y: 0 });
       },
     }),
-    []
+    [hexagons]
   );
 
   const size = 30;
@@ -331,9 +380,9 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
       >
         <defs>
           {hexagons
-            .filter((hex) => hex.tile)
+            .filter((hex) => tileHasActualContent(hex.tile))
             .map((hex) => {
-              const imagePath = getImagePath(hex.tile.name);
+              const imagePath = getImagePath(hex.tile);
               if (!imagePath) return null;
               return (
                 <pattern
@@ -364,7 +413,10 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
               const centerX = pixel.x;
               const centerY = pixel.y;
               const path = generateHexPath(centerX, centerY, size);
-              const imagePath = hex.tile ? getImagePath(hex.tile.name) : null;
+              const displayInfo = hex.tile
+                ? getTileDisplayInfo(hex.tile)
+                : null;
+              const imagePath = hex.tile ? getImagePath(hex.tile) : null;
               const adjacencyBonus = calculateAdjacencyBonus(hex);
 
               return (
@@ -375,7 +427,7 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
                     fill={
                       hex.tile && imagePath
                         ? `url(#pattern-${hex.id.replace(",", "-")})`
-                        : hex.tile
+                        : tileHasActualContent(hex.tile)
                         ? "#10b981"
                         : "#e5e7eb"
                     }
@@ -386,7 +438,7 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
                   />
 
                   {/* Tile name text */}
-                  {hex.tile && !imagePath && (
+                  {hex.tile && displayInfo && !imagePath && (
                     <text
                       x={centerX}
                       y={centerY - 5}
@@ -396,14 +448,14 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
                       fontWeight="bold"
                       pointerEvents="none"
                     >
-                      {hex.tile.name.length > 10
-                        ? hex.tile.name.substring(0, 10) + "..."
-                        : hex.tile.name}
+                      {displayInfo.name.length > 10
+                        ? displayInfo.name.substring(0, 10) + "..."
+                        : displayInfo.name}
                     </text>
                   )}
 
                   {/* Adjacency bonus for districts */}
-                  {hex.tile && hex.tile.type === "district" && (
+                  {hex.tile && tileHasContent(hex.tile, "district") && (
                     <g>
                       <rect
                         x={centerX - 15}
@@ -425,6 +477,35 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
                       >
                         +{adjacencyBonus}
                       </text>
+                    </g>
+                  )}
+
+                  {/* River edges */}
+                  {hex.tile && hex.tile.hasRiverEdges && (
+                    <g>
+                      {Object.entries(hex.tile.hasRiverEdges).map(
+                        ([edge, hasRiver]) => {
+                          if (!hasRiver) return null;
+                          const riverPath = generateRiverEdgePath(
+                            centerX,
+                            centerY,
+                            size,
+                            edge
+                          );
+                          if (!riverPath) return null;
+
+                          return (
+                            <path
+                              key={`river-${hex.id}-${edge}`}
+                              d={riverPath}
+                              stroke="#1e40af"
+                              strokeWidth="3"
+                              strokeLinecap="round"
+                              pointerEvents="none"
+                            />
+                          );
+                        }
+                      )}
                     </g>
                   )}
 
