@@ -15,7 +15,6 @@ function HexPlannerPage() {
       : {
           heroesLegends: true,
           monopoliesCorporations: true,
-          removeLimitations: false,
         };
   });
 

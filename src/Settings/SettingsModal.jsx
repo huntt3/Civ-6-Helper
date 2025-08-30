@@ -14,7 +14,6 @@ const SettingsModal = ({ open, setOpen, settings, setSettings }) => {
     heroesLegends: false,
     monopoliesCorporations: false,
     babylonMode: false,
-    removeLimitations: false,
   };
 
   const handleVersionChange = (version) => {
@@ -45,11 +44,6 @@ const SettingsModal = ({ open, setOpen, settings, setSettings }) => {
         label="Vanilla Babylon Mode"
         checked={settings.babylonMode}
         onChange={() => handleCheckbox("babylonMode")}
-      />
-      <Checkbox
-        label="Remove All Limitations"
-        checked={settings.removeLimitations}
-        onChange={() => handleCheckbox("removeLimitations")}
       />
       <button
         className="bg-gray-300 text-gray-800 rounded px-4 py-1 mt-2 font-sans text-base hover:bg-gray-400 focus:bg-gray-400 focus:outline-none"

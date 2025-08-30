@@ -15,7 +15,6 @@ function DistrictDiscountingToolPage() {
       : {
           heroesLegends: true,
           monopoliesCorporations: true,
-          removeLimitations: false,
         };
   });
 

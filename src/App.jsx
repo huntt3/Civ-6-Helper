@@ -25,7 +25,6 @@ function App() {
           heroesLegends: false,
           monopoliesCorporations: false,
           babylonMode: false,
-          removeLimitations: false,
         };
   });
 

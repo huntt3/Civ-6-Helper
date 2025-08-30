@@ -15,7 +15,6 @@ function EraScoreTrackerPage() {
       : {
           heroesLegends: true,
           monopoliesCorporations: true,
-          removeLimitations: false,
         };
   });
 

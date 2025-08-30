@@ -15,7 +15,6 @@ function GreatPeopleTrackerPage() {
       : {
           heroesLegends: true,
           monopoliesCorporations: true,
-          removeLimitations: false,
         };
   });
 

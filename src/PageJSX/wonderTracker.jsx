@@ -15,7 +15,6 @@ function WonderTrackerPage() {
       : {
           heroesLegends: true,
           monopoliesCorporations: true,
-          removeLimitations: false,
         };
   });
 

@@ -19,7 +19,6 @@ function TechsAndCivicsTreePage() {
           heroesLegends: false,
           monopoliesCorporations: false,
           babylonMode: false,
-          removeLimitations: false,
         };
   });
 
