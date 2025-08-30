@@ -396,7 +396,7 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
                     href={imagePath}
                     width="60"
                     height="60"
-                    x="0"
+                    x="-4"
                     y="0"
                     preserveAspectRatio="xMidYMid slice"
                   />

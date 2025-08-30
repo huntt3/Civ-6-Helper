@@ -139,9 +139,9 @@ const HexPlannerContainer = () => {
             <p>
               <strong>Adjacency Bonus Legend:</strong>
             </p>
-            <p>• Minor adjacencies (other districts): +0.5 points</p>
-            <p>• Normal adjacencies (features/terrain): +1 point</p>
-            <p>• Major adjacencies (special features): +2 points</p>
+            <p>• Minor adjacencies: +0.5 yield</p>
+            <p>• Normal adjacencies: +1 yield</p>
+            <p>• Major adjacencies: +2 yield</p>
           </div>
         </div>
       </CollapsibleContainer>
