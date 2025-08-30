@@ -1,5 +1,4 @@
 import React from "react";
-import EraDropdown from "./EraDropdown";
 import VersionDropdown from "./VersionDropdown";
 import CivModal from "../Templates/CivModal";
 import Checkbox from "../Templates/Checkbox";
@@ -9,9 +8,20 @@ const SettingsModal = ({ open, setOpen, settings, setSettings }) => {
     setSettings((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
+  // Default settings: Heroes & Legends and Monopolies and Corporations unchecked
+  const defaultSettings = {
+    heroesLegends: false,
+    monopoliesCorporations: false,
+    babylonMode: false,
+    removeLimitations: false,
+  };
+
+  const handleResetSettings = () => {
+    setSettings(defaultSettings);
+  };
+
   const message = (
     <div className="flex flex-col items-stretch space-y-2">
-      <EraDropdown />
       <VersionDropdown />
       <Checkbox
         label="Heroes & Legends"
@@ -24,10 +34,23 @@ const SettingsModal = ({ open, setOpen, settings, setSettings }) => {
         onChange={() => handleCheckbox("monopoliesCorporations")}
       />
       <Checkbox
+        label="Vanilla Babylon Mode"
+        checked={settings.babylonMode}
+        onChange={() => handleCheckbox("babylonMode")}
+      />
+      <Checkbox
         label="Remove All Limitations"
         checked={settings.removeLimitations}
         onChange={() => handleCheckbox("removeLimitations")}
       />
+      <button
+        className="bg-gray-300 text-gray-800 rounded px-4 py-1 mt-2 font-sans text-base hover:bg-gray-400 focus:bg-gray-400 focus:outline-none"
+        type="button"
+        aria-label="Reset to default settings"
+        onClick={handleResetSettings}
+      >
+        Reset to Default
+      </button>
     </div>
   );
 
