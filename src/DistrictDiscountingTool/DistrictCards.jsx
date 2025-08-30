@@ -1,4 +1,5 @@
 import React from "react";
+import { isDistrictResearched } from "../utils/districtRequirements";
 
 // List of district titles
 const districtTitles = [
@@ -39,8 +40,15 @@ const DistrictCard = ({
   setNumberBuilt,
   numSpecialtyDistrictsCompleted = 0,
   numSpecialtyDistrictsUnlocked = 0,
+  useCalculatedCounts = false,
 }) => {
   const imgFile = getDistrictImg(title);
+
+  // Determine if research is automated and the actual research state
+  const isAutomatedResearch = useCalculatedCounts;
+  const actualResearched = isAutomatedResearch
+    ? isDistrictResearched(title)
+    : researched;
   // Determine base cost
   let baseCost = 54;
   if (title === "Government Plaza" || title === "Diplomatic Quarter")
@@ -105,10 +113,18 @@ const DistrictCard = ({
         <input
           id={`${title}-researched`}
           type="checkbox"
-          checked={researched}
+          checked={actualResearched}
           onChange={(e) => setResearched(e.target.checked)}
-          className="w-5 h-5 accent-green-600"
+          disabled={isAutomatedResearch}
+          className={`w-5 h-5 accent-green-600 ${
+            isAutomatedResearch ? "cursor-not-allowed opacity-75" : ""
+          }`}
         />
+        {isAutomatedResearch && (
+          <div className="text-xs text-gray-500 mt-1 text-center leading-tight">
+            Use Tech Trees
+          </div>
+        )}
       </div>
       {/* Number Built input */}
       <div className="flex flex-col items-start mr-4">
@@ -132,21 +148,21 @@ const DistrictCard = ({
           onChange={(e) =>
             setNumberBuilt(Math.max(0, parseInt(e.target.value) || 0))
           }
-          disabled={!researched}
+          disabled={!actualResearched}
         />
       </div>
       {/* Discounted status */}
       <div className="flex flex-col items-start mr-4 min-w-[110px]">
         <span
           className={`font-bold ${
-            !researched
+            !actualResearched
               ? "text-gray-500"
               : isDiscounted
               ? "text-green-600"
               : "text-red-600"
           }`}
         >
-          {!researched
+          {!actualResearched
             ? "Not Researched"
             : isDiscounted
             ? "Discounted"
@@ -206,6 +222,7 @@ const DistrictCards = ({
   setNumberBuiltStates,
   numSpecialtyDistrictsCompleted = 0,
   numSpecialtyDistrictsUnlocked = 0,
+  useCalculatedCounts = false,
 }) => {
   return (
     <main
@@ -233,6 +250,7 @@ const DistrictCards = ({
           }}
           numSpecialtyDistrictsCompleted={numSpecialtyDistrictsCompleted}
           numSpecialtyDistrictsUnlocked={numSpecialtyDistrictsUnlocked}
+          useCalculatedCounts={useCalculatedCounts}
         />
       ))}
     </main>
