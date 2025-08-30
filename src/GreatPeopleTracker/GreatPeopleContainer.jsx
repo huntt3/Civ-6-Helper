@@ -238,12 +238,12 @@ const GreatPeopleContainer = () => {
 
     setCheckedCards({});
     setCollapsedEras(defaultCollapsed);
-    setCollapsed(getDefaultCollapsedState());
+    // Preserve collapsed state
 
-    // Clear localStorage
+    // Clear localStorage except collapsed state
     removePageSpecificState("greatPeopleChecked");
     removePageSpecificState("civ6-helper-greatPeople-collapsedEras");
-    removePageSpecificState("civ6-helper-greatPeople-collapsed");
+    // Do NOT remove civ6-helper-greatPeople-collapsed
   };
 
   // Collapse/expand handler for the whole container

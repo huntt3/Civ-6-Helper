@@ -110,11 +110,11 @@ const WondersContainer = () => {
         collapsed={collapsed}
         onCollapse={handleCollapse}
         onRefresh={() => {
-          // Reset built states, collapsed state, and refresh
+          // Reset built states and refresh, preserve collapsed state
           setWondersBuilt({});
-          setCollapsed(getDefaultCollapsedState());
+          // Preserve collapsed state
           removePageSpecificState(WONDERS_BUILT_KEY);
-          removePageSpecificState(WONDERS_COLLAPSED_KEY);
+          // Do NOT remove WONDERS_COLLAPSED_KEY
           fetchWonders();
         }}
         ariaLabel="Wonders"

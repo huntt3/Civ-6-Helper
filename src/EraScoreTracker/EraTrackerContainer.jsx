@@ -269,7 +269,7 @@ const EraTrackerContainer = ({ settings }) => {
       }
     );
 
-    // Remove all Era Tracker related localStorage keys (page-specific)
+    // Remove all Era Tracker related localStorage keys (page-specific) except collapsed state
     localStorage.removeItem("civ6-helper-eraScore");
     localStorage.removeItem("civ6-helper-neededEraScore");
     removePageSpecificState(FAVORITES_KEY);
@@ -278,9 +278,9 @@ const EraTrackerContainer = ({ settings }) => {
     removePageSpecificState(ERA_SCORE_FILTER_KEY);
     removePageSpecificState(SEARCH_KEY);
     removePageSpecificState(SHOW_ONLY_FAVORITED_KEY);
-    removePageSpecificState(ERA_TRACKER_COLLAPSED_KEY);
+    // Do NOT remove collapsed state
 
-    // Reset local state
+    // Reset local state except collapsed
     setFavorites([]);
     setCardsPerPage(10);
     setPage(0);
@@ -288,7 +288,7 @@ const EraTrackerContainer = ({ settings }) => {
     setEraScoreFilter(0);
     setSearch("");
     setShowOnlyFavorited(false);
-    setCollapsed(getDefaultCollapsedState());
+    // Preserve collapsed state
 
     // Refresh the data
     fetchEraScore();

@@ -68,12 +68,12 @@ const DistrictDiscountingContainer = () => {
     removePageSpecificState(LS_CIVICS);
     removePageSpecificState(LS_RESEARCHED);
     removePageSpecificState(LS_BUILT);
-    removePageSpecificState("civ6-helper-district-collapsed");
+    // Do NOT remove civ6-helper-district-collapsed
     setTechsCompleted(0);
     setCivicsCompleted(0);
     setResearchedStates(Array(numDistricts).fill(false));
     setNumberBuiltStates(Array(numDistricts).fill(0));
-    setCollapsed(getDefaultCollapsedState());
+    // Preserve collapsed state
   };
   const numSpecialtyDistrictsCompleted = numberBuiltStates.reduce(
     (a, b) => a + b,

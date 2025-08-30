@@ -131,6 +131,7 @@ const TechTreeContainer = () => {
     if (techResetRef.current) {
       techResetRef.current();
     }
+    // Do NOT remove civ6-helper-tech-collapsed
   };
 
   const handleCivicResetView = () => {
@@ -140,6 +141,7 @@ const TechTreeContainer = () => {
     if (civicResetRef.current) {
       civicResetRef.current();
     }
+    // Do NOT remove civ6-helper-civic-collapsed
   };
 
   return (
