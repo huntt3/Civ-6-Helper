@@ -5,7 +5,8 @@
       "type": "Great General",
       "era": "Classical",
       "taken": false,
-      "ability": "Convert adjacent barbarian units."
+      "ability": "Convert adjacent barbarian units.",
+      "bbgAbility": "Creates a Military Engineer."
     },
     {
       "name": "Hannibal Barca",
@@ -33,7 +34,8 @@
       "type": "Great General",
       "era": "Medieval",
       "taken": false,
-      "ability": "Grants +2 Loyalty per turn for this city."
+      "ability": "Grants +2 Loyalty per turn for this city.",
+      "bbgAbility": "Creates a Trebuchet with a promotion"
     },
     {
       "name": "El Cid",
@@ -54,7 +56,8 @@
       "type": "Great General",
       "era": "Renaissance",
       "taken": false,
-      "ability": "Gain a free Envoy."
+      "ability": "Gain a free Envoy.",
+      "bbgAbility": "Gain a 2 free Envoys."
     },
     {
       "name": "Gustavus Adolphus",
@@ -68,7 +71,8 @@
       "type": "Great General",
       "era": "Renaissance",
       "taken": false,
-      "ability": "Creates a Relic."
+      "ability": "Creates a Relic.",
+      "bbgAbility": "Form an army."
     },
     {
       "name": "Dandara",
@@ -76,6 +80,7 @@
       "era": "Industrial",
       "taken": false,
       "ability": "Grants a Warrior Monk with one promotion level.",
+      "bbgAbility": "Creates the most advanced support unit you have researched",
       "charges": 2
     },
     {
@@ -83,28 +88,32 @@
       "type": "Great General",
       "era": "Industrial",
       "taken": false,
-      "ability": "Grants +4 Loyalty per turn for this city."
+      "ability": "Grants +4 Loyalty per turn for this city.",
+      "bbgAbility": "Creates a Tank unit with 1 promotion and grants +2 Oil per turn."
     },
     {
       "name": "Napoleon Bonaparte",
       "type": "Great General",
       "era": "Industrial",
       "taken": false,
-      "ability": "Forms an Army out of a military land unit."
+      "ability": "Forms an Army out of a military land unit.",
+      "bbgAbility": "Grant 1 Observation Balloon."
     },
     {
       "name": "Rani Lakshmibai",
       "type": "Great General",
       "era": "Industrial",
       "taken": false,
-      "ability": "Instantly creates a Cavalry unit with one promotion level."
+      "ability": "Instantly creates a Cavalry unit with one promotion level.",
+      "bbgAbility": "Creates a Helicopter unit with 1 promotion."
     },
     {
       "name": "Tupac Amaru",
       "type": "Great General",
       "era": "Modern",
       "taken": false,
-      "ability": "Grants a Musketman in each of the target city's indefensible and undefended districts. Must activates in enemy territory."
+      "ability": "Grants a Musketman in each of the target city's indefensible and undefended districts. Must activates in enemy territory.",
+      "bbgAbility": "Creates an Infantry in each of the target city's indefensible and undefended districts."
     },
     {
       "name": "John Monash",
@@ -132,14 +141,16 @@
       "type": "Great General",
       "era": "Atomic",
       "taken": false,
-      "ability": "Instantly creates a Tank unit with one promotion level. Grants +1 Oil per turn."
+      "ability": "Instantly creates a Tank unit with one promotion level. Grants +1 Oil per turn.",
+      "bbgAbility": "Creates a Tank unit with one promotion level and grants +2 Uranium per turn"
     },
     {
       "name": "Dwight Eisenhower",
       "type": "Great General",
       "era": "Atomic",
       "taken": false,
-      "ability": "+5% Production towards military units."
+      "ability": "+5% Production towards military units.",
+      "bbgAbility": "+15% Production towards military units."
     },
     {
       "name": "Georgy Zhukov",
@@ -153,7 +164,8 @@
       "type": "Great General",
       "era": "Atomic",
       "taken": false,
-      "ability": "Grants +6 Loyalty per turn for this city. Must activate in City Center."
+      "ability": "Grants +6 Loyalty per turn for this city. Must activate in City Center.",
+      "bbgAbility": "Creates a Fighter unit with one promotion in the nearest city center and grants +2 Aluminium per turn."
     },
     {
       "name": "Ahmad Shah Massoud",
@@ -216,7 +228,8 @@
       "type": "Great Admiral",
       "era": "Medieval",
       "taken": false,
-      "ability": "+3 Strength Combat Strength for all naval units."
+      "ability": "+3 Strength Combat Strength for all naval units.",
+      "bbgAbility": "Grants a free copy of a Luxury resource on a tile to the Capital city."
     },
     {
       "name": "Zheng He",
@@ -230,7 +243,8 @@
       "type": "Great Admiral",
       "era": "Renaissance",
       "taken": false,
-      "ability": "Instantly creates a Privateer with 1 promotion level. Military units get +50% rewards for plundering sea Trade Routes."
+      "ability": "Instantly creates a Privateer with 1 promotion level. Military units get +50% rewards for plundering sea Trade Routes.",
+      "bbgAbility": "Instantly creates a Privateer with 1 promotion level. Military units get +50% rewards for plundering sea Trade Routes. +25% production toward naval raider and naval ranges units."
     },
     {
       "name": "Santa Cruz",
@@ -251,7 +265,8 @@
       "type": "Great Admiral",
       "era": "Renaissance",
       "taken": false,
-      "ability": "Gain 300 Gold (on Standard speed). Grants 1 free copy of the Luxury resource on this tile to your Capital city."
+      "ability": "Gain 300 Gold (on Standard speed). Grants 1 free copy of the Luxury resource on this tile to your Capital city.",
+      "bbgAbility": "+3 Combat Strength to all naval units"
     },
     {
       "name": "Ching Shih",
@@ -337,7 +352,8 @@
       "era": "Medieval",
       "taken": false,
       "ability": "Grants 175 Production toward wonder construction, doubled if the wonder is from the Ancient or Classical era.",
-      "charges": 2
+      "charges": 2,
+      "bbgCharges": 1
     },
     {
       "name": "Bi Sheng",
@@ -382,7 +398,9 @@
       "type": "Great Engineer",
       "era": "Renaissance",
       "taken": false,
-      "ability": "Culture Bomb adjacent tiles when completing an Industrial Zone in any city."
+      "ability": "Culture Bomb adjacent tiles when completing an Industrial Zone in any city.",
+      "bbgAbility": "+1 Housing and +1 Amenity for this city.",
+      "bbgCharges": 2
     },
     {
       "name": "Ada Lovelace",
@@ -418,7 +436,8 @@
       "type": "Great Engineer",
       "era": "Modern",
       "taken": false,
-      "ability": "This city provides +1 Appeal to any tile it owns."
+      "ability": "This city provides +1 Appeal to any tile it owns.",
+      "bbgAbility": "This city provides +1 appeal to any tile it owns and +2 gold per breath-taking tile in this city"
     },
     {
       "name": "Robert Goddard",

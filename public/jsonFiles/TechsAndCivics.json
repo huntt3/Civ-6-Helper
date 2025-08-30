@@ -449,6 +449,7 @@
       "column": 10,
       "row": 0,
       "prerequisites": ["Industrialization"],
+      "bbgPrerequisites": ["Industrialization", "Scientific Theory"],
       "boostPrerequisites": ["Mass Production"]
     },
     {
@@ -515,7 +516,8 @@
       "column": 11,
       "row": 4,
       "prerequisites": ["Rifling"],
-      "boostPrerequisites": ["Steam Power"]
+      "boostPrerequisites": ["Steam Power"],
+      "bbgBoostPrerequisites": ["Siege Tactics"]
     },
     {
       "name": "Refining",

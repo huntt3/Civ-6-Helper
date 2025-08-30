@@ -63,6 +63,7 @@
     {
       "name": "Great Library",
       "requirement": "Recorded History",
+      "bbgRequirement": "Drama and Poetry",
       "era": "Classical",
       "built": false
     },
@@ -249,6 +250,7 @@
     {
       "name": "Oxford University",
       "requirement": "Scientific Theory",
+      "bbgRequirement": "Urbanization",
       "era": "Industrial",
       "built": false
     },
