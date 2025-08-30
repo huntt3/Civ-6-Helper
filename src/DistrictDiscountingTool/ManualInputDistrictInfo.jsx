@@ -8,6 +8,7 @@ const ManualInputDistrictInfo = ({
   setTechsCompleted,
   civicsCompleted,
   setCivicsCompleted,
+  useCalculatedCounts = false,
 }) => {
   return (
     <section className="flex flex-row gap-8 items-center mb-6">
@@ -30,8 +31,18 @@ const ManualInputDistrictInfo = ({
           onChange={(e) =>
             setTechsCompleted(Math.max(0, parseInt(e.target.value) || 0))
           }
-          className="p-2 rounded-sm border border-gray-300 text-base w-24"
+          disabled={useCalculatedCounts}
+          className={`p-2 rounded-sm border text-base w-24 ${
+            useCalculatedCounts
+              ? "border-gray-200 bg-gray-100 text-gray-600 cursor-not-allowed"
+              : "border-gray-300"
+          }`}
         />
+        {useCalculatedCounts && (
+          <div className="text-xs text-gray-500 mt-1 w-24 leading-tight">
+            Auto-calculated from Tech Tree
+          </div>
+        )}
       </div>
       <div className="flex flex-col items-start">
         <label
@@ -52,8 +63,18 @@ const ManualInputDistrictInfo = ({
           onChange={(e) =>
             setCivicsCompleted(Math.max(0, parseInt(e.target.value) || 0))
           }
-          className="p-2 rounded-sm border border-gray-300 text-base w-24"
+          disabled={useCalculatedCounts}
+          className={`p-2 rounded-sm border text-base w-24 ${
+            useCalculatedCounts
+              ? "border-gray-200 bg-gray-100 text-gray-600 cursor-not-allowed"
+              : "border-gray-300"
+          }`}
         />
+        {useCalculatedCounts && (
+          <div className="text-xs text-gray-500 mt-1 w-24 leading-tight">
+            Auto-calculated from Civic Tree
+          </div>
+        )}
       </div>
     </section>
   );

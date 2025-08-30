@@ -9,6 +9,7 @@ import DistrictDiscountingContainer from "./DistrictDiscountingTool/DistrictDisc
 import GreatPeopleContainer from "./GreatPeopleTracker/GreatPeopleContainer";
 import HexPlannerContainer from "./HexPlanner/HexPlannerContainer";
 import Footer from "./Footer/Footer";
+import { calculateTechCivicCountsFromData } from "./utils/techCompletionUtils";
 import axios from "axios";
 
 const SETTINGS_KEY = "civ6-helper-settings";
@@ -34,6 +35,12 @@ function App() {
     return saved ? JSON.parse(saved) : null;
   });
 
+  // State for calculated tech/civic completion counts from TechTreeContainer
+  const [calculatedCounts, setCalculatedCounts] = useState({
+    techsCompleted: 0,
+    civicsCompleted: 0,
+  });
+
   useEffect(() => {
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
   }, [settings]);
@@ -55,6 +62,36 @@ function App() {
     }
   }, [techsAndCivics]);
 
+  // Calculate tech/civic completion counts from TechTreeContainer state
+  useEffect(() => {
+    const updateCounts = async () => {
+      const counts = await calculateTechCivicCountsFromData();
+      setCalculatedCounts(counts);
+    };
+
+    // Initial calculation
+    updateCounts();
+
+    // Listen for cross-tab storage changes
+    const handleStorageChange = (e) => {
+      if (e.key === "civ6_tech_state") {
+        updateCounts();
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
+  // Callback function for when tech state changes (with debouncing)
+  const handleTechStateChange = React.useCallback(async () => {
+    const counts = await calculateTechCivicCountsFromData();
+    setCalculatedCounts(counts);
+  }, []);
+
   return (
     <main>
       <Navbar />
@@ -63,8 +100,13 @@ function App() {
         techsAndCivics={techsAndCivics}
         setTechsAndCivics={setTechsAndCivics}
         settings={settings}
+        onTechStateChange={handleTechStateChange}
       />
-      <DistrictDiscountingContainer />
+      <DistrictDiscountingContainer
+        techsCompleted={calculatedCounts.techsCompleted}
+        civicsCompleted={calculatedCounts.civicsCompleted}
+        useCalculatedCounts={true}
+      />
       <WondersContainer settings={settings} />
       <GreatPeopleContainer settings={settings} />
       <EraTrackerContainer settings={settings} setSettings={setSettings} />

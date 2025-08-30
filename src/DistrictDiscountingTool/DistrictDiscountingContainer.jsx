@@ -13,7 +13,11 @@ import {
 } from "../utils/pageContext";
 
 // This component manages the collapsed state for the CollapsibleContainer
-const DistrictDiscountingContainer = () => {
+const DistrictDiscountingContainer = ({
+  techsCompleted: propTechsCompleted,
+  civicsCompleted: propCivicsCompleted,
+  useCalculatedCounts = false,
+}) => {
   // State to track if the container is collapsed with localStorage
   const [collapsed, setCollapsed] = useState(() =>
     loadPageSpecificState(
@@ -36,6 +40,14 @@ const DistrictDiscountingContainer = () => {
   const [civicsCompleted, setCivicsCompleted] = useState(() =>
     loadPageSpecificState(LS_CIVICS, 0)
   );
+
+  // Use calculated counts from props if available, otherwise use local state
+  const effectiveTechsCompleted = useCalculatedCounts
+    ? propTechsCompleted || 0
+    : techsCompleted;
+  const effectiveCivicsCompleted = useCalculatedCounts
+    ? propCivicsCompleted || 0
+    : civicsCompleted;
   const [researchedStates, setResearchedStates] = useState(() =>
     loadPageSpecificState(LS_RESEARCHED, Array(numDistricts).fill(false))
   );
@@ -43,13 +55,18 @@ const DistrictDiscountingContainer = () => {
     loadPageSpecificState(LS_BUILT, Array(numDistricts).fill(0))
   );
 
-  // Persist to page-specific localStorage on change
+  // Persist to page-specific localStorage on change (only if not using calculated counts)
   useEffect(() => {
-    savePageSpecificState(LS_TECHS, techsCompleted);
-  }, [techsCompleted]);
+    if (!useCalculatedCounts) {
+      savePageSpecificState(LS_TECHS, techsCompleted);
+    }
+  }, [techsCompleted, useCalculatedCounts]);
+
   useEffect(() => {
-    savePageSpecificState(LS_CIVICS, civicsCompleted);
-  }, [civicsCompleted]);
+    if (!useCalculatedCounts) {
+      savePageSpecificState(LS_CIVICS, civicsCompleted);
+    }
+  }, [civicsCompleted, useCalculatedCounts]);
   useEffect(() => {
     savePageSpecificState(LS_RESEARCHED, researchedStates);
   }, [researchedStates]);
@@ -64,13 +81,15 @@ const DistrictDiscountingContainer = () => {
 
   // Reset all inputs and localStorage
   const handleReset = () => {
-    removePageSpecificState(LS_TECHS);
-    removePageSpecificState(LS_CIVICS);
+    if (!useCalculatedCounts) {
+      removePageSpecificState(LS_TECHS);
+      removePageSpecificState(LS_CIVICS);
+      setTechsCompleted(0);
+      setCivicsCompleted(0);
+    }
     removePageSpecificState(LS_RESEARCHED);
     removePageSpecificState(LS_BUILT);
     // Do NOT remove civ6-helper-district-collapsed
-    setTechsCompleted(0);
-    setCivicsCompleted(0);
     setResearchedStates(Array(numDistricts).fill(false));
     setNumberBuiltStates(Array(numDistricts).fill(0));
     // Preserve collapsed state
@@ -108,21 +127,22 @@ const DistrictDiscountingContainer = () => {
       </div>
       <div className="flex justify-center w-full">
         <ManualInputDistrictInfo
-          techsCompleted={techsCompleted}
+          techsCompleted={effectiveTechsCompleted}
           setTechsCompleted={setTechsCompleted}
-          civicsCompleted={civicsCompleted}
+          civicsCompleted={effectiveCivicsCompleted}
           setCivicsCompleted={setCivicsCompleted}
+          useCalculatedCounts={useCalculatedCounts}
         />
       </div>
       <div className="flex justify-center w-full">
         <TechsAndCivicsPercentage
-          techsCompleted={techsCompleted}
-          civicsCompleted={civicsCompleted}
+          techsCompleted={effectiveTechsCompleted}
+          civicsCompleted={effectiveCivicsCompleted}
         />
       </div>
       <DistrictCards
-        techsCompleted={techsCompleted}
-        civicsCompleted={civicsCompleted}
+        techsCompleted={effectiveTechsCompleted}
+        civicsCompleted={effectiveCivicsCompleted}
         researchedStates={researchedStates}
         setResearchedStates={setResearchedStates}
         numberBuiltStates={numberBuiltStates}

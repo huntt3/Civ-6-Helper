@@ -126,6 +126,7 @@ const TechCarousel = forwardRef(
       hoveredTech,
       setHoveredTech,
       settings,
+      onTechStateChange,
     },
     ref
   ) => {
@@ -325,7 +326,12 @@ const TechCarousel = forwardRef(
         };
       });
       localStorage.setItem("civ6_tech_state", JSON.stringify(state));
-    }, [techs]);
+
+      // Notify parent component about tech state changes
+      if (onTechStateChange) {
+        onTechStateChange();
+      }
+    }, [techs, onTechStateChange]);
 
     // Save position changes for draggable cards
     useEffect(() => {
