@@ -152,6 +152,41 @@ const GreatPeopleContainer = () => {
   const handleCardClick = (name) => {
     setCheckedCards((prev) => {
       const updated = { ...prev, [name]: !prev[name] };
+
+      // After updating checked cards, check if we need to auto-expand next era
+      setTimeout(() => {
+        // Find which era and type this person belongs to
+        const person = greatPeople.find((p) => p.name === name);
+        if (!person || !updated[name]) return; // Only check when marking as checked
+
+        const currentEraIndex = eras.indexOf(person.era);
+        const nextEraIndex = currentEraIndex + 1;
+
+        if (nextEraIndex < eras.length) {
+          const nextEra = eras[nextEraIndex];
+
+          // Check if all people of this type in current era are now checked
+          const peopleInCurrentEra = getPeopleByEraAndType(
+            greatPeople,
+            person.era,
+            person.type
+          );
+          const allCheckedInCurrentEra = peopleInCurrentEra.every(
+            (p) => updated[p.name]
+          );
+
+          if (allCheckedInCurrentEra) {
+            // Auto-expand next era if it's collapsed
+            setCollapsedEras((prevCollapsed) => {
+              if (prevCollapsed[nextEra]) {
+                return { ...prevCollapsed, [nextEra]: false };
+              }
+              return prevCollapsed;
+            });
+          }
+        }
+      }, 0);
+
       return updated;
     });
   };
@@ -220,7 +255,7 @@ const GreatPeopleContainer = () => {
                 aria-controls={`era-row-${era}`}
                 onClick={() => handleCollapse(era)}
               >
-                {collapsedEras[era] ? "Show" : "Hide"}
+                {collapsedEras[era] ? "Expand" : "Collapse"}
               </button>
               <span>{era}</span>
             </div>
