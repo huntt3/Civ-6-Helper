@@ -566,7 +566,8 @@
       "type": "Great Merchant",
       "era": "Renaissance",
       "taken": false,
-      "ability": "Grants 3 Envoys at this City-state."
+      "ability": "Grants 3 Envoys at this City-state you are not at war with.",
+      "bbgAbility": "Grants 3 Envoys at any City-state."
     },
     {
       "name": "Giovanni de' Medici",
@@ -587,7 +588,8 @@
       "type": "Great Merchant",
       "era": "Renaissance",
       "taken": false,
-      "ability": "Gain an Envoy. Domestic Trade Routes gain +0.5 Gold per district at the destination (rounds down to integer)."
+      "ability": "Gain an Envoy. Domestic Trade Routes gain +0.5 Gold per district at the destination (rounds down to integer).",
+      "bbgAbility": "Gain an Envoy. Domestic Trade Routes gain +1 Gold per district at the destination (rounds down to integer)."
     },
     {
       "name": "Adam Smith",
@@ -608,14 +610,16 @@
       "type": "Great Merchant",
       "era": "Industrial",
       "taken": false,
-      "ability": "Creates one copy of Toys, which provides +4 Amenties."
+      "ability": "Creates one copy of Toys, which provides +4 Amenties.",
+      "bbgAbility": "Creates two copys of Toys, which provide +4 Amenties."
     },
     {
       "name": "Stamford Raffles",
       "type": "Great Merchant",
       "era": "Modern",
       "taken": false,
-      "ability": "Absorbs this City-state into your empire. Grants you +10 Loyalty per turn in the city. Activates in a city-state of which you are Suzerain."
+      "ability": "Absorbs this City-state into your empire. Grants you +10 Loyalty per turn in the city. Activates in a city-state of which you are Suzerain.",
+      "bbgAbility": "Absorbs this City-state into your empire. Grants you +10 Loyalty per turn in the city. Activates any city-state."
     },
     {
       "name": "John Rockefeller",
@@ -629,7 +633,8 @@
       "type": "Great Merchant",
       "era": "Modern",
       "taken": false,
-      "ability": "+25% Tourism rate towards other civilizations you have a Trade Route to."
+      "ability": "+25% Tourism rate towards other civilizations you have a Trade Route to.",
+      "bbgAbility": "+25% Tourism rate towards other civilizations you have a Trade Route to. Increases Trade Route capacity by 1"
     },
     {
       "name": "Mary Katherine Goddard",
@@ -671,14 +676,16 @@
       "type": "Great Merchant",
       "era": "Information",
       "taken": false,
-      "ability": "Campus districts provide +10 Tourism. Activates in your Campus."
+      "ability": "Campus districts provide +10 Tourism. Activates in your Campus.",
+      "bbgAbility": "Campus districts provide +50 Tourism. Activates in your Campus."
     },
     {
       "name": "Masaru Ibuka",
       "type": "Great Merchant",
       "era": "Information",
       "taken": false,
-      "ability": "Industrial Zone districts provide +10 Tourism. Activates in your Industrial Zone."
+      "ability": "Industrial Zone districts provide +10 Tourism. Activates in your Industrial Zone.",
+      "bbgAbility": "Industrial Zone districts provide +50 Tourism. Activates in your Industrial Zone."
     },
     {
       "name": "Zhang Heng",
@@ -770,7 +777,8 @@
       "type": "Great Scientist",
       "era": "Industrial",
       "taken": false,
-      "ability": "Triggers the Eureka for Chemistry and one random technology from the Industrial Era."
+      "ability": "Triggers the Eureka for Chemistry and one random technology from the Industrial Era.",
+      "bbgAbility": "Triggers the Eureka for Chemistry and one random technology from the Industrial Era. Grants +50% production toward research labs."
     },
     {
       "name": "James Young",
@@ -784,7 +792,8 @@
       "type": "Great Scientist",
       "era": "Modern",
       "taken": false,
-      "ability": "Triggers the Eureka for Computers and one random technology from the Modern Era."
+      "ability": "Triggers the Eureka for Computers and one random technology from the Modern Era.",
+      "bbgAbility": "Triggers the Eureka for Computers and one random technology from the Modern Era. If you already have the eureka for Computers, grants you the technology for free"
     },
     {
       "name": "Albert Einstein",
@@ -798,7 +807,8 @@
       "type": "Great Scientist",
       "era": "Modern",
       "taken": false,
-      "ability": "Triggers one random Eureka for one random technology from the Modern or Atomic Era. Applies 100 free Great People Great People points towards recruiting all current and future Great People."
+      "ability": "Triggers one random Eureka for one random technology from the Modern or Atomic Era. Applies 100 free Great People Great People points towards recruiting all current and future Great People.",
+      "Ability": "Triggers one random Eureka for one random technology from the Modern or Atomic Era. Applies 100 free Great People Great People points towards recruiting all current and future Great People. +1 diplomatic point"
     },
     {
       "name": "Erwin Schrödinger",
@@ -826,7 +836,8 @@
       "type": "Great Scientist",
       "era": "Atomic",
       "taken": false,
-      "ability": "Gain 1000 Science and Culture (on Standard speed)."
+      "ability": "Gain 1000 Science and Culture (on Standard speed).",
+      "bbgAbility": "Gain 2000 Science and Culture (on Standard speed)."
     },
     {
       "name": "Carl Sagan",
