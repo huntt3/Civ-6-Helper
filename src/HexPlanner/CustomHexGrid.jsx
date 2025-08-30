@@ -266,9 +266,11 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
     return `M ${x1},${y1} L ${x2},${y2}`;
   };
 
-  const handleHexClick = (hex) => {
+  const handleHexClick = (hex, event) => {
     if (!isDragging) {
-      onHexClick(hex.id, { q: hex.q, r: hex.r, s: hex.s });
+      event.preventDefault();
+      const clickType = event.type === "contextmenu" ? "right" : "left";
+      onHexClick(hex.id, { q: hex.q, r: hex.r, s: hex.s }, clickType);
     }
   };
 
@@ -434,7 +436,8 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
                     stroke="#374151"
                     strokeWidth="1"
                     className="cursor-pointer hover:opacity-75 transition-opacity"
-                    onClick={() => handleHexClick(hex)}
+                    onClick={(e) => handleHexClick(hex, e)}
+                    onContextMenu={(e) => handleHexClick(hex, e)}
                   />
 
                   {/* Tile name text */}

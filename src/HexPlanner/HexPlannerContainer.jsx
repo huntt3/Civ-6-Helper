@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 import CustomHexGrid from "./CustomHexGrid";
 import HexPlannerModal from "./HexPlannerModal";
+import { getTileCategories, getDefaultTile } from "../utils/hexPlannerUtils";
 import {
   loadPageSpecificState,
   savePageSpecificState,
@@ -24,6 +25,11 @@ const HexPlannerContainer = () => {
     loadPageSpecificState(HEX_PLANNER_GRID_RADIUS_KEY, 3)
   );
 
+  // Fill tool state
+  const [fillMode, setFillMode] = useState(false);
+  const [selectedFillType, setSelectedFillType] = useState("terrain");
+  const [selectedFillItem, setSelectedFillItem] = useState(null);
+
   const hexGridRef = useRef(null);
 
   // Save grid radius to localStorage
@@ -40,15 +46,40 @@ const HexPlannerContainer = () => {
     setCollapsed((prevCollapsed) => !prevCollapsed);
   };
 
-  const handleHexClick = (hexId, coords) => {
-    // Get current tile data from the hex grid
-    const tileData = hexGridRef.current?.getHexTileData?.(hexId) || null;
+  const handleHexClick = (hexId, coords, clickType = "left") => {
+    if (fillMode && selectedFillItem && clickType === "left") {
+      // Fill mode: apply selected item directly
+      const currentTileData =
+        hexGridRef.current?.getHexTileData?.(hexId) || getDefaultTile();
+      const newTileData = { ...currentTileData };
 
-    setSelectedHex({ id: hexId, coords });
-    setCurrentTileData(tileData);
-    setModalOpen(true);
+      // Apply the selected fill item
+      if (selectedFillType === "terrain") {
+        newTileData.terrain = selectedFillItem;
+      } else if (selectedFillType === "feature") {
+        // Clear conflicting items when placing features
+        newTileData.district = null;
+        newTileData.wonder = null;
+        newTileData.feature = selectedFillItem;
+      } else if (selectedFillType === "district") {
+        // Clear conflicting items when placing districts
+        newTileData.feature = null;
+        newTileData.wonder = null;
+        newTileData.district = selectedFillItem;
+      } else if (selectedFillType === "tileImprovement") {
+        newTileData.tileImprovement = selectedFillItem;
+      }
+
+      // Apply the changes
+      handleTileSelect(hexId, newTileData);
+    } else {
+      // Normal mode or right-click: open modal for detailed configuration
+      const tileData = hexGridRef.current?.getHexTileData?.(hexId) || null;
+      setSelectedHex({ id: hexId, coords });
+      setCurrentTileData(tileData);
+      setModalOpen(true);
+    }
   };
-
   const handleTileSelect = (hexId, tileData) => {
     if (hexGridRef.current && hexGridRef.current.updateHexTile) {
       hexGridRef.current.updateHexTile(hexId, tileData);
@@ -100,11 +131,92 @@ const HexPlannerContainer = () => {
         ariaLabel="Hex Planner"
       >
         <div className="p-4">
+          {/* Fill Tool Section */}
+          <div className="mb-4 p-4 bg-gray-50 rounded-lg border">
+            <div className="flex items-center gap-4 mb-3">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={fillMode}
+                  onChange={(e) => setFillMode(e.target.checked)}
+                  className="w-4 h-4 accent-blue-600"
+                />
+                <span className="text-sm font-medium">Fill Tool Mode</span>
+              </label>
+              {fillMode && (
+                <span className="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded">
+                  Click hexes to apply:{" "}
+                  {selectedFillItem || "Select an item below"}
+                </span>
+              )}
+            </div>
+
+            {fillMode && (
+              <div className="space-y-3">
+                {/* Fill Type Selection */}
+                <div className="flex gap-2 flex-wrap">
+                  {["terrain", "feature", "district", "tileImprovement"].map(
+                    (type) => (
+                      <button
+                        key={type}
+                        onClick={() => {
+                          setSelectedFillType(type);
+                          setSelectedFillItem(null);
+                        }}
+                        className={`px-3 py-1 text-sm rounded transition-colors ${
+                          selectedFillType === type
+                            ? "bg-blue-500 text-white"
+                            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                        }`}
+                      >
+                        {type === "tileImprovement"
+                          ? "Improvements"
+                          : type.charAt(0).toUpperCase() + type.slice(1)}
+                      </button>
+                    )
+                  )}
+                </div>
+
+                {/* Fill Item Selection */}
+                {selectedFillType && (
+                  <div>
+                    <h4 className="text-sm font-medium mb-2 capitalize">
+                      Select{" "}
+                      {selectedFillType === "tileImprovement"
+                        ? "Tile Improvement"
+                        : selectedFillType}
+                      :
+                    </h4>
+                    <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 max-h-32 overflow-y-auto">
+                      {getTileCategories()
+                        .find((cat) => cat.key === selectedFillType)
+                        ?.items.map((item) => (
+                          <button
+                            key={item}
+                            onClick={() => setSelectedFillItem(item)}
+                            className={`p-2 text-xs rounded border transition-colors ${
+                              selectedFillItem === item
+                                ? "bg-blue-100 border-blue-500 text-blue-900"
+                                : "bg-white border-gray-300 hover:bg-gray-50"
+                            }`}
+                          >
+                            {item}
+                          </button>
+                        ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
           <div className="flex items-center justify-between mb-4">
             <p className="text-sm text-gray-600">
-              Click on any hex to place a district, improvement, or feature.
-              Districts show their adjacency bonus in gold. Use scroll wheel to
-              zoom, drag to pan.
+              {fillMode
+                ? `Fill mode: Click hexes to apply ${
+                    selectedFillItem || "selected item"
+                  }. Right-click or disable fill mode for detailed configuration.`
+                : "Click on any hex to configure terrain, districts, features, and rivers. Use scroll wheel to zoom, drag to pan."}
             </p>
             <div className="flex items-center gap-2 ml-4">
               <button
