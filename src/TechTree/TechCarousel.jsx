@@ -42,6 +42,7 @@ const DraggableTechCard = ({
   onResearch,
   onBoostToggle,
   onShowDetails,
+  settings,
   ...props
 }) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } =
@@ -107,6 +108,7 @@ const DraggableTechCard = ({
         onResearch={() => {}} // Disable TechCard's own click handler
         onBoostToggle={onBoostToggle}
         onShowDetails={onShowDetails}
+        settings={settings}
         {...props}
       />
     </div>
@@ -123,6 +125,7 @@ const TechCarousel = forwardRef(
       setAllTechs,
       hoveredTech,
       setHoveredTech,
+      settings,
     },
     ref
   ) => {
@@ -378,7 +381,44 @@ const TechCarousel = forwardRef(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [onReset, setAllTechs, techs]);
 
+    // Helper to determine if all prerequisites are researched
+    const allPrereqsResearched = (tech, allTechs) => {
+      if (!tech.prerequisites || tech.prerequisites.length === 0) return true;
+      return tech.prerequisites.every((pr) => {
+        const prereqTech = allTechs.find((t) => t.name === pr);
+        return prereqTech && prereqTech.researched;
+      });
+    };
+
     const handleResearch = (name) => {
+      // Find the tech being clicked
+      const techToResearch = techs.find((t) => t.name === name);
+
+      if (!techToResearch) return;
+
+      // If trying to research (not unresearch), check prerequisites
+      const babylonMode = settings?.babylonMode || false;
+      const isTech = techToResearch.techCivic === "Tech";
+      const isBetterBalancedMod =
+        settings?.version === "Better Balanced Game Mod";
+      const isComputersTech = techToResearch.name === "Computers";
+
+      // Special cases that bypass prerequisites:
+      // 1. BabylonMode bypasses prerequisites for all Techs (not Civics)
+      // 2. Better Balanced Game Mod allows "Computers" tech to bypass prerequisites
+      const canBypassPrerequisites =
+        (babylonMode && isTech) || (isBetterBalancedMod && isComputersTech);
+
+      // If trying to research (not unresearch), check prerequisites
+      if (!techToResearch.researched && !canBypassPrerequisites) {
+        const canResearch = allPrereqsResearched(techToResearch, techs);
+        if (!canResearch) {
+          // Cannot research - prerequisites not met
+          return;
+        }
+      }
+
+      // Allow the research/unresearch
       setAllTechs((prev) =>
         prev.map((t) =>
           t.name === name ? { ...t, researched: !t.researched } : t
@@ -580,6 +620,7 @@ const TechCarousel = forwardRef(
                           onHover={() => setHoveredTech(tech)}
                           onUnhover={() => setHoveredTech(null)}
                           techCivic={tech.techCivic}
+                          settings={settings}
                         />
                       );
                     }
@@ -596,6 +637,7 @@ const TechCarousel = forwardRef(
                         onHover={() => setHoveredTech(tech)}
                         onUnhover={() => setHoveredTech(null)}
                         techCivic={tech.techCivic}
+                        settings={settings}
                       />
                     );
                   })

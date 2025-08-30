@@ -21,8 +21,10 @@ function App() {
     return saved
       ? JSON.parse(saved)
       : {
-          heroesLegends: true,
-          monopoliesCorporations: true,
+          version: "Gathering Storm",
+          heroesLegends: false,
+          monopoliesCorporations: false,
+          babylonMode: false,
           removeLimitations: false,
         };
   });
@@ -61,6 +63,7 @@ function App() {
       <TechTreeContainer
         techsAndCivics={techsAndCivics}
         setTechsAndCivics={setTechsAndCivics}
+        settings={settings}
       />
       <DistrictDiscountingContainer />
       <WondersContainer />

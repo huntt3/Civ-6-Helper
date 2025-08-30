@@ -15,8 +15,10 @@ function TechsAndCivicsTreePage() {
     return saved
       ? JSON.parse(saved)
       : {
-          heroesLegends: true,
-          monopoliesCorporations: true,
+          version: "Gathering Storm",
+          heroesLegends: false,
+          monopoliesCorporations: false,
+          babylonMode: false,
           removeLimitations: false,
         };
   });
@@ -55,6 +57,7 @@ function TechsAndCivicsTreePage() {
       <TechTreeContainer
         techsAndCivics={techsAndCivics}
         setTechsAndCivics={setTechsAndCivics}
+        settings={settings}
       />
       <Footer />
     </main>

@@ -9,7 +9,7 @@ import {
 } from "../utils/pageContext";
 
 // TechTreeContainer manages the collapsed state for the CollapsibleContainer
-const TechTreeContainer = () => {
+const TechTreeContainer = ({ settings }) => {
   // State to track if the containers are collapsed (start collapsed for performance) with localStorage
   const [techCollapsed, setTechCollapsed] = useState(() =>
     loadPageSpecificState(
@@ -175,6 +175,7 @@ const TechTreeContainer = () => {
           setAllTechs={setAllTechs}
           hoveredTech={hoveredTech}
           setHoveredTech={setHoveredTech}
+          settings={settings}
         />
       </CollapsibleContainer>
       <CollapsibleContainer
@@ -206,6 +207,7 @@ const TechTreeContainer = () => {
           setAllTechs={setAllTechs}
           hoveredTech={hoveredTech}
           setHoveredTech={setHoveredTech}
+          settings={settings}
         />
       </CollapsibleContainer>
     </>

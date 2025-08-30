@@ -10,10 +10,15 @@ const SettingsModal = ({ open, setOpen, settings, setSettings }) => {
 
   // Default settings: Heroes & Legends and Monopolies and Corporations unchecked
   const defaultSettings = {
+    version: "Gathering Storm",
     heroesLegends: false,
     monopoliesCorporations: false,
     babylonMode: false,
     removeLimitations: false,
+  };
+
+  const handleVersionChange = (version) => {
+    setSettings((prev) => ({ ...prev, version }));
   };
 
   const handleResetSettings = () => {
@@ -22,7 +27,10 @@ const SettingsModal = ({ open, setOpen, settings, setSettings }) => {
 
   const message = (
     <div className="flex flex-col items-stretch space-y-2">
-      <VersionDropdown />
+      <VersionDropdown
+        selectedVersion={settings.version}
+        onVersionChange={handleVersionChange}
+      />
       <Checkbox
         label="Heroes & Legends"
         checked={settings.heroesLegends}

@@ -19,6 +19,7 @@ const TechCard = ({
   onHover,
   onUnhover,
   techCivic = "Tech", // Add this prop, default to "Tech"
+  settings,
 }) => {
   // Handle empty cards
   if (!tech || !tech.name) {
@@ -83,6 +84,29 @@ const TechCard = ({
           e.target.classList.contains("boost-checkbox")
         )
           return;
+
+        // Check prerequisites before allowing research
+        const babylonMode = settings?.babylonMode || false;
+        const isTech = techCivic === "Tech" || tech.techCivic === "Tech";
+        const isBetterBalancedMod =
+          settings?.version === "Better Balanced Game Mod";
+        const isComputersTech = tech.name === "Computers";
+
+        // Special cases that bypass prerequisites:
+        // 1. BabylonMode bypasses prerequisites for all Techs (not Civics)
+        // 2. Better Balanced Game Mod allows "Computers" tech to bypass prerequisites
+        const canBypassPrerequisites =
+          (babylonMode && isTech) || (isBetterBalancedMod && isComputersTech);
+
+        // If trying to research (not unresearch), check prerequisites
+        if (!tech.researched && !canBypassPrerequisites) {
+          const canResearch = allPrereqsResearched(tech, allTechs);
+          if (!canResearch) {
+            // Cannot research - prerequisites not met
+            return;
+          }
+        }
+
         onResearch(tech.name);
       }}
       onKeyDown={(e) => {
@@ -93,6 +117,28 @@ const TechCard = ({
             document.activeElement.classList.contains("boost-checkbox")
           )
         ) {
+          // Check prerequisites before allowing research
+          const babylonMode = settings?.babylonMode || false;
+          const isTech = techCivic === "Tech" || tech.techCivic === "Tech";
+          const isBetterBalancedMod =
+            settings?.version === "Better Balanced Game Mod";
+          const isComputersTech = tech.name === "Computers";
+
+          // Special cases that bypass prerequisites:
+          // 1. BabylonMode bypasses prerequisites for all Techs (not Civics)
+          // 2. Better Balanced Game Mod allows "Computers" tech to bypass prerequisites
+          const canBypassPrerequisites =
+            (babylonMode && isTech) || (isBetterBalancedMod && isComputersTech);
+
+          // If trying to research (not unresearch), check prerequisites
+          if (!tech.researched && !canBypassPrerequisites) {
+            const canResearch = allPrereqsResearched(tech, allTechs);
+            if (!canResearch) {
+              // Cannot research - prerequisites not met
+              return;
+            }
+          }
+
           onResearch(tech.name);
         }
       }}
