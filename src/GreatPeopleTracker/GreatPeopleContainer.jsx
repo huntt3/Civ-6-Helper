@@ -149,7 +149,41 @@ const GreatPeopleContainer = () => {
     setCollapsedEras((prev) => ({ ...prev, [era]: !prev[era] }));
   };
 
+  // Helper function to check if a Great Person card should be enabled
+  const isCardEnabled = (person) => {
+    const currentEraIndex = eras.indexOf(person.era);
+
+    // First era (Classical) is always enabled
+    if (currentEraIndex === 0) return true;
+
+    // Check if all previous eras of this type are completed
+    for (let i = 0; i < currentEraIndex; i++) {
+      const previousEra = eras[i];
+      const peopleInPreviousEra = getPeopleByEraAndType(
+        greatPeople,
+        previousEra,
+        person.type
+      );
+
+      // If there are people in this previous era and not all are checked, disable current card
+      if (peopleInPreviousEra.length > 0) {
+        const allCheckedInPreviousEra = peopleInPreviousEra.every(
+          (p) => checkedCards[p.name]
+        );
+        if (!allCheckedInPreviousEra) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  };
+
   const handleCardClick = (name) => {
+    // Find the person and check if they're enabled
+    const person = greatPeople.find((p) => p.name === name);
+    if (!person || !isCardEnabled(person)) return;
+
     setCheckedCards((prev) => {
       const updated = { ...prev, [name]: !prev[name] };
 
@@ -275,34 +309,56 @@ const GreatPeopleContainer = () => {
                       role="cell"
                     >
                       {people.length > 0 ? (
-                        people.map((person) => (
-                          <article
-                            key={person.name}
-                            className={`transition-colors duration-200 border rounded w-full box-border text-sm p-2 mb-1 cursor-pointer ${
-                              checkedCards[person.name]
-                                ? `${colorScheme.cardChecked} filter brightness-90`
-                                : `${colorScheme.card} ${colorScheme.cardHover} hover:shadow-md`
-                            }`}
-                            tabIndex={0}
-                            aria-label={`${person.name}, ${person.ability}`}
-                            role="button"
-                            aria-pressed={!!checkedCards[person.name]}
-                            onClick={() => handleCardClick(person.name)}
-                            onKeyDown={(e) => {
-                              if (e.key === "Enter" || e.key === " ") {
-                                handleCardClick(person.name);
-                              }
-                            }}
-                          >
-                            <span className="font-bold">{person.name}</span>
-                            <p>{person.ability}</p>
-                            {person.charges && (
-                              <p>
-                                <strong>Charges:</strong> {person.charges}
-                              </p>
-                            )}
-                          </article>
-                        ))
+                        people.map((person) => {
+                          const isEnabled = isCardEnabled(person);
+                          return (
+                            <article
+                              key={person.name}
+                              className={`transition-colors duration-200 border rounded w-full box-border text-sm p-2 mb-1 ${
+                                isEnabled
+                                  ? "cursor-pointer"
+                                  : "cursor-not-allowed opacity-50"
+                              } ${
+                                checkedCards[person.name]
+                                  ? `${colorScheme.cardChecked} filter brightness-90`
+                                  : isEnabled
+                                  ? `${colorScheme.card} ${colorScheme.cardHover} hover:shadow-md`
+                                  : "bg-gray-100 border-gray-300"
+                              }`}
+                              tabIndex={isEnabled ? 0 : -1}
+                              aria-label={`${person.name}, ${person.ability}${
+                                !isEnabled
+                                  ? " (locked - get previous era's great people of the type)"
+                                  : ""
+                              }`}
+                              role="button"
+                              aria-pressed={!!checkedCards[person.name]}
+                              aria-disabled={!isEnabled}
+                              onClick={() => handleCardClick(person.name)}
+                              onKeyDown={(e) => {
+                                if (
+                                  isEnabled &&
+                                  (e.key === "Enter" || e.key === " ")
+                                ) {
+                                  handleCardClick(person.name);
+                                }
+                              }}
+                            >
+                              <span className="font-bold">{person.name}</span>
+                              <p>{person.ability}</p>
+                              {person.charges && (
+                                <p>
+                                  <strong>Charges:</strong> {person.charges}
+                                </p>
+                              )}
+                              {!isEnabled && (
+                                <div className="text-xs text-gray-500 mt-1 italic">
+                                  Get previous era's great people of the type
+                                </div>
+                              )}
+                            </article>
+                          );
+                        })
                       ) : (
                         <div
                           className="text-gray-400 text-center py-2"
