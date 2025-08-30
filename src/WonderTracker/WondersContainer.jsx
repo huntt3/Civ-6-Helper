@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 import WonderCard from "./WonderCard";
 import WonderModal from "./WonderModal";
+import {
+  loadPageSpecificState,
+  savePageSpecificState,
+  getDefaultCollapsedState,
+  removePageSpecificState,
+} from "../utils/pageContext";
 
+// Base keys for localStorage (will be made page-specific)
 const WONDERS_BUILT_KEY = "civ6-helper-wonders-built";
 const WONDERS_COLLAPSED_KEY = "civ6-helper-wonders-collapsed";
 
@@ -11,24 +18,22 @@ const WondersContainer = () => {
   const [wonders, setWonders] = useState([]);
   const [selectedWonder, setSelectedWonder] = useState(null);
   // Add collapsed state for CollapsibleContainer with localStorage
-  const [collapsed, setCollapsed] = useState(() => {
-    const saved = localStorage.getItem(WONDERS_COLLAPSED_KEY);
-    return saved ? JSON.parse(saved) : true;
-  });
+  const [collapsed, setCollapsed] = useState(() =>
+    loadPageSpecificState(WONDERS_COLLAPSED_KEY, getDefaultCollapsedState())
+  );
   // Track built wonders in localStorage
-  const [wondersBuilt, setWondersBuilt] = useState(() => {
-    const saved = localStorage.getItem(WONDERS_BUILT_KEY);
-    return saved ? JSON.parse(saved) : {};
-  });
+  const [wondersBuilt, setWondersBuilt] = useState(() =>
+    loadPageSpecificState(WONDERS_BUILT_KEY, {})
+  );
 
   // Save wonder built states to localStorage
   useEffect(() => {
-    localStorage.setItem(WONDERS_BUILT_KEY, JSON.stringify(wondersBuilt));
+    savePageSpecificState(WONDERS_BUILT_KEY, wondersBuilt);
   }, [wondersBuilt]);
 
   // Save collapsed state to localStorage
   useEffect(() => {
-    localStorage.setItem(WONDERS_COLLAPSED_KEY, JSON.stringify(collapsed));
+    savePageSpecificState(WONDERS_COLLAPSED_KEY, collapsed);
   }, [collapsed]);
 
   // Load wonders from JSON
@@ -107,9 +112,9 @@ const WondersContainer = () => {
         onRefresh={() => {
           // Reset built states, collapsed state, and refresh
           setWondersBuilt({});
-          setCollapsed(true);
-          localStorage.removeItem(WONDERS_BUILT_KEY);
-          localStorage.removeItem(WONDERS_COLLAPSED_KEY);
+          setCollapsed(getDefaultCollapsedState());
+          removePageSpecificState(WONDERS_BUILT_KEY);
+          removePageSpecificState(WONDERS_COLLAPSED_KEY);
           fetchWonders();
         }}
         ariaLabel="Wonders"

@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from "react";
 import TechCarousel from "./TechCarousel";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
+import {
+  loadPageSpecificState,
+  savePageSpecificState,
+  getDefaultCollapsedState,
+  removePageSpecificState,
+} from "../utils/pageContext";
 
 // TechTreeContainer manages the collapsed state for the CollapsibleContainer
 const TechTreeContainer = () => {
   // State to track if the containers are collapsed (start collapsed for performance) with localStorage
-  const [techCollapsed, setTechCollapsed] = useState(() => {
-    const saved = localStorage.getItem("civ6-helper-tech-collapsed");
-    return saved ? JSON.parse(saved) : true;
-  });
-  const [civicCollapsed, setCivicCollapsed] = useState(() => {
-    const saved = localStorage.getItem("civ6-helper-civic-collapsed");
-    return saved ? JSON.parse(saved) : true;
-  });
+  const [techCollapsed, setTechCollapsed] = useState(() =>
+    loadPageSpecificState(
+      "civ6-helper-tech-collapsed",
+      getDefaultCollapsedState()
+    )
+  );
+  const [civicCollapsed, setCivicCollapsed] = useState(() =>
+    loadPageSpecificState(
+      "civ6-helper-civic-collapsed",
+      getDefaultCollapsedState()
+    )
+  );
 
   // Shared hover state for cross-container highlighting
   const [hoveredTech, setHoveredTech] = useState(null);
@@ -84,17 +94,11 @@ const TechTreeContainer = () => {
 
   // Save collapsed states to localStorage
   useEffect(() => {
-    localStorage.setItem(
-      "civ6-helper-tech-collapsed",
-      JSON.stringify(techCollapsed)
-    );
+    savePageSpecificState("civ6-helper-tech-collapsed", techCollapsed);
   }, [techCollapsed]);
 
   useEffect(() => {
-    localStorage.setItem(
-      "civ6-helper-civic-collapsed",
-      JSON.stringify(civicCollapsed)
-    );
+    savePageSpecificState("civ6-helper-civic-collapsed", civicCollapsed);
   }, [civicCollapsed]);
 
   const handleTechCollapse = () => {

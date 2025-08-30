@@ -2,32 +2,37 @@ import React, { useState, useRef, useEffect } from "react";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 import CustomHexGrid from "./CustomHexGrid";
 import HexPlannerModal from "./HexPlannerModal";
+import {
+  loadPageSpecificState,
+  savePageSpecificState,
+  getDefaultCollapsedState,
+  removePageSpecificState,
+} from "../utils/pageContext";
 
+// Base keys for localStorage (will be made page-specific)
 const HEX_PLANNER_GRID_RADIUS_KEY = "civ6-helper-hex-planner-grid-radius";
 const HEX_PLANNER_COLLAPSED_KEY = "civ6-helper-hex-planner-collapsed";
 
 const HexPlannerContainer = () => {
-  const [collapsed, setCollapsed] = useState(() => {
-    const saved = localStorage.getItem(HEX_PLANNER_COLLAPSED_KEY);
-    return saved ? JSON.parse(saved) : true;
-  });
+  const [collapsed, setCollapsed] = useState(() =>
+    loadPageSpecificState(HEX_PLANNER_COLLAPSED_KEY, getDefaultCollapsedState())
+  );
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedHex, setSelectedHex] = useState(null);
-  const [gridRadius, setGridRadius] = useState(() => {
-    const saved = localStorage.getItem(HEX_PLANNER_GRID_RADIUS_KEY);
-    return saved ? parseInt(saved, 10) : 3;
-  });
+  const [gridRadius, setGridRadius] = useState(() =>
+    loadPageSpecificState(HEX_PLANNER_GRID_RADIUS_KEY, 3)
+  );
 
   const hexGridRef = useRef(null);
 
   // Save grid radius to localStorage
   useEffect(() => {
-    localStorage.setItem(HEX_PLANNER_GRID_RADIUS_KEY, gridRadius.toString());
+    savePageSpecificState(HEX_PLANNER_GRID_RADIUS_KEY, gridRadius);
   }, [gridRadius]);
 
   // Save collapsed state to localStorage
   useEffect(() => {
-    localStorage.setItem(HEX_PLANNER_COLLAPSED_KEY, JSON.stringify(collapsed));
+    savePageSpecificState(HEX_PLANNER_COLLAPSED_KEY, collapsed);
   }, [collapsed]);
 
   const handleCollapse = () => {
@@ -65,9 +70,9 @@ const HexPlannerContainer = () => {
     }
     // Reset grid radius to default and collapsed state
     setGridRadius(3);
-    setCollapsed(true);
-    localStorage.removeItem(HEX_PLANNER_GRID_RADIUS_KEY);
-    localStorage.removeItem(HEX_PLANNER_COLLAPSED_KEY);
+    setCollapsed(getDefaultCollapsedState());
+    removePageSpecificState(HEX_PLANNER_GRID_RADIUS_KEY);
+    removePageSpecificState(HEX_PLANNER_COLLAPSED_KEY);
 
     // Force re-render of hex grid by changing radius slightly and back
     setGridRadius((prev) => (prev === 3 ? 3.1 : 3));

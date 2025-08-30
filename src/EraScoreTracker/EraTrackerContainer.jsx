@@ -3,7 +3,14 @@ import EraScore from "./EraScore";
 import ProgressBar from "./ProgressBar";
 import EraScoreSums from "./EraScoreSums";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
+import {
+  loadPageSpecificState,
+  savePageSpecificState,
+  getDefaultCollapsedState,
+  removePageSpecificState,
+} from "../utils/pageContext";
 
+// Base keys for localStorage (will be made page-specific)
 const FAVORITES_KEY = "civ6-helper-eraScore-favorites";
 const SORT_ORDER_KEY = "civ6-helper-eraScore-sortOrder";
 const ERA_SCORE_FILTER_KEY = "civ6-helper-eraScore-filter";
@@ -24,26 +31,21 @@ const EraTrackerContainer = ({ settings }) => {
     localStorage.setItem("civ6-helper-cardsPerPage", cardsPerPage);
   }, [cardsPerPage]);
   const [eraScoreItems, setEraScoreItems] = useState([]);
-  const [collapsed, setCollapsed] = useState(() => {
-    const saved = localStorage.getItem(ERA_TRACKER_COLLAPSED_KEY);
-    return saved ? JSON.parse(saved) : true;
-  });
-  const [sortOrder, setSortOrder] = useState(() => {
-    const saved = localStorage.getItem(SORT_ORDER_KEY);
-    return saved !== null ? saved : "desc";
-  });
-  const [eraScoreFilter, setEraScoreFilter] = useState(() => {
-    const saved = localStorage.getItem(ERA_SCORE_FILTER_KEY);
-    return saved !== null ? parseInt(saved, 10) : 0;
-  });
-  const [search, setSearch] = useState(() => {
-    const saved = localStorage.getItem(SEARCH_KEY);
-    return saved !== null ? saved : "";
-  });
-  const [showOnlyFavorited, setShowOnlyFavorited] = useState(() => {
-    const saved = localStorage.getItem(SHOW_ONLY_FAVORITED_KEY);
-    return saved !== null ? JSON.parse(saved) : false;
-  });
+  const [collapsed, setCollapsed] = useState(() =>
+    loadPageSpecificState(ERA_TRACKER_COLLAPSED_KEY, getDefaultCollapsedState())
+  );
+  const [sortOrder, setSortOrder] = useState(() =>
+    loadPageSpecificState(SORT_ORDER_KEY, "desc")
+  );
+  const [eraScoreFilter, setEraScoreFilter] = useState(() =>
+    loadPageSpecificState(ERA_SCORE_FILTER_KEY, 0)
+  );
+  const [search, setSearch] = useState(() =>
+    loadPageSpecificState(SEARCH_KEY, "")
+  );
+  const [showOnlyFavorited, setShowOnlyFavorited] = useState(() =>
+    loadPageSpecificState(SHOW_ONLY_FAVORITED_KEY, false)
+  );
   const [previousEraScore, setPreviousEraScore] = useState(0);
   const [currentEraScore, setCurrentEraScore] = useState(0);
   const [itemScores, setItemScores] = useState({});
@@ -52,15 +54,9 @@ const EraTrackerContainer = ({ settings }) => {
   const nextEraFunctionsRef = useRef({});
   const clearDataFunctionsRef = useRef({});
 
-  const [favorites, setFavorites] = useState(() => {
-    // Load favorites from localStorage (array of titles)
-    try {
-      const saved = localStorage.getItem(FAVORITES_KEY);
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
-  });
+  const [favorites, setFavorites] = useState(() =>
+    loadPageSpecificState(FAVORITES_KEY, [])
+  );
   const [researchedTechs, setResearchedTechs] = useState(() => {
     // Load researched techs from localStorage (from civ6_tech_state)
     try {
@@ -76,34 +72,29 @@ const EraTrackerContainer = ({ settings }) => {
     }
   });
 
-  // Save favorites to localStorage whenever they change
+  // Save state to page-specific localStorage
   useEffect(() => {
-    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+    savePageSpecificState(FAVORITES_KEY, favorites);
   }, [favorites]);
 
-  // Save other state variables to localStorage when they change
   useEffect(() => {
-    localStorage.setItem(SORT_ORDER_KEY, sortOrder);
+    savePageSpecificState(SORT_ORDER_KEY, sortOrder);
   }, [sortOrder]);
 
   useEffect(() => {
-    localStorage.setItem(ERA_SCORE_FILTER_KEY, eraScoreFilter.toString());
+    savePageSpecificState(ERA_SCORE_FILTER_KEY, eraScoreFilter);
   }, [eraScoreFilter]);
 
   useEffect(() => {
-    localStorage.setItem(SEARCH_KEY, search);
+    savePageSpecificState(SEARCH_KEY, search);
   }, [search]);
 
   useEffect(() => {
-    localStorage.setItem(
-      SHOW_ONLY_FAVORITED_KEY,
-      JSON.stringify(showOnlyFavorited)
-    );
+    savePageSpecificState(SHOW_ONLY_FAVORITED_KEY, showOnlyFavorited);
   }, [showOnlyFavorited]);
 
-  // Save collapsed state to localStorage
   useEffect(() => {
-    localStorage.setItem(ERA_TRACKER_COLLAPSED_KEY, JSON.stringify(collapsed));
+    savePageSpecificState(ERA_TRACKER_COLLAPSED_KEY, collapsed);
   }, [collapsed]);
 
   // Listen for changes to civ6_tech_state in localStorage and also poll for changes every second
@@ -278,15 +269,16 @@ const EraTrackerContainer = ({ settings }) => {
       }
     );
 
-    // Remove all Era Tracker related localStorage keys
+    // Remove all Era Tracker related localStorage keys (page-specific)
+    localStorage.removeItem("civ6-helper-eraScore");
     localStorage.removeItem("civ6-helper-neededEraScore");
-    localStorage.removeItem(FAVORITES_KEY);
+    removePageSpecificState(FAVORITES_KEY);
     localStorage.removeItem("civ6-helper-cardsPerPage");
-    localStorage.removeItem(SORT_ORDER_KEY);
-    localStorage.removeItem(ERA_SCORE_FILTER_KEY);
-    localStorage.removeItem(SEARCH_KEY);
-    localStorage.removeItem(SHOW_ONLY_FAVORITED_KEY);
-    localStorage.removeItem(ERA_TRACKER_COLLAPSED_KEY);
+    removePageSpecificState(SORT_ORDER_KEY);
+    removePageSpecificState(ERA_SCORE_FILTER_KEY);
+    removePageSpecificState(SEARCH_KEY);
+    removePageSpecificState(SHOW_ONLY_FAVORITED_KEY);
+    removePageSpecificState(ERA_TRACKER_COLLAPSED_KEY);
 
     // Reset local state
     setFavorites([]);
@@ -296,7 +288,7 @@ const EraTrackerContainer = ({ settings }) => {
     setEraScoreFilter(0);
     setSearch("");
     setShowOnlyFavorited(false);
-    setCollapsed(true);
+    setCollapsed(getDefaultCollapsedState());
 
     // Refresh the data
     fetchEraScore();

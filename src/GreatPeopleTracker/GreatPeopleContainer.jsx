@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
+import {
+  loadPageSpecificState,
+  savePageSpecificState,
+  getDefaultCollapsedState,
+  removePageSpecificState,
+} from "../utils/pageContext";
 
 const getPeopleByEraAndType = (people, era, type) => {
   return people.filter((person) => {
@@ -88,18 +94,21 @@ const GreatPeopleContainer = () => {
     Atomic: true,
     Information: true,
   };
-  const [collapsedEras, setCollapsedEras] = useState(() => {
-    const saved = localStorage.getItem("civ6-helper-greatPeople-collapsedEras");
-    return saved ? JSON.parse(saved) : defaultCollapsed;
-  });
-  const [checkedCards, setCheckedCards] = useState(() => {
-    const saved = localStorage.getItem("greatPeopleChecked");
-    return saved ? JSON.parse(saved) : {};
-  });
-  const [collapsed, setCollapsed] = useState(() => {
-    const saved = localStorage.getItem("civ6-helper-greatPeople-collapsed");
-    return saved ? JSON.parse(saved) : true;
-  });
+  const [collapsedEras, setCollapsedEras] = useState(() =>
+    loadPageSpecificState(
+      "civ6-helper-greatPeople-collapsedEras",
+      defaultCollapsed
+    )
+  );
+  const [checkedCards, setCheckedCards] = useState(() =>
+    loadPageSpecificState("greatPeopleChecked", {})
+  );
+  const [collapsed, setCollapsed] = useState(() =>
+    loadPageSpecificState(
+      "civ6-helper-greatPeople-collapsed",
+      getDefaultCollapsedState()
+    )
+  );
 
   useEffect(() => {
     fetch("./jsonFiles/GreatPeople.json")
@@ -120,23 +129,20 @@ const GreatPeopleContainer = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("greatPeopleChecked", JSON.stringify(checkedCards));
+    savePageSpecificState("greatPeopleChecked", checkedCards);
   }, [checkedCards]);
 
   // Save collapsed eras state to localStorage
   useEffect(() => {
-    localStorage.setItem(
+    savePageSpecificState(
       "civ6-helper-greatPeople-collapsedEras",
-      JSON.stringify(collapsedEras)
+      collapsedEras
     );
   }, [collapsedEras]);
 
   // Save main collapsed state to localStorage
   useEffect(() => {
-    localStorage.setItem(
-      "civ6-helper-greatPeople-collapsed",
-      JSON.stringify(collapsed)
-    );
+    savePageSpecificState("civ6-helper-greatPeople-collapsed", collapsed);
   }, [collapsed]);
 
   const handleCollapse = (era) => {
@@ -163,12 +169,12 @@ const GreatPeopleContainer = () => {
 
     setCheckedCards({});
     setCollapsedEras(defaultCollapsed);
-    setCollapsed(true);
+    setCollapsed(getDefaultCollapsedState());
 
     // Clear localStorage
-    localStorage.removeItem("greatPeopleChecked");
-    localStorage.removeItem("civ6-helper-greatPeople-collapsedEras");
-    localStorage.removeItem("civ6-helper-greatPeople-collapsed");
+    removePageSpecificState("greatPeopleChecked");
+    removePageSpecificState("civ6-helper-greatPeople-collapsedEras");
+    removePageSpecificState("civ6-helper-greatPeople-collapsed");
   };
 
   // Collapse/expand handler for the whole container

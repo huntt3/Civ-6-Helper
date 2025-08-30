@@ -5,15 +5,23 @@ import DistrictDiscountingFormulaInputs from "./DistrictDiscountingFormulaInputs
 import ManualInputDistrictInfo from "./ManualInputDistrictInfo";
 import DistrictDiscountingExplanation from "./DistrictDiscountingExplanation";
 import TechsAndCivicsPercentage from "./TechsAndCivicsPercentage";
+import {
+  loadPageSpecificState,
+  savePageSpecificState,
+  getDefaultCollapsedState,
+  removePageSpecificState,
+} from "../utils/pageContext";
 
 // This component manages the collapsed state for the CollapsibleContainer
 const DistrictDiscountingContainer = () => {
   // State to track if the container is collapsed with localStorage
-  const [collapsed, setCollapsed] = useState(() => {
-    const saved = localStorage.getItem("civ6-helper-district-collapsed");
-    return saved ? JSON.parse(saved) : true;
-  });
-  // Local storage keys
+  const [collapsed, setCollapsed] = useState(() =>
+    loadPageSpecificState(
+      "civ6-helper-district-collapsed",
+      getDefaultCollapsedState()
+    )
+  );
+  // Base keys for localStorage (will be made page-specific)
   const LS_TECHS = "districtDiscounting_techsCompleted";
   const LS_CIVICS = "districtDiscounting_civicsCompleted";
   const LS_RESEARCHED = "districtDiscounting_researchedStates";
@@ -21,58 +29,51 @@ const DistrictDiscountingContainer = () => {
 
   const numDistricts = 14;
 
-  // Load from localStorage or default
-  const [techsCompleted, setTechsCompleted] = useState(() => {
-    const val = localStorage.getItem(LS_TECHS);
-    return val !== null ? Number(val) : 0;
-  });
-  const [civicsCompleted, setCivicsCompleted] = useState(() => {
-    const val = localStorage.getItem(LS_CIVICS);
-    return val !== null ? Number(val) : 0;
-  });
-  const [researchedStates, setResearchedStates] = useState(() => {
-    const val = localStorage.getItem(LS_RESEARCHED);
-    return val ? JSON.parse(val) : Array(numDistricts).fill(false);
-  });
-  const [numberBuiltStates, setNumberBuiltStates] = useState(() => {
-    const val = localStorage.getItem(LS_BUILT);
-    return val ? JSON.parse(val) : Array(numDistricts).fill(0);
-  });
+  // Load from localStorage or default (page-specific)
+  const [techsCompleted, setTechsCompleted] = useState(() =>
+    loadPageSpecificState(LS_TECHS, 0)
+  );
+  const [civicsCompleted, setCivicsCompleted] = useState(() =>
+    loadPageSpecificState(LS_CIVICS, 0)
+  );
+  const [researchedStates, setResearchedStates] = useState(() =>
+    loadPageSpecificState(LS_RESEARCHED, Array(numDistricts).fill(false))
+  );
+  const [numberBuiltStates, setNumberBuiltStates] = useState(() =>
+    loadPageSpecificState(LS_BUILT, Array(numDistricts).fill(0))
+  );
 
-  // Persist to localStorage on change
+  // Persist to page-specific localStorage on change
   useEffect(() => {
-    localStorage.setItem(LS_TECHS, techsCompleted);
+    savePageSpecificState(LS_TECHS, techsCompleted);
   }, [techsCompleted]);
   useEffect(() => {
-    localStorage.setItem(LS_CIVICS, civicsCompleted);
+    savePageSpecificState(LS_CIVICS, civicsCompleted);
   }, [civicsCompleted]);
   useEffect(() => {
-    localStorage.setItem(LS_RESEARCHED, JSON.stringify(researchedStates));
+    savePageSpecificState(LS_RESEARCHED, researchedStates);
   }, [researchedStates]);
   useEffect(() => {
-    localStorage.setItem(LS_BUILT, JSON.stringify(numberBuiltStates));
+    savePageSpecificState(LS_BUILT, numberBuiltStates);
   }, [numberBuiltStates]);
 
   // Save collapsed state to localStorage
   useEffect(() => {
-    localStorage.setItem(
-      "civ6-helper-district-collapsed",
-      JSON.stringify(collapsed)
-    );
+    savePageSpecificState("civ6-helper-district-collapsed", collapsed);
   }, [collapsed]);
 
   // Reset all inputs and localStorage
   const handleReset = () => {
-    localStorage.removeItem(LS_TECHS);
-    localStorage.removeItem(LS_CIVICS);
-    localStorage.removeItem(LS_RESEARCHED);
-    localStorage.removeItem(LS_BUILT);
-    localStorage.removeItem("civ6-helper-district-collapsed");
+    removePageSpecificState(LS_TECHS);
+    removePageSpecificState(LS_CIVICS);
+    removePageSpecificState(LS_RESEARCHED);
+    removePageSpecificState(LS_BUILT);
+    removePageSpecificState("civ6-helper-district-collapsed");
     setTechsCompleted(0);
     setCivicsCompleted(0);
     setResearchedStates(Array(numDistricts).fill(false));
     setNumberBuiltStates(Array(numDistricts).fill(0));
-    setCollapsed(true);
+    setCollapsed(getDefaultCollapsedState());
   };
   const numSpecialtyDistrictsCompleted = numberBuiltStates.reduce(
     (a, b) => a + b,
