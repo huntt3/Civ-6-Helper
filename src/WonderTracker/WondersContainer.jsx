@@ -8,13 +8,14 @@ import {
   getDefaultCollapsedState,
   removePageSpecificState,
 } from "../utils/pageContext";
+import { mapVersionPropertiesArray } from "../utils/versionUtils";
 
 // Base keys for localStorage (will be made page-specific)
 const WONDERS_BUILT_KEY = "civ6-helper-wonders-built";
 const WONDERS_COLLAPSED_KEY = "civ6-helper-wonders-collapsed";
 
 // WondersContainer component using CollapsibleContainer
-const WondersContainer = () => {
+const WondersContainer = ({ settings }) => {
   const [wonders, setWonders] = useState([]);
   const [selectedWonder, setSelectedWonder] = useState(null);
   // Add collapsed state for CollapsibleContainer with localStorage
@@ -42,8 +43,13 @@ const WondersContainer = () => {
       .then((res) => res.json())
       .then((data) => {
         const wondersData = data.Wonder || [];
+        // Apply version-specific property mapping
+        const versionMappedWonders = mapVersionPropertiesArray(
+          wondersData,
+          settings?.version || "Gathering Storm"
+        );
         // Merge with built states from localStorage
-        const wondersWithBuiltState = wondersData.map((wonder) => ({
+        const wondersWithBuiltState = versionMappedWonders.map((wonder) => ({
           ...wonder,
           built: wondersBuilt[wonder.name] || false,
         }));
@@ -54,7 +60,7 @@ const WondersContainer = () => {
 
   useEffect(() => {
     fetchWonders();
-  }, []);
+  }, [settings?.version]);
 
   // Handle card click
   const handleCardClick = (wonder) => setSelectedWonder(wonder);

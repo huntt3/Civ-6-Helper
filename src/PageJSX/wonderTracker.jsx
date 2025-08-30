@@ -27,7 +27,7 @@ function WonderTrackerPage() {
     <main>
       <Navbar />
       <SettingsButton settings={settings} setSettings={setSettings} />
-      <WondersContainer />
+      <WondersContainer settings={settings} />
       <Footer />
     </main>
   );

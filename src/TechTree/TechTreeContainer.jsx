@@ -7,6 +7,7 @@ import {
   getDefaultCollapsedState,
   removePageSpecificState,
 } from "../utils/pageContext";
+import { mapVersionPropertiesArray } from "../utils/versionUtils";
 
 // TechTreeContainer manages the collapsed state for the CollapsibleContainer
 const TechTreeContainer = ({ settings }) => {
@@ -52,7 +53,13 @@ const TechTreeContainer = ({ settings }) => {
           } catch {}
         }
 
-        const merged = (data.Techs || []).map((t) => {
+        // Apply version-specific property mapping before merging with localStorage state
+        const versionMappedTechs = mapVersionPropertiesArray(
+          data.Techs || [],
+          settings?.version || "Gathering Storm"
+        );
+
+        const merged = versionMappedTechs.map((t) => {
           const state = techState[t.name] || {};
           const position = positionState[t.name] || {};
           return { ...t, ...state, ...position };
@@ -90,7 +97,7 @@ const TechTreeContainer = ({ settings }) => {
     };
     window.addEventListener("storage", handleStorage);
     return () => window.removeEventListener("storage", handleStorage);
-  }, []);
+  }, [settings?.version]);
 
   // Save collapsed states to localStorage
   useEffect(() => {

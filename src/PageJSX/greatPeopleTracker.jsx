@@ -27,7 +27,7 @@ function GreatPeopleTrackerPage() {
     <main>
       <Navbar />
       <SettingsButton settings={settings} setSettings={setSettings} />
-      <GreatPeopleContainer />
+      <GreatPeopleContainer settings={settings} />
       <Footer />
     </main>
   );

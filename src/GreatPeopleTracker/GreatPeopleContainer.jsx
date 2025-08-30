@@ -6,6 +6,7 @@ import {
   getDefaultCollapsedState,
   removePageSpecificState,
 } from "../utils/pageContext";
+import { mapVersionPropertiesArray } from "../utils/versionUtils";
 
 const getPeopleByEraAndType = (people, era, type) => {
   return people.filter((person) => {
@@ -82,7 +83,7 @@ const getTypeColorScheme = (type) => {
   }
 };
 
-const GreatPeopleContainer = () => {
+const GreatPeopleContainer = ({ settings }) => {
   const [greatPeople, setGreatPeople] = useState([]);
   const [error, setError] = useState("");
   // Start these eras as collapsed
@@ -119,14 +120,19 @@ const GreatPeopleContainer = () => {
         return response.json();
       })
       .then((data) => {
-        setGreatPeople(data.GreatPeople);
+        // Apply version-specific property mapping
+        const versionMappedPeople = mapVersionPropertiesArray(
+          data.GreatPeople,
+          settings?.version || "Gathering Storm"
+        );
+        setGreatPeople(versionMappedPeople);
       })
       .catch((err) => {
         setError(
           "Sorry, we couldn't load the Great People data. Please try again later."
         );
       });
-  }, []);
+  }, [settings?.version]);
 
   useEffect(() => {
     savePageSpecificState("greatPeopleChecked", checkedCards);

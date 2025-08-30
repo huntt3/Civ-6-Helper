@@ -66,8 +66,8 @@ function App() {
         settings={settings}
       />
       <DistrictDiscountingContainer />
-      <WondersContainer />
-      <GreatPeopleContainer />
+      <WondersContainer settings={settings} />
+      <GreatPeopleContainer settings={settings} />
       <EraTrackerContainer settings={settings} setSettings={setSettings} />
       <HexPlannerContainer />
       <Footer />
