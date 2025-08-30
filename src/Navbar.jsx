@@ -1,8 +1,8 @@
 import React from "react";
 
 const navLinks = [
-  { href: "./", label: "Home" },
-  { href: "./techsAndCivicsTree.html", label: "Techs and Civics Tree" },
+  { href: "./", label: "All" },
+  { href: "./techsAndCivicsTree.html", label: "Techs and Civics Trees" },
   {
     href: "./districtDiscountingTool.html",
     label: "District Discount Tracker",
