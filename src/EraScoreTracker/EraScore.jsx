@@ -183,20 +183,26 @@ const EraScore = ({
             <label className="text-xs font-semibold mb-1">Previous Eras</label>
             <input
               type="checkbox"
-              className="w-5 h-5 accent-blue-600 border-gray-400 rounded focus:ring-2 focus:ring-blue-400"
+              className={`w-5 h-5 accent-blue-600 border-gray-400 rounded focus:ring-2 focus:ring-blue-400 ${
+                currentEraCount > 0 ? "opacity-50 cursor-not-allowed" : ""
+              }`}
               aria-label="Mark as completed in previous eras"
               checked={previousEraCount > 0}
               onChange={handlePreviousEraToggle}
+              disabled={currentEraCount > 0}
             />
           </div>
           <div className="flex flex-col items-center">
             <label className="text-xs font-semibold mb-1">Current Era</label>
             <input
               type="checkbox"
-              className="w-5 h-5 accent-blue-600 border-gray-400 rounded focus:ring-2 focus:ring-blue-400"
+              className={`w-5 h-5 accent-blue-600 border-gray-400 rounded focus:ring-2 focus:ring-blue-400 ${
+                previousEraCount > 0 ? "opacity-50 cursor-not-allowed" : ""
+              }`}
               aria-label="Mark as completed in current era"
               checked={currentEraCount > 0}
               onChange={handleCurrentEraToggle}
+              disabled={previousEraCount > 0}
             />
           </div>
         </div>
