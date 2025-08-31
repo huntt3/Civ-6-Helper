@@ -22,13 +22,16 @@ const HexPlannerContainer = () => {
   const [selectedHex, setSelectedHex] = useState(null);
   const [currentTileData, setCurrentTileData] = useState(null);
   const [gridRadius, setGridRadius] = useState(() =>
-    loadPageSpecificState(HEX_PLANNER_GRID_RADIUS_KEY, 3)
+    loadPageSpecificState(HEX_PLANNER_GRID_RADIUS_KEY, 7)
   );
 
   // Fill tool state
   const [fillMode, setFillMode] = useState(false);
   const [selectedFillType, setSelectedFillType] = useState("terrain");
   const [selectedFillItem, setSelectedFillItem] = useState(null);
+
+  // Legend visibility state
+  const [showLegend, setShowLegend] = useState(true);
 
   const hexGridRef = useRef(null);
 
@@ -105,12 +108,12 @@ const HexPlannerContainer = () => {
       hexGridRef.current.clearHexData();
     }
     // Reset grid radius to default only
-    setGridRadius(3);
+    setGridRadius(7);
     removePageSpecificState(HEX_PLANNER_GRID_RADIUS_KEY);
 
     // Force re-render of hex grid by changing radius slightly and back
-    setGridRadius((prev) => (prev === 3 ? 3.1 : 3));
-    setTimeout(() => setGridRadius(3), 100);
+    setGridRadius((prev) => (prev === 7 ? 7.1 : 7));
+    setTimeout(() => setGridRadius(7), 100);
   };
   const handleResetView = () => {
     // Just reset view without clearing tiles
@@ -240,19 +243,43 @@ const HexPlannerContainer = () => {
               </select>
             </div>
           </div>
-          <CustomHexGrid
-            ref={hexGridRef}
-            onHexClick={handleHexClick}
-            radius={gridRadius}
-          />
-          <div className="mt-4 text-xs text-gray-500">
-            <p>
-              <strong>Adjacency Bonus Legend:</strong>
-            </p>
-            <p>• Minor adjacencies: +0.5 yield</p>
-            <p>• Normal adjacencies: +1 yield</p>
-            <p>• Major adjacencies: +2 yield</p>
+          <div className="relative">
+            <CustomHexGrid
+              ref={hexGridRef}
+              onHexClick={handleHexClick}
+              radius={gridRadius}
+            />
+            {/* Adjacency Bonus Legend Overlay */}
+            {showLegend && (
+              <div className="absolute bottom-2 left-2 text-xs text-gray-700 pointer-events-none">
+                <div className="relative pointer-events-auto">
+                  <button
+                    onClick={() => setShowLegend(false)}
+                    className="absolute -top-2 -right-2 w-5 h-5 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-gray-600 text-xs font-bold"
+                    title="Close legend"
+                  >
+                    ×
+                  </button>
+                  <div className="pr-3">
+                    <p className="font-semibold mb-1">Adjacency Bonus Legend:</p>
+                    <p>• Minor adjacencies: +0.5 yield</p>
+                    <p>• Normal adjacencies: +1 yield</p>
+                    <p>• Major adjacencies: +2 yield</p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
+          {!showLegend && (
+            <div className="mt-2">
+              <button
+                onClick={() => setShowLegend(true)}
+                className="text-xs text-blue-600 hover:text-blue-800 underline"
+              >
+                Show Adjacency Legend
+              </button>
+            </div>
+          )}
         </div>
       </CollapsibleContainer>
 
