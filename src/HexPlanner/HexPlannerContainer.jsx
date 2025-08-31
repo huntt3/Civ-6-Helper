@@ -47,6 +47,9 @@ const HexPlannerContainer = () => {
   };
 
   const handleHexClick = (hexId, coords, clickType = "left") => {
+    // Don't handle hex clicks when in river mode - use edge clicks instead
+    if (selectedFillType === "river") return;
+
     if (!selectedFillItem) return; // Only allow interaction when an item is selected
 
     const currentTileData =
@@ -104,6 +107,44 @@ const HexPlannerContainer = () => {
     // Apply the changes
     handleTileSelect(hexId, newTileData);
   };
+
+  const handleEdgeClick = (hexId, edge, clickType = "left") => {
+    if (selectedFillType !== "river") return;
+
+    const currentTileData =
+      hexGridRef.current?.getHexTileData?.(hexId) || getDefaultTile();
+    const newTileData = { ...currentTileData };
+
+    // Ensure hasRiverEdges object exists
+    if (!newTileData.hasRiverEdges) {
+      newTileData.hasRiverEdges = {
+        northeast: false,
+        east: false,
+        southeast: false,
+        southwest: false,
+        west: false,
+        northwest: false,
+      };
+    }
+
+    if (clickType === "right") {
+      // Right-click: remove river edge
+      newTileData.hasRiverEdges = {
+        ...newTileData.hasRiverEdges,
+        [edge]: false,
+      };
+    } else {
+      // Left-click: toggle river edge
+      newTileData.hasRiverEdges = {
+        ...newTileData.hasRiverEdges,
+        [edge]: !newTileData.hasRiverEdges[edge],
+      };
+    }
+
+    // Apply the changes
+    handleTileSelect(hexId, newTileData);
+  };
+
   const handleTileSelect = (hexId, tileData) => {
     if (hexGridRef.current && hexGridRef.current.updateHexTile) {
       hexGridRef.current.updateHexTile(hexId, tileData);
@@ -163,7 +204,9 @@ const HexPlannerContainer = () => {
           <div className="flex items-center justify-between mb-4">
             <p className="text-sm text-gray-600">
               {selectedFillItem
-                ? `Click hexes to apply ${selectedFillItem}. Right-click to clear ${selectedFillType}.`
+                ? selectedFillType === "river"
+                  ? "Click on hex edges to add/remove rivers. Right-click edges to remove."
+                  : `Click hexes to apply ${selectedFillItem}. Right-click to clear ${selectedFillType}.`
                 : "Select a tile type and item above to start configuring hexes."}
             </p>
             <div className="flex items-center gap-2 ml-4">
@@ -194,6 +237,8 @@ const HexPlannerContainer = () => {
             <CustomHexGrid
               ref={hexGridRef}
               onHexClick={handleHexClick}
+              onEdgeClick={handleEdgeClick}
+              selectedFillType={selectedFillType}
               radius={gridRadius}
             />
             {/* Adjacency Legend Component */}

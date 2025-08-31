@@ -20,6 +20,7 @@ const TileTypeSelector = ({
     { key: "wonder", label: "Wonders" },
     { key: "naturalWonder", label: "Natural Wonders" },
     { key: "tileImprovement", label: "Improvements" },
+    { key: "river", label: "Rivers" },
   ];
 
   return (
