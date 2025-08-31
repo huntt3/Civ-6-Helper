@@ -261,7 +261,9 @@ const HexPlannerContainer = () => {
                     ×
                   </button>
                   <div className="pr-3">
-                    <p className="font-semibold mb-1">Adjacency Bonus Legend:</p>
+                    <p className="font-semibold mb-1">
+                      Adjacency Bonus Legend:
+                    </p>
                     <p>• Minor adjacencies: +0.5 yield</p>
                     <p>• Normal adjacencies: +1 yield</p>
                     <p>• Major adjacencies: +2 yield</p>

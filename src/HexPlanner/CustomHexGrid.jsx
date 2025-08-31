@@ -16,6 +16,7 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [hoveredHex, setHoveredHex] = useState(null);
   const svgRef = React.useRef(null);
   // Ref to skip saving on initial mount
   const isInitialMount = React.useRef(true);
@@ -245,6 +246,52 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
       .filter(Boolean);
   };
 
+  // Get hexes within a specific range of a given hex
+  const getHexesInRange = (centerHex, range) => {
+    if (!range || range <= 0) return [];
+
+    const hexesInRange = [];
+    for (let q = -range; q <= range; q++) {
+      for (
+        let r = Math.max(-range, -q - range);
+        r <= Math.min(range, -q + range);
+        r++
+      ) {
+        const targetQ = centerHex.q + q;
+        const targetR = centerHex.r + r;
+        const distance = (Math.abs(q) + Math.abs(r) + Math.abs(-q - r)) / 2;
+
+        if (distance <= range && distance > 0) {
+          // Exclude the center hex itself
+          const targetId = `${targetQ},${targetR}`;
+          const targetHex = hexagons.find((h) => h.id === targetId);
+          if (targetHex) {
+            hexesInRange.push(targetHex);
+          }
+        }
+      }
+    }
+    return hexesInRange;
+  };
+
+  // Check if a hex should be highlighted based on hover state
+  const isHexHighlighted = (hex) => {
+    if (!hoveredHex) return false;
+
+    const hoveredTile = hoveredHex.tile;
+    if (!hoveredTile) return false;
+
+    const displayInfo = getTileDisplayInfo(hoveredTile);
+    if (!displayInfo) return false;
+
+    const tileData = tiles.find((t) => t.name === displayInfo.name);
+    if (!tileData || !tileData.range) return false;
+
+    // Check if this hex is within range of the hovered hex
+    const hexesInRange = getHexesInRange(hoveredHex, tileData.range);
+    return hexesInRange.some((h) => h.id === hex.id);
+  };
+
   // Convert hex coordinates to pixel coordinates (pointy-top orientation)
   const hexToPixel = (hex, size) => {
     const x = size * (Math.sqrt(3) * hex.q + (Math.sqrt(3) / 2) * hex.r);
@@ -297,6 +344,16 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
       const clickType = event.type === "contextmenu" ? "right" : "left";
       onHexClick(hex.id, { q: hex.q, r: hex.r, s: hex.s }, clickType);
     }
+  };
+
+  const handleHexMouseEnter = (hex) => {
+    if (!isDragging) {
+      setHoveredHex(hex);
+    }
+  };
+
+  const handleHexMouseLeave = () => {
+    setHoveredHex(null);
   };
 
   // Mouse event handlers for pan functionality
@@ -445,6 +502,7 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
                 : null;
               const imagePath = hex.tile ? getImagePath(hex.tile) : null;
               const adjacencyBonus = calculateAdjacencyBonus(hex);
+              const isHighlighted = isHexHighlighted(hex);
 
               return (
                 <g key={hex.id}>
@@ -458,11 +516,14 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
                         ? "#10b981"
                         : "#e5e7eb"
                     }
-                    stroke="#374151"
-                    strokeWidth="1"
-                    className="cursor-pointer hover:opacity-75 transition-opacity"
+                    stroke={isHighlighted ? "#fbbf24" : "#374151"}
+                    strokeWidth={isHighlighted ? "3" : "1"}
+                    opacity={isHighlighted ? 0.8 : 1}
+                    className="cursor-pointer hover:opacity-75 transition-all duration-200"
                     onClick={(e) => handleHexClick(hex, e)}
                     onContextMenu={(e) => handleHexClick(hex, e)}
+                    onMouseEnter={() => handleHexMouseEnter(hex)}
+                    onMouseLeave={handleHexMouseLeave}
                   />
 
                   {/* Tile name text */}

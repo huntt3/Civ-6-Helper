@@ -173,6 +173,7 @@
       "type": "district",
       "requirement": "Apprenticeship",
       "appeal": -1,
+      "range": 6,
       "districtMinorAdjacencies": [
         "City Center",
         "Campus",
@@ -205,13 +206,15 @@
       "name": "Entertainment Complex",
       "type": "district",
       "requirement": "Games and Recreation",
-      "appeal": 1
+      "appeal": 1,
+      "range": 6
     },
     {
       "name": "Water Park",
       "type": "district",
       "requirement": "Natural History",
-      "appeal": 1
+      "appeal": 1,
+      "range": 9
     },
     {
       "name": "Aerodrome",
@@ -265,6 +268,13 @@
       "name": "Wonder",
       "type": "Wonder",
       "appeal": 1
+    },
+    {
+      "name": "colosseum",
+      "type": "Wonder",
+      "appeal": 1,
+      "range": 6,
+      "adjacentPlacementRequirement": "Entertainment Complex"
     },
     {
       "name": "Farm",
