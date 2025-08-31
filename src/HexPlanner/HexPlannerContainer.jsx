@@ -104,11 +104,9 @@ const HexPlannerContainer = () => {
     if (hexGridRef.current && hexGridRef.current.clearHexData) {
       hexGridRef.current.clearHexData();
     }
-    // Reset grid radius to default and collapsed state
+    // Reset grid radius to default only
     setGridRadius(3);
-    setCollapsed(getDefaultCollapsedState());
     removePageSpecificState(HEX_PLANNER_GRID_RADIUS_KEY);
-    removePageSpecificState(HEX_PLANNER_COLLAPSED_KEY);
 
     // Force re-render of hex grid by changing radius slightly and back
     setGridRadius((prev) => (prev === 3 ? 3.1 : 3));
