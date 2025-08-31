@@ -25,6 +25,9 @@ const HexPlannerContainer = () => {
   const [selectedFillType, setSelectedFillType] = useState("terrain");
   const [selectedFillItem, setSelectedFillItem] = useState(null);
 
+  // Tool hover state for collapsible behavior
+  const [toolHovered, setToolHovered] = useState(false);
+
   // Legend visibility state
   const [showLegend, setShowLegend] = useState(true);
 
@@ -150,87 +153,114 @@ const HexPlannerContainer = () => {
         ariaLabel="Hex Planner"
       >
         <div className="p-4">
-          {/* Tile Selection Tool */}
-          <div className="mb-4 p-4 bg-gray-50 rounded-lg border">
-            <div className="mb-3">
-              <h3 className="text-sm font-medium mb-2">
-                Tile Configuration Tool
-              </h3>
-              <p className="text-xs text-gray-600 mb-3">
-                Select a tile type and item, then click hexes to apply.
-                Right-click to clear the selected type.
-              </p>
-              {selectedFillItem && (
-                <div className="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded mb-3">
-                  Active: {selectedFillItem} ({selectedFillType})
+          {/* Tile Configuration Tool - Collapsible on Hover */}
+          <div
+            className="mb-4 transition-all duration-300 ease-in-out"
+            onMouseEnter={() => setToolHovered(true)}
+            onMouseLeave={() => setToolHovered(false)}
+          >
+            {/* Collapsed State - Show only active selection */}
+            {!toolHovered && (
+              <div className="p-2 bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 hover:border-blue-400 transition-colors">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">
+                    {selectedFillItem ? (
+                      <span className="text-blue-700 font-medium">
+                        Active: {selectedFillItem} ({selectedFillType})
+                      </span>
+                    ) : (
+                      "Hover to configure tiles"
+                    )}
+                  </span>
+                  <span className="text-xs text-gray-500">Hover to expand</span>
                 </div>
-              )}
-            </div>
-
-            <div className="space-y-3">
-              {/* Type Selection */}
-              <div className="flex gap-2 flex-wrap">
-                {[
-                  "terrain",
-                  "feature",
-                  "district",
-                  "wonder",
-                  "naturalWonder",
-                  "tileImprovement",
-                ].map((type) => (
-                  <button
-                    key={type}
-                    onClick={() => {
-                      setSelectedFillType(type);
-                      setSelectedFillItem(null);
-                    }}
-                    className={`px-3 py-1 text-sm rounded transition-colors ${
-                      selectedFillType === type
-                        ? "bg-blue-500 text-white"
-                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                    }`}
-                  >
-                    {type === "tileImprovement"
-                      ? "Improvements"
-                      : type === "naturalWonder"
-                      ? "Natural Wonders"
-                      : type.charAt(0).toUpperCase() + type.slice(1)}
-                  </button>
-                ))}
               </div>
+            )}
 
-              {/* Item Selection */}
-              {selectedFillType && (
-                <div>
-                  <h4 className="text-sm font-medium mb-2 capitalize">
-                    Select{" "}
-                    {selectedFillType === "tileImprovement"
-                      ? "Tile Improvement"
-                      : selectedFillType === "naturalWonder"
-                      ? "Natural Wonder"
-                      : selectedFillType}
-                    :
-                  </h4>
-                  <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 max-h-32 overflow-y-auto">
-                    {getTileCategories()
-                      .find((cat) => cat.key === selectedFillType)
-                      ?.items.map((item) => (
-                        <button
-                          key={item}
-                          onClick={() => setSelectedFillItem(item)}
-                          className={`p-2 text-xs rounded border transition-colors ${
-                            selectedFillItem === item
-                              ? "bg-blue-100 border-blue-500 text-blue-900"
-                              : "bg-white border-gray-300 hover:bg-gray-50"
-                          }`}
-                        >
-                          {item}
-                        </button>
-                      ))}
-                  </div>
+            {/* Expanded State - Full Configuration */}
+            {toolHovered && (
+              <div className="p-4 bg-gray-50 rounded-lg border shadow-lg">
+                <div className="mb-3">
+                  <h3 className="text-sm font-medium mb-2">
+                    Tile Configuration Tool
+                  </h3>
+                  <p className="text-xs text-gray-600 mb-3">
+                    Select a tile type and item, then click hexes to apply.
+                    Right-click to clear the selected type.
+                  </p>
+                  {selectedFillItem && (
+                    <div className="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded mb-3">
+                      Active: {selectedFillItem} ({selectedFillType})
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+
+                <div className="space-y-3">
+                  {/* Type Selection */}
+                  <div className="flex gap-2 flex-wrap">
+                    {[
+                      "terrain",
+                      "feature",
+                      "district",
+                      "wonder",
+                      "naturalWonder",
+                      "tileImprovement",
+                    ].map((type) => (
+                      <button
+                        key={type}
+                        onClick={() => {
+                          setSelectedFillType(type);
+                          setSelectedFillItem(null);
+                        }}
+                        className={`px-3 py-1 text-sm rounded transition-colors ${
+                          selectedFillType === type
+                            ? "bg-blue-500 text-white"
+                            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                        }`}
+                      >
+                        {type === "tileImprovement"
+                          ? "Improvements"
+                          : type === "naturalWonder"
+                          ? "Natural Wonders"
+                          : type.charAt(0).toUpperCase() + type.slice(1)}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Item Selection */}
+                  {selectedFillType && (
+                    <div>
+                      <h4 className="text-sm font-medium mb-2 capitalize">
+                        Select{" "}
+                        {selectedFillType === "tileImprovement"
+                          ? "Tile Improvement"
+                          : selectedFillType === "naturalWonder"
+                          ? "Natural Wonder"
+                          : selectedFillType}
+                        :
+                      </h4>
+                      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 max-h-32 overflow-y-auto">
+                        {getTileCategories()
+                          .find((cat) => cat.key === selectedFillType)
+                          ?.items.map((item) => (
+                            <button
+                              key={item}
+                              onClick={() => setSelectedFillItem(item)}
+                              className={`p-2 text-xs rounded border transition-colors ${
+                                selectedFillItem === item
+                                  ? "bg-blue-100 border-blue-500 text-blue-900"
+                                  : "bg-white border-gray-300 hover:bg-gray-50"
+                              }`}
+                            >
+                              {item}
+                            </button>
+                          ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="flex items-center justify-between mb-4">

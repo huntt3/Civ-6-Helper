@@ -450,7 +450,7 @@ const CustomHexGrid = forwardRef(({ onHexClick, radius = 3 }, ref) => {
   const centerOffsetY = -bounds.minY + padding;
 
   return (
-    <div className="w-full h-96 bg-gray-50 rounded-lg overflow-hidden cursor-grab active:cursor-grabbing">
+    <div className="w-full h-[70vh] bg-gray-50 rounded-lg overflow-hidden cursor-grab active:cursor-grabbing">
       <svg
         ref={svgRef}
         width="100%"
