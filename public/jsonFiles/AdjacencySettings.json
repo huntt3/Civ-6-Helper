@@ -1,0 +1,54 @@
+{
+  "AdjacencySettings": [
+    {
+      "title": "Double Campus Adjacency",
+      "districtAffected": "Campus",
+      "multiplier": 2
+    },
+    {
+      "title": "Double Holy Site Adjacency",
+      "districtAffected": "Holy Site",
+      "multiplier": 2
+    },
+    {
+      "title": "Double Harbor Adjacency",
+      "districtAffected": "Harbor",
+      "multiplier": 2
+    },
+    {
+      "title": "Double Theater Square Adjacency",
+      "districtAffected": "Theater Square",
+      "multiplier": 2
+    },
+    {
+      "title": "Double Industrial Zone Adjacency",
+      "districtAffected": "Industrial Zone",
+      "multiplier": 2
+    },
+    {
+      "title": "Double Commercial Hub Adjacency",
+      "districtAffected": "Commercial Hub",
+      "multiplier": 2
+    },
+    {
+      "title": "Dance of the Aurora",
+      "districtAffected": "Holy Site",
+      "adjacentTile": "tundra"
+    },
+    {
+      "title": "Desert Folklore",
+      "districtAffected": "Holy Site",
+      "adjacentTile": "Desert"
+    },
+    {
+      "title": "Sacred Path",
+      "districtAffected": "Holy Site",
+      "adjacentTile": "Rainforest"
+    },
+    {
+      "title": "River Goddess",
+      "districtAffected": "Holy Site",
+      "adjacentTile": "River"
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import CustomHexGrid from "./CustomHexGrid";
 import TileConfigurationTool from "./TileConfigurationTool";
 import AdjacencyLegend from "./AdjacencyLegend";
 import TerrainLegend from "./TerrainLegend";
+import AdjacencySettings from "./AdjacencySettings";
 import {
   loadPageSpecificState,
   savePageSpecificState,
@@ -31,6 +32,10 @@ const HexPlannerContainer = ({ settings }) => {
   // Legend visibility states
   const [showLegend, setShowLegend] = useState(true);
   const [showTerrainLegend, setShowTerrainLegend] = useState(false);
+  const [showAdjacencySettings, setShowAdjacencySettings] = useState(false);
+
+  // Adjacency settings state
+  const [adjacencySettings, setAdjacencySettings] = useState({});
 
   const hexGridRef = useRef(null);
 
@@ -243,6 +248,7 @@ const HexPlannerContainer = ({ settings }) => {
               selectedFillType={selectedFillType}
               radius={gridRadius}
               settings={settings}
+              adjacencySettings={adjacencySettings}
             />
             {/* Adjacency Legend Component */}
             <AdjacencyLegend
@@ -255,6 +261,13 @@ const HexPlannerContainer = ({ settings }) => {
             <TerrainLegend
               isVisible={showTerrainLegend}
               onClose={() => setShowTerrainLegend(false)}
+            />
+            {/* Adjacency Settings Component */}
+            <AdjacencySettings
+              isVisible={showAdjacencySettings}
+              onClose={() => setShowAdjacencySettings(false)}
+              settings={settings}
+              onSettingsChange={setAdjacencySettings}
             />
           </div>
           <div className="flex gap-2 mt-2">
@@ -272,6 +285,14 @@ const HexPlannerContainer = ({ settings }) => {
                 className="text-xs text-green-600 hover:text-green-800 underline"
               >
                 Show Terrain Legend
+              </button>
+            )}
+            {!showAdjacencySettings && (
+              <button
+                onClick={() => setShowAdjacencySettings(true)}
+                className="text-xs text-purple-600 hover:text-purple-800 underline"
+              >
+                Show Adjacency Settings
               </button>
             )}
           </div>

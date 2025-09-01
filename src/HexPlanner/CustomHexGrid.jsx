@@ -10,12 +10,20 @@ const HEX_PLANNER_DATA_KEY = "civ6-helper-hex-planner-data";
 
 const CustomHexGrid = forwardRef(
   (
-    { onHexClick, radius = 3, selectedFillType, onEdgeClick, settings },
+    {
+      onHexClick,
+      radius = 3,
+      selectedFillType,
+      onEdgeClick,
+      settings,
+      adjacencySettings,
+    },
     ref
   ) => {
     // Hexagon grid state (initialized on mount)
     const [hexagons, setHexagons] = useState([]);
     const [tiles, setTiles] = useState([]);
+    const [adjacencySettingsData, setAdjacencySettingsData] = useState([]);
     const [zoom, setZoom] = useState(1);
     const [pan, setPan] = useState({ x: 0, y: 0 });
     const [isDragging, setIsDragging] = useState(false);
@@ -32,6 +40,14 @@ const CustomHexGrid = forwardRef(
         .then((res) => res.json())
         .then((data) => setTiles(data.Tiles || []))
         .catch(() => setTiles([]));
+    }, []);
+
+    // Load adjacency settings data on component mount
+    React.useEffect(() => {
+      fetch("./jsonFiles/AdjacencySettings.json")
+        .then((res) => res.json())
+        .then((data) => setAdjacencySettingsData(data.AdjacencySettings || []))
+        .catch(() => setAdjacencySettingsData([]));
     }, []);
 
     // Save hexagon data to localStorage whenever it changes (skip initial mount)
@@ -297,6 +313,65 @@ const CustomHexGrid = forwardRef(
       // Special Commercial Hub river bonus: +2 if adjacent to one or more rivers (max +2 from rivers)
       if (displayInfo.name === "Commercial Hub" && hasRiverAdjacency) {
         bonus += 2;
+      }
+
+      // Apply adjacency settings
+      if (adjacencySettings && adjacencySettingsData.length > 0) {
+        adjacencySettingsData.forEach((setting, index) => {
+          if (!adjacencySettings[index]) return; // Setting not enabled
+
+          // Check if this district is affected by the setting
+          if (setting.districtAffected === displayInfo.name) {
+            // Apply multiplier settings
+            if (setting.multiplier) {
+              bonus *= setting.multiplier;
+            }
+
+            // Apply adjacent tile bonus settings
+            if (setting.adjacentTile) {
+              let adjacentTileBonus = 0;
+
+              // Handle different adjacent tile types
+              if (setting.adjacentTile.toLowerCase() === "river") {
+                // Check for river edges
+                if (
+                  hasRiverAdjacency ||
+                  (hex.tile?.hasRiverEdges &&
+                    Object.values(hex.tile.hasRiverEdges).some(
+                      (edge) => edge === true
+                    ))
+                ) {
+                  adjacentTileBonus += 1;
+                }
+              } else {
+                // Check adjacent hexes for specific terrain/feature types
+                adjacentHexes.forEach((adjacentHex) => {
+                  if (!adjacentHex.tile) return;
+
+                  // Check terrain type
+                  if (
+                    adjacentHex.tile.terrain &&
+                    adjacentHex.tile.terrain.toLowerCase() ===
+                      setting.adjacentTile.toLowerCase()
+                  ) {
+                    adjacentTileBonus += 1;
+                  }
+
+                  // Check feature type
+                  if (
+                    adjacentHex.tile.feature &&
+                    adjacentHex.tile.feature.toLowerCase() ===
+                      setting.adjacentTile.toLowerCase()
+                  ) {
+                    adjacentTileBonus += 1;
+                  }
+                });
+              }
+
+              bonus += adjacentTileBonus;
+            }
+          }
+        });
       }
 
       return bonus;
