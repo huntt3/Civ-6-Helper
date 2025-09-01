@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
+import { DndContext, rectIntersection } from "@dnd-kit/core";
+import { restrictToParentElement } from "@dnd-kit/modifiers";
 import CollapsibleContainer from "../Templates/CollapsibleContainer";
 import CustomHexGrid from "./CustomHexGrid";
 import TileConfigurationTool from "./TileConfigurationTool";
@@ -40,7 +42,50 @@ const HexPlannerContainer = ({ settings }) => {
   const [adjacencySettings, setAdjacencySettings] = useState({});
   const [cityStateSettings, setCityStateSettings] = useState({});
 
+  // Panel position states
+  const [panelPositions, setPanelPositions] = useState({
+    "adjacency-legend": { x: 20, y: 250 },
+    "terrain-legend": { x: 20, y: 400 },
+    "adjacency-settings": { x: 350, y: 20 },
+    "citystate-settings": { x: 20, y: 20 },
+  });
+
   const hexGridRef = useRef(null);
+
+  // Load panel positions from localStorage
+  useEffect(() => {
+    const savedPositions = localStorage.getItem(
+      "civ6-helper-hex-planner-panel-positions"
+    );
+    if (savedPositions) {
+      setPanelPositions(JSON.parse(savedPositions));
+    }
+  }, []);
+
+  // Handle drag end to persist panel positions
+  const handleDragEnd = (event) => {
+    const { active, delta } = event;
+
+    if (delta.x !== 0 || delta.y !== 0) {
+      setPanelPositions((prev) => {
+        const newPositions = {
+          ...prev,
+          [active.id]: {
+            x: prev[active.id].x + delta.x,
+            y: prev[active.id].y + delta.y,
+          },
+        };
+
+        // Save to localStorage
+        localStorage.setItem(
+          "civ6-helper-hex-planner-panel-positions",
+          JSON.stringify(newPositions)
+        );
+
+        return newPositions;
+      });
+    }
+  };
 
   // Save grid radius to localStorage
   useEffect(() => {
@@ -243,43 +288,55 @@ const HexPlannerContainer = ({ settings }) => {
               </select>
             </div>
           </div>
-          <div className="relative">
-            <CustomHexGrid
-              ref={hexGridRef}
-              onHexClick={handleHexClick}
-              onEdgeClick={handleEdgeClick}
-              selectedFillType={selectedFillType}
-              radius={gridRadius}
-              settings={settings}
-              adjacencySettings={adjacencySettings}
-              cityStateSettings={cityStateSettings}
-            />
-            {/* Adjacency Legend Component */}
-            <AdjacencyLegend
-              isVisible={showLegend}
-              onClose={() => setShowLegend(false)}
-              selectedFillType={selectedFillType}
-              selectedFillItem={selectedFillItem}
-            />
-            {/* Terrain Legend Component */}
-            <TerrainLegend
-              isVisible={showTerrainLegend}
-              onClose={() => setShowTerrainLegend(false)}
-            />
-            {/* Adjacency Settings Component */}
-            <AdjacencySettings
-              isVisible={showAdjacencySettings}
-              onClose={() => setShowAdjacencySettings(false)}
-              settings={settings}
-              onSettingsChange={setAdjacencySettings}
-            />
-            {/* City-State Suzerain Settings Component */}
-            <CityStateSuzerainSettings
-              isVisible={showCityStateSettings}
-              onClose={() => setShowCityStateSettings(false)}
-              onSettingsChange={setCityStateSettings}
-            />
-          </div>
+
+          <DndContext
+            onDragEnd={handleDragEnd}
+            modifiers={[restrictToParentElement]}
+          >
+            <div
+              className="relative overflow-hidden"
+              style={{ minHeight: "600px" }}
+            >
+              <CustomHexGrid
+                ref={hexGridRef}
+                onHexClick={handleHexClick}
+                onEdgeClick={handleEdgeClick}
+                selectedFillType={selectedFillType}
+                radius={gridRadius}
+                settings={settings}
+                adjacencySettings={adjacencySettings}
+                cityStateSettings={cityStateSettings}
+              />
+
+              {/* Draggable Panels */}
+              <AdjacencyLegend
+                isVisible={showLegend}
+                onClose={() => setShowLegend(false)}
+                selectedFillType={selectedFillType}
+                selectedFillItem={selectedFillItem}
+                position={panelPositions["adjacency-legend"]}
+              />
+              <TerrainLegend
+                isVisible={showTerrainLegend}
+                onClose={() => setShowTerrainLegend(false)}
+                position={panelPositions["terrain-legend"]}
+              />
+              <AdjacencySettings
+                isVisible={showAdjacencySettings}
+                onClose={() => setShowAdjacencySettings(false)}
+                settings={settings}
+                onSettingsChange={setAdjacencySettings}
+                position={panelPositions["adjacency-settings"]}
+              />
+              <CityStateSuzerainSettings
+                isVisible={showCityStateSettings}
+                onClose={() => setShowCityStateSettings(false)}
+                onSettingsChange={setCityStateSettings}
+                position={panelPositions["citystate-settings"]}
+              />
+            </div>
+          </DndContext>
+
           <div className="flex gap-2 mt-2">
             {!showLegend && (
               <button

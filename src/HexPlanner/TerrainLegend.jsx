@@ -1,12 +1,10 @@
 import React from "react";
-import { FaTimes } from "react-icons/fa";
+import DraggablePanel from "../Templates/DraggablePanel";
 
 /**
  * Component for the terrain legend overlay
  */
-const TerrainLegend = ({ isVisible, onClose }) => {
-  if (!isVisible) return null;
-
+const TerrainLegend = ({ isVisible, onClose, position }) => {
   const terrainColors = [
     { name: "Plains", color: "#fbbf24" },
     { name: "Grassland", color: "#10b981" },
@@ -18,18 +16,14 @@ const TerrainLegend = ({ isVisible, onClose }) => {
   ];
 
   return (
-    <div className="absolute bottom-4 right-4 bg-black bg-opacity-80 text-white p-4 rounded-lg text-sm z-10 min-w-48">
-      <div className="flex justify-between items-start mb-3">
-        <h4 className="font-semibold">Terrain Legend</h4>
-        <button
-          onClick={onClose}
-          className="text-gray-300 hover:text-white ml-2 p-1"
-          aria-label="Close terrain legend"
-        >
-          <FaTimes size={12} />
-        </button>
-      </div>
-
+    <DraggablePanel
+      id="terrain-legend"
+      title="Terrain Legend"
+      isOpen={isVisible}
+      onClose={onClose}
+      position={position}
+      maxWidth="200px"
+    >
       <div className="space-y-2">
         {terrainColors.map((terrain) => (
           <div key={terrain.name} className="flex items-center space-x-3">
@@ -42,11 +36,11 @@ const TerrainLegend = ({ isVisible, onClose }) => {
                 strokeWidth="1"
               />
             </svg>
-            <span className="text-xs">{terrain.name}</span>
+            <span className="text-xs text-gray-100">{terrain.name}</span>
           </div>
         ))}
       </div>
-    </div>
+    </DraggablePanel>
   );
 };
 

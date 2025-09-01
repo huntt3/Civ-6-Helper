@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaTimes } from "react-icons/fa";
+import DraggablePanel from "../Templates/DraggablePanel";
 
 /**
  * Component for city-state suzerain settings specific to hex planner
@@ -8,6 +8,7 @@ const CityStateSuzerainSettings = ({
   isVisible,
   onClose,
   onSettingsChange,
+  position,
 }) => {
   const [mexicoCitySuzerain, setMexicoCitySuzerain] = useState(false);
 
@@ -41,21 +42,15 @@ const CityStateSuzerainSettings = ({
     setMexicoCitySuzerain(checked);
   };
 
-  if (!isVisible) return null;
-
   return (
-    <div className="absolute top-4 left-4 bg-black bg-opacity-90 text-white p-4 rounded-lg text-sm z-20 min-w-64">
-      <div className="flex justify-between items-start mb-3">
-        <h4 className="font-semibold text-base">City-State Suzerain</h4>
-        <button
-          onClick={onClose}
-          className="text-gray-300 hover:text-white ml-2 p-1"
-          aria-label="Close city-state settings"
-        >
-          <FaTimes size={14} />
-        </button>
-      </div>
-
+    <DraggablePanel
+      id="citystate-settings"
+      title="City-State Suzerain"
+      isOpen={isVisible}
+      onClose={onClose}
+      position={position}
+      maxWidth="280px"
+    >
       <div className="space-y-3">
         <div className="flex items-start space-x-3">
           <input
@@ -68,7 +63,7 @@ const CityStateSuzerainSettings = ({
           <div className="flex-1">
             <label
               htmlFor="mexico-city-suzerain"
-              className="cursor-pointer font-medium text-white hover:text-blue-300 transition-colors"
+              className="cursor-pointer font-medium text-gray-100 hover:text-blue-300 transition-colors"
             >
               Mexico City suzerain
             </label>
@@ -81,7 +76,7 @@ const CityStateSuzerainSettings = ({
           </div>
         </div>
       </div>
-    </div>
+    </DraggablePanel>
   );
 };
 
