@@ -5,6 +5,7 @@ import TileConfigurationTool from "./TileConfigurationTool";
 import AdjacencyLegend from "./AdjacencyLegend";
 import TerrainLegend from "./TerrainLegend";
 import AdjacencySettings from "./AdjacencySettings";
+import CityStateSuzerainSettings from "./CityStateSuzerainSettings";
 import {
   loadPageSpecificState,
   savePageSpecificState,
@@ -33,9 +34,11 @@ const HexPlannerContainer = ({ settings }) => {
   const [showLegend, setShowLegend] = useState(true);
   const [showTerrainLegend, setShowTerrainLegend] = useState(false);
   const [showAdjacencySettings, setShowAdjacencySettings] = useState(false);
+  const [showCityStateSettings, setShowCityStateSettings] = useState(false);
 
-  // Adjacency settings state
+  // Settings states
   const [adjacencySettings, setAdjacencySettings] = useState({});
+  const [cityStateSettings, setCityStateSettings] = useState({});
 
   const hexGridRef = useRef(null);
 
@@ -249,6 +252,7 @@ const HexPlannerContainer = ({ settings }) => {
               radius={gridRadius}
               settings={settings}
               adjacencySettings={adjacencySettings}
+              cityStateSettings={cityStateSettings}
             />
             {/* Adjacency Legend Component */}
             <AdjacencyLegend
@@ -268,6 +272,12 @@ const HexPlannerContainer = ({ settings }) => {
               onClose={() => setShowAdjacencySettings(false)}
               settings={settings}
               onSettingsChange={setAdjacencySettings}
+            />
+            {/* City-State Suzerain Settings Component */}
+            <CityStateSuzerainSettings
+              isVisible={showCityStateSettings}
+              onClose={() => setShowCityStateSettings(false)}
+              onSettingsChange={setCityStateSettings}
             />
           </div>
           <div className="flex gap-2 mt-2">
@@ -293,6 +303,14 @@ const HexPlannerContainer = ({ settings }) => {
                 className="text-xs text-purple-600 hover:text-purple-800 underline"
               >
                 Show Adjacency Settings
+              </button>
+            )}
+            {!showCityStateSettings && (
+              <button
+                onClick={() => setShowCityStateSettings(true)}
+                className="text-xs text-orange-600 hover:text-orange-800 underline"
+              >
+                Show City-State Settings
               </button>
             )}
           </div>

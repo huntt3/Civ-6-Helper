@@ -17,6 +17,7 @@ const CustomHexGrid = forwardRef(
       onEdgeClick,
       settings,
       adjacencySettings,
+      cityStateSettings,
     },
     ref
   ) => {
@@ -377,6 +378,33 @@ const CustomHexGrid = forwardRef(
       return bonus;
     };
 
+    // Calculate effective range for a district with city-state bonuses
+    const getEffectiveRange = (hex) => {
+      if (!hex.tile || !tileHasContent(hex.tile, "district")) return 0;
+
+      const displayInfo = getTileDisplayInfo(hex.tile);
+      if (!displayInfo || displayInfo.type !== "district") return 0;
+
+      const tileData = tiles.find((t) => t.name === displayInfo.name);
+      if (!tileData || !tileData.range) return 0;
+
+      let effectiveRange = tileData.range;
+
+      // Apply Mexico City suzerain bonus (+3 range for Industrial Zone, Entertainment Complex, Water Park)
+      if (cityStateSettings?.mexicoCitySuzerain) {
+        const affectedDistricts = [
+          "Industrial Zone",
+          "Entertainment Complex",
+          "Water Park",
+        ];
+        if (affectedDistricts.includes(displayInfo.name)) {
+          effectiveRange += 3;
+        }
+      }
+
+      return effectiveRange;
+    };
+
     // Get adjacent hexes for a given hex
     const getAdjacentHexes = (hex) => {
       const directions = [
@@ -457,8 +485,9 @@ const CustomHexGrid = forwardRef(
       const tileData = tiles.find((t) => t.name === displayInfo.name);
       if (!tileData || !tileData.range) return false;
 
-      // Check if this hex is within range of the hovered hex
-      const hexesInRange = getHexesInRange(hoveredHex, tileData.range);
+      // Check if this hex is within range of the hovered hex (using effective range with bonuses)
+      const effectiveRange = getEffectiveRange(hoveredHex);
+      const hexesInRange = getHexesInRange(hoveredHex, effectiveRange);
       return hexesInRange.some((h) => h.id === hex.id);
     };
 
