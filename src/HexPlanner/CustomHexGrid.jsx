@@ -657,7 +657,7 @@ const CustomHexGrid = forwardRef(
                                 key={`river-${hex.id}-${edge}`}
                                 d={riverPath}
                                 stroke="#1e40af"
-                                strokeWidth="3"
+                                strokeWidth="6"
                                 strokeLinecap="round"
                                 pointerEvents="none"
                               />
@@ -693,7 +693,7 @@ const CustomHexGrid = forwardRef(
                               key={`edge-hover-${hex.id}-${edge}`}
                               d={riverPath}
                               stroke={hasRiver ? "#1e40af" : "#94a3b8"}
-                              strokeWidth="5"
+                              strokeWidth="8"
                               strokeLinecap="round"
                               fill="none"
                               opacity={

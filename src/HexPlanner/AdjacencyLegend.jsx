@@ -22,24 +22,13 @@ const AdjacencyLegend = ({ isVisible, onClose }) => {
 
       <div className="space-y-2">
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-green-500 rounded"></div>
-          <span>+1 Adjacency</span>
+          <span>• Minor adjacencies: +0.5 yield</span>
         </div>
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-yellow-500 rounded"></div>
-          <span>+2 Adjacency</span>
+          <span>• Normal adjacencies: +1 yield</span>
         </div>
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-orange-500 rounded"></div>
-          <span>+3 Adjacency</span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-red-500 rounded"></div>
-          <span>+4+ Adjacency</span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-blue-300 rounded border border-blue-500"></div>
-          <span>Range Highlight</span>
+          <span>• Major adjacencies: +2 yield</span>
         </div>
       </div>
     </div>
