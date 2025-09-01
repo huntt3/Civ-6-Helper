@@ -16,7 +16,7 @@ import { getDefaultTile } from "../utils/hexPlannerUtils";
 const HEX_PLANNER_GRID_RADIUS_KEY = "civ6-helper-hex-planner-grid-radius";
 const HEX_PLANNER_COLLAPSED_KEY = "civ6-helper-hex-planner-collapsed";
 
-const HexPlannerContainer = () => {
+const HexPlannerContainer = ({ settings }) => {
   const [collapsed, setCollapsed] = useState(() =>
     loadPageSpecificState(HEX_PLANNER_COLLAPSED_KEY, getDefaultCollapsedState())
   );
@@ -242,6 +242,7 @@ const HexPlannerContainer = () => {
               onEdgeClick={handleEdgeClick}
               selectedFillType={selectedFillType}
               radius={gridRadius}
+              settings={settings}
             />
             {/* Adjacency Legend Component */}
             <AdjacencyLegend

@@ -9,7 +9,10 @@ import {
 const HEX_PLANNER_DATA_KEY = "civ6-helper-hex-planner-data";
 
 const CustomHexGrid = forwardRef(
-  ({ onHexClick, radius = 3, selectedFillType, onEdgeClick }, ref) => {
+  (
+    { onHexClick, radius = 3, selectedFillType, onEdgeClick, settings },
+    ref
+  ) => {
     // Hexagon grid state (initialized on mount)
     const [hexagons, setHexagons] = useState([]);
     const [tiles, setTiles] = useState([]);
@@ -236,6 +239,21 @@ const CustomHexGrid = forwardRef(
 
       const adjacentHexes = getAdjacentHexes(hex);
       let bonus = 0;
+      let hasRiverAdjacency = false;
+
+      // Check for river adjacency (special case for Commercial Hub)
+      if (displayInfo.name === "Commercial Hub") {
+        // Check if this hex has any river edges
+        const riverEdges = hex.tile?.hasRiverEdges;
+        if (riverEdges) {
+          hasRiverAdjacency = Object.values(riverEdges).some(
+            (edge) => edge === true
+          );
+        }
+      }
+
+      // Check version-specific bonuses
+      const isBBG = settings?.version === "Better Balanced Game Mod";
 
       adjacentHexes.forEach((adjacentHex) => {
         if (!adjacentHex.tile) return;
@@ -244,6 +262,16 @@ const CustomHexGrid = forwardRef(
         if (!adjacentDisplayInfo) return;
 
         const adjacentTileName = adjacentDisplayInfo.name;
+
+        // Special BBG rule: Commercial Hub gets normal adjacency from City Center
+        if (
+          displayInfo.name === "Commercial Hub" &&
+          isBBG &&
+          adjacentTileName === "City Center"
+        ) {
+          bonus += 1;
+          return;
+        }
 
         // Check minor adjacencies (0.5 points)
         if (tileData.districtMinorAdjacencies?.includes(adjacentTileName)) {
@@ -255,9 +283,21 @@ const CustomHexGrid = forwardRef(
         }
         // Check major adjacencies (2 points)
         else if (tileData.majorAdjacencies?.includes(adjacentTileName)) {
+          // Skip "River" from majorAdjacencies for Commercial Hub - handled separately
+          if (
+            displayInfo.name === "Commercial Hub" &&
+            adjacentTileName === "River"
+          ) {
+            return;
+          }
           bonus += 2;
         }
       });
+
+      // Special Commercial Hub river bonus: +2 if adjacent to one or more rivers (max +2 from rivers)
+      if (displayInfo.name === "Commercial Hub" && hasRiverAdjacency) {
+        bonus += 2;
+      }
 
       return bonus;
     };

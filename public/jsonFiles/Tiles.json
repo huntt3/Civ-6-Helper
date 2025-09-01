@@ -137,7 +137,7 @@
       ],
       "otherMinorAdjacencies": [],
       "normalAdjacencies": [],
-      "majorAdjacencies": ["River", "Harbor", "Pamukkale"]
+      "majorAdjacencies": ["Harbor", "Pamukkale"]
     },
     {
       "name": "Harbor",

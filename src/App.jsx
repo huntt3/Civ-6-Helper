@@ -110,7 +110,7 @@ function App() {
       <WondersContainer settings={settings} />
       <GreatPeopleContainer settings={settings} />
       <EraTrackerContainer settings={settings} setSettings={setSettings} />
-      <HexPlannerContainer />
+      <HexPlannerContainer settings={settings} />
       <Footer />
     </main>
   );
