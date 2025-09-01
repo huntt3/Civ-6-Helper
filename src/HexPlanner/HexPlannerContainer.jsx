@@ -245,6 +245,8 @@ const HexPlannerContainer = () => {
             <AdjacencyLegend
               isVisible={showLegend}
               onClose={() => setShowLegend(false)}
+              selectedFillType={selectedFillType}
+              selectedFillItem={selectedFillItem}
             />
           </div>
           {!showLegend && (

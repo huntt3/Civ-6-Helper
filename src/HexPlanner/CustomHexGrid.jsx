@@ -253,6 +253,24 @@ const CustomHexGrid = forwardRef(
         .filter(Boolean);
     };
 
+    // Check if a district has any adjacency bonuses defined
+    const districtHasAdjacencyBonuses = (hex) => {
+      if (!hex.tile || !tileHasContent(hex.tile, "district")) return false;
+
+      const displayInfo = getTileDisplayInfo(hex.tile);
+      if (!displayInfo || displayInfo.type !== "district") return false;
+
+      const tileData = tiles.find((t) => t.name === displayInfo.name);
+      if (!tileData) return false;
+
+      return !!(
+        tileData.districtMinorAdjacencies ||
+        tileData.otherMinorAdjacencies ||
+        tileData.normalAdjacencies ||
+        tileData.majorAdjacencies
+      );
+    };
+
     // Get hexes within a specific range of a given hex
     const getHexesInRange = (centerHex, range) => {
       if (!range || range <= 0) return [];
@@ -613,30 +631,32 @@ const CustomHexGrid = forwardRef(
                     )}
 
                     {/* Adjacency bonus for districts */}
-                    {hex.tile && tileHasContent(hex.tile, "district") && (
-                      <g>
-                        <rect
-                          x={centerX - 15}
-                          y={centerY + 8}
-                          width="30"
-                          height="14"
-                          fill="rgba(0, 0, 0, 0.8)"
-                          rx="2"
-                          pointerEvents="none"
-                        />
-                        <text
-                          x={centerX}
-                          y={centerY + 18}
-                          textAnchor="middle"
-                          fontSize="10"
-                          fill="gold"
-                          fontWeight="bold"
-                          pointerEvents="none"
-                        >
-                          +{adjacencyBonus}
-                        </text>
-                      </g>
-                    )}
+                    {hex.tile &&
+                      tileHasContent(hex.tile, "district") &&
+                      districtHasAdjacencyBonuses(hex) && (
+                        <g>
+                          <rect
+                            x={centerX - 15}
+                            y={centerY + 8}
+                            width="30"
+                            height="14"
+                            fill="rgba(0, 0, 0, 0.8)"
+                            rx="2"
+                            pointerEvents="none"
+                          />
+                          <text
+                            x={centerX}
+                            y={centerY + 18}
+                            textAnchor="middle"
+                            fontSize="10"
+                            fill="gold"
+                            fontWeight="bold"
+                            pointerEvents="none"
+                          >
+                            +{adjacencyBonus}
+                          </text>
+                        </g>
+                      )}
 
                     {/* River edges */}
                     {hex.tile && hex.tile.hasRiverEdges && (
