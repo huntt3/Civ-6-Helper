@@ -194,6 +194,36 @@ const CustomHexGrid = forwardRef(
       };
     }, []);
 
+    // Get terrain color mapping
+    const getTerrainColor = (terrainType) => {
+      const terrainColors = {
+        Plains: "#fbbf24", // yellow
+        Grassland: "#10b981", // green
+        Desert: "#f59e0b", // orange
+        Tundra: "#6b7280", // gray
+        Snow: "#ffffff", // white
+        Coast: "#7dd3fc", // light blue
+        Ocean: "#1e40af", // dark blue
+      };
+      return terrainColors[terrainType] || "#9ca3af"; // default gray
+    };
+
+    // Generate pointy-top square path for terrain indicator
+    const generateTerrainIndicator = (centerX, centerY, size) => {
+      const indicatorSize = size * 0.3; // 30% of hex size
+      const topY = centerY - size * 0.7; // Position at top of hex
+
+      // Create a diamond/square rotated 45 degrees (pointy-top)
+      const points = [
+        { x: centerX, y: topY - indicatorSize * 0.5 }, // top point
+        { x: centerX + indicatorSize * 0.5, y: topY }, // right point
+        { x: centerX, y: topY + indicatorSize * 0.5 }, // bottom point
+        { x: centerX - indicatorSize * 0.5, y: topY }, // left point
+      ];
+
+      return `M ${points[0].x} ${points[0].y} L ${points[1].x} ${points[1].y} L ${points[2].x} ${points[2].y} L ${points[3].x} ${points[3].y} Z`;
+    };
+
     // Calculate adjacency bonus for a district
     const calculateAdjacencyBonus = (hex) => {
       if (!hex.tile || !tileHasContent(hex.tile, "district")) return 0;
@@ -612,6 +642,18 @@ const CustomHexGrid = forwardRef(
                       onMouseEnter={() => handleHexMouseEnter(hex)}
                       onMouseLeave={handleHexMouseLeave}
                     />
+
+                    {/* Terrain indicator - pointy-top square */}
+                    {hex.tile?.terrain && (
+                      <path
+                        d={generateTerrainIndicator(centerX, centerY, size)}
+                        fill={getTerrainColor(hex.tile.terrain)}
+                        stroke="#000000"
+                        strokeWidth="1"
+                        opacity="0.9"
+                        pointerEvents="none"
+                      />
+                    )}
 
                     {/* Tile name text */}
                     {hex.tile && displayInfo && !imagePath && (

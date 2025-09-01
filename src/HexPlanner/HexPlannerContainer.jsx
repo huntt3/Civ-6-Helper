@@ -3,6 +3,7 @@ import CollapsibleContainer from "../Templates/CollapsibleContainer";
 import CustomHexGrid from "./CustomHexGrid";
 import TileConfigurationTool from "./TileConfigurationTool";
 import AdjacencyLegend from "./AdjacencyLegend";
+import TerrainLegend from "./TerrainLegend";
 import {
   loadPageSpecificState,
   savePageSpecificState,
@@ -27,8 +28,9 @@ const HexPlannerContainer = () => {
   const [selectedFillType, setSelectedFillType] = useState("terrain");
   const [selectedFillItem, setSelectedFillItem] = useState(null);
 
-  // Legend visibility state
+  // Legend visibility states
   const [showLegend, setShowLegend] = useState(true);
+  const [showTerrainLegend, setShowTerrainLegend] = useState(false);
 
   const hexGridRef = useRef(null);
 
@@ -248,17 +250,30 @@ const HexPlannerContainer = () => {
               selectedFillType={selectedFillType}
               selectedFillItem={selectedFillItem}
             />
+            {/* Terrain Legend Component */}
+            <TerrainLegend
+              isVisible={showTerrainLegend}
+              onClose={() => setShowTerrainLegend(false)}
+            />
           </div>
-          {!showLegend && (
-            <div className="mt-2">
+          <div className="flex gap-2 mt-2">
+            {!showLegend && (
               <button
                 onClick={() => setShowLegend(true)}
                 className="text-xs text-blue-600 hover:text-blue-800 underline"
               >
                 Show Adjacency Legend
               </button>
-            </div>
-          )}
+            )}
+            {!showTerrainLegend && (
+              <button
+                onClick={() => setShowTerrainLegend(true)}
+                className="text-xs text-green-600 hover:text-green-800 underline"
+              >
+                Show Terrain Legend
+              </button>
+            )}
+          </div>
         </div>
       </CollapsibleContainer>
     </>
