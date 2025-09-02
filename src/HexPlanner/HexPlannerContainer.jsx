@@ -8,6 +8,7 @@ import AdjacencyLegend from "./AdjacencyLegend";
 import TerrainLegend from "./TerrainLegend";
 import AdjacencySettings from "./AdjacencySettings";
 import CityStateSuzerainSettings from "./CityStateSuzerainSettings";
+import KeybindSettings from "./KeybindSettings";
 import {
   loadPageSpecificState,
   savePageSpecificState,
@@ -37,10 +38,12 @@ const HexPlannerContainer = ({ settings }) => {
   const [showTerrainLegend, setShowTerrainLegend] = useState(false);
   const [showAdjacencySettings, setShowAdjacencySettings] = useState(false);
   const [showCityStateSettings, setShowCityStateSettings] = useState(false);
+  const [showKeybindSettings, setShowKeybindSettings] = useState(false);
 
   // Settings states
   const [adjacencySettings, setAdjacencySettings] = useState({});
   const [cityStateSettings, setCityStateSettings] = useState({});
+  const [keybindSettings, setKeybindSettings] = useState({});
 
   // Panel position states
   const [panelPositions, setPanelPositions] = useState({
@@ -48,6 +51,7 @@ const HexPlannerContainer = ({ settings }) => {
     "terrain-legend": { x: 20, y: 400 },
     "adjacency-settings": { x: 350, y: 20 },
     "citystate-settings": { x: 20, y: 20 },
+    "keybind-settings": { x: 350, y: 250 },
   });
 
   const hexGridRef = useRef(null);
@@ -86,6 +90,40 @@ const HexPlannerContainer = ({ settings }) => {
       });
     }
   };
+
+  // Handle keyboard shortcuts for quick tile selection
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      // Only handle if the hex planner container is focused/visible and not in an input
+      if (event.target.tagName === "INPUT" || event.target.tagName === "SELECT")
+        return;
+
+      const key = event.key.toLowerCase();
+      const keybind = keybindSettings[key];
+
+      if (keybind) {
+        event.preventDefault();
+
+        // Set the fill type and item based on the keybind
+        if (keybind.type === "terrain") {
+          setSelectedFillType("terrain");
+          setSelectedFillItem(keybind.name);
+        } else if (keybind.type === "district") {
+          setSelectedFillType("district");
+          setSelectedFillItem(keybind.name);
+        } else if (keybind.type === "special" && keybind.name === "River") {
+          setSelectedFillType("river");
+          setSelectedFillItem("River");
+        } else if (keybind.type === "Tile Improvement") {
+          setSelectedFillType("improvement");
+          setSelectedFillItem(keybind.name);
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+    return () => document.removeEventListener("keydown", handleKeyPress);
+  }, [keybindSettings]);
 
   // Save grid radius to localStorage
   useEffect(() => {
@@ -334,6 +372,12 @@ const HexPlannerContainer = ({ settings }) => {
                 onSettingsChange={setCityStateSettings}
                 position={panelPositions["citystate-settings"]}
               />
+              <KeybindSettings
+                isVisible={showKeybindSettings}
+                onClose={() => setShowKeybindSettings(false)}
+                onSettingsChange={setKeybindSettings}
+                position={panelPositions["keybind-settings"]}
+              />
             </div>
           </DndContext>
 
@@ -368,6 +412,14 @@ const HexPlannerContainer = ({ settings }) => {
                 className="text-xs text-orange-600 hover:text-orange-800 underline"
               >
                 Show City-State Settings
+              </button>
+            )}
+            {!showKeybindSettings && (
+              <button
+                onClick={() => setShowKeybindSettings(true)}
+                className="text-xs text-yellow-600 hover:text-yellow-800 underline"
+              >
+                Show Keybind Settings
               </button>
             )}
           </div>

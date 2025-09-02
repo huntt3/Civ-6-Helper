@@ -3,7 +3,8 @@
     {
       "name": "City Center",
       "type": "district",
-      "appeal": 0
+      "appeal": 0,
+      "keybind": "q"
     },
     {
       "name": "Campus",
@@ -38,7 +39,8 @@
         "Reef",
         "Great Barrier Reef",
         "Pamukkale"
-      ]
+      ],
+      "keybind": "s"
     },
     {
       "name": "Theater Square",
@@ -71,7 +73,8 @@
         "Entertainment Complex",
         "Water Park",
         "Pamukkale"
-      ]
+      ],
+      "keybind": "t"
     },
     {
       "name": "Holy Site",
@@ -101,13 +104,15 @@
       ],
       "otherMinorAdjacencies": ["Woods"],
       "normalAdjacencies": ["Mountain"],
-      "majorAdjacencies": ["Natural Wonder"]
+      "majorAdjacencies": ["Natural Wonder"],
+      "keybind": "f"
     },
     {
       "name": "Encampment",
       "type": "district",
       "requirement": "Bronze Working",
-      "appeal": -1
+      "appeal": -1,
+      "keybind": "e"
     },
     {
       "name": "Commercial Hub",
@@ -137,7 +142,8 @@
       ],
       "otherMinorAdjacencies": [],
       "normalAdjacencies": [],
-      "majorAdjacencies": ["Harbor", "Pamukkale"]
+      "majorAdjacencies": ["Harbor", "Pamukkale"],
+      "keybind": "c"
     },
     {
       "name": "Harbor",
@@ -166,7 +172,8 @@
       ],
       "otherMinorAdjacencies": [],
       "normalAdjacencies": ["Sea Resource"],
-      "majorAdjacencies": ["City Center"]
+      "majorAdjacencies": ["City Center"],
+      "keybind": "h"
     },
     {
       "name": "Industrial Zone",
@@ -194,7 +201,8 @@
       ],
       "otherMinorAdjacencies": ["Mine", "Lumber Mill"],
       "normalAdjacencies": ["Quarry", "Strategic Resource"],
-      "majorAdjacencies": ["Aqueduct", "Bath", "Canal", "Dam"]
+      "majorAdjacencies": ["Aqueduct", "Bath", "Canal", "Dam"],
+      "keybind": "i"
     },
     {
       "name": "Preserve",
@@ -207,14 +215,16 @@
       "type": "district",
       "requirement": "Games and Recreation",
       "appeal": 1,
-      "range": 6
+      "range": 6,
+      "keybind": "e"
     },
     {
       "name": "Water Park",
       "type": "district",
       "requirement": "Natural History",
       "appeal": 1,
-      "range": 9
+      "range": 9,
+      "keybind": "w"
     },
     {
       "name": "Aerodrome",
@@ -244,7 +254,8 @@
       "name": "Aqueduct",
       "type": "district",
       "requirement": "Mathematics",
-      "appeal": 0
+      "appeal": 0,
+      "keybind": "u"
     },
     {
       "name": "Canal",
@@ -400,6 +411,54 @@
       "type": "Tile Improvement",
       "requirement": "Seasteads",
       "appeal": 0
+    },
+    {
+      "name": "Grassland",
+      "type": "terrain",
+      "appeal": 0,
+      "keybind": "g"
+    },
+    {
+      "name": "Plains",
+      "type": "terrain",
+      "appeal": 0,
+      "keybind": "p"
+    },
+    {
+      "name": "Desert",
+      "type": "terrain",
+      "appeal": 0,
+      "keybind": "d"
+    },
+    {
+      "name": "Tundra",
+      "type": "terrain",
+      "appeal": 0,
+      "keybind": "z"
+    },
+    {
+      "name": "Snow",
+      "type": "terrain",
+      "appeal": 0,
+      "keybind": "n"
+    },
+    {
+      "name": "Coast",
+      "type": "terrain",
+      "appeal": 0,
+      "keybind": "l"
+    },
+    {
+      "name": "Ocean",
+      "type": "terrain",
+      "appeal": 0,
+      "keybind": "o"
+    },
+    {
+      "name": "River",
+      "type": "special",
+      "appeal": 0,
+      "keybind": "r"
     }
   ]
 }
