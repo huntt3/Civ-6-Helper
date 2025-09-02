@@ -440,7 +440,7 @@
       "name": "Snow",
       "type": "terrain",
       "appeal": 0,
-      "keybind": "n"
+      "keybind": "s"
     },
     {
       "name": "Coast",

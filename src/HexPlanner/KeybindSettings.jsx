@@ -7,78 +7,44 @@ import DraggablePanel from "../Templates/DraggablePanel";
 const KeybindSettings = ({
   isVisible,
   onClose,
-  onSettingsChange,
+  keybindSettings,
+  onKeybindSettingsChange,
   position,
 }) => {
-  const [keybinds, setKeybinds] = useState({});
   const [tiles, setTiles] = useState([]);
 
-  // Load tiles data to get default keybinds
+  // Load tiles data
   useEffect(() => {
     fetch("./jsonFiles/Tiles.json")
       .then((res) => res.json())
       .then((data) => {
         setTiles(data.Tiles || []);
-
-        // Build default keybinds from tiles data
-        const defaultKeybinds = {};
-        data.Tiles?.forEach((tile) => {
-          if (tile.keybind) {
-            defaultKeybinds[tile.keybind] = {
-              type: tile.type,
-              name: tile.name,
-            };
-          }
-        });
-        
-        // Add default erase keybind
-        defaultKeybinds["Backspace"] = {
-          type: "special",
-          name: "Erase",
-        };
-
-        // Load saved keybinds or use defaults
-        const savedKeybinds = localStorage.getItem(
-          "civ6-helper-hex-planner-keybinds"
-        );
-        if (savedKeybinds) {
-          setKeybinds({ ...defaultKeybinds, ...JSON.parse(savedKeybinds) });
-        } else {
-          setKeybinds(defaultKeybinds);
-        }
       })
       .catch(() => setTiles([]));
   }, []);
 
-  // Save keybinds to localStorage when changed
-  useEffect(() => {
-    if (Object.keys(keybinds).length > 0) {
-      localStorage.setItem(
-        "civ6-helper-hex-planner-keybinds",
-        JSON.stringify(keybinds)
-      );
-      if (onSettingsChange) {
-        onSettingsChange(keybinds);
-      }
-    }
-  }, [keybinds, onSettingsChange]);
-
   const handleKeybindChange = (oldKey, newKey, itemName) => {
     if (!newKey || newKey === oldKey) return;
-    
+
     // Check if the new key is already in use
-    if (keybinds[newKey]) {
-      alert(`Key "${newKey}" is already assigned to ${keybinds[newKey].name}. Please choose a different key.`);
+    if (keybindSettings[newKey]) {
+      alert(
+        `Key "${newKey}" is already assigned to ${keybindSettings[newKey].name}. Please choose a different key.`
+      );
       return;
     }
-    
-    setKeybinds((prev) => {
-      const updated = { ...prev };
-      const item = updated[oldKey];
-      delete updated[oldKey];
-      updated[newKey] = item;
-      return updated;
-    });
+
+    const updatedKeybinds = { ...keybindSettings };
+    const item = updatedKeybinds[oldKey];
+    delete updatedKeybinds[oldKey];
+    updatedKeybinds[newKey] = item;
+
+    // Save to localStorage and notify parent
+    localStorage.setItem(
+      "civ6-helper-hex-planner-keybinds",
+      JSON.stringify(updatedKeybinds)
+    );
+    onKeybindSettingsChange(updatedKeybinds);
   };
 
   const resetToDefaults = () => {
@@ -91,18 +57,23 @@ const KeybindSettings = ({
         };
       }
     });
-    
+
     // Add default erase keybind
     defaultKeybinds["Backspace"] = {
       type: "special",
       name: "Erase",
     };
-    
-    setKeybinds(defaultKeybinds);
+
+    // Save to localStorage and notify parent
+    localStorage.setItem(
+      "civ6-helper-hex-planner-keybinds",
+      JSON.stringify(defaultKeybinds)
+    );
+    onKeybindSettingsChange(defaultKeybinds);
   };
 
   // Group keybinds by type for better organization
-  const groupedKeybinds = Object.entries(keybinds).reduce(
+  const groupedKeybinds = Object.entries(keybindSettings).reduce(
     (acc, [key, item]) => {
       if (!acc[item.type]) acc[item.type] = [];
       acc[item.type].push({ key, ...item });
@@ -150,7 +121,10 @@ const KeybindSettings = ({
                   type="text"
                   value={item.key === "Backspace" ? "⌫" : item.key}
                   onChange={(e) => {
-                    const newKey = e.target.value === "⌫" ? "Backspace" : e.target.value.toLowerCase();
+                    const newKey =
+                      e.target.value === "⌫"
+                        ? "Backspace"
+                        : e.target.value.toLowerCase();
                     handleKeybindChange(item.key, newKey, item.name);
                   }}
                   onKeyDown={(e) => {
@@ -168,7 +142,7 @@ const KeybindSettings = ({
           </div>
         ))}
 
-        {Object.keys(keybinds).length === 0 && (
+        {Object.keys(keybindSettings).length === 0 && (
           <p className="text-gray-400 text-center py-4 text-xs">
             Loading keybinds...
           </p>

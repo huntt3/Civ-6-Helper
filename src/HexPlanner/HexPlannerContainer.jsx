@@ -66,17 +66,73 @@ const HexPlannerContainer = ({ settings }) => {
     }
   }, []);
 
+  // Initialize keybind settings
+  useEffect(() => {
+    const initializeKeybinds = async () => {
+      try {
+        const response = await fetch("./jsonFiles/Tiles.json");
+        const data = await response.json();
+
+        // Build default keybinds from tiles data
+        const defaultKeybinds = {};
+        data.Tiles?.forEach((tile) => {
+          if (tile.keybind) {
+            defaultKeybinds[tile.keybind] = {
+              type: tile.type,
+              name: tile.name,
+            };
+          }
+        });
+
+        // Add default erase keybind
+        defaultKeybinds["Backspace"] = {
+          type: "special",
+          name: "Erase",
+        };
+
+        // Load saved keybinds or use defaults
+        const savedKeybinds = localStorage.getItem(
+          "civ6-helper-hex-planner-keybinds"
+        );
+        const finalKeybinds = savedKeybinds
+          ? { ...defaultKeybinds, ...JSON.parse(savedKeybinds) }
+          : defaultKeybinds;
+
+        setKeybindSettings(finalKeybinds);
+      } catch (error) {
+        console.error("Failed to load keybind settings:", error);
+      }
+    };
+
+    if (Object.keys(keybindSettings).length === 0) {
+      initializeKeybinds();
+    }
+  }, [keybindSettings]);
+
+  // Save keybind settings to localStorage when they change
+  useEffect(() => {
+    if (Object.keys(keybindSettings).length > 0) {
+      localStorage.setItem(
+        "civ6-helper-hex-planner-keybinds",
+        JSON.stringify(keybindSettings)
+      );
+    }
+  }, [keybindSettings]);
+
   // Handle drag end to persist panel positions
   const handleDragEnd = (event) => {
     const { active, delta } = event;
 
     if (delta.x !== 0 || delta.y !== 0) {
       setPanelPositions((prev) => {
+        // Get current position or use default
+        const currentPosition = prev[active.id] || { x: 20, y: 20 };
+
         const newPositions = {
           ...prev,
           [active.id]: {
-            x: prev[active.id].x + delta.x,
-            y: prev[active.id].y + delta.y,
+            x: currentPosition.x + delta.x,
+            y: currentPosition.y + delta.y,
           },
         };
 
@@ -98,7 +154,8 @@ const HexPlannerContainer = ({ settings }) => {
       if (event.target.tagName === "INPUT" || event.target.tagName === "SELECT")
         return;
 
-      const key = event.key === "Backspace" ? "Backspace" : event.key.toLowerCase();
+      const key =
+        event.key === "Backspace" ? "Backspace" : event.key.toLowerCase();
       const keybind = keybindSettings[key];
 
       if (keybind) {
@@ -381,31 +438,40 @@ const HexPlannerContainer = ({ settings }) => {
                 onClose={() => setShowLegend(false)}
                 selectedFillType={selectedFillType}
                 selectedFillItem={selectedFillItem}
-                position={panelPositions["adjacency-legend"]}
+                position={
+                  panelPositions["adjacency-legend"] || { x: 20, y: 20 }
+                }
               />
               <TerrainLegend
                 isVisible={showTerrainLegend}
                 onClose={() => setShowTerrainLegend(false)}
-                position={panelPositions["terrain-legend"]}
+                position={panelPositions["terrain-legend"] || { x: 20, y: 60 }}
               />
               <AdjacencySettings
                 isVisible={showAdjacencySettings}
                 onClose={() => setShowAdjacencySettings(false)}
                 settings={settings}
                 onSettingsChange={setAdjacencySettings}
-                position={panelPositions["adjacency-settings"]}
+                position={
+                  panelPositions["adjacency-settings"] || { x: 20, y: 100 }
+                }
               />
               <CityStateSuzerainSettings
                 isVisible={showCityStateSettings}
                 onClose={() => setShowCityStateSettings(false)}
                 onSettingsChange={setCityStateSettings}
-                position={panelPositions["citystate-settings"]}
+                position={
+                  panelPositions["citystate-settings"] || { x: 20, y: 140 }
+                }
               />
               <KeybindSettings
                 isVisible={showKeybindSettings}
                 onClose={() => setShowKeybindSettings(false)}
-                onSettingsChange={setKeybindSettings}
-                position={panelPositions["keybind-settings"]}
+                keybindSettings={keybindSettings}
+                onKeybindSettingsChange={setKeybindSettings}
+                position={
+                  panelPositions["keybind-settings"] || { x: 20, y: 180 }
+                }
               />
             </div>
           </DndContext>
