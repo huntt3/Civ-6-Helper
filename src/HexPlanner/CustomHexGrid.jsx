@@ -47,7 +47,19 @@ const CustomHexGrid = forwardRef(
     React.useEffect(() => {
       fetch("./jsonFiles/AdjacencySettings.json")
         .then((res) => res.json())
-        .then((data) => setAdjacencySettingsData(data.AdjacencySettings || []))
+        .then((data) => {
+          // Flatten the grouped adjacency settings into a single array
+          const settings = data.AdjacencySettings || {};
+          const flattenedSettings = [];
+
+          Object.values(settings).forEach((settingsGroup) => {
+            if (Array.isArray(settingsGroup)) {
+              flattenedSettings.push(...settingsGroup);
+            }
+          });
+
+          setAdjacencySettingsData(flattenedSettings);
+        })
         .catch(() => setAdjacencySettingsData([]));
     }, []);
 
