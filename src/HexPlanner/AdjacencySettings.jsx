@@ -116,10 +116,29 @@ const AdjacencySettings = ({
                           {setting.title}
                         </label>
                         <div className="text-xs text-gray-400 mt-1">
+                          {setting.multiplier && (
+                            <span>
+                              {setting.multiplier}x adjacency for{" "}
+                              {setting.districtAffected}
+                            </span>
+                          )}
                           {setting.adjacentTile && (
                             <span>
                               +1 adjacency for each {setting.adjacentTile}{" "}
                               adjacent to {setting.districtAffected}
+                            </span>
+                          )}
+                          {setting.additionalYield && (
+                            <span>
+                              +{setting.additionalYield.type} adjacency equal to{" "}
+                              {setting.additionalYield.formula.replace(
+                                "_",
+                                " "
+                              )}{" "}
+                              for{" "}
+                              {Array.isArray(setting.districtAffected)
+                                ? setting.districtAffected.join(", ")
+                                : setting.districtAffected}
                             </span>
                           )}
                         </div>

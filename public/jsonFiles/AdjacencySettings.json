@@ -73,7 +73,12 @@
     "Golden Age Dedications": [
       {
         "title": "Free Inquiry",
-        "type": "Golden Age Dedication"
+        "type": "Golden Age Dedication",
+        "districtAffected": ["Commercial Hub", "Harbor"],
+        "additionalYield": {
+          "type": "science",
+          "formula": "gold_adjacency"
+        }
       }
     ]
   }

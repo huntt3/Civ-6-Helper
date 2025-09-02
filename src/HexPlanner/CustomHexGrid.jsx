@@ -52,9 +52,14 @@ const CustomHexGrid = forwardRef(
           const settings = data.AdjacencySettings || {};
           const flattenedSettings = [];
 
-          Object.values(settings).forEach((settingsGroup) => {
+          Object.entries(settings).forEach(([sectionName, settingsGroup]) => {
             if (Array.isArray(settingsGroup)) {
-              flattenedSettings.push(...settingsGroup);
+              settingsGroup.forEach((setting, index) => {
+                flattenedSettings.push({
+                  ...setting,
+                  originalKey: `${sectionName}-${index}`, // Store original key for mapping
+                });
+              });
             }
           });
 
@@ -256,15 +261,15 @@ const CustomHexGrid = forwardRef(
       return `M ${points[0].x} ${points[0].y} L ${points[1].x} ${points[1].y} L ${points[2].x} ${points[2].y} L ${points[3].x} ${points[3].y} Z`;
     };
 
-    // Calculate adjacency bonus for a district
-    const calculateAdjacencyBonus = (hex) => {
-      if (!hex.tile || !tileHasContent(hex.tile, "district")) return 0;
+    // Calculate adjacency bonuses for a district (returns object with multiple yield types)
+    const calculateAdjacencyBonuses = (hex) => {
+      if (!hex.tile || !tileHasContent(hex.tile, "district")) return {};
 
       const displayInfo = getTileDisplayInfo(hex.tile);
-      if (!displayInfo || displayInfo.type !== "district") return 0;
+      if (!displayInfo || displayInfo.type !== "district") return {};
 
       const tileData = tiles.find((t) => t.name === displayInfo.name);
-      if (!tileData) return 0;
+      if (!tileData) return {};
 
       const adjacentHexes = getAdjacentHexes(hex);
       let bonus = 0;
@@ -328,16 +333,24 @@ const CustomHexGrid = forwardRef(
         bonus += 2;
       }
 
-      // Apply adjacency settings
+      // Start with the primary yield type
+      const primaryYieldType = tileData.adjacencyYield || "gold";
+      const bonuses = { [primaryYieldType]: bonus };
+
+      // Apply adjacency settings (multipliers and adjacent tile bonuses first)
       if (adjacencySettings && adjacencySettingsData.length > 0) {
-        adjacencySettingsData.forEach((setting, index) => {
-          if (!adjacencySettings[index]) return; // Setting not enabled
+        adjacencySettingsData.forEach((setting) => {
+          if (!adjacencySettings[setting.originalKey]) return; // Setting not enabled using original key
 
           // Check if this district is affected by the setting
-          if (setting.districtAffected === displayInfo.name) {
+          const isAffected = Array.isArray(setting.districtAffected)
+            ? setting.districtAffected.includes(displayInfo.name)
+            : setting.districtAffected === displayInfo.name;
+
+          if (isAffected) {
             // Apply multiplier settings
             if (setting.multiplier) {
-              bonus *= setting.multiplier;
+              bonuses[primaryYieldType] *= setting.multiplier;
             }
 
             // Apply adjacent tile bonus settings
@@ -381,13 +394,38 @@ const CustomHexGrid = forwardRef(
                 });
               }
 
-              bonus += adjacentTileBonus;
+              bonuses[primaryYieldType] += adjacentTileBonus;
+            }
+          }
+        });
+
+        // Apply additional yield settings after all base calculations (like Free Inquiry)
+        adjacencySettingsData.forEach((setting) => {
+          if (!adjacencySettings[setting.originalKey]) return; // Setting not enabled using original key
+
+          // Check if this district is affected by the setting
+          const isAffected = Array.isArray(setting.districtAffected)
+            ? setting.districtAffected.includes(displayInfo.name)
+            : setting.districtAffected === displayInfo.name;
+
+          if (isAffected && setting.additionalYield) {
+            const additionalYieldType = setting.additionalYield.type;
+            if (setting.additionalYield.formula === "gold_adjacency") {
+              // For Free Inquiry: science adjacency equals final gold adjacency (after multipliers)
+              bonuses[additionalYieldType] = bonuses[primaryYieldType];
             }
           }
         });
       }
 
-      return bonus;
+      return bonuses;
+    };
+
+    // Legacy function for backward compatibility - returns primary yield bonus
+    const calculateAdjacencyBonus = (hex) => {
+      const bonuses = calculateAdjacencyBonuses(hex);
+      const primaryYieldType = getDistrictYieldType(hex);
+      return bonuses[primaryYieldType] || 0;
     };
 
     // Get the yield type for a district's adjacency bonus
@@ -785,8 +823,8 @@ const CustomHexGrid = forwardRef(
                   ? getTileDisplayInfo(hex.tile)
                   : null;
                 const imagePath = hex.tile ? getImagePath(hex.tile) : null;
-                const adjacencyBonus = calculateAdjacencyBonus(hex);
-                const yieldType = getDistrictYieldType(hex);
+                const adjacencyBonuses = calculateAdjacencyBonuses(hex);
+                const yieldTypes = Object.keys(adjacencyBonuses);
                 const isHighlighted = isHexHighlighted(hex);
 
                 return (
@@ -840,42 +878,55 @@ const CustomHexGrid = forwardRef(
                       </text>
                     )}
 
-                    {/* Adjacency bonus for districts */}
+                    {/* Adjacency bonuses for districts */}
                     {hex.tile &&
                       tileHasContent(hex.tile, "district") &&
-                      districtHasAdjacencyBonuses(hex) && (
+                      districtHasAdjacencyBonuses(hex) &&
+                      yieldTypes.length > 0 && (
                         <g>
-                          <rect
-                            x={centerX - (yieldType ? 22 : 15)}
-                            y={centerY + 8}
-                            width={yieldType ? "44" : "30"}
-                            height="14"
-                            fill="rgba(0, 0, 0, 0.8)"
-                            rx="2"
-                            pointerEvents="none"
-                          />
-                          <text
-                            x={centerX - (yieldType ? 8 : 0)}
-                            y={centerY + 18}
-                            textAnchor="middle"
-                            fontSize="10"
-                            fill="gold"
-                            fontWeight="bold"
-                            pointerEvents="none"
-                          >
-                            +{adjacencyBonus}
-                          </text>
-                          {/* Yield icon */}
-                          {yieldType && (
-                            <image
-                              x={centerX + 8}
-                              y={centerY + 9}
-                              width="12"
-                              height="12"
-                              href={`./yieldImg/${yieldType}.webp`}
-                              pointerEvents="none"
-                            />
-                          )}
+                          {yieldTypes.map((yieldType, index) => {
+                            const bonus = adjacencyBonuses[yieldType];
+                            if (bonus <= 0) return null;
+
+                            // Stack bonuses upward above the hex center
+                            const totalHeight = yieldTypes.length * 16;
+                            const yOffset =
+                              centerY + 20 - totalHeight + index * 16;
+
+                            return (
+                              <g key={`bonus-${yieldType}-${index}`}>
+                                <rect
+                                  x={centerX - 22}
+                                  y={yOffset}
+                                  width="44"
+                                  height="14"
+                                  fill="rgba(0, 0, 0, 0.8)"
+                                  rx="2"
+                                  pointerEvents="none"
+                                />
+                                <text
+                                  x={centerX - 8}
+                                  y={yOffset + 10}
+                                  textAnchor="middle"
+                                  fontSize="10"
+                                  fill="gold"
+                                  fontWeight="bold"
+                                  pointerEvents="none"
+                                >
+                                  +{bonus}
+                                </text>
+                                {/* Yield icon */}
+                                <image
+                                  x={centerX + 8}
+                                  y={yOffset + 1}
+                                  width="12"
+                                  height="12"
+                                  href={`./yieldImg/${yieldType}.webp`}
+                                  pointerEvents="none"
+                                />
+                              </g>
+                            );
+                          })}
                         </g>
                       )}
 
