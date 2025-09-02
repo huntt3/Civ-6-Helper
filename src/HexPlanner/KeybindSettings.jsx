@@ -30,6 +30,12 @@ const KeybindSettings = ({
             };
           }
         });
+        
+        // Add default erase keybind
+        defaultKeybinds["Backspace"] = {
+          type: "special",
+          name: "Erase",
+        };
 
         // Load saved keybinds or use defaults
         const savedKeybinds = localStorage.getItem(
@@ -57,16 +63,22 @@ const KeybindSettings = ({
     }
   }, [keybinds, onSettingsChange]);
 
-  const handleKeybindChange = (oldKey, newKey) => {
-    if (newKey && newKey !== oldKey) {
-      setKeybinds((prev) => {
-        const updated = { ...prev };
-        const item = updated[oldKey];
-        delete updated[oldKey];
-        updated[newKey] = item;
-        return updated;
-      });
+  const handleKeybindChange = (oldKey, newKey, itemName) => {
+    if (!newKey || newKey === oldKey) return;
+    
+    // Check if the new key is already in use
+    if (keybinds[newKey]) {
+      alert(`Key "${newKey}" is already assigned to ${keybinds[newKey].name}. Please choose a different key.`);
+      return;
     }
+    
+    setKeybinds((prev) => {
+      const updated = { ...prev };
+      const item = updated[oldKey];
+      delete updated[oldKey];
+      updated[newKey] = item;
+      return updated;
+    });
   };
 
   const resetToDefaults = () => {
@@ -79,6 +91,13 @@ const KeybindSettings = ({
         };
       }
     });
+    
+    // Add default erase keybind
+    defaultKeybinds["Backspace"] = {
+      type: "special",
+      name: "Erase",
+    };
+    
     setKeybinds(defaultKeybinds);
   };
 
@@ -129,12 +148,20 @@ const KeybindSettings = ({
                 </span>
                 <input
                   type="text"
-                  value={item.key}
-                  onChange={(e) =>
-                    handleKeybindChange(item.key, e.target.value.toLowerCase())
-                  }
+                  value={item.key === "Backspace" ? "⌫" : item.key}
+                  onChange={(e) => {
+                    const newKey = e.target.value === "⌫" ? "Backspace" : e.target.value.toLowerCase();
+                    handleKeybindChange(item.key, newKey, item.name);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Backspace") {
+                      e.preventDefault();
+                      handleKeybindChange(item.key, "Backspace", item.name);
+                    }
+                  }}
                   maxLength={1}
                   className="w-8 h-6 text-center text-xs bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                  placeholder="Key"
                 />
               </div>
             ))}

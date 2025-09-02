@@ -98,11 +98,18 @@ const HexPlannerContainer = ({ settings }) => {
       if (event.target.tagName === "INPUT" || event.target.tagName === "SELECT")
         return;
 
-      const key = event.key.toLowerCase();
+      const key = event.key === "Backspace" ? "Backspace" : event.key.toLowerCase();
       const keybind = keybindSettings[key];
 
       if (keybind) {
         event.preventDefault();
+
+        // Handle erase functionality
+        if (keybind.type === "special" && keybind.name === "Erase") {
+          setSelectedFillType("erase");
+          setSelectedFillItem("Erase");
+          return;
+        }
 
         // Set the fill type and item based on the keybind
         if (keybind.type === "terrain") {
@@ -148,6 +155,26 @@ const HexPlannerContainer = ({ settings }) => {
     const currentTileData =
       hexGridRef.current?.getHexTileData?.(hexId) || getDefaultTile();
     const newTileData = { ...currentTileData };
+
+    // Handle erase mode - clear all tile data
+    if (selectedFillType === "erase") {
+      newTileData.terrain = null;
+      newTileData.feature = null;
+      newTileData.district = null;
+      newTileData.wonder = null;
+      newTileData.naturalWonder = null;
+      newTileData.tileImprovement = null;
+      newTileData.hasRiverEdges = {
+        top: false,
+        topRight: false,
+        bottomRight: false,
+        bottom: false,
+        bottomLeft: false,
+        topLeft: false,
+      };
+      handleTileSelect(hexId, newTileData);
+      return;
+    }
 
     if (clickType === "right") {
       // Right-click: clear the selected type
@@ -299,7 +326,9 @@ const HexPlannerContainer = ({ settings }) => {
               {selectedFillItem
                 ? selectedFillType === "river"
                   ? "Click on hex edges to add/remove rivers. Right-click edges to remove."
-                  : `Click hexes to apply ${selectedFillItem}. Right-click to clear ${selectedFillType}.`
+                  : selectedFillType === "erase"
+                  ? "Click hexes to erase all data from tiles. Use keyboard shortcuts for quick selection."
+                  : `Click hexes to apply ${selectedFillItem}. Right-click to clear ${selectedFillType}. Use keyboard shortcuts for quick selection.`
                 : "Select a tile type and item above to start configuring hexes."}
             </p>
             <div className="flex items-center gap-2 ml-4">

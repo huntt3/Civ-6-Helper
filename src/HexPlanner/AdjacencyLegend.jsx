@@ -38,13 +38,11 @@ const AdjacencyLegend = ({
     );
   };
 
-  const shouldShow = isVisible && hasAdjacencyBonuses();
-
   return (
     <DraggablePanel
       id="adjacency-legend"
       title="Adjacency Legend"
-      isOpen={shouldShow}
+      isOpen={isVisible && hasAdjacencyBonuses()}
       onClose={onClose}
       position={position}
       maxWidth="220px"

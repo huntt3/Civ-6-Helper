@@ -40,16 +40,23 @@ const DraggablePanel = ({
       {...attributes}
     >
       {/* Draggable Header */}
-      <div
-        {...listeners}
-        className="bg-gray-800 text-white px-4 py-3 rounded-t-lg cursor-move select-none flex justify-between items-center"
-      >
-        <h3 className="text-sm font-semibold text-white">{title}</h3>
+      <div className="bg-gray-800 text-white px-4 py-3 rounded-t-lg select-none flex justify-between items-center">
+        <h3
+          {...listeners}
+          className="text-sm font-semibold text-white cursor-move flex-1"
+        >
+          {title}
+        </h3>
         <button
-          onClick={onClose}
-          className="text-gray-300 hover:text-white transition-colors p-1 rounded hover:bg-gray-700"
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            onClose();
+          }}
+          className="text-gray-300 hover:text-white transition-colors p-1 rounded hover:bg-gray-700 cursor-pointer ml-2"
           type="button"
           aria-label={`Close ${title}`}
+          style={{ cursor: "pointer" }}
         >
           <FaTimes size={12} />
         </button>
