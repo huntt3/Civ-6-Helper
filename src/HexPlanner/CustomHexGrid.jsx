@@ -378,6 +378,17 @@ const CustomHexGrid = forwardRef(
       return bonus;
     };
 
+    // Get the yield type for a district's adjacency bonus
+    const getDistrictYieldType = (hex) => {
+      if (!hex.tile || !tileHasContent(hex.tile, "district")) return null;
+
+      const displayInfo = getTileDisplayInfo(hex.tile);
+      if (!displayInfo || displayInfo.type !== "district") return null;
+
+      const tileData = tiles.find((t) => t.name === displayInfo.name);
+      return tileData?.adjacencyYield || null;
+    };
+
     // Calculate effective range for a district with city-state bonuses
     const getEffectiveRange = (hex) => {
       if (!hex.tile || !tileHasContent(hex.tile, "district")) return 0;
@@ -763,6 +774,7 @@ const CustomHexGrid = forwardRef(
                   : null;
                 const imagePath = hex.tile ? getImagePath(hex.tile) : null;
                 const adjacencyBonus = calculateAdjacencyBonus(hex);
+                const yieldType = getDistrictYieldType(hex);
                 const isHighlighted = isHexHighlighted(hex);
 
                 return (
@@ -822,16 +834,16 @@ const CustomHexGrid = forwardRef(
                       districtHasAdjacencyBonuses(hex) && (
                         <g>
                           <rect
-                            x={centerX - 15}
+                            x={centerX - (yieldType ? 22 : 15)}
                             y={centerY + 8}
-                            width="30"
+                            width={yieldType ? "44" : "30"}
                             height="14"
                             fill="rgba(0, 0, 0, 0.8)"
                             rx="2"
                             pointerEvents="none"
                           />
                           <text
-                            x={centerX}
+                            x={centerX - (yieldType ? 8 : 0)}
                             y={centerY + 18}
                             textAnchor="middle"
                             fontSize="10"
@@ -841,6 +853,17 @@ const CustomHexGrid = forwardRef(
                           >
                             +{adjacencyBonus}
                           </text>
+                          {/* Yield icon */}
+                          {yieldType && (
+                            <image
+                              x={centerX + 8}
+                              y={centerY + 9}
+                              width="12"
+                              height="12"
+                              href={`./yieldImg/${yieldType}.webp`}
+                              pointerEvents="none"
+                            />
+                          )}
                         </g>
                       )}
 

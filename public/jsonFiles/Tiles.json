@@ -40,6 +40,7 @@
         "Great Barrier Reef",
         "Pamukkale"
       ],
+      "adjacencyYield": "science",
       "keybind": "s"
     },
     {
@@ -74,6 +75,7 @@
         "Water Park",
         "Pamukkale"
       ],
+      "adjacencyYield": "culture",
       "keybind": "t"
     },
     {
@@ -105,6 +107,7 @@
       "otherMinorAdjacencies": ["Woods"],
       "normalAdjacencies": ["Mountain"],
       "majorAdjacencies": ["Natural Wonder"],
+      "adjacencyYield": "faith",
       "keybind": "f"
     },
     {
@@ -143,6 +146,7 @@
       "otherMinorAdjacencies": [],
       "normalAdjacencies": [],
       "majorAdjacencies": ["Harbor", "Pamukkale"],
+      "adjacencyYield": "gold",
       "keybind": "c"
     },
     {
@@ -173,6 +177,7 @@
       "otherMinorAdjacencies": [],
       "normalAdjacencies": ["Sea Resource"],
       "majorAdjacencies": ["City Center"],
+      "adjacencyYield": "gold",
       "keybind": "h"
     },
     {
@@ -202,6 +207,7 @@
       "otherMinorAdjacencies": ["Mine", "Lumber Mill"],
       "normalAdjacencies": ["Quarry", "Strategic Resource"],
       "majorAdjacencies": ["Aqueduct", "Bath", "Canal", "Dam"],
+      "adjacencyYield": "production",
       "keybind": "i"
     },
     {
