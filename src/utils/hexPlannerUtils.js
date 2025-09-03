@@ -178,7 +178,7 @@ export const getTileCategories = async () => {
   const [
     terrainItems,
     featureItems,
-    districtItems,
+  districtItems,
     wonderItems,
     naturalWonderItems,
     tileImprovementItems,
@@ -209,7 +209,15 @@ export const getTileCategories = async () => {
     {
       name: "Districts",
       key: "district",
-      items: districtItems.length > 0 ? districtItems : DISTRICT_TYPES,
+      // Provide objects so callers can distinguish unique districts
+      items:
+        districtItems.length > 0
+          ? (await loadTilesData()).map((t) =>
+              districtItems.includes(t.name)
+                ? { name: t.name, unique: !!t.unique }
+                : null
+            ).filter(Boolean)
+          : DISTRICT_TYPES.map((n) => ({ name: n, unique: false })),
       required: false,
       description: "City districts",
     },

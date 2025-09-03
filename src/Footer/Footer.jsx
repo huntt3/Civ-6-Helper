@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="space-y-2">
           <h3 className="text-white font-semibold text-base">Community</h3>
           <a
-            href="https://example.com/bug-report"
+            href="https://discord.gg/2q45gjFfmz"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 hover:text-white transition"
@@ -20,7 +20,7 @@ const Footer = () => {
             Report a Bug
           </a>
           <a
-            href="https://discord.gg/example"
+            href="https://discord.gg/2q45gjFfmz"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 hover:text-white transition"

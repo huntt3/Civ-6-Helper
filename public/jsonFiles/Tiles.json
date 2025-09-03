@@ -284,6 +284,7 @@
     {
       "name": "Acropolis",
       "type": "district",
+      "unique": true,
       "requirement": "Drama and Poetry",
       "appeal": 1,
       "districtMinorAdjacencies": [
@@ -318,12 +319,14 @@
     {
       "name": "Bath",
       "type": "district",
+      "unique": true,
       "requirement": "Mathematics",
       "appeal": 0
     },
     {
       "name": "Copacabana",
       "type": "district",
+      "unique": true,
       "requirement": "Natural History",
       "appeal": 1,
       "range": 9
@@ -331,6 +334,7 @@
     {
       "name": "Cothon",
       "type": "district",
+      "unique": true,
       "requirement": "Celestial Navigation",
       "appeal": 0,
       "districtMinorAdjacencies": [
@@ -361,6 +365,7 @@
     {
       "name": "Hansa",
       "type": "district",
+      "unique": true,
       "requirement": "Apprenticeship",
       "appeal": -1,
       "range": 6,
@@ -390,6 +395,7 @@
     {
       "name": "Hippodrome",
       "type": "district",
+      "unique": true,
       "requirement": "Games and Recreation",
       "appeal": 1,
       "range": 6
@@ -397,12 +403,14 @@
     {
       "name": "Ikanda",
       "type": "district",
+      "unique": true,
       "requirement": "Bronze Working",
       "appeal": -1
     },
     {
       "name": "Lavra",
       "type": "district",
+      "unique": true,
       "requirement": "Astrology",
       "appeal": 1,
       "districtMinorAdjacencies": [
@@ -434,12 +442,14 @@
     {
       "name": "Mbanza",
       "type": "district",
+      "unique": true,
       "requirement": "Mathematics",
       "appeal": 0
     },
     {
       "name": "Observatory",
       "type": "district",
+      "unique": true,
       "requirement": "Writing",
       "appeal": 0,
       "districtMinorAdjacencies": [
@@ -476,6 +486,7 @@
     {
       "name": "Oppidum",
       "type": "district",
+      "unique": true,
       "requirement": "Apprenticeship",
       "appeal": -1,
       "range": 6,
@@ -505,6 +516,7 @@
     {
       "name": "Royal Navy Dockyard",
       "type": "district",
+      "unique": true,
       "requirement": "Celestial Navigation",
       "appeal": 0,
       "districtMinorAdjacencies": [
@@ -535,6 +547,7 @@
     {
       "name": "Seowon",
       "type": "district",
+      "unique": true,
       "requirement": "Writing",
       "appeal": 0,
       "districtMinorAdjacencies": [
@@ -571,6 +584,7 @@
     {
       "name": "Street Carnival",
       "type": "district",
+      "unique": true,
       "requirement": "Games and Recreation",
       "appeal": 1,
       "range": 6
@@ -578,6 +592,7 @@
     {
       "name": "Suguba",
       "type": "district",
+      "unique": true,
       "requirement": "Currency",
       "appeal": 0,
       "districtMinorAdjacencies": [
@@ -609,6 +624,7 @@
     {
       "name": "Thành",
       "type": "district",
+      "unique": true,
       "requirement": "Bronze Working",
       "appeal": -1
     },

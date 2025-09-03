@@ -36,9 +36,8 @@ const TileItemSelector = ({
       // Return single river option for simplified UX
       return ["Rivers"];
     }
-
-    const category = categories.find((cat) => cat.key === selectedFillType);
-    return category ? category.items : [];
+  const category = categories.find((cat) => cat.key === selectedFillType);
+  return category ? category.items : [];
   };
 
   const items = getItems();
@@ -66,22 +65,80 @@ const TileItemSelector = ({
                   selectedFillType.slice(1)
             }:`}
       </h4>
-      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 max-h-32 overflow-y-auto">
-        {items.map((item) => (
-          <button
-            key={item}
-            onClick={() => onFillItemChange(item)}
-            className={`p-2 text-xs rounded border transition-colors text-left ${
-              selectedFillItem === item
-                ? "bg-blue-100 border-blue-500 text-blue-900"
-                : "bg-white border-gray-300 hover:bg-gray-50"
-            }`}
-          >
-            <div className="flex items-center space-x-2">
-              <span className="text-xs truncate">{item}</span>
-            </div>
-          </button>
-        ))}
+      <div className="max-h-32 overflow-y-auto">
+        {selectedFillType === "district" ? (
+          // Districts: separate universal and unique districts with a spacer
+          (() => {
+            const universal = items.filter((i) => !i.unique).map((i) => i.name);
+            const unique = items.filter((i) => i.unique).map((i) => i.name);
+
+            return (
+              <>
+                <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 mb-2">
+                  {universal.map((item) => (
+                    <button
+                      key={item}
+                      onClick={() => onFillItemChange(item)}
+                      className={`p-2 text-xs rounded border transition-colors text-left ${
+                        selectedFillItem === item
+                          ? "bg-blue-100 border-blue-500 text-blue-900"
+                          : "bg-white border-gray-300 hover:bg-gray-50"
+                      }`}
+                    >
+                      <div className="flex items-center space-x-2">
+                        <span className="text-xs truncate">{item}</span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+
+                {unique.length > 0 && (
+                  <div className="py-2">
+                    <hr className="border-t border-gray-200" />
+                  </div>
+                )}
+
+                {unique.length > 0 && (
+                  <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                    {unique.map((item) => (
+                      <button
+                        key={item}
+                        onClick={() => onFillItemChange(item)}
+                        className={`p-2 text-xs rounded border transition-colors text-left ${
+                          selectedFillItem === item
+                            ? "bg-blue-100 border-blue-500 text-blue-900"
+                            : "bg-white border-gray-300 hover:bg-gray-50"
+                        }`}
+                      >
+                        <div className="flex items-center space-x-2">
+                          <span className="text-xs truncate">{item}</span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </>
+            );
+          })()
+        ) : (
+          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
+            {items.map((item) => (
+              <button
+                key={item}
+                onClick={() => onFillItemChange(item)}
+                className={`p-2 text-xs rounded border transition-colors text-left ${
+                  selectedFillItem === item
+                    ? "bg-blue-100 border-blue-500 text-blue-900"
+                    : "bg-white border-gray-300 hover:bg-gray-50"
+                }`}
+              >
+                <div className="flex items-center space-x-2">
+                  <span className="text-xs truncate">{item}</span>
+                </div>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
