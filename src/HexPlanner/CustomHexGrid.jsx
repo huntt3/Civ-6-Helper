@@ -30,6 +30,8 @@ const CustomHexGrid = forwardRef(
     const [isDragging, setIsDragging] = useState(false);
     const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
     const [hoveredHex, setHoveredHex] = useState(null);
+    // Selected range state: { centerId, radius } or null
+    const [selectedRange, setSelectedRange] = useState(null);
     const [hoveredEdge, setHoveredEdge] = useState(null);
     const svgRef = React.useRef(null);
     // Ref to skip saving on initial mount
@@ -616,6 +618,15 @@ const CustomHexGrid = forwardRef(
 
     // Check if a hex should be highlighted based on hover state
     const isHexHighlighted = (hex) => {
+      // If a persistent selection exists, use that
+      if (selectedRange) {
+        const centerHex = hexagons.find((h) => h.id === selectedRange.centerId);
+        if (centerHex) {
+          const hexesInRange = getHexesInRange(centerHex, selectedRange.radius);
+          if (hexesInRange.some((h) => h.id === hex.id)) return true;
+        }
+      }
+
       if (!hoveredHex) return false;
 
       const hoveredTile = hoveredHex.tile;
@@ -746,6 +757,19 @@ const CustomHexGrid = forwardRef(
 
         const clickType = event.type === "contextmenu" ? "right" : "left";
         onHexClick(hex.id, { q: hex.q, r: hex.r, s: hex.s }, clickType);
+
+        // Toggle persistent range highlighting when left-clicking a tile that has a range
+        if (clickType === "left") {
+          const effectiveRange = getEffectiveRange(hex);
+          if (effectiveRange && effectiveRange > 0) {
+            if (selectedRange && selectedRange.centerId === hex.id) {
+              // Clicking again clears the selection
+              setSelectedRange(null);
+            } else {
+              setSelectedRange({ centerId: hex.id, radius: effectiveRange });
+            }
+          }
+        }
       }
     };
 
@@ -824,6 +848,8 @@ const CustomHexGrid = forwardRef(
     const clearHexData = () => {
       setHexagons((prev) => prev.map((hex) => ({ ...hex, tile: null })));
       localStorage.removeItem(HEX_PLANNER_DATA_KEY);
+      // Clear any persistent range selection when tiles are cleared
+      setSelectedRange(null);
     };
 
     useImperativeHandle(
