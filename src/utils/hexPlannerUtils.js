@@ -2,7 +2,43 @@
  * Hex Planner tile data structure and validation utilities
  */
 
-// Terrain types that every tile must have
+// Cache for loaded tiles data
+let cachedTilesData = null;
+
+/**
+ * Load tiles data from JSON file
+ * @returns {Promise<Array>} Array of tile data from Tiles.json
+ */
+const loadTilesData = async () => {
+  if (cachedTilesData) {
+    return cachedTilesData;
+  }
+
+  try {
+    const response = await fetch("./jsonFiles/Tiles.json");
+    const data = await response.json();
+    cachedTilesData = data.Tiles || [];
+    return cachedTilesData;
+  } catch (error) {
+    console.error("Failed to load tiles data:", error);
+    return [];
+  }
+};
+
+/**
+ * Get tiles by type from the loaded data
+ * @param {string} type - The tile type to filter by
+ * @returns {Promise<Array>} Array of tile names matching the type
+ */
+const getTilesByType = async (type) => {
+  const tiles = await loadTilesData();
+  return tiles
+    .filter((tile) => tile.type === type)
+    .map((tile) => tile.name)
+    .sort();
+};
+
+// Legacy hardcoded arrays for backward compatibility (will be replaced by dynamic loading)
 export const TERRAIN_TYPES = [
   "Grassland",
   "Plains",
@@ -13,7 +49,6 @@ export const TERRAIN_TYPES = [
   "Ocean",
 ];
 
-// Feature types (optional, mutually exclusive with districts/wonders)
 export const FEATURE_TYPES = [
   "Woods",
   "Rainforest",
@@ -26,7 +61,6 @@ export const FEATURE_TYPES = [
   "Geothermal Fissure",
 ];
 
-// District types (mutually exclusive with features, wonders, and each other)
 export const DISTRICT_TYPES = [
   "City Center",
   "Campus",
@@ -49,17 +83,10 @@ export const DISTRICT_TYPES = [
   "Neighborhood",
 ];
 
-// Wonder types (mutually exclusive with features, districts, and each other)
-export const WONDER_TYPES = [
-  "Wonder", // Generic wonder placeholder
-];
+export const WONDER_TYPES = ["Wonder"];
 
-// Natural Wonder types (special placement rules)
-export const NATURAL_WONDER_TYPES = [
-  "Natural Wonder", // Generic natural wonder placeholder
-];
+export const NATURAL_WONDER_TYPES = ["Natural Wonder"];
 
-// Tile Improvement types (can be placed on terrain/features if requirements met)
 export const TILE_IMPROVEMENT_TYPES = [
   "Farm",
   "Mine",
@@ -145,52 +172,76 @@ export const getDefaultTile = () => ({
 
 /**
  * Get tile categories for the modal
- * @returns {Array} Array of tile categories with their items
+ * @returns {Promise<Array>} Array of tile categories with their items loaded from Tiles.json
  */
-export const getTileCategories = () => [
-  {
-    name: "Terrain",
-    key: "terrain",
-    items: TERRAIN_TYPES,
-    required: true,
-    description: "Base terrain type (required)",
-  },
-  {
-    name: "Features",
-    key: "feature",
-    items: FEATURE_TYPES,
-    required: false,
-    description: "Natural features (optional)",
-  },
-  {
-    name: "Districts",
-    key: "district",
-    items: DISTRICT_TYPES,
-    required: false,
-    description: "City districts",
-  },
-  {
-    name: "Wonders",
-    key: "wonder",
-    items: WONDER_TYPES,
-    required: false,
-    description: "World wonders",
-  },
-  {
-    name: "Natural Wonders",
-    key: "naturalWonder",
-    items: NATURAL_WONDER_TYPES,
-    required: false,
-    description: "Natural wonders",
-  },
-  {
-    name: "Tile Improvements",
-    key: "tileImprovement",
-    items: TILE_IMPROVEMENT_TYPES,
-    required: false,
-    description: "Tile improvements",
-  },
-];
+export const getTileCategories = async () => {
+  const [
+    terrainItems,
+    featureItems,
+    districtItems,
+    wonderItems,
+    naturalWonderItems,
+    tileImprovementItems,
+  ] = await Promise.all([
+    getTilesByType("terrain"),
+    getTilesByType("feature"),
+    getTilesByType("district"),
+    getTilesByType("Wonder"),
+    getTilesByType("Natural Wonder"),
+    getTilesByType("Tile Improvement"),
+  ]);
+
+  return [
+    {
+      name: "Terrain",
+      key: "terrain",
+      items: terrainItems.length > 0 ? terrainItems : TERRAIN_TYPES,
+      required: true,
+      description: "Base terrain type (required)",
+    },
+    {
+      name: "Features",
+      key: "feature",
+      items: featureItems.length > 0 ? featureItems : FEATURE_TYPES,
+      required: false,
+      description: "Natural features (optional)",
+    },
+    {
+      name: "Districts",
+      key: "district",
+      items: districtItems.length > 0 ? districtItems : DISTRICT_TYPES,
+      required: false,
+      description: "City districts",
+    },
+    {
+      name: "Wonders",
+      key: "wonder",
+      items: wonderItems.length > 0 ? wonderItems : WONDER_TYPES,
+      required: false,
+      description: "World wonders",
+    },
+    {
+      name: "Natural Wonders",
+      key: "naturalWonder",
+      items:
+        naturalWonderItems.length > 0
+          ? naturalWonderItems
+          : NATURAL_WONDER_TYPES,
+      required: false,
+      description: "Natural wonders",
+    },
+    {
+      name: "Tile Improvements",
+      key: "tileImprovement",
+      items:
+        tileImprovementItems.length > 0
+          ? tileImprovementItems
+          : TILE_IMPROVEMENT_TYPES,
+      required: false,
+      description: "Tile improvements",
+    },
+  ];
+};
 
 /**
  * Get display information for a tile (backward compatibility with old grid)

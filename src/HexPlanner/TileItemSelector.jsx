@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { getTileCategories } from "../utils/hexPlannerUtils";
 
 /**
@@ -9,22 +9,47 @@ const TileItemSelector = ({
   selectedFillItem,
   onFillItemChange,
 }) => {
-  // Get items based on selected type using the utility function
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Load tile categories on mount
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        setLoading(true);
+        const tileCategories = await getTileCategories();
+        setCategories(tileCategories);
+      } catch (error) {
+        console.error("Failed to load tile categories:", error);
+        setCategories([]); // Fallback to empty array
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadCategories();
+  }, []);
+
+  // Get items based on selected type
   const getItems = () => {
     if (selectedFillType === "river") {
       // Return single river option for simplified UX
       return ["Rivers"];
     }
 
-    const categories = getTileCategories();
     const category = categories.find((cat) => cat.key === selectedFillType);
     return category ? category.items : [];
   };
+
   const items = getItems();
 
-  // Don't render if no type is selected
-  if (!selectedFillType) {
-    return null;
+  // Don't render if no type is selected or still loading
+  if (!selectedFillType || loading) {
+    return loading ? (
+      <div className="mt-4 text-center text-sm text-gray-500">
+        Loading tiles...
+      </div>
+    ) : null;
   }
 
   return (

@@ -517,20 +517,23 @@ const CustomHexGrid = forwardRef(
       return tileData?.adjacencyYield || null;
     };
 
-    // Calculate effective range for a district with city-state bonuses
+    // Calculate effective range for a tile (districts and other items like wonders can define a range)
     const getEffectiveRange = (hex) => {
-      if (!hex.tile || !tileHasContent(hex.tile, "district")) return 0;
+      if (!hex.tile) return 0;
 
       const displayInfo = getTileDisplayInfo(hex.tile);
-      if (!displayInfo || displayInfo.type !== "district") return 0;
+      if (!displayInfo) return 0;
 
       const tileData = tiles.find((t) => t.name === displayInfo.name);
       if (!tileData || !tileData.range) return 0;
 
       let effectiveRange = tileData.range;
 
-      // Apply Mexico City suzerain bonus (+3 range for Industrial Zone, Entertainment Complex, Water Park)
-      if (cityStateSettings?.mexicoCitySuzerain) {
+      // Apply Mexico City suzerain bonus only for specific districts
+      if (
+        cityStateSettings?.mexicoCitySuzerain &&
+        displayInfo.type === "district"
+      ) {
         const affectedDistricts = [
           "Industrial Zone",
           "Entertainment Complex",

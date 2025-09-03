@@ -333,9 +333,9 @@ const HexPlannerContainer = ({ settings }) => {
   };
 
   const handleRadiusChange = (newRadius) => {
-  // Clamp radius to allowed range [1, 15]
-  const clamped = Math.max(1, Math.min(15, Number(newRadius) || 1));
-  setGridRadius(clamped);
+    // Clamp radius to allowed range [1, 15]
+    const clamped = Math.max(1, Math.min(15, Number(newRadius) || 1));
+    setGridRadius(clamped);
   };
 
   const handleReset = () => {

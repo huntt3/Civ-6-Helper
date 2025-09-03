@@ -796,6 +796,76 @@
       "type": "special",
       "appeal": 0,
       "keybind": "r"
+    },
+    {
+      "name": "Woods",
+      "type": "feature",
+      "appeal": 0
+    },
+    {
+      "name": "Rainforest",
+      "type": "feature",
+      "appeal": -1
+    },
+    {
+      "name": "Marsh",
+      "type": "feature",
+      "appeal": -1
+    },
+    {
+      "name": "Floodplains",
+      "type": "feature",
+      "appeal": -1
+    },
+    {
+      "name": "Hills",
+      "type": "feature",
+      "appeal": 0
+    },
+    {
+      "name": "Geothermal Fissure",
+      "type": "feature",
+      "appeal": 0
+    },
+    {
+      "name": "Reef",
+      "type": "feature",
+      "appeal": 1
+    },
+    {
+      "name": "Volcanic Soil",
+      "type": "feature",
+      "appeal": 0
+    },
+    {
+      "name": "Great Barrier Reef",
+      "type": "Natural Wonder",
+      "appeal": 3
+    },
+    {
+      "name": "Pamukkale",
+      "type": "Natural Wonder",
+      "appeal": 2
+    },
+    {
+      "name": "Everest",
+      "type": "Natural Wonder",
+      "appeal": 2
+    },
+    {
+      "name": "Mountain",
+      "type": "feature",
+      "appeal": 0
+    },
+    {
+      "name": "Sea Resource",
+      "type": "feature",
+      "appeal": 0
+    },
+    {
+      "name": "Strategic Resource",
+      "type": "feature",
+      "appeal": 0
     }
   ]
 }
