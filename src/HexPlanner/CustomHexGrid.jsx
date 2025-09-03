@@ -1000,10 +1000,74 @@ const CustomHexGrid = forwardRef(
                     )}
                     */}
 
-                    {/* Tile name text (hide terrain names — terrain shown only by indicator) */}
+                    {/* Tile content text - show features and improvements when not a district */}
+                    {hex.tile && !hex.tile.district && !imagePath && (
+                      <g pointerEvents="none">
+                        {/* Collect all non-terrain content to display */}
+                        {(() => {
+                          const contentToShow = [];
+
+                          // Add all features if present (new array format)
+                          if (
+                            hex.tile.features &&
+                            hex.tile.features.length > 0
+                          ) {
+                            contentToShow.push(...hex.tile.features);
+                          }
+                          // Backward compatibility: add legacy feature if present and not in features array
+                          else if (hex.tile.feature) {
+                            contentToShow.push(hex.tile.feature);
+                          }
+
+                          // Add wonder if present
+                          if (hex.tile.wonder) {
+                            contentToShow.push(hex.tile.wonder);
+                          }
+
+                          // Add natural wonder if present
+                          if (hex.tile.naturalWonder) {
+                            contentToShow.push(hex.tile.naturalWonder);
+                          }
+
+                          // Add tile improvement if present
+                          if (hex.tile.tileImprovement) {
+                            contentToShow.push(hex.tile.tileImprovement);
+                          }
+
+                          // Render each piece of content
+                          return contentToShow.map((content, index) => {
+                            const truncatedContent =
+                              content.length > 10
+                                ? content.substring(0, 10) + "..."
+                                : content;
+
+                            // Stack text vertically, starting from center
+                            const totalHeight = contentToShow.length * 12;
+                            const yOffset =
+                              centerY - totalHeight / 2 + index * 12;
+
+                            return (
+                              <text
+                                key={`content-${index}`}
+                                x={centerX}
+                                y={yOffset}
+                                textAnchor="middle"
+                                fontSize="8"
+                                fill="white"
+                                fontWeight="bold"
+                              >
+                                {truncatedContent}
+                              </text>
+                            );
+                          });
+                        })()}
+                      </g>
+                    )}
+
+                    {/* District name text (shown with image pattern) */}
                     {hex.tile &&
                       displayInfo &&
-                      displayInfo.type !== "terrain" &&
+                      displayInfo.type === "district" &&
                       !imagePath && (
                         <text
                           x={centerX}

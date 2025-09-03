@@ -155,7 +155,8 @@ export const validateTileConfiguration = (tileData) => {
  */
 export const getDefaultTile = () => ({
   terrain: null,
-  feature: null,
+  features: [], // Support multiple features as array
+  feature: null, // Keep for backward compatibility
   district: null,
   wonder: null,
   naturalWonder: null,
@@ -271,6 +272,10 @@ export const getTileDisplayInfo = (tileData) => {
   if (tileData.naturalWonder) {
     return { name: tileData.naturalWonder, type: "natural-wonder" };
   }
+  // Check both new features array and legacy feature field
+  if (tileData.features && tileData.features.length > 0) {
+    return { name: tileData.features[0], type: "feature" };
+  }
   if (tileData.feature) {
     return { name: tileData.feature, type: "feature" };
   }
@@ -290,6 +295,7 @@ export const tileHasActualContent = (tileData) => {
   if (!tileData) return false;
   return Boolean(
     tileData.terrain ||
+      (tileData.features && tileData.features.length > 0) ||
       tileData.feature ||
       tileData.district ||
       tileData.wonder ||

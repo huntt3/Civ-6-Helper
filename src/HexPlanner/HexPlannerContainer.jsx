@@ -216,6 +216,7 @@ const HexPlannerContainer = ({ settings }) => {
     // Handle erase mode - clear all tile data
     if (selectedFillType === "erase") {
       newTileData.terrain = null;
+      newTileData.features = [];
       newTileData.feature = null;
       newTileData.district = null;
       newTileData.wonder = null;
@@ -238,7 +239,15 @@ const HexPlannerContainer = ({ settings }) => {
       if (selectedFillType === "terrain") {
         newTileData.terrain = null;
       } else if (selectedFillType === "feature") {
-        newTileData.feature = null;
+        // Remove specific feature from features array or clear legacy feature
+        if (newTileData.features && newTileData.features.length > 0) {
+          newTileData.features = newTileData.features.filter(
+            (f) => f !== selectedFillItem
+          );
+        }
+        if (newTileData.feature === selectedFillItem) {
+          newTileData.feature = null;
+        }
       } else if (selectedFillType === "district") {
         newTileData.district = null;
       } else if (selectedFillType === "wonder") {
@@ -257,21 +266,36 @@ const HexPlannerContainer = ({ settings }) => {
         newTileData.district = null;
         newTileData.wonder = null;
         newTileData.naturalWonder = null;
-        newTileData.feature = selectedFillItem;
+
+        // Initialize features array if not exists
+        if (!newTileData.features) {
+          newTileData.features = [];
+        }
+
+        // Add feature to array if not already present
+        if (!newTileData.features.includes(selectedFillItem)) {
+          newTileData.features.push(selectedFillItem);
+        }
+
+        // Keep legacy feature field for backward compatibility (use first feature)
+        newTileData.feature = newTileData.features[0] || null;
       } else if (selectedFillType === "district") {
         // Clear conflicting items when placing districts
+        newTileData.features = [];
         newTileData.feature = null;
         newTileData.wonder = null;
         newTileData.naturalWonder = null;
         newTileData.district = selectedFillItem;
       } else if (selectedFillType === "wonder") {
         // Clear conflicting items when placing wonders
+        newTileData.features = [];
         newTileData.feature = null;
         newTileData.district = null;
         newTileData.naturalWonder = null;
         newTileData.wonder = selectedFillItem;
       } else if (selectedFillType === "naturalWonder") {
         // Clear conflicting items when placing natural wonders
+        newTileData.features = [];
         newTileData.feature = null;
         newTileData.district = null;
         newTileData.wonder = null;
@@ -400,46 +424,6 @@ const HexPlannerContainer = ({ settings }) => {
                     onFillTypeChange={setSelectedFillType}
                     onFillItemChange={setSelectedFillItem}
                   />
-                </div>
-              </div>
-
-              {/* Status and Controls - Overlay positioned at bottom */}
-              <div className="absolute bottom-4 left-4 right-4 z-10 pointer-events-none">
-                <div className="flex items-center justify-between pointer-events-auto">
-                  <div className="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
-                    <p className="text-sm text-gray-600">
-                      {selectedFillItem
-                        ? selectedFillType === "river"
-                          ? "Click on hex edges to add/remove rivers. Right-click edges to remove."
-                          : selectedFillType === "erase"
-                          ? "Click hexes to erase all data from tiles. Use keyboard shortcuts for quick selection."
-                          : `Click hexes to apply ${selectedFillItem}. Right-click to clear ${selectedFillType}. Use keyboard shortcuts for quick selection.`
-                        : "Select a tile type and item above to start configuring hexes."}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 ml-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
-                    <button
-                      onClick={handleResetView}
-                      className="px-3 py-1 text-xs bg-gray-500 text-white rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                    >
-                      Reset View
-                    </button>
-                    <label className="text-sm font-medium text-gray-700 mr-2">
-                      Grid Radius:
-                    </label>
-                    <input
-                      type="number"
-                      min={1}
-                      max={15}
-                      step={1}
-                      value={gridRadius}
-                      onChange={(e) =>
-                        handleRadiusChange(parseInt(e.target.value))
-                      }
-                      className="w-20 px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      aria-label="Grid radius (1-15)"
-                    />
-                  </div>
                 </div>
               </div>
 
