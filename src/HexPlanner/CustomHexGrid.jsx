@@ -418,6 +418,32 @@ const CustomHexGrid = forwardRef(
         });
       }
 
+      // Special: River Goddess (version-dependent bonuses)
+      if (adjacencySettings && adjacencySettingsData.length > 0) {
+        const riverGoddess = adjacencySettingsData.find(
+          (s) => s.title === "River Goddess" && adjacencySettings[s.originalKey]
+        );
+
+        if (riverGoddess && displayInfo.name === "Holy Site") {
+          // Determine if this Holy Site is adjacent to ANY river edge
+          const riverEdges = hex.tile?.hasRiverEdges;
+          const hasRiver =
+            riverEdges && Object.values(riverEdges).some((e) => e === true);
+          if (hasRiver) {
+            if (settings?.version === "Better Balanced Game Mod") {
+              // +1 faith adjacency (add to existing), +1 housing, +1 amenities
+              bonuses["faith"] = (bonuses["faith"] || 0) + 1;
+              bonuses["housing"] = (bonuses["housing"] || 0) + 1;
+              bonuses["amenities"] = (bonuses["amenities"] || 0) + 1;
+            } else {
+              // Gathering Storm (or default): +2 housing, +2 amenities (no faith change)
+              bonuses["housing"] = (bonuses["housing"] || 0) + 2;
+              bonuses["amenities"] = (bonuses["amenities"] || 0) + 2;
+            }
+          }
+        }
+      }
+
       return bonuses;
     };
 

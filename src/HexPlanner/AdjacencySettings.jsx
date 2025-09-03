@@ -141,6 +141,13 @@ const AdjacencySettings = ({
                                 : setting.districtAffected}
                             </span>
                           )}
+                          {setting.title === "River Goddess" && (
+                            <span>
+                              {settings?.version === "Better Balanced Game Mod"
+                                ? "Holy Site adjacent to a River: +1 Faith adjacency, +1 Housing, +1 Amenities"
+                                : "Holy Site adjacent to a River: +2 Housing, +2 Amenities"}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>
