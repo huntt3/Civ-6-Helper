@@ -49,9 +49,9 @@ const HexPlannerContainer = ({ settings }) => {
   const [panelPositions, setPanelPositions] = useState({
     "adjacency-legend": { x: 20, y: 250 },
     "terrain-legend": { x: 20, y: 400 },
-    "adjacency-settings": { x: 350, y: 20 },
-    "citystate-settings": { x: 20, y: 20 },
-    "keybind-settings": { x: 350, y: 250 },
+    "adjacency-settings": { x: 350, y: 120 },
+    "citystate-settings": { x: 20, y: 120 },
+    "keybind-settings": { x: 350, y: 320 },
   });
 
   const hexGridRef = useRef(null);
@@ -372,47 +372,6 @@ const HexPlannerContainer = ({ settings }) => {
         ariaLabel="Hex Planner"
       >
         <div className="p-4">
-          {/* Tile Configuration Tool - Collapsible on Hover */}
-          <TileConfigurationTool
-            selectedFillType={selectedFillType}
-            selectedFillItem={selectedFillItem}
-            onFillTypeChange={setSelectedFillType}
-            onFillItemChange={setSelectedFillItem}
-          />
-
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-sm text-gray-600">
-              {selectedFillItem
-                ? selectedFillType === "river"
-                  ? "Click on hex edges to add/remove rivers. Right-click edges to remove."
-                  : selectedFillType === "erase"
-                  ? "Click hexes to erase all data from tiles. Use keyboard shortcuts for quick selection."
-                  : `Click hexes to apply ${selectedFillItem}. Right-click to clear ${selectedFillType}. Use keyboard shortcuts for quick selection.`
-                : "Select a tile type and item above to start configuring hexes."}
-            </p>
-            <div className="flex items-center gap-2 ml-4">
-              <button
-                onClick={handleResetView}
-                className="px-3 py-1 text-xs bg-gray-500 text-white rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
-              >
-                Reset View
-              </button>
-              <label className="text-sm font-medium text-gray-700 mr-2">
-                Grid Radius:
-              </label>
-              <input
-                type="number"
-                min={1}
-                max={15}
-                step={1}
-                value={gridRadius}
-                onChange={(e) => handleRadiusChange(parseInt(e.target.value))}
-                className="w-20 px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                aria-label="Grid radius (1-15)"
-              />
-            </div>
-          </div>
-
           <DndContext
             onDragEnd={handleDragEnd}
             modifiers={[restrictToParentElement]}
@@ -431,6 +390,58 @@ const HexPlannerContainer = ({ settings }) => {
                 adjacencySettings={adjacencySettings}
                 cityStateSettings={cityStateSettings}
               />
+
+              {/* Tile Configuration Tool - Overlay positioned at top */}
+              <div className="absolute top-4 left-4 right-4 z-10 pointer-events-none">
+                <div className="pointer-events-auto">
+                  <TileConfigurationTool
+                    selectedFillType={selectedFillType}
+                    selectedFillItem={selectedFillItem}
+                    onFillTypeChange={setSelectedFillType}
+                    onFillItemChange={setSelectedFillItem}
+                  />
+                </div>
+              </div>
+
+              {/* Status and Controls - Overlay positioned at bottom */}
+              <div className="absolute bottom-4 left-4 right-4 z-10 pointer-events-none">
+                <div className="flex items-center justify-between pointer-events-auto">
+                  <div className="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
+                    <p className="text-sm text-gray-600">
+                      {selectedFillItem
+                        ? selectedFillType === "river"
+                          ? "Click on hex edges to add/remove rivers. Right-click edges to remove."
+                          : selectedFillType === "erase"
+                          ? "Click hexes to erase all data from tiles. Use keyboard shortcuts for quick selection."
+                          : `Click hexes to apply ${selectedFillItem}. Right-click to clear ${selectedFillType}. Use keyboard shortcuts for quick selection.`
+                        : "Select a tile type and item above to start configuring hexes."}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 ml-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
+                    <button
+                      onClick={handleResetView}
+                      className="px-3 py-1 text-xs bg-gray-500 text-white rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                    >
+                      Reset View
+                    </button>
+                    <label className="text-sm font-medium text-gray-700 mr-2">
+                      Grid Radius:
+                    </label>
+                    <input
+                      type="number"
+                      min={1}
+                      max={15}
+                      step={1}
+                      value={gridRadius}
+                      onChange={(e) =>
+                        handleRadiusChange(parseInt(e.target.value))
+                      }
+                      className="w-20 px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      aria-label="Grid radius (1-15)"
+                    />
+                  </div>
+                </div>
+              </div>
 
               {/* Draggable Panels */}
               <AdjacencyLegend

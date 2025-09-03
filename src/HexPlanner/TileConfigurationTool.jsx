@@ -16,15 +16,15 @@ const TileConfigurationTool = ({
 
   return (
     <div
-      className="mb-4 transition-all duration-300 ease-in-out"
+      className="transition-all duration-300 ease-in-out"
       onMouseEnter={() => setToolHovered(true)}
       onMouseLeave={() => setToolHovered(false)}
     >
       {/* Collapsed State - Show only active selection */}
       {!toolHovered && (
-        <div className="p-2 bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 hover:border-blue-400 transition-colors">
+        <div className="p-2 bg-white/80 backdrop-blur-sm rounded-lg border-2 border-dashed border-gray-300/80 hover:border-blue-400 transition-colors shadow-lg">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-gray-700">
               {selectedFillItem ? (
                 <span className="text-blue-700 font-medium">
                   Active: {selectedFillItem} ({selectedFillType})
@@ -40,9 +40,9 @@ const TileConfigurationTool = ({
 
       {/* Expanded State - Full Configuration */}
       {toolHovered && (
-        <div className="p-4 bg-gray-50 rounded-lg border shadow-lg">
+        <div className="p-4 bg-white/85 backdrop-blur-sm rounded-lg border shadow-xl">
           <div className="mb-3">
-            <h3 className="text-sm font-medium mb-2">
+            <h3 className="text-sm font-medium mb-2 text-gray-800">
               Tile Configuration Tool
             </h3>
             <p className="text-xs text-gray-600 mb-3">
@@ -50,7 +50,7 @@ const TileConfigurationTool = ({
               Right-click to clear the selected type.
             </p>
             {selectedFillItem && (
-              <div className="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded mb-3">
+              <div className="text-xs text-blue-700 bg-blue-100/80 px-2 py-1 rounded mb-3">
                 Active: {selectedFillItem} ({selectedFillType})
               </div>
             )}

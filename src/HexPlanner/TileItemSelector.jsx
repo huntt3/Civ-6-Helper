@@ -36,8 +36,8 @@ const TileItemSelector = ({
       // Return single river option for simplified UX
       return ["Rivers"];
     }
-  const category = categories.find((cat) => cat.key === selectedFillType);
-  return category ? category.items : [];
+    const category = categories.find((cat) => cat.key === selectedFillType);
+    return category ? category.items : [];
   };
 
   const items = getItems();
