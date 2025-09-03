@@ -261,6 +261,58 @@ const CustomHexGrid = forwardRef(
       return `M ${points[0].x} ${points[0].y} L ${points[1].x} ${points[1].y} L ${points[2].x} ${points[2].y} L ${points[3].x} ${points[3].y} Z`;
     };
 
+    // Generate pointy-bottom square path for appeal indicator (mirrored)
+    /* Disabled: appeal indicators are not ready for production
+    const generateAppealIndicator = (centerX, centerY, size) => {
+      const indicatorSize = size * 0.3;
+      const bottomY = centerY + size * 0.7; // Position at bottom of hex
+
+      const points = [
+        { x: centerX, y: bottomY - indicatorSize * 0.5 }, // top point of diamond
+        { x: centerX + indicatorSize * 0.5, y: bottomY }, // right
+        { x: centerX, y: bottomY + indicatorSize * 0.5 }, // bottom
+        { x: centerX - indicatorSize * 0.5, y: bottomY }, // left
+      ];
+
+      return `M ${points[0].x} ${points[0].y} L ${points[1].x} ${points[1].y} L ${points[2].x} ${points[2].y} L ${points[3].x} ${points[3].y} Z`;
+    };
+    */
+
+    // Disabled appeal coloring — appeal indicator currently turned off
+    /*
+    const getAppealColor = (appeal) => {
+      if (appeal > 0) return "#10b981"; // green
+      if (appeal < 0) return "#ef4444"; // red
+      return "#6b7280"; // neutral gray
+    };
+    */
+
+    // Calculate total appeal for a hex tile (disabled)
+    /*
+    const calculateTileAppeal = (hex) => {
+      if (!hex.tile) return 0;
+
+      let totalAppeal = 0;
+
+      // Get appeal from each component of the tile
+      const checkAppeal = (tileName) => {
+        if (!tileName) return 0;
+        const tileData = tiles.find((t) => t.name === tileName);
+        return tileData?.appeal || 0;
+      };
+
+      // Add appeal from each tile component
+      totalAppeal += checkAppeal(hex.tile.terrain);
+      totalAppeal += checkAppeal(hex.tile.feature);
+      totalAppeal += checkAppeal(hex.tile.district);
+      totalAppeal += checkAppeal(hex.tile.wonder);
+      totalAppeal += checkAppeal(hex.tile.naturalWonder);
+      totalAppeal += checkAppeal(hex.tile.tileImprovement);
+
+      return totalAppeal;
+    };
+    */
+
     // Calculate adjacency bonuses for a district (returns object with multiple yield types)
     const calculateAdjacencyBonuses = (hex) => {
       if (!hex.tile || !tileHasContent(hex.tile, "district")) return {};
@@ -851,6 +903,8 @@ const CustomHexGrid = forwardRef(
                 const imagePath = hex.tile ? getImagePath(hex.tile) : null;
                 const adjacencyBonuses = calculateAdjacencyBonuses(hex);
                 const yieldTypes = Object.keys(adjacencyBonuses);
+                // Appeal indicator disabled — set to 0 to avoid rendering
+                const tileAppeal = 0; // calculateTileAppeal(hex);
                 const isHighlighted = isHexHighlighted(hex);
 
                 return (
@@ -891,6 +945,31 @@ const CustomHexGrid = forwardRef(
                         pointerEvents="none"
                       />
                     )}
+
+                    {/* Appeal indicator - DISABLED
+                    {hex.tile && tileAppeal !== 0 && (
+                      <g pointerEvents="none">
+                        <path
+                          d={generateAppealIndicator(centerX, centerY, size)}
+                          fill={getAppealColor(tileAppeal)}
+                          stroke="#000000"
+                          strokeWidth="1"
+                          opacity="0.95"
+                        />
+                        <text
+                          x={centerX}
+                          y={centerY + size * 0.72}
+                          textAnchor="middle"
+                          fontSize="8"
+                          fill="white"
+                          fontWeight="bold"
+                          pointerEvents="none"
+                        >
+                          {tileAppeal}
+                        </text>
+                      </g>
+                    )}
+                    */}
 
                     {/* Tile name text (hide terrain names — terrain shown only by indicator) */}
                     {hex.tile &&

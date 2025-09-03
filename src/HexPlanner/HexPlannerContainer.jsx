@@ -333,7 +333,9 @@ const HexPlannerContainer = ({ settings }) => {
   };
 
   const handleRadiusChange = (newRadius) => {
-    setGridRadius(newRadius);
+  // Clamp radius to allowed range [1, 15]
+  const clamped = Math.max(1, Math.min(15, Number(newRadius) || 1));
+  setGridRadius(clamped);
   };
 
   const handleReset = () => {
@@ -395,21 +397,19 @@ const HexPlannerContainer = ({ settings }) => {
               >
                 Reset View
               </button>
-              <label className="text-sm font-medium text-gray-700">
-                Grid Size:
+              <label className="text-sm font-medium text-gray-700 mr-2">
+                Grid Radius:
               </label>
-              <select
+              <input
+                type="number"
+                min={1}
+                max={15}
+                step={1}
                 value={gridRadius}
                 onChange={(e) => handleRadiusChange(parseInt(e.target.value))}
-                className="px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value={2}>Small (2)</option>
-                <option value={3}>Medium (3)</option>
-                <option value={4}>Large (4)</option>
-                <option value={5}>Extra Large (5)</option>
-                <option value={6}>Extra Large (6)</option>
-                <option value={7}>Huge (7)</option>
-              </select>
+                className="w-20 px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="Grid radius (1-15)"
+              />
             </div>
           </div>
 
