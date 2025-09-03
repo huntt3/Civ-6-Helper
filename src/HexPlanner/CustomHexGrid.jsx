@@ -234,7 +234,7 @@ const CustomHexGrid = forwardRef(
     // Get terrain color mapping
     const getTerrainColor = (terrainType) => {
       const terrainColors = {
-        Plains: "#fbbf24", // yellow
+        Plains: "#fde68a", // yellow
         Grassland: "#10b981", // green
         Desert: "#f59e0b", // orange
         Tundra: "#6b7280", // gray
@@ -861,7 +861,12 @@ const CustomHexGrid = forwardRef(
                       fill={
                         hex.tile && imagePath
                           ? `url(#pattern-${hex.id.replace(",", "-")})`
-                          : tileHasActualContent(hex.tile)
+                          : hex.tile &&
+                            (hex.tile.district ||
+                              hex.tile.wonder ||
+                              hex.tile.naturalWonder ||
+                              hex.tile.feature ||
+                              hex.tile.tileImprovement)
                           ? "#10b981"
                           : "#e5e7eb"
                       }
@@ -887,22 +892,25 @@ const CustomHexGrid = forwardRef(
                       />
                     )}
 
-                    {/* Tile name text */}
-                    {hex.tile && displayInfo && !imagePath && (
-                      <text
-                        x={centerX}
-                        y={centerY - 5}
-                        textAnchor="middle"
-                        fontSize="8"
-                        fill="white"
-                        fontWeight="bold"
-                        pointerEvents="none"
-                      >
-                        {displayInfo.name.length > 10
-                          ? displayInfo.name.substring(0, 10) + "..."
-                          : displayInfo.name}
-                      </text>
-                    )}
+                    {/* Tile name text (hide terrain names — terrain shown only by indicator) */}
+                    {hex.tile &&
+                      displayInfo &&
+                      displayInfo.type !== "terrain" &&
+                      !imagePath && (
+                        <text
+                          x={centerX}
+                          y={centerY - 5}
+                          textAnchor="middle"
+                          fontSize="8"
+                          fill="white"
+                          fontWeight="bold"
+                          pointerEvents="none"
+                        >
+                          {displayInfo.name.length > 10
+                            ? displayInfo.name.substring(0, 10) + "..."
+                            : displayInfo.name}
+                        </text>
+                      )}
 
                     {/* Adjacency bonuses for districts */}
                     {hex.tile &&

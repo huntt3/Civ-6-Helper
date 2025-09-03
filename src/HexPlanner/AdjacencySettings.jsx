@@ -15,44 +15,80 @@ const AdjacencySettings = ({
   const [adjacencySettings, setAdjacencySettings] = useState({});
   const [activeSettings, setActiveSettings] = useState({});
   const [collapsedSections, setCollapsedSections] = useState({});
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
-  // Load adjacency settings data on component mount
+  // Load adjacency settings and then load active settings from localStorage
   useEffect(() => {
     fetch("./jsonFiles/AdjacencySettings.json")
       .then((res) => res.json())
       .then((data) => {
         setAdjacencySettings(data.AdjacencySettings || {});
+        // After adjacencySettings are set, load active settings from localStorage
+        const savedSettings = localStorage.getItem(
+          "civ6-helper-hex-planner-adjacency-settings"
+        );
+        if (savedSettings) {
+          setActiveSettings(JSON.parse(savedSettings));
+        }
+        setIsInitialLoad(false);
       })
-      .catch(() => setAdjacencySettings({}));
+      .catch(() => {
+        setAdjacencySettings({});
+        setIsInitialLoad(false);
+      });
   }, []);
 
-  // Load active settings from localStorage
+  // Save active settings to localStorage when changed (but not on initial load)
   useEffect(() => {
-    const savedSettings = localStorage.getItem(
-      "civ6-helper-hex-planner-adjacency-settings"
-    );
-    if (savedSettings) {
-      setActiveSettings(JSON.parse(savedSettings));
+    if (!isInitialLoad) {
+      localStorage.setItem(
+        "civ6-helper-hex-planner-adjacency-settings",
+        JSON.stringify(activeSettings)
+      );
+      // Also pass to parent component
+      if (onSettingsChange) {
+        onSettingsChange(activeSettings);
+      }
     }
-  }, []);
-
-  // Save active settings to localStorage when changed
-  useEffect(() => {
-    localStorage.setItem(
-      "civ6-helper-hex-planner-adjacency-settings",
-      JSON.stringify(activeSettings)
-    );
-    // Also pass to parent component
-    if (onSettingsChange) {
-      onSettingsChange(activeSettings);
-    }
-  }, [activeSettings, onSettingsChange]);
+  }, [activeSettings, onSettingsChange, isInitialLoad]);
 
   const handleSettingToggle = (settingKey, checked) => {
-    setActiveSettings((prev) => ({
-      ...prev,
-      [settingKey]: checked,
-    }));
+    // Enforce mutual exclusivity for Pantheon, Leader, and Golden Age Dedication types
+    setActiveSettings((prev) => {
+      const next = { ...prev, [settingKey]: checked };
+
+      if (checked) {
+        // Derive section and index from key pattern: SectionName-index
+        const [sectionName, rawIndex] = settingKey.split("-");
+        const index = parseInt(rawIndex, 10);
+        const sectionArray = adjacencySettings[sectionName];
+        const currentSetting = sectionArray ? sectionArray[index] : null;
+
+        const EXCLUSIVE_TYPES = new Set([
+          "Pantheon",
+          "Leader",
+          "Golden Age Dedication",
+        ]);
+
+        if (currentSetting && EXCLUSIVE_TYPES.has(currentSetting.type)) {
+          // Turn off every other setting having the same type
+          Object.entries(adjacencySettings).forEach(([secName, arr]) => {
+            if (Array.isArray(arr)) {
+              arr.forEach((s, i) => {
+                if (s.type === currentSetting.type) {
+                  const key = `${secName}-${i}`;
+                  if (key !== settingKey) {
+                    next[key] = false;
+                  }
+                }
+              });
+            }
+          });
+        }
+      }
+
+      return next;
+    });
   };
 
   const toggleSection = (sectionName) => {
