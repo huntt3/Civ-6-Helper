@@ -361,25 +361,39 @@ const CustomHexGrid = forwardRef(
           return;
         }
 
+        // Check all adjacency categories - tiles can contribute to multiple categories
+        let tileBonus = 0;
+
         // Check minor adjacencies (0.5 points)
         if (tileData.districtMinorAdjacencies?.includes(adjacentTileName)) {
-          bonus += 0.5;
+          tileBonus += 0.5;
         }
+
+        // Check other minor adjacencies (0.5 points)
+        if (tileData.otherMinorAdjacencies?.includes(adjacentTileName)) {
+          tileBonus += 0.5;
+        }
+
         // Check normal adjacencies (1 point)
-        else if (tileData.normalAdjacencies?.includes(adjacentTileName)) {
-          bonus += 1;
+        if (tileData.normalAdjacencies?.includes(adjacentTileName)) {
+          tileBonus += 1;
         }
+
         // Check major adjacencies (2 points)
-        else if (tileData.majorAdjacencies?.includes(adjacentTileName)) {
+        if (tileData.majorAdjacencies?.includes(adjacentTileName)) {
           // Skip "River" from majorAdjacencies for Commercial Hub - handled separately
           if (
             displayInfo.name === "Commercial Hub" &&
             adjacentTileName === "River"
           ) {
-            return;
+            // Don't add major adjacency bonus for rivers on Commercial Hub
+          } else {
+            tileBonus += 2;
           }
-          bonus += 2;
         }
+
+        // Add the accumulated bonus for this adjacent tile
+        bonus += tileBonus;
       });
 
       // Special Commercial Hub river bonus: +2 if adjacent to one or more rivers (max +2 from rivers)

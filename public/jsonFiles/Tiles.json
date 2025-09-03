@@ -58,6 +58,8 @@
         "Harbor",
         "Industrial Zone",
         "Preserve",
+        "Entertainment Complex",
+        "Water Park",
         "Aerodrome",
         "Spaceport",
         "Government Plaza",
@@ -155,6 +157,7 @@
       "requirement": "Celestial Navigation",
       "appeal": 0,
       "districtMinorAdjacencies": [
+        "City Center",
         "Campus",
         "Theater Square",
         "Holy Site",
@@ -202,6 +205,9 @@
         "Spaceport",
         "Government Plaza",
         "Diplomatic Quarter",
+        "Aqueduct",
+        "Canal",
+        "Dam",
         "Neighborhood"
       ],
       "otherMinorAdjacencies": ["Mine", "Lumber Mill"],
@@ -297,6 +303,8 @@
         "Harbor",
         "Industrial Zone",
         "Preserve",
+        "Entertainment Complex",
+        "Water Park",
         "Aerodrome",
         "Spaceport",
         "Government Plaza",
@@ -338,6 +346,7 @@
       "requirement": "Celestial Navigation",
       "appeal": 0,
       "districtMinorAdjacencies": [
+        "City Center",
         "Campus",
         "Theater Square",
         "Holy Site",
@@ -385,6 +394,9 @@
         "Spaceport",
         "Government Plaza",
         "Diplomatic Quarter",
+        "Aqueduct",
+        "Canal",
+        "Dam",
         "Neighborhood"
       ],
       "otherMinorAdjacencies": ["Mine", "Lumber Mill"],
@@ -506,6 +518,9 @@
         "Spaceport",
         "Government Plaza",
         "Diplomatic Quarter",
+        "Aqueduct",
+        "Canal",
+        "Dam",
         "Neighborhood"
       ],
       "otherMinorAdjacencies": ["Mine", "Lumber Mill"],
@@ -520,6 +535,7 @@
       "requirement": "Celestial Navigation",
       "appeal": 0,
       "districtMinorAdjacencies": [
+        "City Center",
         "Campus",
         "Theater Square",
         "Holy Site",
