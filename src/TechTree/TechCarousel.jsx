@@ -603,14 +603,17 @@ const TechCarousel = forwardRef(
                     const isDraggable = draggableCards.includes(tech.name);
 
                     let extraClass = "";
-                    // Only yellow rings for all hover states
-                    if (
-                      hoveredTech &&
-                      (tech.name === hoveredTech.name ||
-                        boostsSet.has(tech.name) ||
-                        boostedBySet.has(tech.name))
-                    ) {
-                      extraClass = "ring-7 ring-amber-400";
+                    if (hoveredTech && tech.name === hoveredTech.name) {
+                      // The hovered tech itself gets slate highlight
+                      extraClass = "ring-4 ring-slate-300 dark:ring-slate-600";
+                    } else if (hoveredTech && boostsSet.has(tech.name)) {
+                      // Cards that boost the hovered tech get yellow highlight
+                      extraClass =
+                        "ring-4 ring-yellow-300 dark:ring-yellow-700";
+                    } else if (hoveredTech && boostedBySet.has(tech.name)) {
+                      // Cards that are boosted by the hovered tech get emerald highlight
+                      extraClass =
+                        "ring-4 ring-emerald-300 dark:ring-emerald-500";
                     }
 
                     if (isDraggable) {
