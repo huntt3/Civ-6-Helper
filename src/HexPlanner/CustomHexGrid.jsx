@@ -327,6 +327,7 @@ const CustomHexGrid = forwardRef(
 
       const adjacentHexes = getAdjacentHexes(hex);
       let bonus = 0;
+      let minorAdjacencyCount = 0; // Track minor adjacencies separately to floor them
       let hasRiverAdjacency = false;
 
       // Check for river adjacency (special case for Commercial Hub)
@@ -342,6 +343,73 @@ const CustomHexGrid = forwardRef(
 
       // Check version-specific bonuses
       const isBBG = settings?.version === "Better Balanced Game Mod";
+      const isGS =
+        settings?.version === "Gathering Storm" || !settings?.version; // Default to GS if no version specified
+
+      // Special case for Seowon district
+      if (displayInfo.name === "Seowon") {
+        // Base adjacency bonus depends on version
+        if (isBBG) {
+          bonus += 1; // +1 base science for BBG
+        } else if (isGS) {
+          bonus += 4; // +4 base science for Gathering Storm
+        }
+
+        // Count adjacent districts for version-specific penalties/bonuses
+        let adjacentDistrictCount = 0;
+        let adjacentMineCount = 0;
+
+        adjacentHexes.forEach((adjacentHex) => {
+          if (!adjacentHex.tile) return;
+
+          const adjacentDisplayInfo = getTileDisplayInfo(adjacentHex.tile);
+          if (!adjacentDisplayInfo) return;
+
+          // Count districts
+          if (adjacentDisplayInfo.type === "district") {
+            adjacentDistrictCount += 1;
+          }
+
+          // Count mines for BBG
+          if (isBBG && adjacentDisplayInfo.name === "Mine") {
+            adjacentMineCount += 1;
+          }
+        });
+
+        // Apply version-specific district effects
+        if (isGS) {
+          // Gathering Storm: -1 science for each adjacent district
+          bonus -= adjacentDistrictCount;
+        } else if (isBBG) {
+          // BBG: minor adjacency from mines (floored)
+          bonus += Math.floor(adjacentMineCount / 2);
+        }
+
+        // For Seowon, we bypass the normal adjacency calculation but still apply adjacency settings
+        const primaryYieldType = tileData.adjacencyYield || "science";
+        let bonuses = { [primaryYieldType]: Math.max(0, bonus) }; // Ensure bonus doesn't go negative
+
+        // Apply adjacency settings (multipliers and adjacent tile bonuses) to Seowon
+        if (adjacencySettings && adjacencySettingsData.length > 0) {
+          adjacencySettingsData.forEach((setting) => {
+            if (!adjacencySettings[setting.originalKey]) return; // Setting not enabled using original key
+
+            // Check if this district is affected by the setting
+            const isAffected = Array.isArray(setting.districtAffected)
+              ? setting.districtAffected.includes(displayInfo.name)
+              : setting.districtAffected === displayInfo.name;
+
+            if (isAffected) {
+              // Apply multiplier settings
+              if (setting.multiplier) {
+                bonuses[primaryYieldType] *= setting.multiplier;
+              }
+            }
+          });
+        }
+
+        return bonuses;
+      }
 
       adjacentHexes.forEach((adjacentHex) => {
         if (!adjacentHex.tile) return;
@@ -362,24 +430,23 @@ const CustomHexGrid = forwardRef(
         }
 
         // Check all adjacency categories - tiles can contribute to multiple categories
-        let tileBonus = 0;
 
-        // Check minor adjacencies (0.5 points)
+        // Check minor adjacencies (count for flooring)
         if (tileData.districtMinorAdjacencies?.includes(adjacentTileName)) {
-          tileBonus += 0.5;
+          minorAdjacencyCount += 1;
         }
 
-        // Check other minor adjacencies (0.5 points)
+        // Check other minor adjacencies (count for flooring)
         if (tileData.otherMinorAdjacencies?.includes(adjacentTileName)) {
-          tileBonus += 0.5;
+          minorAdjacencyCount += 1;
         }
 
-        // Check normal adjacencies (1 point)
+        // Check normal adjacencies (1 point each)
         if (tileData.normalAdjacencies?.includes(adjacentTileName)) {
-          tileBonus += 1;
+          bonus += 1;
         }
 
-        // Check major adjacencies (2 points)
+        // Check major adjacencies (2 points each)
         if (tileData.majorAdjacencies?.includes(adjacentTileName)) {
           // Skip "River" from majorAdjacencies for Commercial Hub - handled separately
           if (
@@ -388,13 +455,13 @@ const CustomHexGrid = forwardRef(
           ) {
             // Don't add major adjacency bonus for rivers on Commercial Hub
           } else {
-            tileBonus += 2;
+            bonus += 2;
           }
         }
-
-        // Add the accumulated bonus for this adjacent tile
-        bonus += tileBonus;
       });
+
+      // Floor minor adjacencies: every 2 minor adjacencies = +1 bonus
+      bonus += Math.floor(minorAdjacencyCount / 2);
 
       // Special Commercial Hub river bonus: +2 if adjacent to one or more rivers (max +2 from rivers)
       if (displayInfo.name === "Commercial Hub" && hasRiverAdjacency) {
@@ -590,6 +657,9 @@ const CustomHexGrid = forwardRef(
 
       const displayInfo = getTileDisplayInfo(hex.tile);
       if (!displayInfo || displayInfo.type !== "district") return false;
+
+      // Special cases that have hardcoded adjacency logic
+      if (displayInfo.name === "Seowon") return true;
 
       const tileData = tiles.find((t) => t.name === displayInfo.name);
       if (!tileData) return false;

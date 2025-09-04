@@ -4,37 +4,37 @@
       {
         "title": "Double Campus Adjacency",
         "type": "Policy Card",
-        "districtAffected": "Campus",
+        "districtAffected": ["Campus", "Observatory", "Seowon"],
         "multiplier": 2
       },
       {
         "title": "Double Holy Site Adjacency",
         "type": "Policy Card",
-        "districtAffected": "Holy Site",
+        "districtAffected": ["Holy Site", "Lavra"],
         "multiplier": 2
       },
       {
         "title": "Double Harbor Adjacency",
         "type": "Policy Card",
-        "districtAffected": "Harbor",
+        "districtAffected": ["Harbor", "Cothon", "Royal Navy Dockyard"],
         "multiplier": 2
       },
       {
         "title": "Double Theater Square Adjacency",
         "type": "Policy Card",
-        "districtAffected": "Theater Square",
+        "districtAffected": ["Theater Square", "Acropolis"],
         "multiplier": 2
       },
       {
         "title": "Double Industrial Zone Adjacency",
         "type": "Policy Card",
-        "districtAffected": "Industrial Zone",
+        "districtAffected": ["Industrial Zone", "Hansa", "Oppidum"],
         "multiplier": 2
       },
       {
         "title": "Double Commercial Hub Adjacency",
         "type": "Policy Card",
-        "districtAffected": "Commercial Hub",
+        "districtAffected": ["Commercial Hub", "Suguba"],
         "multiplier": 2
       }
     ],

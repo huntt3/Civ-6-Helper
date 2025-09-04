@@ -98,6 +98,19 @@ const AdjacencySettings = ({
     }));
   };
 
+  // Format districtAffected which can be a string or an array
+  const formatDistrictList = (districts) => {
+    if (Array.isArray(districts)) {
+      if (districts.length === 0) return "";
+      if (districts.length === 1) return districts[0];
+      if (districts.length === 2) return `${districts[0]} and ${districts[1]}`;
+      return `${districts.slice(0, -1).join(", ")}, and ${
+        districts[districts.length - 1]
+      }`;
+    }
+    return districts || "";
+  };
+
   return (
     <DraggablePanel
       id="adjacency-settings"
@@ -155,7 +168,7 @@ const AdjacencySettings = ({
                           {setting.multiplier && (
                             <span>
                               {setting.multiplier}x adjacency for{" "}
-                              {setting.districtAffected}
+                              {formatDistrictList(setting.districtAffected)}
                             </span>
                           )}
                           {setting.adjacentTile && (
@@ -171,10 +184,7 @@ const AdjacencySettings = ({
                                 "_",
                                 " "
                               )}{" "}
-                              for{" "}
-                              {Array.isArray(setting.districtAffected)
-                                ? setting.districtAffected.join(", ")
-                                : setting.districtAffected}
+                              for {formatDistrictList(setting.districtAffected)}
                             </span>
                           )}
                           {setting.title === "River Goddess" && (
