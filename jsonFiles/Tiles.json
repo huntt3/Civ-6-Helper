@@ -49,7 +49,7 @@
         "Thành"
       ],
       "otherMinorAdjacencies": [],
-      "normalAdjacencies": ["Mountain"],
+      "normalAdjacencies": ["Government Plaza", "Mountain"],
       "majorAdjacencies": [
         "Geothermal Fissure",
         "Reef",
@@ -102,7 +102,7 @@
         "Thành"
       ],
       "otherMinorAdjacencies": [],
-      "normalAdjacencies": [],
+      "normalAdjacencies": ["Government Plaza"],
       "majorAdjacencies": [
         "Wonder",
         "Entertainment Complex",
@@ -155,7 +155,7 @@
         "Thành"
       ],
       "otherMinorAdjacencies": ["Woods"],
-      "normalAdjacencies": ["Mountain", "Pamukkale"],
+      "normalAdjacencies": ["Government Plaza", "Mountain", "Pamukkale"],
       "majorAdjacencies": ["Natural Wonder"],
       "adjacencyYield": "faith",
       "keybind": "f"
@@ -210,7 +210,7 @@
         "Thành"
       ],
       "otherMinorAdjacencies": [],
-      "normalAdjacencies": [],
+      "normalAdjacencies": ["Government Plaza"],
       "majorAdjacencies": ["Harbor", "Pamukkale"],
       "adjacencyYield": "gold",
       "keybind": "c"
@@ -258,7 +258,7 @@
         "Thành"
       ],
       "otherMinorAdjacencies": [],
-      "normalAdjacencies": ["Sea Resource"],
+      "normalAdjacencies": ["Government Plaza", "Sea Resource"],
       "majorAdjacencies": ["City Center"],
       "adjacencyYield": "gold",
       "keybind": "h"
@@ -307,7 +307,7 @@
         "Thành"
       ],
       "otherMinorAdjacencies": ["Mine", "Lumber Mill"],
-      "normalAdjacencies": ["Quarry", "Strategic Resource"],
+      "normalAdjacencies": ["Government Plaza", "Quarry", "Strategic Resource"],
       "majorAdjacencies": ["Aqueduct", "Bath", "Canal", "Dam"],
       "adjacencyYield": "production",
       "keybind": "i"
@@ -463,7 +463,7 @@
         "Suguba",
         "Thành"
       ],
-      "normalAdjacencies": ["City Center"],
+      "normalAdjacencies": ["Government Plaza", "City Center"],
       "majorAdjacencies": [
         "Wonder",
         "Entertainment Complex",
@@ -531,7 +531,7 @@
         "Thành"
       ],
       "otherMinorAdjacencies": [],
-      "normalAdjacencies": ["Sea Resource"],
+      "normalAdjacencies": ["Government Plaza", "Sea Resource"],
       "majorAdjacencies": ["City Center"],
       "adjacencyYield": "gold"
     },
@@ -580,7 +580,12 @@
         "Thành"
       ],
       "otherMinorAdjacencies": ["Mine", "Lumber Mill"],
-      "normalAdjacencies": ["Quarry", "Strategic Resource", "Bonus Resource"],
+      "normalAdjacencies": [
+        "Government Plaza",
+        "Quarry",
+        "Strategic Resource",
+        "Bonus Resource"
+      ],
       "majorAdjacencies": ["Aqueduct", "Bath", "Canal", "Dam"],
       "adjacencyYield": "production"
     },
@@ -643,7 +648,7 @@
         "Thành"
       ],
       "otherMinorAdjacencies": ["Woods"],
-      "normalAdjacencies": ["Mountain", "Pamukkale"],
+      "normalAdjacencies": ["Government Plaza", "Mountain", "Pamukkale"],
       "majorAdjacencies": ["Natural Wonder"],
       "adjacencyYield": "faith"
     },
@@ -698,7 +703,7 @@
         "Thành"
       ],
       "otherMinorAdjacencies": ["Farm"],
-      "normalAdjacencies": [],
+      "normalAdjacencies": ["Government Plaza"],
       "majorAdjacencies": ["Plantation", "Great Barrier Reef", "Pamukkale"],
       "adjacencyYield": "science"
     },
@@ -747,7 +752,7 @@
         "Thành"
       ],
       "otherMinorAdjacencies": ["Mine", "Lumber Mill"],
-      "normalAdjacencies": [],
+      "normalAdjacencies": ["Government Plaza"],
       "majorAdjacencies": ["Quarry", "Strategic Resource"],
       "adjacencyYield": "production"
     },
@@ -795,7 +800,7 @@
         "Thành"
       ],
       "otherMinorAdjacencies": [],
-      "normalAdjacencies": ["Sea Resource"],
+      "normalAdjacencies": ["Government Plaza", "Sea Resource"],
       "majorAdjacencies": ["City Center"],
       "adjacencyYield": "gold"
     },
@@ -859,7 +864,7 @@
         "Thành"
       ],
       "otherMinorAdjacencies": [],
-      "normalAdjacencies": [],
+      "normalAdjacencies": ["Government Plaza"],
       "majorAdjacencies": ["Holy Site", "Pamukkale"],
       "adjacencyYield": "gold"
     },
