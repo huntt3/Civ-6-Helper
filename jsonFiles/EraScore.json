@@ -1,6 +1,14 @@
 {
   "EraScore": [
     {
+      "title": "Dedication",
+      "eraScore": 1,
+      "description": "Dark Age/ Normal Age Dedication.",
+      "repeatable": true,
+      "prerequisites": [],
+      "favorited": false
+    },
+    {
       "title": "Tribal Village Contacted",
       "eraScore": 1,
       "description": "A Tribal Village was contacted, giving strength to our budding cities.",

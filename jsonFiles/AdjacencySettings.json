@@ -1,0 +1,117 @@
+{
+  "AdjacencySettings": {
+    "Policy Cards": [
+      {
+        "title": "Double Campus Adjacency",
+        "type": "Policy Card",
+        "districtAffected": ["Campus", "Observatory", "Seowon"],
+        "multiplier": 2
+      },
+      {
+        "title": "Double Holy Site Adjacency",
+        "type": "Policy Card",
+        "districtAffected": ["Holy Site", "Lavra"],
+        "multiplier": 2
+      },
+      {
+        "title": "Double Harbor Adjacency",
+        "type": "Policy Card",
+        "districtAffected": ["Harbor", "Cothon", "Royal Navy Dockyard"],
+        "multiplier": 2
+      },
+      {
+        "title": "Double Theater Square Adjacency",
+        "type": "Policy Card",
+        "districtAffected": ["Theater Square", "Acropolis"],
+        "multiplier": 2
+      },
+      {
+        "title": "Double Industrial Zone Adjacency",
+        "type": "Policy Card",
+        "districtAffected": ["Industrial Zone", "Hansa", "Oppidum"],
+        "multiplier": 2
+      },
+      {
+        "title": "Double Commercial Hub Adjacency",
+        "type": "Policy Card",
+        "districtAffected": ["Commercial Hub", "Suguba"],
+        "multiplier": 2
+      }
+    ],
+    "Pantheons": [
+      {
+        "title": "Dance of the Aurora",
+        "type": "Pantheon",
+        "districtAffected": "Holy Site",
+        "adjacentTile": "tundra"
+      },
+      {
+        "title": "Desert Folklore",
+        "type": "Pantheon",
+        "districtAffected": "Holy Site",
+        "adjacentTile": "Desert"
+      },
+      {
+        "title": "Sacred Path",
+        "type": "Pantheon",
+        "districtAffected": "Holy Site",
+        "adjacentTile": "Rainforest"
+      },
+      {
+        "title": "River Goddess",
+        "type": "Pantheon",
+        "districtAffected": "Holy Site",
+        "adjacentTile": "River"
+      }
+    ],
+    "Leaders": [
+      {
+        "title": "Arabia",
+        "type": "Leader"
+      },
+      {
+        "title": "Theodora",
+        "type": "Leader"
+      },
+      {
+        "title": "Ludwig",
+        "type": "Leader"
+      },
+      {
+        "title": "Japan",
+        "type": "Leader"
+      },
+      {
+        "title": "Khmer",
+        "type": "Leader"
+      },
+      {
+        "title": "Mbande Nzinga",
+        "type": "Leader"
+      },
+      {
+        "title": "Mansa Musa",
+        "type": "Leader"
+      },
+      {
+        "title": "Sundiata Keita",
+        "type": "Leader"
+      },
+      {
+        "title": "Norway",
+        "type": "Leader"
+      }
+    ],
+    "Golden Age Dedications": [
+      {
+        "title": "Free Inquiry",
+        "type": "Golden Age Dedication",
+        "districtAffected": ["Commercial Hub", "Harbor"],
+        "additionalYield": {
+          "type": "science",
+          "formula": "gold_adjacency"
+        }
+      }
+    ]
+  }
+}
