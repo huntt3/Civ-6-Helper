@@ -335,6 +335,14 @@ const CustomHexGrid = forwardRef(
       // - arabiaScienceAdjCount: number of adjacent Holy Sites to a Campus (+science to Campus)
       let arabiaFaithAdjCount = 0;
       let arabiaScienceAdjCount = 0;
+      // When Khmer (GS) grants Food equal to faith adjacency, defer setting until after all faith modifiers
+      let khmerGrantFoodFromFaith = false;
+      // Track Mbande Nzinga adjacency count for Mbanza tiles
+      let mbanzaAdjCount = 0;
+      // Norway adjacency counters
+      let woodsAdjCount = 0; // adjacent woods/forest
+      let coastAdjCount = 0; // adjacent coast terrain
+      let holySiteAdjCount = 0; // adjacent Holy Sites (for Harbor bonuses)
       let hasRiverAdjacency = false;
 
       // Check for river adjacency (special case for Commercial Hub)
@@ -370,6 +378,34 @@ const CustomHexGrid = forwardRef(
         theodoraSetting &&
         adjacencySettings &&
         adjacencySettings[theodoraSetting.originalKey];
+      // Determine if Khmer leader setting is enabled in adjacency settings
+      const khmerSetting = adjacencySettingsData.find(
+        (s) => s.title === "Khmer"
+      );
+      const isKhmer =
+        khmerSetting &&
+        adjacencySettings &&
+        adjacencySettings[khmerSetting.originalKey];
+      // Determine if Mbande Nzinga leader setting is enabled in adjacency settings
+      const mbandeSetting = adjacencySettingsData.find(
+        (s) =>
+          s.title === "Mbande Nzinga" || s.title === "Mbande Nzinga (Mbanza)"
+      );
+      const isMbande =
+        mbandeSetting &&
+        adjacencySettings &&
+        adjacencySettings[mbandeSetting.originalKey];
+      const isMbandeBBG = isBBG && Boolean(isMbande);
+      // Determine if Norway leader setting is enabled in adjacency settings
+      const norwaySetting = adjacencySettingsData.find(
+        (s) => s.title === "Norway"
+      );
+      const isNorway =
+        norwaySetting &&
+        adjacencySettings &&
+        adjacencySettings[norwaySetting.originalKey];
+      const isNorwayGS = isNorway && isGS;
+      const isNorwayBBG = isNorway && isBBG;
 
       // Special case for Seowon district
       if (displayInfo.name === "Seowon") {
@@ -443,6 +479,27 @@ const CustomHexGrid = forwardRef(
         if (!adjacentDisplayInfo) return;
 
         const adjacentTileName = adjacentDisplayInfo.name;
+
+        // Count adjacent Mbanza for Mbande Nzinga effects
+        if (adjacentTileName === "Mbanza") {
+          mbanzaAdjCount += 1;
+        }
+        // Count adjacent woods/forest for Norway (GS)
+        if (
+          adjacentHex.tile.feature &&
+          (adjacentHex.tile.feature === "Woods" ||
+            adjacentHex.tile.feature === "Forest")
+        ) {
+          woodsAdjCount += 1;
+        }
+        // Count adjacent coast tiles for Norway (BBG)
+        if (adjacentHex.tile.terrain && adjacentHex.tile.terrain === "Coast") {
+          coastAdjCount += 1;
+        }
+        // Count adjacent Holy Sites for Harbor bonuses
+        if (adjacentTileName === "Holy Site") {
+          holySiteAdjCount += 1;
+        }
 
         // Special BBG rule: Commercial Hub gets normal adjacency from City Center
         if (
@@ -621,6 +678,32 @@ const CustomHexGrid = forwardRef(
         });
       }
 
+      // Mbande Nzinga + BBG: Commercial Hubs get +2 gold per adjacent Mbanza; Theater Squares get +2 culture per adjacent Mbanza
+      if (isMbandeBBG && mbanzaAdjCount > 0) {
+        if (displayInfo.name === "Commercial Hub") {
+          bonuses["gold"] = (bonuses["gold"] || 0) + 2 * mbanzaAdjCount;
+        }
+        if (displayInfo.name === "Theater Square") {
+          bonuses["culture"] = (bonuses["culture"] || 0) + 2 * mbanzaAdjCount;
+        }
+      }
+
+      // Norway effects
+      if (isNorwayGS && displayInfo.name === "Holy Site" && woodsAdjCount > 0) {
+        // Gathering Storm: Holy Sites get +1 faith per adjacent woods/forest
+        bonuses["faith"] = (bonuses["faith"] || 0) + 1 * woodsAdjCount;
+      }
+      if (isNorwayBBG) {
+        if (displayInfo.name === "Holy Site" && coastAdjCount > 0) {
+          // BBG: Holy Sites get +1 faith per adjacent Coast tile
+          bonuses["faith"] = (bonuses["faith"] || 0) + 1 * coastAdjCount;
+        }
+        if (displayInfo.name === "Harbor" && holySiteAdjCount > 0) {
+          // BBG: Harbors get +2 gold per adjacent Holy Site
+          bonuses["gold"] = (bonuses["gold"] || 0) + 2 * holySiteAdjCount;
+        }
+      }
+
       // Special: River Goddess (version-dependent bonuses)
       if (adjacencySettings && adjacencySettingsData.length > 0) {
         // Theodora leader effects: apply before River Goddess adjustments
@@ -644,6 +727,28 @@ const CustomHexGrid = forwardRef(
               (bonuses["culture"] || 0) + adjacentDistrictCount;
           }
         }
+        // Khmer leader effects (river-dependent): apply before River Goddess adjustments
+        if (isKhmer && displayInfo.name === "Holy Site") {
+          // Determine if this Holy Site is adjacent to ANY river edge
+          const riverEdges = hex.tile?.hasRiverEdges;
+          const hasRiver =
+            riverEdges && Object.values(riverEdges).some((e) => e === true);
+
+          if (hasRiver) {
+            if (isGS) {
+              // Gathering Storm: +2 faith and +2 housing
+              bonuses["faith"] = (bonuses["faith"] || 0) + 2;
+              bonuses["housing"] = (bonuses["housing"] || 0) + 2;
+              // Defer setting food here; we'll set it after all faith modifiers are applied
+              khmerGrantFoodFromFaith = true;
+            } else if (isBBG) {
+              // Better Balanced Game: +1 faith, +1 food, +2 housing
+              bonuses["faith"] = (bonuses["faith"] || 0) + 1;
+              bonuses["food"] = (bonuses["food"] || 0) + 1;
+              bonuses["housing"] = (bonuses["housing"] || 0) + 2;
+            }
+          }
+        }
         const riverGoddess = adjacencySettingsData.find(
           (s) => s.title === "River Goddess" && adjacencySettings[s.originalKey]
         );
@@ -665,6 +770,10 @@ const CustomHexGrid = forwardRef(
               bonuses["amenities"] = (bonuses["amenities"] || 0) + 2;
             }
           }
+        }
+        // If Khmer (GS) wanted food equal to faith adjacency, set it now using the final faith value
+        if (khmerGrantFoodFromFaith) {
+          bonuses["food"] = bonuses["faith"] || 0;
         }
       }
 
