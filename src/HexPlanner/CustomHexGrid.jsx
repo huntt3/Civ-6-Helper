@@ -327,7 +327,14 @@ const CustomHexGrid = forwardRef(
 
       const adjacentHexes = getAdjacentHexes(hex);
       let bonus = 0;
-      let minorAdjacencyCount = 0; // Track minor adjacencies separately to floor them
+      // Track minor adjacencies separately so we can apply Japan leader effects to districtMinorAdjacencies
+      let districtMinorAdjCount = 0;
+      let otherMinorAdjCount = 0;
+      // Track Arabia BBG adjacency bonuses:
+      // - arabiaFaithAdjCount: number of adjacent Campuses to a Holy Site (+faith to Holy Site)
+      // - arabiaScienceAdjCount: number of adjacent Holy Sites to a Campus (+science to Campus)
+      let arabiaFaithAdjCount = 0;
+      let arabiaScienceAdjCount = 0;
       let hasRiverAdjacency = false;
 
       // Check for river adjacency (special case for Commercial Hub)
@@ -345,6 +352,24 @@ const CustomHexGrid = forwardRef(
       const isBBG = settings?.version === "Better Balanced Game Mod";
       const isGS =
         settings?.version === "Gathering Storm" || !settings?.version; // Default to GS if no version specified
+
+      // Determine if Arabia leader setting is enabled in adjacency settings
+      const arabiaSetting = adjacencySettingsData.find(
+        (s) => s.title === "Arabia"
+      );
+      const isArabia =
+        arabiaSetting &&
+        adjacencySettings &&
+        adjacencySettings[arabiaSetting.originalKey];
+      const isArabiaBBG = isBBG && Boolean(isArabia);
+      // Determine if Theodora leader setting is enabled in adjacency settings
+      const theodoraSetting = adjacencySettingsData.find(
+        (s) => s.title === "Theodora"
+      );
+      const isTheodora =
+        theodoraSetting &&
+        adjacencySettings &&
+        adjacencySettings[theodoraSetting.originalKey];
 
       // Special case for Seowon district
       if (displayInfo.name === "Seowon") {
@@ -429,16 +454,33 @@ const CustomHexGrid = forwardRef(
           return;
         }
 
+        // Arabia + BBG special case: Holy Site <-> Campus grant +1 faith each
+        if (isArabiaBBG) {
+          if (
+            displayInfo.name === "Holy Site" &&
+            adjacentTileName === "Campus"
+          ) {
+            arabiaFaithAdjCount += 1;
+          } else if (
+            displayInfo.name === "Campus" &&
+            adjacentTileName === "Holy Site"
+          ) {
+            // Campus adjacent to Holy Site => Campus gets +1 science under Arabia+BBG
+            arabiaScienceAdjCount += 1;
+          }
+          // Do not return; allow these tiles to also count for other adjacency categories
+        }
+
         // Check all adjacency categories - tiles can contribute to multiple categories
 
         // Check minor adjacencies (count for flooring)
         if (tileData.districtMinorAdjacencies?.includes(adjacentTileName)) {
-          minorAdjacencyCount += 1;
+          districtMinorAdjCount += 1;
         }
 
         // Check other minor adjacencies (count for flooring)
         if (tileData.otherMinorAdjacencies?.includes(adjacentTileName)) {
-          minorAdjacencyCount += 1;
+          otherMinorAdjCount += 1;
         }
 
         // Check normal adjacencies (1 point each)
@@ -461,16 +503,42 @@ const CustomHexGrid = forwardRef(
       });
 
       // Floor minor adjacencies: every 2 minor adjacencies = +1 bonus
-      bonus += Math.floor(minorAdjacencyCount / 2);
+      // District minor adjacencies are doubled when Japan is active
+      const japanSetting = adjacencySettingsData.find(
+        (s) => s.title === "Japan"
+      );
+      const isJapan =
+        japanSetting &&
+        adjacencySettings &&
+        adjacencySettings[japanSetting.originalKey];
 
-      // Special Commercial Hub river bonus: +2 if adjacent to one or more rivers (max +2 from rivers)
+      const districtMultiplier = isJapan ? 2 : 1;
+      bonus += Math.floor(
+        (districtMinorAdjCount * districtMultiplier + otherMinorAdjCount) / 2
+      );
+
+      // Special Commercial Hub river behavior:
+      // - Default: +2 if adjacent to one or more rivers
+      // - When Japan + BBG: Commercial Hubs adjacent to rivers get -2 adjacency instead
       if (displayInfo.name === "Commercial Hub" && hasRiverAdjacency) {
-        bonus += 2;
+        if (isBBG && isJapan) {
+          bonus += 0;
+        } else {
+          bonus += 2;
+        }
       }
 
       // Start with the primary yield type
       const primaryYieldType = tileData.adjacencyYield || "gold";
       const bonuses = { [primaryYieldType]: bonus };
+
+      // Arabia + BBG: apply faith adjacency from Campus<->Holy Site
+      if (isArabiaBBG && arabiaFaithAdjCount > 0) {
+        bonuses["faith"] = (bonuses["faith"] || 0) + arabiaFaithAdjCount;
+      }
+      if (isArabiaBBG && arabiaScienceAdjCount > 0) {
+        bonuses["science"] = (bonuses["science"] || 0) + arabiaScienceAdjCount;
+      }
 
       // Apply adjacency settings (multipliers and adjacent tile bonuses first)
       if (adjacencySettings && adjacencySettingsData.length > 0) {
@@ -555,6 +623,27 @@ const CustomHexGrid = forwardRef(
 
       // Special: River Goddess (version-dependent bonuses)
       if (adjacencySettings && adjacencySettingsData.length > 0) {
+        // Theodora leader effects: apply before River Goddess adjustments
+        if (isTheodora && displayInfo.name === "Holy Site") {
+          // Gathering Storm: Holy Sites provide Culture equal to their adjacency bonus
+          if (isGS) {
+            const primary = bonuses[primaryYieldType] || 0;
+            bonuses["culture"] = primary;
+          }
+
+          // Better Balanced Game: Holy Sites receive +1 culture per adjacent district
+          if (isBBG) {
+            let adjacentDistrictCount = 0;
+            adjacentHexes.forEach((adj) => {
+              if (!adj.tile) return;
+              const adjInfo = getTileDisplayInfo(adj.tile);
+              if (adjInfo && adjInfo.type === "district")
+                adjacentDistrictCount += 1;
+            });
+            bonuses["culture"] =
+              (bonuses["culture"] || 0) + adjacentDistrictCount;
+          }
+        }
         const riverGoddess = adjacencySettingsData.find(
           (s) => s.title === "River Goddess" && adjacencySettings[s.originalKey]
         );
