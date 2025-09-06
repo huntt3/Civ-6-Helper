@@ -315,12 +315,92 @@ const CustomHexGrid = forwardRef(
     };
     */
 
-    // Calculate adjacency bonuses for a district (returns object with multiple yield types)
+    // Calculate adjacency bonuses for a district or wonder (returns object with multiple yield types)
     const calculateAdjacencyBonuses = (hex) => {
-      if (!hex.tile || !tileHasContent(hex.tile, "district")) return {};
+      if (!hex.tile) return {};
 
       const displayInfo = getTileDisplayInfo(hex.tile);
-      if (!displayInfo || displayInfo.type !== "district") return {};
+      if (!displayInfo) return {};
+
+      console.log(
+        "calculateAdjacencyBonuses called for:",
+        displayInfo.name,
+        "type:",
+        displayInfo.type
+      );
+
+      // Handle Wonders separately: Ludwig grants culture to Wonders based on adjacent districts
+      if (displayInfo.type === "Wonder" || displayInfo.type === "wonder") {
+        console.log("Processing Wonder:", displayInfo.name);
+        const adjacentHexes = getAdjacentHexes(hex);
+        let adjacentDistrictCount = 0;
+        adjacentHexes.forEach((adj) => {
+          if (!adj || !adj.tile) return;
+          const adjInfo = getTileDisplayInfo(adj.tile);
+          if (adjInfo && adjInfo.type === "district") {
+            adjacentDistrictCount += 1;
+            console.log("Found adjacent district:", adjInfo.name, "for Wonder");
+          }
+        });
+
+        const isBBG = settings?.version === "Better Balanced Game Mod";
+        const isGS =
+          settings?.version === "Gathering Storm" || !settings?.version;
+
+        const ludwigSetting = adjacencySettingsData.find(
+          (s) => s.title === "Ludwig"
+        );
+        const isLudwig =
+          ludwigSetting &&
+          adjacencySettings &&
+          adjacencySettings[ludwigSetting.originalKey];
+        const ludwigPostSetting = adjacencySettingsData.find(
+          (s) => s.title === "Ludwig post Drama & Poetry"
+        );
+        const isLudwigPost =
+          ludwigPostSetting &&
+          adjacencySettings &&
+          adjacencySettings[ludwigPostSetting.originalKey];
+
+        console.log("Wonder debug:", {
+          adjacentDistrictCount,
+          isLudwig,
+          isLudwigPost,
+          isBBG,
+          isGS,
+          ludwigSetting: ludwigSetting?.title,
+          ludwigPostSetting: ludwigPostSetting?.title,
+          version: settings?.version,
+        });
+
+        let bonuses = {};
+        if ((isLudwig || isLudwigPost) && adjacentDistrictCount > 0) {
+          // Post Drama & Poetry gives +2 culture per adjacent district (if enabled)
+          if (isLudwigPost) {
+            bonuses["culture"] = 2 * adjacentDistrictCount;
+            console.log(
+              "Applied Ludwig Post Drama & Poetry bonus:",
+              bonuses["culture"]
+            );
+            return bonuses;
+          }
+
+          // Ludwig base behavior depends on version
+          if (isGS) {
+            bonuses["culture"] = 2 * adjacentDistrictCount;
+            console.log("Applied Ludwig GS bonus:", bonuses["culture"]);
+          } else if (isBBG) {
+            bonuses["culture"] = 1 * adjacentDistrictCount;
+            console.log("Applied Ludwig BBG bonus:", bonuses["culture"]);
+          }
+        }
+
+        console.log("Wonder final bonuses:", bonuses);
+        return bonuses;
+      }
+
+      // Continue with district logic
+      if (displayInfo.type !== "district") return {};
 
       const tileData = tiles.find((t) => t.name === displayInfo.name);
       if (!tileData) return {};
@@ -330,6 +410,8 @@ const CustomHexGrid = forwardRef(
       // Track minor adjacencies separately so we can apply Japan leader effects to districtMinorAdjacencies
       let districtMinorAdjCount = 0;
       let otherMinorAdjCount = 0;
+      // General adjacent district count (used for Ludwig wonder bonuses)
+      let adjacentDistrictCount = 0;
       // Track Arabia BBG adjacency bonuses:
       // - arabiaFaithAdjCount: number of adjacent Campuses to a Holy Site (+faith to Holy Site)
       // - arabiaScienceAdjCount: number of adjacent Holy Sites to a Campus (+science to Campus)
@@ -396,6 +478,22 @@ const CustomHexGrid = forwardRef(
         adjacencySettings &&
         adjacencySettings[mbandeSetting.originalKey];
       const isMbandeBBG = isBBG && Boolean(isMbande);
+      // Determine if Ludwig leader setting is enabled in adjacency settings
+      const ludwigSetting = adjacencySettingsData.find(
+        (s) => s.title === "Ludwig" || s.title.includes("Ludwig")
+      );
+      const isLudwig =
+        ludwigSetting &&
+        adjacencySettings &&
+        adjacencySettings[ludwigSetting.originalKey];
+      // Check for a separate Ludwig (Post Drama & Poetry) setting if present
+      const ludwigPostSetting = adjacencySettingsData.find(
+        (s) => s.title.includes("Ludwig") && s.title.includes("Drama")
+      );
+      const isLudwigPost =
+        ludwigPostSetting &&
+        adjacencySettings &&
+        adjacencySettings[ludwigPostSetting.originalKey];
       // Determine if Norway leader setting is enabled in adjacency settings
       const norwaySetting = adjacencySettingsData.find(
         (s) => s.title === "Norway"
@@ -479,6 +577,11 @@ const CustomHexGrid = forwardRef(
         if (!adjacentDisplayInfo) return;
 
         const adjacentTileName = adjacentDisplayInfo.name;
+
+        // Count adjacent districts for Ludwig (wonders)
+        if (adjacentDisplayInfo.type === "district") {
+          adjacentDistrictCount += 1;
+        }
 
         // Count adjacent Mbanza for Mbande Nzinga effects
         if (adjacentTileName === "Mbanza") {
@@ -685,6 +788,31 @@ const CustomHexGrid = forwardRef(
         }
         if (displayInfo.name === "Theater Square") {
           bonuses["culture"] = (bonuses["culture"] || 0) + 2 * mbanzaAdjCount;
+        }
+      }
+
+      // Ludwig leader effects: Wonders gain culture per adjacent district
+      if (isLudwig && adjacentDistrictCount > 0) {
+        if (isGS) {
+          // Gathering Storm: +2 culture per adjacent district
+          if (displayInfo.type === "Wonder" || displayInfo.type === "Wonder") {
+            bonuses["culture"] =
+              (bonuses["culture"] || 0) + 2 * adjacentDistrictCount;
+          }
+        } else if (isBBG) {
+          // Better Balanced Game: +1 culture per adjacent district
+          if (displayInfo.type === "Wonder" || displayInfo.type === "Wonder") {
+            bonuses["culture"] =
+              (bonuses["culture"] || 0) + 1 * adjacentDistrictCount;
+          }
+        }
+      }
+
+      // Additional Ludwig Post Drama & Poetry bonus (if separate setting)
+      if (isLudwigPost && adjacentDistrictCount > 0) {
+        if (displayInfo.type === "Wonder" || displayInfo.type === "Wonder") {
+          bonuses["culture"] =
+            (bonuses["culture"] || 0) + 2 * adjacentDistrictCount;
         }
       }
 
@@ -1366,10 +1494,13 @@ const CustomHexGrid = forwardRef(
                         </text>
                       )}
 
-                    {/* Adjacency bonuses for districts */}
+                    {/* Adjacency bonuses for districts and wonders */}
                     {hex.tile &&
-                      tileHasContent(hex.tile, "district") &&
-                      districtHasAdjacencyBonuses(hex) &&
+                      ((tileHasContent(hex.tile, "district") &&
+                        districtHasAdjacencyBonuses(hex)) ||
+                        (displayInfo &&
+                          (displayInfo.type === "Wonder" ||
+                            displayInfo.type === "wonder"))) &&
                       yieldTypes.length > 0 && (
                         <g>
                           {yieldTypes.map((yieldType, index) => {
