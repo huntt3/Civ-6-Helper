@@ -336,17 +336,11 @@ const EraTrackerContainer = ({ settings }) => {
           className={`px-3 py-1 rounded ${
             sortOrder === "asc" ? "bg-blue-600 text-white" : "bg-gray-200"
           }`}
-          onClick={() => setSortOrder("asc")}
+          onClick={() => setSortOrder((s) => (s === "asc" ? "desc" : "asc"))}
+          aria-pressed={sortOrder === "asc"}
+          title="Toggle sort order"
         >
-          Sort Ascending
-        </button>
-        <button
-          className={`px-3 py-1 rounded ${
-            sortOrder === "desc" ? "bg-blue-600 text-white" : "bg-gray-200"
-          }`}
-          onClick={() => setSortOrder("desc")}
-        >
-          Sort Descending
+          {sortOrder === "asc" ? "Sort Ascending" : "Sort Descending"}
         </button>
         <input
           type="number"
