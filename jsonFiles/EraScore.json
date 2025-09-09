@@ -103,7 +103,7 @@
       "title": "Rival Holy City Converted",
       "eraScore": 4,
       "description": "The Holy City of another Religion has converted to our Religion.",
-      "repeatable": false,
+      "repeatable": true,
       "prerequisites": ["Astrology"],
       "favorited": false
     },
@@ -111,7 +111,7 @@
       "title": "Foreign Capital Taken",
       "eraScore": 4,
       "description": "You have taken control of a foreign power's original capital city.",
-      "repeatable": false,
+      "repeatable": true,
       "prerequisites": [],
       "favorited": false
     },
@@ -135,7 +135,7 @@
       "title": "First Discovery of a New Continent",
       "eraScore": 4,
       "description": "Our civilization's explorers are the first in the world to find this continent.",
-      "repeatable": false,
+      "repeatable": true,
       "prerequisites": [],
       "favorited": false
     },
@@ -439,7 +439,7 @@
       "title": "Enemy Veteran Defeated",
       "eraScore": 3,
       "description": "One of your units defeated an enemy unit with at least 2 more promotions than it.",
-      "repeatable": false,
+      "repeatable": true,
       "prerequisites": [],
       "favorited": false
     },
@@ -541,7 +541,7 @@
       "title": "City on New Continent",
       "eraScore": 2,
       "description": "A city is placed on a continent you have not yet settled.",
-      "repeatable": false,
+      "repeatable": true,
       "prerequisites": [],
       "favorited": false
     },
@@ -581,7 +581,7 @@
       "title": "Free City Joins",
       "eraScore": 2,
       "description": "A Free City has decided to pledge its loyalty to us, joining our empire.",
-      "repeatable": false,
+      "repeatable": true,
       "prerequisites": [],
       "favorited": false
     },
@@ -781,7 +781,7 @@
       "title": "World's First Technology of New Era",
       "eraScore": 2,
       "description": "You have completed the world's first technology from a new era of discovery.",
-      "repeatable": false,
+      "repeatable": true,
       "prerequisites": [],
       "favorited": false
     },
@@ -1004,7 +1004,7 @@
       "title": "First Civic of New Era",
       "eraScore": 1,
       "description": "You have completed your civilization's first civic from a new era of discovery.",
-      "repeatable": false,
+      "repeatable": true,
       "prerequisites": [],
       "favorited": false
     },
@@ -1012,7 +1012,7 @@
       "title": "Discovery of a Natural Wonder",
       "eraScore": 1,
       "description": "Your civilization discovers this natural wonder for the first time.",
-      "repeatable": false,
+      "repeatable": true,
       "prerequisites": [],
       "favorited": false
     },
@@ -1068,7 +1068,7 @@
       "title": "Great Person Recruited",
       "eraScore": 1,
       "description": "A Great Person has traveled to our lands to share unique talents.",
-      "repeatable": false,
+      "repeatable": true,
       "prerequisites": [
         "Astrology",
         "Writing",
@@ -1081,7 +1081,7 @@
       "title": "Old Great Person Recruited",
       "eraScore": 1,
       "description": "A Great Person has traveled to our lands. Though better suited to a past era, they will still contribute great things to our civilization.",
-      "repeatable": false,
+      "repeatable": true,
       "prerequisites": [
         "Astrology",
         "Writing",
@@ -1118,7 +1118,7 @@
       "title": "Met New Civilization",
       "eraScore": 1,
       "description": "You have made contact with a new civilization.",
-      "repeatable": false,
+      "repeatable": true,
       "prerequisites": [],
       "favorited": false
     },
@@ -1134,7 +1134,7 @@
       "title": "First Technology of New Era",
       "eraScore": 1,
       "description": "You have completed your civilization's first technology from a new era of discovery.",
-      "repeatable": false,
+      "repeatable": true,
       "prerequisites": [],
       "favorited": false
     },
@@ -1150,7 +1150,7 @@
       "title": "Strategic Resource Potential Unleashed",
       "eraScore": 1,
       "description": "You own your first unit that uses this strategic resource.",
-      "repeatable": false,
+      "repeatable": true,
       "prerequisites": ["Horseback Riding", "Iron Working"],
       "favorited": false
     },
@@ -1174,7 +1174,7 @@
       "title": "Enemy Formation Defeated",
       "eraScore": 1,
       "description": "One of your units defeated an enemy unit with a superior military formation.",
-      "repeatable": false,
+      "repeatable": true,
       "prerequisites": [],
       "favorited": false
     },
